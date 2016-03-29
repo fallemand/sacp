@@ -1,0 +1,113 @@
+<header id="navbar" ng-controller="NavbarController">
+    <div id="navbar-container" class="boxed">
+
+        <!--Brand logo & name-->
+        <!--================================-->
+        <div class="navbar-header">
+            <a href="index.html" class="navbar-brand">
+                <img src="assets/images/logo.png" alt="Nifty Logo" class="brand-icon">
+                <div class="brand-title">
+                    <span class="brand-text">Nifty</span>
+                </div>
+            </a>
+        </div>
+        <!--================================-->
+        <!--End brand logo & name-->
+
+
+        <!--Navbar Dropdown-->
+        <!--================================-->
+        <div class="navbar-content clearfix">
+            <ul class="nav navbar-top-links pull-right">
+
+                <li ng-show="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                    <a href="/admin" ui-sref="admin">
+                        <i class="fa fa-cog fa-fw fa-lg"></i> Administración
+                    </a>
+                </li>
+
+                <li ng-hide="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                    <a href="/admin" ui-sref="signup">
+                        <i class="fa fa-user-plus fa-fw fa-lg"></i> Registrarse
+                    </a>
+                </li>
+
+                <li ng-hide="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                    <a href="/admin" ui-sref="login">
+                        <i class="fa fa-sign-in fa-fw fa-lg"></i> Login
+                    </a>
+                </li>
+
+                <!--User dropdown-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <li ng-show="nav.isLoggedIn()" id="dropdown-user" class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right" uib-dropdown-toggle>
+                        <span class="pull-right">
+                            <img class="img-circle img-user media-object" src="assets/images/av1.png" alt="Profile Picture">
+                        </span>
+                        <div class="username hidden-xs">{{ nav.getCurrentUser().name }}</div>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default" uib-dropdown-menu>
+
+                        <!-- User dropdown menu -->
+                        <ul class="head-list">
+                            <li ng-show="nav.isLoggedIn()" ui-sref-active="active">
+                                <a href="/settings" ui-sref="settings">
+                                    <i class="fa fa-user fa-fw fa-lg"></i> Perfil
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Dropdown footer -->
+                        <div ng-show="nav.isLoggedIn()" ui-sref-active="active" class="pad-all text-right">
+                            <a ui-sref="logout" href="#" class="btn btn-primary">
+                                <i class="fa fa-sign-out fa-fw"></i> Salir
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End user dropdown-->
+
+            </ul>
+        </div>
+        <!--================================-->
+        <!--End Navbar Dropdown-->
+
+    </div>
+</header>
+
+
+
+<!--
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">focor</a>
+    </div>
+    <div uib-collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in nav.menu" ui-sref-active="active">
+            <a ui-sref="{{item.state}}">{{item.title}}</a>
+        </li>
+        <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>
+        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
+        <li ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </li>
+        <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+-->
