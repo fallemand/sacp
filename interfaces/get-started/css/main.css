@@ -1,0 +1,23 @@
+.cls-header {
+    background-color: #0ba0b5;
+}
+
+.cls-container {
+    background-color: #e7ebee;
+    color: #515151;
+}
+
+.cls-header {
+    margin-bottom: 10px;
+}
+
+.cls-content {
+    padding-top: 25vh;
+}
+.cls-content a, .cls-content a:hover, .cls-content a:focus {
+    color: #0a8b9d;
+}
+
+.chosen-choices li input {
+    width: 350% !important;
+}
