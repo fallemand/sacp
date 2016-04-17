@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('focorApp', [
-  'focorApp.auth',
-  'focorApp.admin',
-  'focorApp.constants',
+angular.module('sacpApp', [
+  'sacpApp.auth',
+  'sacpApp.admin',
+  'sacpApp.constants',
   'ngCookies',
   'ngResource',
   'ngSanitize',

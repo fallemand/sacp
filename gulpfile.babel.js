@@ -494,7 +494,7 @@ gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], ()
 gulp.task('html', function() {
     return gulp.src(`${clientPath}/{app,components}/**/*.html`)
         .pipe(plugins.angularTemplatecache({
-            module: 'focorApp'
+            module: 'sacpApp'
         }))
         .pipe(gulp.dest('.tmp'));
 });
@@ -502,7 +502,7 @@ gulp.task('html', function() {
 gulp.task('constant', function() {
   let sharedConfig = require(`./${serverPath}/config/environment/shared`);
   return plugins.ngConstant({
-    name: 'focorApp.constants',
+    name: 'sacpApp.constants',
     deps: [],
     wrap: true,
     stream: true,

@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('focorApp.util', []);
+angular.module('sacpApp.util', []);

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .config(function($stateProvider) {
     $stateProvider
       .state('login', {

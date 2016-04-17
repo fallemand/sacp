@@ -26,7 +26,7 @@ function authInterceptor($rootScope, $q, $cookies, $injector, Util) {
   };
 }
 
-angular.module('focorApp.auth')
+angular.module('sacpApp.auth')
   .factory('authInterceptor', authInterceptor);
 
 })();

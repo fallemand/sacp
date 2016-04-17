@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .directive('footer', function() {
     return {
       templateUrl: 'components/footer/footer.html',

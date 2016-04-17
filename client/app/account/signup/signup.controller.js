@@ -39,5 +39,5 @@ class SignupController {
   }
 }
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .controller('SignupController', SignupController);

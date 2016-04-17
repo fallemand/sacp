@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .factory('Modal', function($rootScope, $uibModal) {
     /**
      * Opens a modal

@@ -29,5 +29,5 @@ class LoginController {
   }
 }
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .controller('LoginController', LoginController);

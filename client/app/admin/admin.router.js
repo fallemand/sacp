@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('focorApp.admin')
+angular.module('sacpApp.admin')
   .config(function($stateProvider) {
     $stateProvider
       .state('admin', {

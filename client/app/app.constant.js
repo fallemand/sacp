@@ -1,5 +1,5 @@
 (function(angular, undefined) {
-  angular.module("focorApp.constants", [])
+  angular.module("sacpApp.constants", [])
 
 .constant("appConfig", {
 	"userRoles": [

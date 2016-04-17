@@ -14,7 +14,7 @@ class AdminController {
   }
 }
 
-angular.module('focorApp.admin')
+angular.module('sacpApp.admin')
   .controller('AdminController', AdminController);
 
 })();

@@ -33,7 +33,7 @@ class MainController {
   }
 }
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .component('main', {
     templateUrl: 'app/main/main.html',
     controller: MainController

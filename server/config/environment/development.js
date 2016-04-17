@@ -6,7 +6,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/focor-dev'
+    uri: 'mongodb://localhost/sacp-dev'
   },
 
   // Seed database on startup

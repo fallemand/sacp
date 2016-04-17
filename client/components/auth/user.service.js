@@ -21,7 +21,7 @@ function UserResource($resource) {
   });
 }
 
-angular.module('focorApp.auth')
+angular.module('sacpApp.auth')
   .factory('User', UserResource);
 
 })();

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('focorApp.admin', [
-  'focorApp.auth',
+angular.module('sacpApp.admin', [
+  'sacpApp.auth',
   'ui.router'
 ]);

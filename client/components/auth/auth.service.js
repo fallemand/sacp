@@ -183,7 +183,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
   return Auth;
 }
 
-angular.module('focorApp.auth')
+angular.module('sacpApp.auth')
   .factory('Auth', AuthService);
 
 })();

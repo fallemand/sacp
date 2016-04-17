@@ -59,7 +59,7 @@ function UtilService($window) {
   return Util;
 }
 
-angular.module('focorApp.util')
+angular.module('sacpApp.util')
   .factory('Util', UtilService);
 
 })();

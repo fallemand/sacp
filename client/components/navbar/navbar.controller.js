@@ -17,5 +17,5 @@ class NavbarController {
   }
 }
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .controller('NavbarController', NavbarController);

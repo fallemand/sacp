@@ -25,5 +25,5 @@ class SettingsController {
   }
 }
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .controller('SettingsController', SettingsController);

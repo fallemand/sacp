@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('focorApp')
+angular.module('sacpApp')
   .directive('navbar', () => ({
     templateUrl: 'components/navbar/navbar.html',
     restrict: 'E',
