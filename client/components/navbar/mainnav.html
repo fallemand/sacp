@@ -1,0 +1,84 @@
+<!--MAIN NAVIGATION-->
+<!--===================================================-->
+<nav id="mainnav-container">
+    <div id="mainnav">
+
+        <!--Shortcut buttons-->
+        <!--================================-->
+        <div id="mainnav-shortcut">
+            <ul class="list-unstyled">
+                <li ng-show="nav.isLoggedIn()"class="col-xs-4" data-content="Inicio">
+                    <a class="shortcut-grid" href="#">
+                        <i class="fa fa-home"></i>
+                    </a>
+                </li>
+                <li ng-show="nav.isAdmin()" class="col-xs-4" data-content="Estadísticas">
+                    <a class="shortcut-grid" href="#">
+                        <i class="fa fa-bar-chart"></i>
+                    </a>
+                </li>
+                <li ng-show="nav.isAdmin()" class="col-xs-4" data-content="Reportes">
+                    <a class="shortcut-grid" href="#">
+                        <i class="fa fa-file-excel-o"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--================================-->
+        <!--End shortcut buttons-->
+
+
+        <!--Menu-->
+        <!--================================-->
+        <div id="mainnav-menu-wrap">
+            <div class="nano">
+                <div class="nano-content">
+                    <ul id="mainnav-menu" class="list-group">
+
+                        <!--Category name-->
+                        <li class="list-header">Menú</li>
+
+                        <!--Menu list item-->
+                        <li ng-show="nav.isAdmin()">
+                            <a href="#">
+                                <i class="flaticon-doctor-with-stethoscope"></i>
+                                <span class="menu-title">Médicos</span>
+                            </a>
+                        </li>
+
+                        <!--Menu list item-->
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-user"></i>
+                                <span class="menu-title">Pacientes</span>
+                            </a>
+                        </li>
+
+                        <!--Menu list item-->
+                        <li>
+                            <a href="#">
+                                <i class="flaticon-medical-briefcase"></i>
+											<span class="menu-title">
+												Tratamientos
+											</span>
+                            </a>
+
+                            <!--Submenu-->
+                            <ul class="collapse">
+                                <li><a href="add-treatment">Agregar Nuevo</a></li>
+                                <li><a href="treatments">Listado</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--================================-->
+        <!--End menu-->
+
+    </div>
+</nav>
+<!--===================================================-->
+<!--END MAIN NAVIGATION-->
