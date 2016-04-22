@@ -1,0 +1,56 @@
+/**
+ * App-wide Styles
+ */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/**
+ *  Main Styles
+ */
+#content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cls-header {
+    background-color: #0ba0b5;
+}
+
+.cls-container {
+    background-color: #e7ebee;
+    color: #515151;
+}
+
+.cls-header {
+    margin-bottom: 10px;
+}
+
+.cls-content {
+    padding-top: 25vh;
+}
+.cls-content a, .cls-content a:hover, .cls-content a:focus {
+    color: #0a8b9d;
+}
+
+.chosen-choices li input {
+    width: 350% !important;
+}
+
+#content-container {
+    padding-bottom: 35px !important;
+}
+
+@media (min-width: 1200px) {
+    #mainnav-menu .list-header, #mainnav-menu .list-divider, #mainnav-menu .menu-title, #mainnav-menu .arrow, #mainnav-menu .menu-title > .label {
+        transition: initial;
+    }
+}
+
+#mainnav-container {
+    z-index: initial;
+}

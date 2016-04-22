@@ -7,17 +7,17 @@
         <!--================================-->
         <div id="mainnav-shortcut">
             <ul class="list-unstyled">
-                <li ng-show="nav.isLoggedIn()"class="col-xs-4" data-content="Inicio">
+                <li ng-show="nav.isLoggedIn()"class="col-xs-4" uib-tooltip="Inicio" tooltip-placement="bottom">
                     <a class="shortcut-grid" href="#">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
-                <li ng-show="nav.isAdmin()" class="col-xs-4" data-content="Estadísticas">
+                <li ng-show="nav.isAdmin()" class="col-xs-4" uib-tooltip="Estadísticas" tooltip-placement="bottom">
                     <a class="shortcut-grid" href="#">
                         <i class="fa fa-bar-chart"></i>
                     </a>
                 </li>
-                <li ng-show="nav.isAdmin()" class="col-xs-4" data-content="Reportes">
+                <li ng-show="nav.isAdmin()" class="col-xs-4" uib-tooltip="Reportes" tooltip-placement="bottom">
                     <a class="shortcut-grid" href="#">
                         <i class="fa fa-file-excel-o"></i>
                     </a>

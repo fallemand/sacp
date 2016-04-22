@@ -3,61 +3,17 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
 
-/**
- * App-wide Styles
- */
-
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
+//Import Assets - Manual
+@import '../assets/theme/nifty.min';
+@import '../assets/theme/theme-sacp';
+@import '../assets/fonts/flaticon';
 
 // Component styles are injected through grunt
 /* inject:scss */
 @import 'admin/admin';
 @import 'main/main';
-@import '../components/footer/footer';
+@import '../components/general/main';
 @import '../components/modal/modal';
 /* endinject */
 
-@import '../assets/theme/nifty.min';
-@import '../assets/theme/theme-sacp';
-@import '../assets/fonts/flaticon';
 
-/**
- *  Main Styles
- */
-#content-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.cls-header {
-    background-color: #0ba0b5;
-}
-
-.cls-container {
-    background-color: #e7ebee;
-    color: #515151;
-}
-
-.cls-header {
-    margin-bottom: 10px;
-}
-
-.cls-content {
-    padding-top: 25vh;
-}
-.cls-content a, .cls-content a:hover, .cls-content a:focus {
-    color: #0a8b9d;
-}
-
-.chosen-choices li input {
-    width: 350% !important;
-}
-
-#content-container {
-    padding-bottom: 35px !important;
-}
