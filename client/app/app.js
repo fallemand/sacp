@@ -9,6 +9,7 @@ angular.module('sacpApp', [
         'ngSanitize',
         'btford.socket-io',
         'ui.router',
+        'ncy-angular-breadcrumb',
         'ui.bootstrap',
         'validation.match'
     ])

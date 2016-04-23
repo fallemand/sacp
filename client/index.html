@@ -11,9 +11,10 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <base href="/">
-    <title></title>
+    <title>S.A.C.P. | Sistema de Auditoría y Control de Prescripciones</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/favicon.png">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
     <!-- bower:css -->
@@ -25,7 +26,7 @@
     <!-- endinjector -->
     <!-- endbuild -->
 </head>
-<body ng-app="sacpApp">
+<body ng-app="sacpApp" class="nifty-ready">
 
 <!--[if lt IE 7]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -67,6 +68,7 @@
 <script src="bower_components/angular-socket-io/socket.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+<script src="bower_components/angular-breadcrumb/release/angular-breadcrumb.js"></script>
 <!-- endbower -->
 <script src="socket.io-client/socket.io.js"></script>
 <!-- endbuild -->
@@ -83,6 +85,8 @@
 <script src="app/admin/admin.controller.js"></script>
 <script src="app/admin/admin.router.js"></script>
 <script src="app/app.constant.js"></script>
+<script src="app/home/home.controller.js"></script>
+<script src="app/home/home.js"></script>
 <script src="app/main/main.controller.js"></script>
 <script src="app/main/main.js"></script>
 <script src="components/auth/auth.service.js"></script>

@@ -3,12 +3,12 @@
 angular.module('sacpApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('main', {
-                url: '/main',
-                template: '<main></main>',
+            .state('home', {
+                url: '/',
+                template: '<home></home>',
                 parent: 'private',
                 ncyBreadcrumb: {
-                    label: 'Principal'
+                    label: 'Inicio'
                 }
             });
     });

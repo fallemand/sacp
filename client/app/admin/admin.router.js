@@ -9,6 +9,9 @@ angular.module('sacpApp.admin')
                 controller: 'AdminController',
                 controllerAs: 'admin',
                 authenticate: 'admin',
-                parent: 'private'
+                parent: 'private',
+                ncyBreadcrumb: {
+                    label: 'Administración'
+                }
             });
     });

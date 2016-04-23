@@ -36,7 +36,10 @@ angular.module('sacpApp')
                 controller: 'SettingsController',
                 controllerAs: 'vm',
                 authenticate: true,
-                parent: 'private'
+                parent: 'private',
+                ncyBreadcrumb: {
+                    label: 'Configuración'
+                }
             });
     })
     .run(function ($rootScope) {
