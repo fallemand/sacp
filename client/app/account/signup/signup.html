@@ -2,32 +2,40 @@
     <div class="panel-body">
         <p class="pad-btm">Registrar una cuenta</p>
         <form class="form" name="form" ng-submit="vm.register(form)" novalidate>
-            <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted,
-                                            'has-error': form.name.$invalid && vm.submitted}">
+            <div class="form-group" ng-class="{ 'has-success': form.name.$valid && form.name.$dirty,
+                                            'has-error': form.name.$invalid && form.name.$dirty}">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                    <input type="text" class="form-control" placeholder="Nombre" name="name"
+                    <input type="text" class="form-control" placeholder="Nombre" name="name" minlength="6"
                            ng-model="vm.user.name" required/>
                 </div>
-                <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
+                <p class="help-block" ng-show="form.name.$error.required && form.name.$dirty">
                     El nombre es requerido
                 </p>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-success': form.mn.$valid && form.mn.$dirty,
+                                            'has-error': form.mn.$invalid && form.mn.$dirty}">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-user-md"></i></i></div>
-                    <input type="text" class="form-control" placeholder="Matricula" name="username">
+                    <input type="number" class="form-control" min="1" max="99999999" step="1" required ng-model="vm.user.mn" placeholder="Matricula Nacional" name="mn">
                 </div>
+                <p class="help-block" ng-show="form.mn.$error.required && form.mn.$dirty">
+                    La matrícula es requerida
+                </p>
             </div>
-            <div class="form-group">
+            <div class="form-group"ng-class="{ 'has-success': form.mp.$valid && form.mp.$dirty,
+                                            'has-error': form.mp.$invalid && form.mp.$dirty}">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-user-md"></i></i></div>
-                    <input type="text" class="form-control" placeholder="Matricula Provincial" name="username">
+                    <input type="number" class="form-control" min="1" max="99999999" step="1" required ng-model="vm.user.mp" placeholder="Matricula Provincial" name="mp">
                 </div>
+                <p class="help-block" ng-show="form.mp.$error.required && form.mp.$dirty">
+                    La matrícula es requerida
+                </p>
             </div>
             <hr>
-            <div class="form-group" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
-                                                            'has-error': form.email.$invalid && vm.submitted }">
+            <div class="form-group" ng-class="{ 'has-success': form.email.$valid && form.email.$dirty,
+                                                            'has-error': form.email.$invalid && form.email.$dirty }">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
                     <input type="email" name="email" class="form-control" ng-model="vm.user.email"
@@ -35,10 +43,10 @@
                            required
                            mongoose-error/>
                 </div>
-                <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
+                <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty">
                     Doesn't look like a valid email.
                 </p>
-                <p class="help-block" ng-show="form.email.$error.required && vm.submitted">
+                <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty">
                     What's your email address?
                 </p>
                 <p class="help-block" ng-show="form.email.$error.mongoose">
@@ -46,8 +54,8 @@
                 </p>
             </div>
 
-            <div class="form-group" ng-class="{ 'has-success': form.password.$valid && vm.submitted,
-                                            'has-error': form.password.$invalid && vm.submitted }">
+            <div class="form-group" ng-class="{ 'has-success': form.password.$valid && form.password.$dirty,
+                                            'has-error': form.password.$invalid && form.password.$dirty }">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                     <input type="password" name="password" class="form-control" placeholder="Contraseña"
@@ -57,7 +65,7 @@
                            mongoose-error/>
                 </div>
                 <p class="help-block"
-                   ng-show="(form.password.$error.minlength || form.password.$error.required) && vm.submitted">
+                   ng-show="(form.password.$error.minlength || form.password.$error.required) && form.password.$dirty">
                     Password must be at least 3 characters.
                 </p>
                 <p class="help-block" ng-show="form.password.$error.mongoose">
@@ -66,8 +74,8 @@
             </div>
 
 
-            <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && vm.submitted,
-                                            'has-error': form.confirmPassword.$invalid && vm.submitted }">
+            <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && form.confirmPassword.$dirty,
+                                            'has-error': form.confirmPassword.$invalid && form.confirmPassword.$dirty }">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                     <input type="password" name="confirmPassword" class="form-control"
@@ -77,7 +85,7 @@
                            ng-minlength="3" required/>
                 </div>
                 <p class="help-block"
-                   ng-show="form.confirmPassword.$error.match && vm.submitted">
+                   ng-show="form.confirmPassword.$error.match && form.confirmPassword.$dirty">
                     Passwords must match.
                 </p>
             </div>
