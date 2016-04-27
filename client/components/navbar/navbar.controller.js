@@ -19,10 +19,10 @@ class NavbarController {
 
     toggleMainNav() {
         if($('#container').hasClass('mainnav-lg')) {
-            $('#container').removeClass('mainnav-lg')
+            $('#container').removeClass('mainnav-lg');
         }
         else {
-            $('#container').addClass('mainnav-lg')
+            $('#container').addClass('mainnav-lg');
         }
     }
 

@@ -315,7 +315,7 @@ gulp.task('start:server:prod', () => {
 gulp.task('start:server', () => {
     process.env.NODE_ENV = process.env.NODE_ENV || 'development';
     config = require(`./${serverPath}/config/environment`);
-    nodemon(`--harmony-proxies -w ${serverPath} ${serverPath} `)
+    nodemon(`-w ${serverPath} ${serverPath} `)//--harmony-proxies
         .on('log', onServerLog);
 });
 

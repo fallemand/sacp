@@ -6,11 +6,14 @@
                                             'has-error': form.name.$invalid && form.name.$dirty}">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                    <input type="text" class="form-control" placeholder="Nombre" name="name" minlength="6"
+                    <input type="text" class="form-control" placeholder="Nombre y Apellido" name="name" minlength="6"
                            ng-model="vm.user.name" required/>
                 </div>
                 <p class="help-block" ng-show="form.name.$error.required && form.name.$dirty">
                     El nombre es requerido
+                </p>
+                <p class="help-block" ng-show="form.name.$error.minlength && form.name.$dirty">
+                    Escribe por lo menos 6 caracteres
                 </p>
             </div>
             <div class="form-group" ng-class="{ 'has-success': form.mn.$valid && form.mn.$dirty,
@@ -22,6 +25,12 @@
                 <p class="help-block" ng-show="form.mn.$error.required && form.mn.$dirty">
                     La matrícula es requerida
                 </p>
+                <p class="help-block" ng-show="form.mn.$error.max && form.mn.$dirty">
+                    Máximo 8 dígitos
+                </p>
+                <p class="help-block" ng-show="form.mn.$error.min && form.mn.$dirty">
+                    El valor mínimo es 1
+                </p>
             </div>
             <div class="form-group"ng-class="{ 'has-success': form.mp.$valid && form.mp.$dirty,
                                             'has-error': form.mp.$invalid && form.mp.$dirty}">
@@ -31,6 +40,12 @@
                 </div>
                 <p class="help-block" ng-show="form.mp.$error.required && form.mp.$dirty">
                     La matrícula es requerida
+                </p>
+                <p class="help-block" ng-show="form.mp.$error.max && form.mp.$dirty">
+                    Máximo 8 dígitos
+                </p>
+                <p class="help-block" ng-show="form.mp.$error.min && form.mp.$dirty">
+                    El valor mínimo es 1
                 </p>
             </div>
             <hr>
@@ -44,10 +59,10 @@
                            mongoose-error/>
                 </div>
                 <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty">
-                    Doesn't look like a valid email.
+                    No parece un email válido
                 </p>
                 <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty">
-                    What's your email address?
+                    Debes ingresar tu email
                 </p>
                 <p class="help-block" ng-show="form.email.$error.mongoose">
                     {{ vm.errors.email }}
@@ -60,13 +75,13 @@
                     <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                     <input type="password" name="password" class="form-control" placeholder="Contraseña"
                            ng-model="vm.user.password"
-                           ng-minlength="3"
+                           ng-minlength="6"
                            required
                            mongoose-error/>
                 </div>
                 <p class="help-block"
                    ng-show="(form.password.$error.minlength || form.password.$error.required) && form.password.$dirty">
-                    Password must be at least 3 characters.
+                    La contraseña debe tener como mínimo 6 caracteres
                 </p>
                 <p class="help-block" ng-show="form.password.$error.mongoose">
                     {{ vm.errors.password }}
@@ -82,11 +97,11 @@
                            placeholder="Repetir Contraseña"
                            ng-model="vm.user.confirmPassword"
                            match="vm.user.password"
-                           ng-minlength="3" required/>
+                           ng-minlength="6" required/>
                 </div>
                 <p class="help-block"
                    ng-show="form.confirmPassword.$error.match && form.confirmPassword.$dirty">
-                    Passwords must match.
+                    Las contraseñas no coinciden
                 </p>
             </div>
 
