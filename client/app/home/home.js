@@ -7,6 +7,7 @@ angular.module('sacpApp')
                 url: '/',
                 template: '<home></home>',
                 parent: 'private',
+                authenticate: true,
                 ncyBreadcrumb: {
                     label: 'Inicio'
                 }

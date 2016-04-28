@@ -33,6 +33,10 @@ var UserSchema = new Schema({
     mn: {
         type: Number,
         required: true
+    },
+    active: {
+        type: Boolean,
+        default: 0
     }
 });
 
@@ -47,7 +51,10 @@ UserSchema
     .get(function () {
         return {
             'name': this.name,
-            'role': this.role
+            'role': this.role,
+            'mail': this.mail,
+            'mp': this.mp,
+            'mn': this.mn
         };
     });
 
@@ -97,7 +104,7 @@ UserSchema
             .catch(function (err) {
                 throw err;
             });
-    }, 'The specified email address is already in use.');
+    }, 'Este email ya se encuentra registrado.');
 
 var validatePresenceOf = function (value) {
     return value && value.length;
@@ -114,7 +121,7 @@ UserSchema
         }
 
         if (!validatePresenceOf(this.password)) {
-            return next(new Error('Invalid password'));
+            return next(new Error('Contraseña Incorrecta'));
         }
 
         // Make salt with a callback

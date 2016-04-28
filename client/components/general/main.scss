@@ -12,10 +12,6 @@
 /**
  *  Main Styles
  */
-#content-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .cls-header {
     background-color: #0ba0b5;
@@ -50,6 +46,13 @@
         transition: initial;
     }
 }
+
+@media (min-width: 768px) {
+    .cls-content .cls-content-lg {
+        width: 460px;
+    }
+}
+
 
 #mainnav-container {
     z-index: initial;

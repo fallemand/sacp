@@ -96,13 +96,13 @@
                     </a>
                 </li>
 
-                <li ng-hide="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                <li ng-hide="nav.isLoggedIn()" ui-sref-active="active" class="dropdown">
                     <a href="/register" ui-sref="signup">
                         <i class="fa fa-user-plus fa-fw fa-lg"></i> Registro
                     </a>
                 </li>
 
-                <li ng-hide="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                <li ng-hide="nav.isLoggedIn()" ui-sref-active="active" class="dropdown">
                     <a href="/login" ui-sref="login">
                         <i class="fa fa-sign-in fa-fw fa-lg"></i> Login
                     </a>
