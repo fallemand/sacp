@@ -8,7 +8,7 @@
                             <i class="flaticon-doctor-with-stethoscope"></i> Médicos Activos
                         </uib-tab-heading>
 
-                        <div ng-table="vm.tableParams" class="table table-responsive" show-filter="true">
+                        <div ng-table="vm.activeDoctorsTable" class="table table-responsive" show-filter="true">
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
@@ -54,7 +54,7 @@
                             Solicitudes <span class="badge badge-warning">3</span>
                         </uib-tab-heading>
 
-                        <div ng-table="vm.tableParams" class="table table-responsive" show-filter="true">
+                        <div ng-table="vm.notActiveDoctorsTable" class="table table-responsive" show-filter="true">
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
@@ -68,9 +68,9 @@
                                 <tbody>
                                 <tr ng-repeat="user in $data">
                                     <td>
-                                        <a class="btn btn-xs btn-success"><i
+                                        <a class="btn btn-xs btn-success" ng-click="vm.activateUser(user)"><i
                                             class="fa fa-check-square"></i> Activar</a>
-                                        <a class="btn btn-xs btn-danger"><i class="fa fa-times"></i>
+                                        <a class="btn btn-xs btn-danger" ng-click="vm.deleteUser(user)"><i class="fa fa-times"></i>
                                             Cancelar</a>
                                     </td>
                                     <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
