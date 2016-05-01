@@ -1,4 +1,4 @@
-<header id="navbar" ng-controller="NavbarController">
+<header id="navbar">
     <div id="navbar-container" class="boxed">
 
         <!--Brand logo & name-->
@@ -95,6 +95,21 @@
                         <i class="fa fa-cog fa-fw fa-lg"></i> Administración
                     </a>
                 </li>
+                <li ng-show="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                    <a href="/doctors" ui-sref="doctors">
+                        <i class="fa fa-cog fa-fw fa-lg"></i> Administración
+                    </a>
+                </li>
+                <li ng-show="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                    <a href="/treatments" ui-sref="treatments">
+                        <i class="fa fa-cog fa-fw fa-lg"></i> Administración
+                    </a>
+                </li>
+                <li ng-show="nav.isAdmin()" ui-sref-active="active" class="dropdown">
+                    <a href="/admin" ui-sref="admin">
+                        <i class="fa fa-cog fa-fw fa-lg"></i> Administración
+                    </a>
+                </li>
 
                 <li ng-hide="nav.isLoggedIn()" ui-sref-active="active" class="dropdown">
                     <a href="/register" ui-sref="signup">
@@ -111,7 +126,7 @@
                 <!--User dropdown-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <li ng-show="nav.isLoggedIn()" id="dropdown-user" class="dropdown" uib-dropdown on-toggle="toggled(open)">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right" uib-dropdown-toggle>
+                    <a class="dropdown-toggle text-right" uib-dropdown-toggle>
                         <span class="pull-right">
                             <img class="img-circle img-user media-object" src="assets/images/av1.png" alt="Profile Picture">
                         </span>

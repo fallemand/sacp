@@ -11,7 +11,8 @@ angular.module('sacpApp', [
         'ui.router',
         'ncy-angular-breadcrumb',
         'ui.bootstrap',
-        'validation.match'
+        'validation.match',
+        'ngTable'
     ])
     .config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
         $urlRouterProvider

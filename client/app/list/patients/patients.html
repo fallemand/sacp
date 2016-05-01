@@ -1,0 +1,51 @@
+<div class="cls-content-sm panel">
+    <div class="panel-body">
+        <p class="pad-btm">Ingresar a su cuenta</p>
+        <div class="row">
+            <div class="col-sm-12 mar-btm">
+                <p>Default: <code>test@example.com</code> / <code>test</code></p>
+                <p>Admin: <code>admin@example.com</code> / <code>admin</code></p>
+            </div>
+        </div>
+        <form name="form" ng-submit="vm.login(form)" novalidate>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                    <input type="email" name="email" class="form-control" ng-model="vm.user.email"  placeholder="Email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                    <input type="password" name="password" class="form-control"  placeholder="Password" ng-model="vm.user.password" required>
+                </div>
+            </div>
+            <div class="form-group has-error">
+                <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && vm.submitted">
+                    Please enter your email and password.
+                </p>
+                <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
+                    Please enter a valid email.
+                </p>
+
+                <p class="help-block">{{ vm.errors.other }}</p>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 text-left checkbox">
+                    <label>
+                        <input type="checkbox"> Recordarme
+                    </label>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group text-right">
+                        <button class="btn btn-success text-uppercase" type="submit">Login</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="pad-ver">
+    <a href="#" class="btn-link mar-rgt">No recuerdo mi contraseña</a>
+    <a ui-sref="signup" class="btn-link mar-lft">Registrarse</a>
+</div>

@@ -47,7 +47,8 @@ User.find({}).remove()
                 email: 'test@example.com',
                 password: 'test',
                 mn: '1',
-                mp: '1'
+                mp: '1',
+                active: true
 
             }, {
                 provider: 'local',
@@ -56,7 +57,107 @@ User.find({}).remove()
                 email: 'admin@example.com',
                 password: 'admin',
                 mn: '1',
-                mp: '1'
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'admin1@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'adm2@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'ad3n@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'ad4n@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'adm5@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'ad6n@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'adm7@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'ad8n@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'ad9n@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'ad0n@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'ad55n@example.com',
+                password: 'admin',
+                mn: '1',
+                mp: '1',
+                active: true
             })
             .then(() => {
                 console.log('finished populating users');
