@@ -15,6 +15,7 @@ import {Server as KarmaServer} from 'karma';
 import runSequence from 'run-sequence';
 import {protractor, webdriver_update} from 'gulp-protractor';
 import {Instrumenter} from 'isparta';
+import nodeInspector from 'gulp-node-inspector';
 
 var plugins = gulpLoadPlugins();
 var config;
@@ -39,13 +40,13 @@ const paths = {
     },
     server: {
         scripts: [
-          `${serverPath}/**/!(*.spec|*.integration).js`,
-          `!${serverPath}/config/local.env.sample.js`
+            `${serverPath}/**/!(*.spec|*.integration).js`,
+            `!${serverPath}/config/local.env.sample.js`
         ],
         json: [`${serverPath}/**/*.json`],
         test: {
-          integration: [`${serverPath}/**/*.integration.js`, 'mocha.global.js'],
-          unit: [`${serverPath}/**/*.spec.js`, 'mocha.global.js']
+            integration: [`${serverPath}/**/*.integration.js`, 'mocha.global.js'],
+            unit: [`${serverPath}/**/*.spec.js`, 'mocha.global.js']
         }
     },
     karma: 'karma.conf.js',
@@ -77,14 +78,14 @@ function checkAppReady(cb) {
 function whenServerReady(cb) {
     var serverReady = false;
     var appReadyInterval = setInterval(() =>
-        checkAppReady((ready) => {
-            if (!ready || serverReady) {
-                return;
-            }
-            clearInterval(appReadyInterval);
-            serverReady = true;
-            cb();
-        }),
+            checkAppReady((ready) => {
+                if (!ready || serverReady) {
+                    return;
+                }
+                clearInterval(appReadyInterval);
+                serverReady = true;
+                cb();
+            }),
         100);
 }
 
@@ -165,7 +166,7 @@ let istanbul = lazypipe()
             }
         },
         coverageDirectory: './coverage',
-        rootDirectory : ''
+        rootDirectory: ''
     });
 
 /********************
@@ -271,7 +272,7 @@ gulp.task('lint:scripts:client', () => {
         paths.client.scripts,
         _.map(paths.client.test, blob => '!' + blob),
         [`!${clientPath}/app/app.constant.js`]
-    ))
+        ))
         .pipe(lintClientScripts());
 });
 
@@ -291,9 +292,9 @@ gulp.task('lint:scripts:serverTest', () => {
 });
 
 gulp.task('jscs', () => {
-  return gulp.src(_.union(paths.client.scripts, paths.server.scripts))
-      .pipe(plugins.jscs())
-      .pipe(plugins.jscs.reporter());
+    return gulp.src(_.union(paths.client.scripts, paths.server.scripts))
+        .pipe(plugins.jscs())
+        .pipe(plugins.jscs.reporter());
 });
 
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], {dot: true}));
@@ -317,6 +318,25 @@ gulp.task('start:server', () => {
     config = require(`./${serverPath}/config/environment`);
     nodemon(`-w ${serverPath} ${serverPath} `)//--harmony-proxies
         .on('log', onServerLog);
+});
+
+gulp.task('start:server:debug', () => {
+    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    config = require(`./${serverPath}/config/environment`);
+    nodemon(`--debug -w ${serverPath} ${serverPath} `)//--harmony-proxies
+        .on('log', onServerLog)
+        .on('config:update', function () {
+            setTimeout(function () {
+                require('open')('http://localhost:8080/debug?port=5858');
+            }, 500);
+        });
+});
+
+gulp.task('node-inspector', function () {
+    gulp.src([])
+        .pipe(nodeInspector({
+            webHost: 'localhost'
+        }));
 });
 
 gulp.task('watch', () => {
@@ -360,6 +380,17 @@ gulp.task('serve', cb => {
         cb);
 });
 
+gulp.task('serve:debug', cb => {
+    runSequence(['clean:tmp', 'constant'],
+        ['lint:scripts', 'inject'],
+        ['wiredep:client'],
+        ['transpile:client', 'styles'],
+        'node-inspector',
+        ['start:server:debug', 'start:client'],
+        'watch',
+        cb);
+});
+
 gulp.task('serve:dist', cb => {
     runSequence(
         'build',
@@ -395,8 +426,8 @@ gulp.task('mocha:integration', () => {
 
 gulp.task('test:client', ['wiredep:test', 'constant'], (done) => {
     new KarmaServer({
-      configFile: `${__dirname}/${paths.karma}`,
-      singleRun: true
+        configFile: `${__dirname}/${paths.karma}`,
+        singleRun: true
     }, done).start();
 });
 
@@ -470,28 +501,28 @@ gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], ()
 
     return gulp.src(paths.client.mainView)
         .pipe(plugins.useref())
-            .pipe(appFilter)
-                .pipe(plugins.addSrc.append('.tmp/templates.js'))
-                .pipe(plugins.concat('app/app.js'))
-            .pipe(appFilter.restore)
-            .pipe(jsFilter)
-                .pipe(plugins.ngAnnotate())
-                .pipe(plugins.uglify())
-            .pipe(jsFilter.restore)
-            .pipe(cssFilter)
-                .pipe(plugins.minifyCss({
-                    cache: true,
-                    processImportFrom: ['!fonts.googleapis.com']
-                }))
-            .pipe(cssFilter.restore)
-            .pipe(htmlBlock)
-                .pipe(plugins.rev())
-            .pipe(htmlBlock.restore)
+        .pipe(appFilter)
+        .pipe(plugins.addSrc.append('.tmp/templates.js'))
+        .pipe(plugins.concat('app/app.js'))
+        .pipe(appFilter.restore)
+        .pipe(jsFilter)
+        .pipe(plugins.ngAnnotate())
+        .pipe(plugins.uglify())
+        .pipe(jsFilter.restore)
+        .pipe(cssFilter)
+        .pipe(plugins.minifyCss({
+            cache: true,
+            processImportFrom: ['!fonts.googleapis.com']
+        }))
+        .pipe(cssFilter.restore)
+        .pipe(htmlBlock)
+        .pipe(plugins.rev())
+        .pipe(htmlBlock.restore)
         .pipe(plugins.revReplace({manifest}))
         .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
 });
 
-gulp.task('html', function() {
+gulp.task('html', function () {
     return gulp.src(`${clientPath}/{app,components}/**/*.html`)
         .pipe(plugins.angularTemplatecache({
             module: 'sacpApp'
@@ -499,19 +530,19 @@ gulp.task('html', function() {
         .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('constant', function() {
-  let sharedConfig = require(`./${serverPath}/config/environment/shared`);
-  return plugins.ngConstant({
-    name: 'sacpApp.constants',
-    deps: [],
-    wrap: true,
-    stream: true,
-    constants: { appConfig: sharedConfig }
-  })
-    .pipe(plugins.rename({
-      basename: 'app.constant'
-    }))
-    .pipe(gulp.dest(`${clientPath}/app/`))
+gulp.task('constant', function () {
+    let sharedConfig = require(`./${serverPath}/config/environment/shared`);
+    return plugins.ngConstant({
+            name: 'sacpApp.constants',
+            deps: [],
+            wrap: true,
+            stream: true,
+            constants: {appConfig: sharedConfig}
+        })
+        .pipe(plugins.rename({
+            basename: 'app.constant'
+        }))
+        .pipe(gulp.dest(`${clientPath}/app/`))
 });
 
 gulp.task('build:images', () => {
@@ -532,15 +563,15 @@ gulp.task('build:images', () => {
 
 gulp.task('copy:extras', () => {
     return gulp.src([
-        `${clientPath}/favicon.ico`,
-        `${clientPath}/robots.txt`,
-        `${clientPath}/.htaccess`
-    ], { dot: true })
+            `${clientPath}/favicon.ico`,
+            `${clientPath}/robots.txt`,
+            `${clientPath}/.htaccess`
+        ], {dot: true})
         .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
 });
 
 gulp.task('copy:fonts', () => {
-    return gulp.src(`${clientPath}/bower_components/{bootstrap,font-awesome}/fonts/**/*`, { dot: true })
+    return gulp.src(`${clientPath}/bower_components/{bootstrap,font-awesome}/fonts/**/*`, {dot: true})
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/bower_components`));
 });
 
@@ -551,45 +582,45 @@ gulp.task('copy:assets', () => {
 
 gulp.task('copy:server', () => {
     return gulp.src([
-        'package.json',
-        'bower.json',
-        '.bowerrc'
-    ], {cwdbase: true})
+            'package.json',
+            'bower.json',
+            '.bowerrc'
+        ], {cwdbase: true})
         .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('coverage:pre', () => {
-  return gulp.src(paths.server.scripts)
-    // Covering files
-    .pipe(plugins.istanbul({
-        instrumenter: Instrumenter, // Use the isparta instrumenter (code coverage for ES6)
-        includeUntested: true
-    }))
-    // Force `require` to return covered files
-    .pipe(plugins.istanbul.hookRequire());
+    return gulp.src(paths.server.scripts)
+        // Covering files
+        .pipe(plugins.istanbul({
+            instrumenter: Instrumenter, // Use the isparta instrumenter (code coverage for ES6)
+            includeUntested: true
+        }))
+        // Force `require` to return covered files
+        .pipe(plugins.istanbul.hookRequire());
 });
 
 gulp.task('coverage:unit', () => {
     return gulp.src(paths.server.test.unit)
         .pipe(mocha())
         .pipe(istanbul())
-        // Creating the reports after tests ran
+    // Creating the reports after tests ran
 });
 
 gulp.task('coverage:integration', () => {
     return gulp.src(paths.server.test.integration)
         .pipe(mocha())
         .pipe(istanbul())
-        // Creating the reports after tests ran
+    // Creating the reports after tests ran
 });
 
 gulp.task('mocha:coverage', cb => {
-  runSequence('coverage:pre',
-              'env:all',
-              'env:test',
-              'coverage:unit',
-              'coverage:integration',
-              cb);
+    runSequence('coverage:pre',
+        'env:all',
+        'env:test',
+        'coverage:unit',
+        'coverage:integration',
+        cb);
 });
 
 // Downloads the selenium webdriver
@@ -600,8 +631,8 @@ gulp.task('test:e2e', ['env:all', 'env:test', 'start:server', 'webdriver_update'
         .pipe(protractor({
             configFile: 'protractor.conf.js',
         })).on('error', err => {
-            console.log(err)
-        }).on('end', () => {
-            process.exit();
-        });
+        console.log(err)
+    }).on('end', () => {
+        process.exit();
+    });
 });
