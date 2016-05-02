@@ -18,7 +18,9 @@
     "angular-validation-match": "~1.5.2",
     "angular-breadcrumb": "~0.4.1",
     "ng-table": "^0.8.3",
-    "angular-animate": "^1.5.5"
+    "angular-animate": "^1.5.5",
+    "bootstrap-sweetalert": "^0.4.5",
+    "ng-sweet-alert": "^1.0.5"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0",

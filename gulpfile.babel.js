@@ -440,6 +440,7 @@ gulp.task('wiredep:client', () => {
                 /bootstrap.js/,
                 /json3/,
                 /es5-shim/,
+                '/bower_components/sweetalert/',
                 /bootstrap.css/,
                 /font-awesome.css/
             ],
@@ -456,6 +457,7 @@ gulp.task('wiredep:test', () => {
                 /bootstrap.js/,
                 '/json3/',
                 '/es5-shim/',
+                '/bower_components/sweetalert/',
                 /bootstrap.css/,
                 /font-awesome.css/
             ],

@@ -103,7 +103,7 @@ export function changePassword(req, res, next) {
  * Activate User
  */
 export function activate(req, res, next) {
-    var userId = req.params.id
+    var userId = req.params.id;
 
     return User.findById(userId).exec()
         .then(user => {

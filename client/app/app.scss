@@ -2,7 +2,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
-@import '../bower_components/ng-table/dist/ng-table.min';
 
 //Import Assets - Manual
 @import '../assets/theme/nifty.min';
@@ -17,6 +16,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import 'main/main';
 @import '../components/general/main';
 @import '../components/modal/modal';
+@import '../components/tabs/tabs';
 /* endinject */
 
 
