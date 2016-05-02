@@ -1,0 +1,22 @@
+.tab-animation > .tab-content {
+    position: relative;
+    > .tab-pane {
+        transition: opacity 0.1s linear;
+        &.active-remove {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: block;
+        }
+        &.active-remove-active, &.active-add {
+            opacity: 0;
+        }
+    }
+}
+
+.nav-tabs {
+    margin-bottom: 10px;
+    > li:not(.active) {
+        opacity: .7;
+    }
+}
