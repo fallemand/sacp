@@ -14,7 +14,7 @@ angular.module('sacpApp', [
         'validation.match',
         'ngTable',
         'ngAnimate',
-        'ng-sweet-alert'
+        'hSweetAlert'
     ])
     .config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
         $urlRouterProvider

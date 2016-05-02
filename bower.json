@@ -20,7 +20,7 @@
     "ng-table": "^0.8.3",
     "angular-animate": "^1.5.5",
     "bootstrap-sweetalert": "^0.4.5",
-    "ng-sweet-alert": "^1.0.5"
+    "angular-sweetalert": "angular-h-sweetalert#^1.4.7"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0",

@@ -441,6 +441,7 @@ gulp.task('wiredep:client', () => {
                 /json3/,
                 /es5-shim/,
                 '/bower_components/sweetalert/',
+                /ngSweetAlert.js/,
                 /bootstrap.css/,
                 /font-awesome.css/
             ],
@@ -458,6 +459,7 @@ gulp.task('wiredep:test', () => {
                 '/json3/',
                 '/es5-shim/',
                 '/bower_components/sweetalert/',
+                /ngSweetAlert.js/,
                 /bootstrap.css/,
                 /font-awesome.css/
             ],

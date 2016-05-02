@@ -71,18 +71,12 @@
                                 <tbody>
                                 <tr ng-repeat="user in $data">
                                     <td>
-                                        <a sweetalert class="btn btn-xs btn-success"
-                                           sweet-options="{title: '¿Está Seguro?',text: 'Activará el usuario {{user.name}}!',type: 'success',
-                                           showCancelButton: true,confirmButtonClass: 'btn-success',confirmButtonText: 'Sí, activarlo!',cancelButtonText: 'No'}"
-                                           sweet-on-confirm="vm.activateUser(user)">
-                                            <i class="fa fa-check-square"></i> Activar</a>
-                                        <a sweetalert class="btn btn-xs btn-danger"
-                                           sweet-options="{title: '¿Está Seguro?',text: 'Eliminará el usuario {{user.name}}!',type: 'error',
-                                           showCancelButton: true,confirmButtonClass: 'btn-danger',confirmButtonText: 'Sí, eliminarlo!',cancelButtonText: 'No'}"
-                                           sweet-on-confirm="vm.deleteUser(user)">
-                                            <i class="fa fa-times"></i>
-                                            Cancelar</a>
-
+                                        <a class="btn btn-xs btn-success" ng-click="vm.activateUser(user)">
+                                            <i class="fa fa-check-square"></i> Activar
+                                        </a>
+                                        <a class="btn btn-xs btn-danger" ng-click="vm.deleteUser(user)">
+                                            <i class="fa fa-times"></i>Cancelar
+                                        </a>
                                     </td>
                                     <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
                                         {{user.name}}
