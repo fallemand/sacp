@@ -1,0 +1,65 @@
+<div ng-table="vm.notActiveDoctorsTable" class="table table-responsive" show-filter="true">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Mail</th>
+            <th>MN</th>
+            <th>MP</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in $data">
+            <td>
+                <a class="btn btn-xs btn-success" ng-click="vm.activateUser(user)">
+                    <i class="fa fa-check-square"></i> Activar
+                </a>
+                <a class="btn btn-xs btn-danger" ng-click="vm.deleteUser(user)">
+                    <i class="fa fa-times"></i>Cancelar
+                </a>
+            </td>
+            <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+                {{user.name}}
+            </td>
+            <td title="'Mail'" filter="{ email: 'text'}" sortable="'email'">
+                {{user.email}}
+            </td>
+            <td title="'MN'" filter="{ mn: 'number'}" sortable="'mn'">
+                {{user.mn}}
+            </td>
+            <td title="'MP'" filter="{ mp: 'number'}" sortable="'mp'">
+                {{user.mp}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--
+<div ng-table="vm.notActiveDoctorsTable" class="table table-responsive" show-filter="true">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th></th>
+            <th ng-repeat="metadata in $metadata">{{metadata.title}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="data in $data">
+            <td>
+                <a class="btn btn-xs btn-success" ng-click="vm.viewData(user)">
+                    <i class="fa fa-check-square"></i> Activar
+                </a>
+                <a class="btn btn-xs btn-danger" ng-click="vm.deleteData(user)">
+                    <i class="fa fa-times"></i>Cancelar
+                </a>
+            </td>
+            <td ng-repeat="metadata in $metadata" title="'{{metadata.title}}'" filter="{ name: '{{metadata.type}}'}" sortable="'{{metadata.title}}'">
+                {{data[metadata.name].value}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+-->
