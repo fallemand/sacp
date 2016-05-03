@@ -3,6 +3,25 @@
     width: 400px;
     margin-left: -200px;
     padding: 5px;
+    min-height: 256px;
+    .btn:focus {
+        box-shadow: none;
+    }
+    .btn-default:focus {
+        border-color: #cdd6e1;
+    }
+    .btn-success:focus {
+        border-color: #8bbf51;
+    }
+    .btn-info:focus {
+        border-color: #4ebcda;
+    }
+    .btn-danger:focus {
+        border-color: #f76c51;
+    }
+    .btn-warning:focus {
+        border-color: #ebaa4b;
+    }
     h2 {
         font-weight: 400;
         font-size: 20px;

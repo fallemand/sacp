@@ -31,11 +31,13 @@ class DoctorsController {
             showCancelButton: true,
             confirmButtonClass: 'btn-danger',
             confirmButtonText: 'Sí, eliminarlo!',
-            closeOnConfirm: false
+            closeOnConfirm: false,
+            allowEscapeKey: true,
+            allowOutsideClick: true
         }, (function() {
             this.$http.delete('/api/users/' + user._id);
             this.notActiveDoctorsTable.reload();
-            this.sweet.show('Eliminado!', 'El usuario ha sido eliminado.', 'success');
+            this.sweet.show({title: 'Eliminado!', text: 'El usuario ha sido eliminado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
         }).bind(this));
     }
 
@@ -45,13 +47,15 @@ class DoctorsController {
             text: 'Activará el usuario ' + user.name,
             type: 'info',
             showCancelButton: true,
-            confirmButtonClass: 'btn-success',
+            confirmButtonClass: 'btn-info',
             confirmButtonText: 'Sí, activarlo!',
-            closeOnConfirm: false
+            closeOnConfirm: false,
+            allowEscapeKey: true,
+            allowOutsideClick: true
         }, (function() {
             this.$http.put('/api/users/' + user._id + '/activate');
             this.notActiveDoctorsTable.reload();
-            this.sweet.show('Activado!', 'El usuario ha sido activado.', 'success');
+            this.sweet.show({title: 'Activado!', text: 'El usuario ha sido activado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
         }).bind(this));
     }
 }

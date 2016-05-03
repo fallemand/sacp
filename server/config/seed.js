@@ -85,7 +85,7 @@ User.find({}).remove()
                 password: 'admin',
                 mn: '1',
                 mp: '1',
-                active: true
+                active: false
             }, {
                 provider: 'local',
                 role: 'admin',
@@ -94,7 +94,7 @@ User.find({}).remove()
                 password: 'admin',
                 mn: '1',
                 mp: '1',
-                active: true
+                active: false
             }, {
                 provider: 'local',
                 role: 'admin',
@@ -103,7 +103,7 @@ User.find({}).remove()
                 password: 'admin',
                 mn: '1',
                 mp: '1',
-                active: true
+                active: false
             }, {
                 provider: 'local',
                 role: 'admin',
@@ -112,7 +112,7 @@ User.find({}).remove()
                 password: 'admin',
                 mn: '1',
                 mp: '1',
-                active: true
+                active: false
             }, {
                 provider: 'local',
                 role: 'admin',
@@ -121,7 +121,7 @@ User.find({}).remove()
                 password: 'admin',
                 mn: '1',
                 mp: '1',
-                active: true
+                active: false
             }, {
                 provider: 'local',
                 role: 'admin',
