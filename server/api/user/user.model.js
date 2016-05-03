@@ -4,8 +4,6 @@ import crypto from 'crypto';
 import mongoose from 'mongoose';
 mongoose.Promise = require('bluebird');
 import {Schema} from 'mongoose';
-var extend = require('mongoose-schema-extend');
-
 
 var UserSchema = new Schema({
     name: {
