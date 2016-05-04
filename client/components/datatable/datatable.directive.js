@@ -8,9 +8,7 @@ angular.module('sacpApp')
             controller: 'DatatableController',
             controllerAs: 'vm',
             scope: {
-                metadata: '=',
-                cancelEvent: '=',
-                activateEvent: '='
+                parameters: '='
             }
         };
     });
