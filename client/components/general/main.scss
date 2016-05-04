@@ -47,6 +47,12 @@
     }
 }
 
+@media (min-width: 992px) {
+    #page-content {
+        padding: 10px 25px 0;
+    }
+}
+
 @media (min-width: 768px) {
     .cls-content .cls-content-lg {
         width: 460px;
@@ -65,4 +71,18 @@
 .badge {
     padding: 2px 6px;
     vertical-align: top;
+}
+
+select.form-control {
+    height: 31px;
+}
+
+.effect-slide {
+    transition: max-height .4s ease-out;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.effect-slide.ng-hide {
+    max-height: 0;
 }

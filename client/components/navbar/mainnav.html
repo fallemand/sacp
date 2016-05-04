@@ -8,7 +8,7 @@
         <div id="mainnav-shortcut">
             <ul class="list-unstyled">
                 <li ng-show="nav.isLoggedIn()" class="col-xs-4" uib-tooltip="Inicio" tooltip-placement="bottom">
-                    <a class="shortcut-grid" href="#">
+                    <a class="shortcut-grid" href="/home" ui-sref="home">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
@@ -40,7 +40,7 @@
 
                         <!--Menu list item-->
                         <li ng-show="nav.isAdmin()">
-                            <a href="/doctors" ui-sref="doctors" >
+                            <a href="/doctors" ui-sref="doctors">
                                 <i class="flaticon-doctor-with-stethoscope"></i>
                                 <span class="menu-title">Médicos</span>
                             </a>

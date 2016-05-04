@@ -1,33 +1,28 @@
 'use strict';
 
 class PatientsController {
-  constructor(Auth, $state) {
-    this.user = {};
-    this.errors = {};
-    this.submitted = false;
 
-    this.Auth = Auth;
-    this.$state = $state;
-  }
 
-  login(form) {
-    this.submitted = true;
+    constructor(Auth, $state) {
+        this.showPatientForm = false;
+        this.user = {};
+        this.errors = {};
+        this.submitted = false;
 
-    if (form.$valid) {
-      this.Auth.login({
-        email: this.user.email,
-        password: this.user.password
-      })
-      .then(() => {
-        // Logged in, redirect to home
-        this.$state.go('home');
-      })
-      .catch(err => {
-        this.errors.other = err.message;
-      });
+        this.Auth = Auth;
+        this.$state = $state;
     }
-  }
+
+    addPatient() {
+        if(this.showPatientForm) {
+            this.showPatientForm = false;
+        }
+        else {
+            this.showPatientForm = true;
+        }
+
+    }
 }
 
 angular.module('sacpApp')
-  .controller('PatientsController', PatientsController);
+    .controller('PatientsController', PatientsController);
