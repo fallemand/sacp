@@ -61,7 +61,6 @@ User.find({}).remove()
                 active: true
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'admin1@example.com',
                 password: 'admin',
@@ -70,7 +69,6 @@ User.find({}).remove()
                 active: true
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'adm2@example.com',
                 password: 'admin',
@@ -79,7 +77,6 @@ User.find({}).remove()
                 active: true
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'ad3n@example.com',
                 password: 'admin',
@@ -88,7 +85,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'ad4n@example.com',
                 password: 'admin',
@@ -97,7 +93,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'adm5@example.com',
                 password: 'admin',
@@ -106,7 +101,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'ad6n@example.com',
                 password: 'admin',
@@ -115,7 +109,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'adm7@example.com',
                 password: 'admin',
@@ -124,7 +117,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'ad8n@example.com',
                 password: 'admin',
@@ -133,7 +125,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'ad9n@example.com',
                 password: 'admin',
@@ -142,7 +133,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'ad0n@example.com',
                 password: 'admin',
@@ -151,7 +141,6 @@ User.find({}).remove()
                 active: false
             }, {
                 provider: 'local',
-                role: 'admin',
                 name: 'Admin',
                 email: 'ad55n@example.com',
                 password: 'admin',

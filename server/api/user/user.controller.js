@@ -32,6 +32,18 @@ export function index(req, res) {
 }
 
 /**
+ * Count list of users
+ * restriction: 'admin'
+ */
+export function count(req, res) {
+    return User.count(req.query).exec()
+        .then(count => {
+            res.status(200).json(count);
+        })
+        .catch(handleError(res));
+}
+
+/**
  * Creates a new user
  */
 export function create(req, res, next) {
@@ -102,10 +114,8 @@ export function changePassword(req, res, next) {
 /**
  * Activate User
  */
-export function activate(req, res, next) {
-    var userId = req.params.id;
-
-    return User.findById(userId).exec()
+export function activate(req, res) {
+    return User.findById(req.params.id).exec()
         .then(user => {
             user.active = true;
             return user.save()

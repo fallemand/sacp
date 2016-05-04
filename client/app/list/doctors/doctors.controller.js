@@ -5,21 +5,35 @@ class DoctorsController {
     constructor($http, NgTableParams, sweet) {
         this.$http = $http;
         this.sweet = sweet;
+        this.countNotActiveUsers;
 
-        this.activeDoctorsTable = new NgTableParams({count: 2}, {
+        this.activeDoctorsTable = new NgTableParams({}, {
             getData: function ($defer, params) {
-                $http.get('/api/users?active=true').then(response => {
+                $http.get('/api/users?active=true&&role=user').then(response => {
                     $defer.resolve(response.data);
                 });
             }
         });
 
-        this.notActiveDoctorsTable = new NgTableParams({count: 2}, {
-            getData: function ($defer, params) {
-                $http.get('/api/users?active=false').then(response => {
+        this.notActiveDoctorsTable = new NgTableParams({}, {
+            getData: (function ($defer, params) {
+                $http.get('/api/users?active=false&&role=user').then(response => {
+                    this.countNotActiveUsers = response.data.length;
                     $defer.resolve(response.data);
                 });
-            }
+            }).bind(this)
+        });
+    }
+
+    updateData() {
+        this.notActiveDoctorsTable.reload();
+        this.activeDoctorsTable.reload();
+        this.countList();
+    }
+
+    countList() {
+        this.$http.get('/api/users/count?active=false&&role=user').then(response => {
+            this.countNotActiveUsers = response.data;
         });
     }
 
@@ -35,9 +49,10 @@ class DoctorsController {
             allowEscapeKey: true,
             allowOutsideClick: true
         }, (function() {
-            this.$http.delete('/api/users/' + user._id);
-            this.notActiveDoctorsTable.reload();
-            this.sweet.show({title: 'Eliminado!', text: 'El usuario ha sido eliminado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
+            this.$http.delete('/api/users/' + user._id).then(response => {
+                this.updateData();
+                this.sweet.show({title: 'Eliminado!', text: 'El usuario ha sido eliminado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
+            });
         }).bind(this));
     }
 
@@ -47,15 +62,16 @@ class DoctorsController {
             text: 'Activará el usuario ' + user.name,
             type: 'info',
             showCancelButton: true,
-            confirmButtonClass: 'btn-info',
+            confirmButtonClass: 'btn-success',
             confirmButtonText: 'Sí, activarlo!',
             closeOnConfirm: false,
             allowEscapeKey: true,
             allowOutsideClick: true
         }, (function() {
-            this.$http.put('/api/users/' + user._id + '/activate');
-            this.notActiveDoctorsTable.reload();
-            this.sweet.show({title: 'Activado!', text: 'El usuario ha sido activado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
+            this.$http.put('/api/users/' + user._id + '/activate').then(response => {
+                this.updateData();
+                this.sweet.show({title: 'Activado!', text: 'El usuario ha sido activado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
+            });
         }).bind(this));
     }
 }
