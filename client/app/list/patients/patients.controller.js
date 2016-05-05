@@ -3,24 +3,43 @@
 class PatientsController {
 
 
-    constructor(Auth, $state) {
+    constructor($http, sweet) {
         this.showPatientForm = false;
-        this.user = {};
+        this.newPatient = {};
         this.errors = {};
         this.submitted = false;
-
-        this.Auth = Auth;
-        this.$state = $state;
     }
 
-    addPatient() {
+    addPatient(form) {
+        this.submitted = true;
+
+        if (form.$valid) {
+            this.$http.post('/api/patients', { name: this.newPatient })
+                .then(() => {
+                    // Show success alert
+                    this.success = true;
+                })
+                .catch(err => {
+                    err = err.data;
+                    this.errors = {};
+
+                    // Update validity of form fields that match the mongoose errors
+                    angular.forEach(err.errors, (error, field) => {
+                        form[field].$setValidity('mongoose', false);
+                        this.errors[field] = error.message;
+                    });
+                });
+        }
+    }
+
+
+    togglePatientForm() {
         if(this.showPatientForm) {
             this.showPatientForm = false;
         }
         else {
             this.showPatientForm = true;
         }
-
     }
 }
 

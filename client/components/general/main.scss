@@ -74,12 +74,12 @@
 }
 
 select.form-control {
-    height: 31px;
+    height: 28px;
 }
 
 .effect-slide {
     transition: all .4s linear;
-    max-height: 100px;
+    max-height: 400px;
     overflow: hidden;
     opacity: 1;
     &.ng-hide {
@@ -107,5 +107,16 @@ select.form-control {
     &.ng-enter-active {
         /* end with opacity 1 (fade in) */
         opacity: 1;
+    }
+}
+
+.form-short {
+    .form-group {
+        margin: 5px 0;
+    }
+    .help-block {
+        font-size: 11px;
+        line-height: 12px;
+        margin: 3px 0 0;
     }
 }

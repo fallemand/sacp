@@ -16,6 +16,10 @@ var PatientSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    socialInsuaranceNumber: {
+        type: Number,
+        required: true
+    },
     address: {
         type: String,
         required: false

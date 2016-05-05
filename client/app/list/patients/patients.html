@@ -8,7 +8,7 @@
                 <div class="pad-btm form-inline">
                     <div class="row">
                         <div class="col-sm-6 table-toolbar-left">
-                            <button class="btn btn-primary btn-labeled fa fa-plus" ng-click="vm.addPatient()">
+                            <button class="btn btn-primary btn-labeled fa fa-plus" ng-click="vm.togglePatientForm()">
                                 Agregar
                             </button>
                             <div class="btn-group">
@@ -42,82 +42,143 @@
                     </div>
                 </div>
 
-                <div class="well well-sm effect-slide" ng-show="vm.showPatientForm">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-3 mar-btm">
-                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i
-                                                            class="fa fa-user"></i></span>
-                                        <input type="text" class="form-control" placeholder="Nombre">
+                <div class="well well-xs effect-slide" ng-show="vm.showPatientForm">
+                    <form class="form form-short" name="form" ng-submit="vm.addPatient(form)" novalidate>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.name.$valid && (form.name.$dirty || vm.submitted),
+                                            'has-error': form.name.$invalid && (form.name.$dirty || vm.submitted)}">
+                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i
+                                                                class="fa fa-user"></i></span>
+                                            <input type="text" class="form-control" placeholder="Nombre y Apellido"
+                                                   name="name" minlength="6"
+                                                   ng-model="vm.patient.name" required>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.name.$error.required && (form.name.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
+                                        <p class="help-block"
+                                           ng-show="form.name.$error.minlength && (form.name.$dirty || vm.submitted)">
+                                            Escribe por lo menos 6 caracteres
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-md-3 mar-btm">
-                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i
-                                                            class="fa fa-user"></i></span>
-                                        <input type="email" class="form-control" placeholder="Apellido">
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.dni.$valid && (form.dni.$dirty || vm.submitted),
+                                            'has-error': form.dni.$invalid && (form.dni.$dirty || vm.submitted)}">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">DNI</span>
+                                            <input type="number" class="form-control" placeholder="DNI" name="dni"
+                                                   minlength="6"
+                                                   ng-model="vm.patient.dni" required>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.dni.$error.required && (form.dni.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-md-3 mar-btm">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">DNI</span>
-                                        <input type="url" class="form-control" placeholder="DNI">
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.socialInsuaranceNumber.$valid && (form.socialInsuaranceNumber.$dirty || vm.submitted),
+                                            'has-error': form.socialInsuaranceNumber.$invalid && (form.socialInsuaranceNumber.$dirty || vm.submitted)}">
+                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i
+                                                                class="fa fa-credit-card"></i></span>
+                                            <input type="number" class="form-control" placeholder="Nº Obra Social"
+                                                   name="socialInsuaranceNumber" minlength="6"
+                                                   ng-model="vm.patient.socialInsuaranceNumber" required>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.socialInsuaranceNumber.$error.required && (form.socialInsuaranceNumber.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-md-3 mar-btm">
-                                    <div class="input-group">
-                                                        <span class="input-group-addon"><i
-                                                            class="fa fa-credit-card"></i></span>
-                                        <input type="url" class="form-control"
-                                               placeholder="Nº Obra Social">
+
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.email.$valid && (form.email.$dirty || vm.submitted),
+                                            'has-error': form.email.$invalid && (form.email.$dirty || vm.submitted)}">
+                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i
+                                                                class="fa fa-envelope"></i></span>
+                                            <input type="email" class="form-control" placeholder="Email"
+                                                   name="email" minlength="6"
+                                                   ng-model="vm.patient.email" required>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.email.$error.required && (form.email.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="input-group">
+
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.address.$valid && (form.address.$dirty || vm.submitted),
+                                            'has-error': form.address.$invalid && (form.address.$dirty || vm.submitted)}">
+                                        <div class="input-group">
                                                         <span class="input-group-addon"><i
                                                             class="fa fa-home"></i></span>
-                                        <input type="text" class="form-control" placeholder="Domicilio">
+                                            <input type="text" class="form-control" placeholder="Nº Obra Social"
+                                                   name="address" minlength="6"
+                                                   ng-model="vm.patient.address" required>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.address.$error.required && (form.address.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.telephone.$valid && (form.telephone.$dirty || vm.submitted),
+                                            'has-error': form.telephone.$invalid && (form.telephone.$dirty || vm.submitted)}">
+                                        <div class="input-group">
                                                         <span class="input-group-addon"><i
                                                             class="fa fa-phone"></i></span>
-                                        <input type="email" class="form-control" placeholder="Teléfono">
+                                            <input type="tel" class="form-control" placeholder="Teléfono"
+                                                   name="telephone" minlength="6"
+                                                   ng-model="vm.patient.telephone" required>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.telephone.$error.required && (form.telephone.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.cellphone.$valid && (form.cellphone.$dirty || vm.submitted),
+                                            'has-error': form.cellphone.$invalid && (form.cellphone.$dirty || vm.submitted)}">
+                                        <div class="input-group">
                                                         <span class="input-group-addon"><i
-                                                            class="fa fa-mobile-phone"></i></span>
-                                        <input type="url" class="form-control" placeholder="Celular">
+                                                            class="fa fa-phone"></i></span>
+                                            <input type="tel" class="form-control" placeholder="Celular"
+                                                   name="cellphone" minlength="6"
+                                                   ng-model="vm.patient.cellphone" required>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.cellphone.$error.required && (form.cellphone.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                                        <span class="input-group-addon">
+                                    <div class="col-md-3 form-group" ng-class="{ 'has-success': form.agreementType.$valid && (form.agreementType.$dirty || vm.submitted),
+                                            'has-error': form.agreementType.$invalid && (form.agreementType.$dirty || vm.submitted)}">
+                                        <div class="input-group">
+                                             <span class="input-group-addon">
                                                             TC
                                                         </span>
-                                        <select class="form-control">
-                                            <option selected>Tipo Convenio</option>
-                                            <option>PROFE</option>
-                                            <option>Carenciado</option>
-                                            <option>DOSEP</option>
-                                        </select>
+                                            <select class="form-control"
+                                                    name="agreementType" minlength="6"
+                                                    ng-model="vm.patient.agreementType" required>
+                                                <option selected>Tipo Convenio</option>
+                                                <option>PROFE</option>
+                                                <option>Carenciado</option>
+                                                <option>DOSEP</option>
+                                            </select>
+                                        </div>
+                                        <p class="help-block"
+                                           ng-show="form.agreementType.$error.required && (form.agreementType.$dirty || vm.submitted)">
+                                            El campo es requerido
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-2 text-center">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                <br/>
+                                <button class="btn btn-default mar-top">Cancelar</button>
+                            </div>
                         </div>
-                        <div class="col-md-2 text-center">
-                            <button class="btn btn-primary">Guardar</button>
-                            <br/>
-                            <button class="btn btn-default mar-top">Cancelar</button>
-                        </div>
-                    </div>
+                    </form>
 
                 </div>
 
