@@ -78,11 +78,34 @@ select.form-control {
 }
 
 .effect-slide {
-    transition: max-height .4s ease-out;
+    transition: all .4s linear;
     max-height: 100px;
     overflow: hidden;
+    opacity: 1;
+    &.ng-hide {
+        max-height: 0;
+        min-height: 0;
+        opacity: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin: 0;
+        border-bottom-width: 0;
+    }
 }
 
-.effect-slide.ng-hide {
-    max-height: 0;
+.inner-view {
+    /* start 'enter' transition */
+    &.ng-enter {
+        /* transition on enter for .5s */
+        transition: .5s;
+
+        /* start with opacity 0 (invisible) */
+        opacity: 0;
+    }
+
+    /* end 'enter' transition */
+    &.ng-enter-active {
+        /* end with opacity 1 (fade in) */
+        opacity: 1;
+    }
 }
