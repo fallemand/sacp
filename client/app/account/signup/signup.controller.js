@@ -6,6 +6,7 @@ class SignupController {
     errors = {};
     success = false;
     submitted = false;
+    isSaving = false;
     //end-non-standard
 
     constructor(Auth, $state) {
@@ -14,8 +15,8 @@ class SignupController {
     }
 
     register(form) {
+        this.isSaving = true;
         this.submitted = true;
-
         if (form.$valid) {
             this.Auth.createUser({
                     name: this.user.name,
@@ -37,7 +38,9 @@ class SignupController {
                         form[field].$setValidity('mongoose', false);
                         this.errors[field] = error.message;
                     });
-                });
+                }).finally(function () {
+                    this.isSaving = false;
+            });
         }
     }
 }

@@ -93,6 +93,15 @@ select.form-control {
     }
 }
 
+
+.effect-fade {
+    transition: opacity .5s linear;
+    opacity: 1;
+    &.ng-hide {
+        opacity: 0;
+    }
+}
+
 .inner-view {
     /* start 'enter' transition */
     &.ng-enter {
@@ -108,6 +117,14 @@ select.form-control {
         /* end with opacity 1 (fade in) */
         opacity: 1;
     }
+}
+
+.input-group-addon {
+    transition: all .5s ease-out;
+}
+
+.form-control {
+    transition: border .5s ease-out;
 }
 
 .form-short {
