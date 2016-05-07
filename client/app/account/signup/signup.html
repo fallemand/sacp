@@ -1,7 +1,7 @@
 <div class="cls-content-lg panel">
     <div class="panel-body">
         <p class="pad-btm">Registrar una cuenta</p>
-        <form class="form" name="form" ng-hide="vm.success" ng-disabled="isSaving" ng-submit="vm.register(form)" novalidate>
+        <form class="form" name="form" ng-hide="vm.success" ng-disabled="isSaving" ng-submit="vm.register(form)" novalidate autocomplete="off">
             <fieldset ng-disabled="isSaving">
                 <div class="form-group" ng-class="{ 'has-success': form.name.$valid && (form.name.$dirty || vm.submitted),
                                             'has-error': form.name.$invalid && (form.name.$dirty || vm.submitted)}">
@@ -11,11 +11,9 @@
                                minlength="6"
                                ng-model="vm.user.name" required/>
                     </div>
-                    <p class="help-block" ng-show="form.name.$error.required && (form.name.$dirty || vm.submitted)">
-                        El nombre es requerido
-                    </p>
-                    <p class="help-block" ng-show="form.name.$error.minlength && (form.name.$dirty || vm.submitted)">
-                        Escribe por lo menos 6 caracteres
+                    <p class="help-block" ng-show="form.name.$invalid && (form.name.$dirty || vm.submitted)">
+                        <span ng-show="form.name.$error.minlength">Escribe por lo menos 6 caracteres</span>
+                        <span ng-show="form.name.$error.required">El campo es requerido</span>
                     </p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-success': form.mn.$valid && (form.mn.$dirty || vm.submitted),
@@ -25,14 +23,10 @@
                         <input type="number" class="form-control" min="1" max="99999999" step="1" required
                                ng-model="vm.user.mn" placeholder="Matricula Nacional" name="mn">
                     </div>
-                    <p class="help-block" ng-show="form.mn.$error.required && (form.mn.$dirty || vm.submitted)">
-                        La matrícula es requerida
-                    </p>
-                    <p class="help-block" ng-show="form.mn.$error.max && (form.mn.$dirty || vm.submitted)">
-                        Máximo 8 dígitos
-                    </p>
-                    <p class="help-block" ng-show="form.mn.$error.min && (form.mn.$dirty || vm.submitted)">
-                        El valor mínimo es 1
+                    <p class="help-block" ng-show="form.mn.$invalid && (form.mn.$dirty || vm.submitted)">
+                        <span ng-show="form.mn.$error.required">El campo es requerido</span>
+                        <span ng-show="form.mn.$error.max">Máximo 8 dígitos</span>
+                        <span ng-show="form.mn.$error.min">El valor mínimo es 1</span>
                     </p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-success': form.mp.$valid && (form.mp.$dirty || vm.submitted),
@@ -42,14 +36,10 @@
                         <input type="number" class="form-control" min="1" max="99999999" step="1" required
                                ng-model="vm.user.mp" placeholder="Matricula Provincial" name="mp">
                     </div>
-                    <p class="help-block" ng-show="form.mp.$error.required && (form.mp.$dirty || vm.submitted)">
-                        La matrícula es requerida
-                    </p>
-                    <p class="help-block" ng-show="form.mp.$error.max && (form.mp.$dirty || vm.submitted)">
-                        Máximo 8 dígitos
-                    </p>
-                    <p class="help-block" ng-show="form.mp.$error.min && (form.mp.$dirty || vm.submitted)">
-                        El valor mínimo es 1
+                    <p class="help-block" ng-show="form.mp.$invalid && (form.mp.$dirty || vm.submitted)">
+                        <span ng-show="form.mp.$error.required">El campo es requerido</span>
+                        <span ng-show="form.mp.$error.max">Máximo 8 dígitos</span>
+                        <span ng-show="form.mp.$error.min">El valor mínimo es 1</span>
                     </p>
                 </div>
                 <hr>
@@ -62,14 +52,10 @@
                                required
                                mongoose-error/>
                     </div>
-                    <p class="help-block" ng-show="form.email.$error.email && (form.email.$dirty || vm.submitted)">
-                        No parece un email válido
-                    </p>
-                    <p class="help-block" ng-show="form.email.$error.required && (form.email.$dirty || vm.submitted)">
-                        Debes ingresar tu email
-                    </p>
-                    <p class="help-block" ng-show="form.email.$error.mongoose">
-                        {{ vm.errors.email }}
+                    <p class="help-block" ng-show="form.email.$invalid && (form.email.$dirty || vm.submitted)">
+                        <span ng-show="form.email.$error.email">No parece un email válido</span>
+                        <span ng-show="form.email.$error.required">Debes ingresar tu email</span>
+                        <span ng-show="form.email.$error.mongoose">{{ vm.errors.email }}</span>
                     </p>
                 </div>
 
@@ -83,12 +69,9 @@
                                required
                                mongoose-error/>
                     </div>
-                    <p class="help-block"
-                       ng-show="(form.password.$error.minlength || form.password.$error.required) && (form.password.$dirty || vm.submitted)">
-                        La contraseña debe tener como mínimo 6 caracteres
-                    </p>
-                    <p class="help-block" ng-show="form.password.$error.mongoose">
-                        {{ vm.errors.password }}
+                    <p class="help-block" ng-show="form.password.$invalid && (form.password.$dirty || vm.submitted)">
+                        <span ng-show="form.password.$error.minlength">La contraseña debe tener como mínimo 6 caracteres</span>
+                        <span ng-show="form.password.$error.mongoose">{{ vm.errors.password }}</span>
                     </p>
                 </div>
 
@@ -103,9 +86,8 @@
                                match="vm.user.password"
                                ng-minlength="6" required/>
                     </div>
-                    <p class="help-block"
-                       ng-show="form.confirmPassword.$error.match && (form.confirmPassword.$dirty || vm.submitted)">
-                        Las contraseñas no coinciden
+                    <p class="help-block" ng-show="form.confirmPassword.$invalid && (form.confirmPassword.$dirty || vm.submitted)">
+                        <span ng-show="form.confirmPassword.$error.match">Las contraseñas no coinciden</span>
                     </p>
                 </div>
 

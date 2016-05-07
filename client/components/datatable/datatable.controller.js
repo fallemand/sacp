@@ -7,6 +7,13 @@
             // Use the User $resource to fetch all users
             this.$scope = $scope;
             this.parameters = $scope.parameters;
+            this.entity = parameters.entity;
+            $http.get('/api/' + entity + '?active=false').then(response => {
+                this.metedata = response.data;
+            });
+
+
+            alert($scope.parameters.entity);
 
 
             this.notActiveDoctorsTable = new NgTableParams({count: 2}, {
@@ -17,9 +24,6 @@
                 }
             });
         }
-
-        activateUser = this.$scope.parameters.activateEvent;
-        deleteUser = this.$scope.parameters.cancelEvent;
     }
 
     angular.module('sacpApp.admin')

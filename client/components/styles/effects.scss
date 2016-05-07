@@ -1,0 +1,58 @@
+/* SlideDown Effect */
+.effect-slide {
+    transition: all .4s linear;
+    max-height: 400px;
+    overflow: hidden;
+    opacity: 1;
+    &.ng-hide {
+        max-height: 0;
+        min-height: 0;
+        opacity: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin: 0;
+        border-bottom-width: 0;
+    }
+}
+
+/* Fade Effect */
+.effect-fade {
+    transition: opacity .5s linear;
+    opacity: 1;
+    &.ng-hide {
+        opacity: 0;
+    }
+}
+
+/* Effects between pages */
+.inner-view {
+    &.ng-enter {
+        transition: .5s;
+        opacity: 0;
+    }
+    &.ng-enter-active {
+        opacity: 1;
+    }
+}
+
+/* Error Effects */
+.input-group-addon {
+    transition: all .5s ease-out;
+}
+
+.form-control {
+    transition: border .5s ease-out;
+}
+
+/* Effects between pages */
+.help-block {
+    transition: all .2s ease-out;
+    max-height: 17px;
+    overflow: hidden;
+    opacity: 1;
+    &.ng-hide {
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
+    }
+}

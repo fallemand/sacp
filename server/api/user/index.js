@@ -15,4 +15,6 @@ router.put('/:id/activate', auth.hasRole('admin'), controller.activate);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 
+router.get('/metadata', auth.isAuthenticated(), controller.metadata);
+
 module.exports = router;

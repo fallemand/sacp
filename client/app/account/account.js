@@ -10,6 +10,13 @@ angular.module('sacpApp')
                 controllerAs: 'vm',
                 parent: 'public'
             })
+            .state('recover', {
+                url: '/recover',
+                templateUrl: 'app/account/recover/recover.html',
+                controller: 'RecoverController',
+                controllerAs: 'vm',
+                parent: 'public'
+            })
             .state('logout', {
                 url: '/logout?referrer',
                 referrer: 'login',

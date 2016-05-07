@@ -11,13 +11,15 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 // Component styles are injected through grunt
 /* inject:scss */
 @import 'admin/admin';
+@import 'datatable/datatable';
 @import 'home/home';
 @import 'main/main';
 @import '../components/datatable/datatable';
-@import '../components/general/main';
 @import '../components/modal/modal';
-@import '../components/sweetalert/sweetalert';
-@import '../components/tabs/tabs';
+@import '../components/styles/effects';
+@import '../components/styles/main';
+@import '../components/styles/sweetalert';
+@import '../components/styles/tabs';
 /* endinject */
 
 
