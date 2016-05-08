@@ -7,21 +7,16 @@
             // Use the User $resource to fetch all users
             this.$scope = $scope;
             this.parameters = $scope.parameters;
-            this.entity = parameters.entity;
-            $http.get('/api/' + entity + '?active=false').then(response => {
-                this.metedata = response.data;
+            this.$http = $http;
+            $http.get('/api/'+ this.parameters.entity +'/metadata').then(response => {
+                this.metadata = response.data;
             });
-
-
-            alert($scope.parameters.entity);
-
-
             this.notActiveDoctorsTable = new NgTableParams({count: 2}, {
-                getData: function ($defer, params) {
-                    $http.get('/api/users?active=false').then(response => {
+                getData: (function ($defer, params) {
+                    $http.get('/api/'+ this.parameters.entity +'?' + this.parameters.filters).then(response => {
                         $defer.resolve(response.data);
                     });
-                }
+                }).bind(this)
             });
         }
     }

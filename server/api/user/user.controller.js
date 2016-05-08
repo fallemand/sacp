@@ -146,10 +146,19 @@ export function me(req, res, next) {
  * Get metadata
  */
 export function metadata(req, res, next) {
-    return res.json({
-        name: 'Textos'
-    })
-        .catch(err => next(err));
+    res.json({
+        'fields': [
+            {
+                'name': 'Nombre',
+                'type': 'string'
+            },
+            {
+                'name': 'Email',
+                'type': 'string'
+            }
+        ]
+
+    });
 }
 
 /**

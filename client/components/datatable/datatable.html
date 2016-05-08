@@ -3,10 +3,7 @@
         <thead>
         <tr>
             <th></th>
-            <th>Nombre</th>
-            <th>Mail</th>
-            <th>MN</th>
-            <th>MP</th>
+            <th ng-repeat="field in vm.metadata.fields">{{field.name}}</th>
         </tr>
         </thead>
         <tbody>

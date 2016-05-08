@@ -5,8 +5,9 @@
         constructor() {
             this.message = 'Hello';
             this.parameters = {
-                entity: 'user'
-            }
+                entity: 'users',
+                filters: 'active=true'
+            };
         }
     }
 

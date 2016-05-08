@@ -7,45 +7,6 @@ class DoctorsController {
         this.sweet = sweet;
         this.countNotActiveUsers;
 
-        this.parameters = {
-            activateEvent : (function(user) {
-                this.sweet.show({
-                    title: '¿Está Seguro?',
-                    text: 'Activará el usuario ' + user.name,
-                    type: 'info',
-                    showCancelButton: true,
-                    confirmButtonClass: 'btn-success',
-                    confirmButtonText: 'Sí, activarlo!',
-                    closeOnConfirm: false,
-                    allowEscapeKey: true,
-                    allowOutsideClick: true
-                }, (function() {
-                    this.$http.put('/api/users/' + user._id + '/activate').then(response => {
-                        this.updateData();
-                        this.sweet.show({title: 'Activado!', text: 'El usuario ha sido activado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
-                    });
-                }).bind(this));
-            }).bind(this),
-            cancelEvent : (function(user) {
-                this.sweet.show({
-                    title: '¿Está Seguro?',
-                    text: 'Eliminará el usuario ' + user.name,
-                    type: 'error',
-                    showCancelButton: true,
-                    confirmButtonClass: 'btn-danger',
-                    confirmButtonText: 'Sí, eliminarlo!',
-                    closeOnConfirm: false,
-                    allowEscapeKey: true,
-                    allowOutsideClick: true
-                }, (function() {
-                    this.$http.delete('/api/users/' + user._id).then(response => {
-                        this.updateData();
-                        this.sweet.show({title: 'Eliminado!', text: 'El usuario ha sido eliminado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
-                    });
-                }).bind(this));
-            }).bind(this)
-        };
-
         this.activeDoctorsTable = new NgTableParams({}, {
             getData: function ($defer, params) {
                 $http.get('/api/users?active=true&&role=user').then(response => {
