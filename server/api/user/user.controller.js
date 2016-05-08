@@ -149,12 +149,32 @@ export function metadata(req, res, next) {
     res.json({
         'fields': [
             {
-                'name': 'Nombre',
-                'type': 'string'
+                'title': 'Nombre',
+                'pluralTitle': 'Nombres',
+                'field' : 'name',
+                'type': 'string',
+                'show': true
             },
             {
-                'name': 'Email',
-                'type': 'string'
+                'title': 'Email',
+                'pluralTitle': 'Emails',
+                'field' : 'email',
+                'type': 'string',
+                'show': true
+            },
+            {
+                'title': 'Matricula Nacional',
+                'pluralTitle': 'Matricula Nacional',
+                'field' : 'mn',
+                'type': 'string',
+                'show': true
+            },
+            {
+                'title': 'Matricula Provincial',
+                'pluralTitle': 'Matricula Provincial',
+                'field' : 'mp',
+                'type': 'string',
+                'show': true
             }
         ]
 

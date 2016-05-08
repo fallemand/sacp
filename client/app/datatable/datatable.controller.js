@@ -6,7 +6,8 @@
             this.message = 'Hello';
             this.parameters = {
                 entity: 'users',
-                filters: 'active=true'
+                filters: 'active=true',
+                actions: ['activate', 'delete']
             };
         }
     }
