@@ -8,6 +8,19 @@ class PatientsController {
         this.newPatient = {};
         this.errors = {};
         this.submitted = false;
+
+        this.patientsTable;
+
+        this.patientsTableParamenters = {
+            entity: 'patients',
+            actions: ['view', 'modify', 'delete'],
+            initEvent : (function(table) {
+                this.patientsTable  = table;
+            }).bind(this),
+            reloadEvent : (function() {
+                this.patientsTable.reload();
+            }).bind(this)
+        };
     }
 
     addPatient(form) {

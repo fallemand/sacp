@@ -6,6 +6,7 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
+import Patient from '../api/patient/patient.model';
 
 Thing.find({}).remove()
     .then(() => {
@@ -151,4 +152,20 @@ User.find({}).remove()
             .then(() => {
                 console.log('finished populating users');
             });
+    });
+
+Patient.find({}).remove()
+    .then(() => {
+        Patient.create({
+            name: 'Juan Carlos',
+            email: 'juancarlos@hotmail.com',
+            dni: '36142871',
+            socialInsuaranceNumber: '23425456',
+            address: 'Hidalgo Palacios 7542',
+            phone: '+43532656565',
+            cellphone: '3513160678',
+            agreementType: 'ASETCP'
+        }).then(() => {
+            console.log('finished populating patients');
+        });
     });

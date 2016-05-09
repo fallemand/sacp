@@ -2,9 +2,8 @@
 
 class DoctorsController {
 
-    constructor($http, NgTableParams, sweet) {
+    constructor($http) {
         this.$http = $http;
-        this.sweet = sweet;
         this.countNotActiveUsers;
         this.activeDoctorsTable;
         this.notActiveDoctorsTable;
@@ -12,8 +11,12 @@ class DoctorsController {
         this.activeDoctorsTableParameters = {
             entity: 'users',
             filters: 'active=true&&role=user',
+            actions: ['view', 'modify', 'delete'],
             initEvent : (function(table) {
                 this.activeDoctorsTable = table;
+            }).bind(this),
+            reloadEvent : (function() {
+                this.activeDoctorsTable.reload();
             }).bind(this)
 
         };
@@ -21,10 +24,10 @@ class DoctorsController {
         this.notActiveDoctorsTableParameters = {
             entity: 'users',
             filters: 'active=false&&role=user',
-            actions: ['activate', 'delete'],
-            reloadEvent : (function(table) {
+            actions: ['activate', 'cancel'],
+            reloadEvent : (function() {
                 this.countList();
-                table.reload();
+                this.notActiveDoctorsTable.reload();
                 this.activeDoctorsTable.reload();
             }).bind(this),
             initEvent : (function(table) {

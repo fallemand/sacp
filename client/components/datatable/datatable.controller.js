@@ -56,19 +56,26 @@
         }
 
         actionsCol($scope, row) {
-            var html = '' ;
+            var html = '<div class="btn-group">';
             angular.forEach(this.actions, (value, index) => {
                 switch(value) {
+                    case 'view' :
+                        html += '<a class="btn btn-xs btn-default" ng-click="vm.view(row)" uib-tooltip="Ver" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-eye"></i></a>'; break;
+                    case 'modify' :
+                        html += '<a class="btn btn-xs btn-default" ng-click="vm.update(row)" uib-tooltip="Modificar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-pencil"></i></a>'; break;
+                    case 'delete' :
+                        html += '<a class="btn btn-xs btn-default" ng-click="vm.cancel(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>'; break;
                     case 'activate' :
                         html += '<a class="btn btn-xs btn-success" ng-click="vm.activate(row)" ><i class="fa fa-check-square"></i> Activar</a>'; break;
-                    case 'delete' :
-                        html += '<a class="btn btn-xs btn-danger" ng-click="vm.delete(row)"><i class="fa fa-times"></i>Cancelar</a>'; break;
+                    case 'cancel' :
+                        html += '<a class="btn btn-xs btn-danger" ng-click="vm.cancel(row)"><i class="fa fa-times"></i>Cancelar</a>'; break;
                 }
             });
+            html += '</div>';
             return html;
         }
 
-        delete(user) {
+        cancel(user) {
             this.sweet.show({
                 title: '¿Está Seguro?',
                 text: 'Eliminará el ' + this.metadata.name + ' ' + user.name,
@@ -82,7 +89,7 @@
             }, (function() {
                 this.$http.delete('/api/users/' + user._id).then(response => {
                     if(this.parameters.reloadEvent) {
-                        this.parameters.reloadEvent(this.tableParams);
+                        this.parameters.reloadEvent();
                     }
                     this.sweet.show({title: 'Eliminado!', text: 'El ' + this.metadata.name + ' ha sido eliminado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
                 });
@@ -103,7 +110,7 @@
             }, (function() {
                 this.$http.put('/api/users/' + user._id + '/activate').then(response => {
                     if(this.parameters.reloadEvent) {
-                        this.parameters.reloadEvent(this.tableParams);
+                        this.parameters.reloadEvent();
                     }
                     this.sweet.show({title: 'Activado!', text: 'El ' + this.metadata.name + ' ha sido activado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
                 });

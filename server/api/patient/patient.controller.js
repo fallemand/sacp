@@ -100,3 +100,62 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+// Get metadata
+export function metadata(req, res) {
+    res.json({
+        name : 'paciente',
+        pluralName: 'pacientes',
+        'fields': [
+            {
+                'title': 'Nombre',
+                'field' : 'name',
+                'type': 'string',
+                'show': true
+            },
+            {
+                'title': 'Email',
+                'field' : 'email',
+                'type': 'string',
+                'show': true
+            },
+            {
+                'title': 'DNI',
+                'field' : 'dni',
+                'type': 'mber',
+                'show': true
+            },
+            {
+                'title': 'Nº Obra Social',
+                'field' : 'socialInsuaranceNumber',
+                'type': 'number',
+                'show': true
+            },
+            {
+                'title': 'Tipo Convenio',
+                'field' : 'agreementType',
+                'type': 'text',
+                'show': true
+            },
+            {
+                'title': 'Dirección',
+                'field' : 'address',
+                'type': 'text',
+                'show': true
+            },
+            {
+                'title': 'Teléfono',
+                'field' : 'phone',
+                'type': 'text',
+                'show': true
+            },
+            {
+                'title': 'Celular',
+                'field' : 'cellphone',
+                'type': 'text',
+                'show': true
+            }
+        ]
+
+    });
+}
