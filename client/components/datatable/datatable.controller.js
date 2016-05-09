@@ -18,12 +18,12 @@
                 getData: (function ($defer, params) {
                     $http.get('/api/' + this.parameters.entity + '?' + this.parameters.filters).then(response => {
                         $defer.resolve(response.data);
-                        if(this.parameters.initEvent) {
-                            this.parameters.initEvent(this.tableParams);
-                        }
                     });
                 }).bind(this)
             });
+            if(this.parameters.initEvent) {
+                this.parameters.initEvent(this.tableParams);
+            }
         }
 
         generateColsList(metadata, parameters, $compile) {

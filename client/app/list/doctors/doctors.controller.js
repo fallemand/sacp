@@ -6,22 +6,30 @@ class DoctorsController {
         this.$http = $http;
         this.sweet = sweet;
         this.countNotActiveUsers;
+        this.activeDoctorsTable;
+        this.notActiveDoctorsTable;
 
-        this.activeDoctorsTable = {
+        this.activeDoctorsTableParameters = {
             entity: 'users',
             filters: 'active=true&&role=user',
+            initEvent : (function(table) {
+                this.activeDoctorsTable = table;
+            }).bind(this)
 
         };
 
-        this.notActiveDoctorsTable = {
+        this.notActiveDoctorsTableParameters = {
             entity: 'users',
             filters: 'active=false&&role=user',
             actions: ['activate', 'delete'],
             reloadEvent : (function(table) {
-                table.reload();
-            }).bind(this),
-            initEvent : (function() {
                 this.countList();
+                table.reload();
+                this.activeDoctorsTable.reload();
+            }).bind(this),
+            initEvent : (function(table) {
+                this.countList();
+                this.notActiveDoctorsTable = table;
             }).bind(this)
         };
 
