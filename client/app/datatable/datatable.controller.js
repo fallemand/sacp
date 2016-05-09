@@ -7,7 +7,10 @@
             this.parameters = {
                 entity: 'users',
                 filters: 'active=true',
-                actions: ['activate', 'delete']
+                actions: ['activate', 'delete'],
+                reloadEvent : function() {
+                    alert(true);
+                }
             };
         }
     }

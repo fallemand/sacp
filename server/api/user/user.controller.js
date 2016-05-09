@@ -147,6 +147,8 @@ export function me(req, res, next) {
  */
 export function metadata(req, res, next) {
     res.json({
+        name : 'usuario',
+        pluralName: 'usuarios',
         'fields': [
             {
                 'title': 'Nombre',

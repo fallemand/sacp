@@ -3,8 +3,8 @@
 (function () {
 
     class DatatableController {
-        constructor($scope, $http, NgTableParams, $compile) {
-            // Use the User $resource to fetch all users
+        constructor($scope, $http, NgTableParams, $compile, sweet) {
+            this.sweet = sweet;
             this.$compile = $compile;
             this.$scope = $scope;
             this.parameters = $scope.parameters;
@@ -14,10 +14,13 @@
                 this.cols = this.generateColsList(this.metadata, this.parameters, this.$compile);
                 this.loadedData = true;
             });
-            this.tableParams = new NgTableParams({count: 2}, {
+            this.tableParams = new NgTableParams({}, {
                 getData: (function ($defer, params) {
                     $http.get('/api/' + this.parameters.entity + '?' + this.parameters.filters).then(response => {
                         $defer.resolve(response.data);
+                        if(this.parameters.initEvent) {
+                            this.parameters.initEvent(this.tableParams);
+                        }
                     });
                 }).bind(this)
             });
@@ -65,12 +68,46 @@
             return html;
         }
 
-        activate(id) {
-            alert(id);
+        delete(user) {
+            this.sweet.show({
+                title: '¿Está Seguro?',
+                text: 'Eliminará el ' + this.metadata.name + ' ' + user.name,
+                type: 'error',
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger',
+                confirmButtonText: 'Sí, eliminarlo!',
+                closeOnConfirm: false,
+                allowEscapeKey: true,
+                allowOutsideClick: true
+            }, (function() {
+                this.$http.delete('/api/users/' + user._id).then(response => {
+                    if(this.parameters.reloadEvent) {
+                        this.parameters.reloadEvent(this.tableParams);
+                    }
+                    this.sweet.show({title: 'Eliminado!', text: 'El ' + this.metadata.name + ' ha sido eliminado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
+                });
+            }).bind(this));
         }
 
-        delete(id) {
-            alert(id);
+        activate(user) {
+            this.sweet.show({
+                title: '¿Está Seguro?',
+                text: 'Activará el ' + this.metadata.name + ' ' + user.name,
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonClass: 'btn-success',
+                confirmButtonText: 'Sí, activarlo!',
+                closeOnConfirm: false,
+                allowEscapeKey: true,
+                allowOutsideClick: true
+            }, (function() {
+                this.$http.put('/api/users/' + user._id + '/activate').then(response => {
+                    if(this.parameters.reloadEvent) {
+                        this.parameters.reloadEvent(this.tableParams);
+                    }
+                    this.sweet.show({title: 'Activado!', text: 'El ' + this.metadata.name + ' ha sido activado.', type: 'success', timer: '1300', allowOutsideClick: true, allowEscapeKey: true, showConfirmButton: false});
+                });
+            }).bind(this));
         }
     }
 
