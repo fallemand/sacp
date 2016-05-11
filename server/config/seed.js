@@ -160,7 +160,7 @@ Patient.find({}).remove()
             name: 'Juan Carlos',
             email: 'juancarlos@hotmail.com',
             dni: '36142871',
-            socialInsuaranceNumber: '23425456',
+            socialInsuranceNumber: '23425456',
             address: 'Hidalgo Palacios 7542',
             phone: '+43532656565',
             cellphone: '3513160678',

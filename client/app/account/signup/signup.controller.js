@@ -40,7 +40,7 @@ class SignupController {
                     });
                 }).finally(function () {
                     this.isSaving = false;
-            });
+                });
         }
     }
 }

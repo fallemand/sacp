@@ -3,21 +3,22 @@
 class PatientsController {
 
 
-    constructor($http, sweet) {
+    constructor($http, ngToast) {
         this.showPatientForm = false;
         this.newPatient = {};
         this.errors = {};
         this.submitted = false;
-
+        this.$http = $http;
+        this.ngToast = ngToast;
         this.patientsTable;
 
         this.patientsTableParamenters = {
             entity: 'patients',
             actions: ['view', 'modify', 'delete'],
-            initEvent : (function(table) {
-                this.patientsTable  = table;
+            initEvent: (function (table) {
+                this.patientsTable = table;
             }).bind(this),
-            reloadEvent : (function() {
+            reloadEvent: (function () {
                 this.patientsTable.reload();
             }).bind(this)
         };
@@ -27,27 +28,40 @@ class PatientsController {
         this.submitted = true;
 
         if (form.$valid) {
-            this.$http.post('/api/patients', { name: this.newPatient })
-                .then(() => {
-                    // Show success alert
-                    this.success = true;
-                })
-                .catch(err => {
-                    err = err.data;
-                    this.errors = {};
+            this.add();
+        }
+    }
 
-                    // Update validity of form fields that match the mongoose errors
-                    angular.forEach(err.errors, (error, field) => {
-                        form[field].$setValidity('mongoose', false);
-                        this.errors[field] = error.message;
+    add() {
+        this.$http.post('/api/patients', {
+            name: this.patient.name,
+            email: this.patient.email,
+            dni: this.patient.dni,
+            socialInsuranceNumber: this.patient.socialInsuranceNumber,
+            address: this.patient.address,
+            phone: this.patient.phone,
+            cellphone: this.patient.cellphone,
+            agreementType: this.patient.agreementType
+        }).then(() => {
+                this.patientsTable.reload();
+                this.ngToast.create('Paciente agregado con éxito!');
+            })
+            .catch(err => {
+                err = err.data;
+                angular.forEach(err.errors, (error, field) => {
+                    this.ngToast.create({
+                        className: 'danger',
+                        content: error.message
                     });
                 });
-        }
+            }).finally(function () {
+            this.isSaving = false;
+        });
     }
 
 
     togglePatientForm() {
-        if(this.showPatientForm) {
+        if (this.showPatientForm) {
             this.showPatientForm = false;
         }
         else {

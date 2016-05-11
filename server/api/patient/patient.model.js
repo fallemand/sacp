@@ -16,7 +16,7 @@ var PatientSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    socialInsuaranceNumber: {
+    socialInsuranceNumber: {
         type: Number,
         required: true
     },

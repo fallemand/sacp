@@ -127,7 +127,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Nº Obra Social',
-                'field' : 'socialInsuaranceNumber',
+                'field' : 'socialInsuranceNumber',
                 'type': 'number',
                 'show': true
             },
