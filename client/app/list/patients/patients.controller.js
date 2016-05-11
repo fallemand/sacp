@@ -5,12 +5,13 @@ class PatientsController {
 
     constructor($http, ngToast) {
         this.showPatientForm = false;
-        this.newPatient = {};
+        this.patient = {};
         this.errors = {};
         this.submitted = false;
         this.$http = $http;
         this.ngToast = ngToast;
         this.patientsTable;
+        this.isSaving = false;
 
         this.patientsTableParamenters = {
             entity: 'patients',
@@ -28,35 +29,46 @@ class PatientsController {
         this.submitted = true;
 
         if (form.$valid) {
-            this.add();
+            this.isSaving = true;
+            this.$http.post('/api/patients', {
+                name: this.patient.name,
+                email: this.patient.email,
+                dni: this.patient.dni,
+                socialInsuranceNumber: this.patient.socialInsuranceNumber,
+                address: this.patient.address,
+                phone: this.patient.phone,
+                cellphone: this.patient.cellphone,
+                agreementType: this.patient.agreementType
+            }).then(() => {
+                    this.patientsTable.reload();
+                    this.resetForm();
+                    this.ngToast.create('Paciente agregado con éxito!');
+                })
+                .catch(err => {
+                    err = err.data;
+                    angular.forEach(err.errors, (error, field) => {
+                        this.ngToast.create({
+                            className: 'danger',
+                            content: error.message
+                        });
+                    });
+                }).finally(function () {
+                this.isSaving = false;
+            });
         }
     }
 
-    add() {
-        this.$http.post('/api/patients', {
-            name: this.patient.name,
-            email: this.patient.email,
-            dni: this.patient.dni,
-            socialInsuranceNumber: this.patient.socialInsuranceNumber,
-            address: this.patient.address,
-            phone: this.patient.phone,
-            cellphone: this.patient.cellphone,
-            agreementType: this.patient.agreementType
-        }).then(() => {
-                this.patientsTable.reload();
-                this.ngToast.create('Paciente agregado con éxito!');
-            })
-            .catch(err => {
-                err = err.data;
-                angular.forEach(err.errors, (error, field) => {
-                    this.ngToast.create({
-                        className: 'danger',
-                        content: error.message
-                    });
-                });
-            }).finally(function () {
-            this.isSaving = false;
-        });
+    cancel() {
+        this.showPatientForm = false;
+        this.resetForm();
+    }
+
+    resetForm() {
+        this.patient = {};
+        this.form.$setPristine();
+        this.form.$setValidity();
+        this.form.$setUntouched();
+        this.submitted = false;
     }
 
 
