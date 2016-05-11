@@ -6,7 +6,6 @@ class PatientsController {
     constructor($http, ngToast) {
         this.showPatientForm = false;
         this.patient = {};
-        this.errors = {};
         this.submitted = false;
         this.$http = $http;
         this.ngToast = ngToast;
@@ -58,17 +57,26 @@ class PatientsController {
         }
     }
 
-    cancel() {
+    cancel(form) {
         this.showPatientForm = false;
-        this.resetForm();
+        this.resetForm(form);
     }
 
-    resetForm() {
-        this.patient = {};
-        this.form.$setPristine();
-        this.form.$setValidity();
-        this.form.$setUntouched();
+    resetForm(form) {
         this.submitted = false;
+        this.patient = {
+            name : '',
+            email: '',
+            dni: '',
+            socialInsuranceNumber: '',
+            address: '',
+            phone: '',
+            cellphone: '',
+            agreementType: ''
+        };
+        form.$setPristine();
+        form.$setValidity();
+        form.$setUntouched();
     }
 
 
