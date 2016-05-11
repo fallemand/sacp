@@ -64,6 +64,7 @@
                                                 ng-show="form.name.$error.minlength">Escribe por lo menos 6 caracteres</span>
                                             </p>
                                         </div>
+
                                         <div class="col-md-3 form-group" ng-class="{ 'has-success': form.dni.$valid && (form.dni.$dirty || vm.submitted),
                                             'has-error': form.dni.$invalid && (form.dni.$dirty || vm.submitted)}">
                                             <div class="input-group">
@@ -79,6 +80,7 @@
                                                 ng-show="form.dni.$error.min">Escribe por lo menos 6 caracteres</span>
                                             </p>
                                         </div>
+
                                         <div class="col-md-3 form-group" ng-class="{ 'has-success': form.socialInsuranceNumber.$valid && (form.socialInsuranceNumber.$dirty || vm.submitted),
                                             'has-error': form.socialInsuranceNumber.$invalid && (form.socialInsuranceNumber.$dirty || vm.submitted)}">
                                             <div class="input-group">
@@ -95,6 +97,7 @@
                                                 ng-show="form.socialInsuranceNumber.$error.min">Escribe por lo menos 2 caracteres</span>
                                             </p>
                                         </div>
+
                                         <div class="col-md-3 form-group" ng-class="{ 'has-success': form.email.$valid && (form.email.$dirty || vm.submitted),
                                             'has-error': form.email.$invalid && (form.email.$dirty || vm.submitted)}">
                                             <div class="input-group">
@@ -122,34 +125,33 @@
                                                ng-show="form.address.$invalid && (form.address.$dirty || vm.submitted)">
                                             </p>
                                         </div>
+
                                         <div class="col-md-3 form-group" ng-class="{ 'has-success': form.telephone.$valid && (form.telephone.$dirty || vm.submitted),
                                             'has-error': form.telephone.$invalid && (form.telephone.$dirty || vm.submitted)}">
                                             <div class="input-group">
                                                         <span class="input-group-addon"><i
                                                             class="fa fa-phone"></i></span>
-                                                <input type="tel" class="form-control" placeholder="Teléfono"
+                                                <input type="number" class="form-control" placeholder="Teléfono"
                                                        name="telephone" ng-model="vm.patient.telephone">
                                             </div>
                                             <p class="help-block"
                                                ng-show="form.telephone.$invalid && (form.telephone.$dirty || vm.submitted)">
-                                                <span
-                                                    ng-show="form.telephone.$error.required">El campo es requerido</span>
-                                                <span
-                                                    ng-show="form.telephone.$error.tel">No parece un teléfono válido</span>
                                             </p>
                                         </div>
+
                                         <div class="col-md-3 form-group" ng-class="{ 'has-success': form.cellphone.$valid && (form.cellphone.$dirty || vm.submitted),
                                             'has-error': form.cellphone.$invalid && (form.cellphone.$dirty || vm.submitted)}">
                                             <div class="input-group">
                                                         <span class="input-group-addon"><i
                                                             class="fa fa-phone"></i></span>
-                                                <input type="tel" class="form-control" placeholder="Celular"
+                                                <input type="number" class="form-control" placeholder="Celular"
                                                        name="cellphone" ng-model="vm.patient.cellphone">
                                             </div>
                                             <p class="help-block"
                                                ng-show="form.cellphone.$invalid && (form.cellphone.$dirty || vm.submitted)">
                                             </p>
                                         </div>
+
                                         <div class="col-md-3 form-group" ng-class="{ 'has-success': form.agreementType.$valid && (form.agreementType.$dirty || vm.submitted),
                                             'has-error': form.agreementType.$invalid && (form.agreementType.$dirty || vm.submitted)}">
                                             <div class="input-group">
@@ -166,8 +168,7 @@
                                             </div>
                                             <p class="help-block"
                                                ng-show="form.agreementType.$invalid && (form.agreementType.$dirty || vm.submitted)">
-                                            <span
-                                                ng-show="form.agreementType.$error.required">El campo es requerido</span>
+                                                <span ng-show="form.agreementType.$error.required">El campo es requerido</span>
                                             </p>
                                         </div>
                                     </div>

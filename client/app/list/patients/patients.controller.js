@@ -40,7 +40,7 @@ class PatientsController {
                 agreementType: this.patient.agreementType
             }).then(() => {
                     this.patientsTable.reload();
-                    this.resetForm();
+                    this.resetForm(form);
                     this.ngToast.create('Paciente agregado con éxito!');
                 })
                 .catch(err => {
@@ -75,7 +75,6 @@ class PatientsController {
             agreementType: ''
         };
         form.$setPristine();
-        form.$setValidity();
         form.$setUntouched();
     }
 
