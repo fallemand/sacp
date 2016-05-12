@@ -42,9 +42,14 @@
                     field: value.field,
                     title: value.title,
                     show: value.show,
-                    filter: { 'name' : "text" },
-                    getValue: this.htmlValue
+                    filter: { 'name' : "text" }
                 };
+                switch(value.type) {
+                    case 'text' : col.getValue = this.htmlValue; break;
+                    case 'number' : col.getValue = this.htmlValue; break;
+                    case 'object': col.getValue = this.objectValue; break;
+                    default: col.getValue = this.htmlValue; break;
+                }
                 cols.push(col);
             });
             return cols;
@@ -52,6 +57,11 @@
 
         htmlValue($scope, row) {
             var value = row[this.field];
+            return value;
+        }
+
+        objectValue($scope, row) {
+            var value = row[this.field].name;
             return value;
         }
 

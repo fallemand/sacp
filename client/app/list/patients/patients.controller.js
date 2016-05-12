@@ -11,6 +11,12 @@ class PatientsController {
         this.ngToast = ngToast;
         this.patientsTable;
         this.isSaving = false;
+        this.agreementTypes;
+
+        $http.get('/api/agreement-types').then(response => {
+            this.agreementTypes = response.data;
+            this.patient.agreementType = this.agreementTypes[0];
+        });
 
         this.patientsTableParamenters = {
             entity: 'patients',

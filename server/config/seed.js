@@ -7,6 +7,7 @@
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import Patient from '../api/patient/patient.model';
+import AgreementType from '../api/agreement-type/agreement-type.model';
 
 Thing.find({}).remove()
     .then(() => {
@@ -154,6 +155,64 @@ User.find({}).remove()
             });
     });
 
+AgreementType.find({}).remove()
+    .then(() => {
+        AgreementType.create({
+            name: 'PROFE'
+        }, {
+            name: 'Carenciado'
+        }, {
+            name: 'DOSEP'
+        }).then(() => {
+            console.log('finished populating agreement types');
+            Patient.find({}).remove()
+                .then(() => {
+                    AgreementType.findOne({name: 'DOSEP'}, function (err, doc) {
+                        Patient.create({
+                            name: 'Juan Carlos',
+                            email: 'juancarlos@hotmail.com',
+                            dni: '36142871',
+                            socialInsuranceNumber: '23425456',
+                            address: 'Hidalgo Palacios 7542',
+                            phone: '+43532656565',
+                            cellphone: '3513160678',
+                            agreementType: doc._id
+                        }).then(() => {
+                            console.log('finished populating patients');
+                        });
+                    });
+                    AgreementType.findOne({name: 'Carenciado'}, function (err, doc) {
+                        Patient.create({
+                            name: 'Juan Carlos',
+                            email: 'juancarlos@hotmail.com',
+                            dni: '36142871',
+                            socialInsuranceNumber: '23425456',
+                            address: 'Hidalgo Palacios 7542',
+                            phone: '+43532656565',
+                            cellphone: '3513160678',
+                            agreementType: doc._id
+                        }).then(() => {
+                            console.log('finished populating patients');
+                        });
+                    });
+                    AgreementType.findOne({name: 'PROFE'}, function (err, doc) {
+                        Patient.create({
+                            name: 'Juan Carlos',
+                            email: 'juancarlos@hotmail.com',
+                            dni: '36142871',
+                            socialInsuranceNumber: '23425456',
+                            address: 'Hidalgo Palacios 7542',
+                            phone: '+43532656565',
+                            cellphone: '3513160678',
+                            agreementType: doc._id
+                        }).then(() => {
+                            console.log('finished populating patients');
+                        });
+                    });
+                });
+        });
+    });
+
 Patient.find({}).remove()
     .then(() => {
         Patient.create({
@@ -163,9 +222,10 @@ Patient.find({}).remove()
             socialInsuranceNumber: '23425456',
             address: 'Hidalgo Palacios 7542',
             phone: '+43532656565',
-            cellphone: '3513160678',
-            agreementType: 'ASETCP'
+            cellphone: '3513160678'
         }).then(() => {
             console.log('finished populating patients');
         });
     });
+
+

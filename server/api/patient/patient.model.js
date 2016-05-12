@@ -1,8 +1,9 @@
 'use strict';
 
 import mongoose from 'mongoose';
+var Schema = mongoose.Schema;
 
-var PatientSchema = new mongoose.Schema({
+var PatientSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -10,7 +11,7 @@ var PatientSchema = new mongoose.Schema({
     email: {
         type: String,
         lowercase: true,
-        required: true
+        required: false
     },
     dni: {
         type: Number,
@@ -33,7 +34,8 @@ var PatientSchema = new mongoose.Schema({
         required: false
     },
     agreementType: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'AgreementType',
         required: false
     }
 });
