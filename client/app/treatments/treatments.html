@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-lg-8 col-md-9">
+        <div class="panel">
+            <div id="demo-cls-wz">
+                <multi-step-container steps="vm.steps" class="simple-prev-next">
+                    <head>
+
+                        <!--Nav-->
+                        <ul class="wz-nav-off wz-icon-inline wz-classic">
+                            <li class="col-xs-3 bg-primary active">
+                                <a data-toggle="tab" href="#demo-cls-tab1">
+                                    <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i class="fa fa-user"></i></span>
+                                    Paciente
+                                </a>
+                            </li>
+                            <li class="col-xs-3 bg-primary">
+                                <a data-toggle="tab" href="#demo-cls-tab2">
+                                <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i
+                                    class="flaticon-spotlight"></i></span> Enfermedad
+                                </a>
+                            </li>
+                            <li class="col-xs-3 bg-primary">
+                                <a data-toggle="tab" href="#demo-cls-tab3">
+                                <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i
+                                    class="flaticon-medical-briefcase"></i></span> Tratamiento
+                                </a>
+                            </li>
+                            <li class="col-xs-3 bg-primary">
+                                <a data-toggle="tab" href="#demo-cls-tab4">
+                                    <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i
+                                        class="fa fa-check-square-o"></i></span>
+                                    Confirmar
+                                </a>
+                            </li>
+                        </ul>
+                        <!--Progress bar-->
+                        <div class="progress progress-md progress-striped active">
+                            <div class="progress-bar progress-bar progress-bar-info"></div>
+                        </div>
+                        <button ng-disabled="$isFirst()" class="btn btn-default" ng-click="$previousStep()">
+                            <span class="fa fa-chevron-left"></span>
+                            Previous
+                        </button>
+                        <strong ng-bind-template="{{$getActiveIndex()}}. {{$getActiveStep().title}}"></strong>
+
+                        <button ng-disabled="$isLast()" class="btn btn-default" ng-click="$nextStep()">
+                            Next
+                            <span class="fa fa-chevron-right"></span>
+                        </button>
+                    </head>
+
+                    <!--Form-->
+                    <form class="form-horizontal mar-top">
+                        <div class="panel-body">
+                            <div class="tab-content">
+
+
+                                <step-container></step-container>
+
+
+                            </div>
+                        </div>
+
+
+                        <!--Footer button-->
+                        <div class="panel-footer text-right">
+                            <div class="box-inline">
+                                <button type="button" class="previous btn btn-info">Atras</button>
+                                <button type="button" class="next btn btn-info">Siguiente</button>
+                                <button type="button" class="finish btn btn-info" disabled>Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </multi-step-container>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-4 col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Historial</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Observación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>12/10/2015</td>
+                            <td><span class="label label-primary">En Auditoría</span></td>
+                            <td>Carga Inicial</td>
+                        </tr>
+                        <tr>
+                            <td>13/10/2015</td>
+                            <td><span class="label label-warning">Pausado</span></td>
+                            <td>Requiere agregar información de estudios</td>
+                        </tr>
+                        <tr>
+                            <td>15/10/2015</td>
+                            <td><span class="label label-primary">En Auditoría</span></td>
+                            <td>Agregada imágenes estudios</td>
+                        </tr>
+                        <tr>
+                            <td>20/10/2015</td>
+                            <td><span class="label label-success">Aprobado</span></td>
+                            <td>-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,8 @@ angular.module('sacpApp', [
         'ngTable',
         'ngAnimate',
         'hSweetAlert',
-        'ngToast'
+        'ngToast',
+        'multiStepForm'
     ])
     .config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
         $urlRouterProvider
