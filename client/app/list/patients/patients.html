@@ -158,12 +158,7 @@
                                              <span class="input-group-addon">
                                                             TC
                                                         </span>
-                                                <select class="form-control" name="agreementType"
-                                                        ng-model="vm.patient.agreementType" required>
-                                                    <option selected>Tipo Convenio</option>
-                                                    <option>PROFE</option>
-                                                    <option>Carenciado</option>
-                                                    <option>DOSEP</option>
+                                                <select ng-model="vm.patient.agreementType" name="agreementType" class="form-control" ng-options="item.name for item in vm.agreementTypes" required>
                                                 </select>
                                             </div>
                                             <p class="help-block"
