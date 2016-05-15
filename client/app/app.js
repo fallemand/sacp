@@ -18,7 +18,7 @@ angular.module('sacpApp', [
         'ngToast',
         'multiStepForm'
     ])
-    .config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
+    .config(function ($urlRouterProvider, $locationProvider, $stateProvider, $animateProvider) {
         $urlRouterProvider
             .otherwise('/');
 
@@ -40,6 +40,9 @@ angular.module('sacpApp', [
                     }
                 }
             });
+
+        //Disable ngAnimate for some elements.
+        $animateProvider.classNameFilter(/^(?:(?!ng-animate-disabled).)*$/);
 
         $locationProvider.html5Mode(true);
     });
