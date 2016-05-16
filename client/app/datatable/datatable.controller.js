@@ -27,15 +27,6 @@
                     max: '20'
                 }
             };
-            this.isSaving = false;
-        }
-
-        register(form) {
-            this.isSaving = true;
-            this.submitted = true;
-            if (form.$valid) {
-                alert(true);
-            }
         }
     }
 

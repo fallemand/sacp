@@ -29,7 +29,9 @@
 .cls-content {
     padding-top: 18vh;
 }
-.cls-content a, .cls-content a:hover, .cls-content a:focus {
+.cls-content a,
+.cls-content a:hover,
+.cls-content a:focus {
     color: #0a8b9d;
 }
 
@@ -42,7 +44,11 @@
 }
 
 @media (min-width: 1200px) {
-    #mainnav-menu .list-header, #mainnav-menu .list-divider, #mainnav-menu .menu-title, #mainnav-menu .arrow, #mainnav-menu .menu-title > .label {
+    #mainnav-menu .list-header,
+    #mainnav-menu .list-divider,
+    #mainnav-menu .menu-title,
+    #mainnav-menu .arrow,
+    #mainnav-menu .menu-title > .label {
         transition: initial;
     }
 }
@@ -91,10 +97,7 @@ select.form-control {
         margin: 3px 0 0;
     }
     .row {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display:         flex;
+        display: flex;
         flex-wrap: wrap;
         > [class*='col-'] {
             display: flex;

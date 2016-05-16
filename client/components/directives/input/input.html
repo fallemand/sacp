@@ -1,11 +1,22 @@
 
-<div class="form-group" ng-class="{ 'has-success': form[vm.parameters.field].$valid && (form[vm.parameters.field].$dirty || vm.submitted),
+
+<form class="form" name="form" ng-hide="vm.success" ng-disabled="vm.isSaving" ng-submit="vm.register(form)" novalidate autocomplete="off">
+    <fieldset ng-disabled="vm.isSaving">
+        <div class="form-group" ng-class="{ 'has-success': form[vm.parameters.field].$valid && (form[vm.parameters.field].$dirty || vm.submitted),
                                             'has-error': form[vm.parameters.field].$invalid && (form[vm.parameters.field].$dirty || vm.submitted)}">
-    <div class="input-group">
-        <div class="input-group-addon"><i class="{{vm.parameters.icon}}"></i></div>
-        <input type="{{vm.parameters.type}}" class="form-control" required ng-model="vm[vm.parameters.entity].mn" placeholder="{{vm.parameters.title}}" name="{{vm.parameters.field}}">
-    </div>
-    <p class="help-block" ng-show="form[vm.parameters.field].$invalid && (form[vm.parameters.field].$dirty || vm.submitted)">
-        <span ng-repeat="(key, value) in vm.parameters.restrictions" ng-show="form[vm.parameters.field].$error[key]">{{vm.getMessage(key, value)}}</span>
-    </p>
-</div>
+            <div class="input-group">
+                <div class="input-group-addon"><i class="{{vm.parameters.icon}}"></i></div>
+                <input type="{{vm.parameters.type}}" class="form-control" required ng-model="vm[vm.parameters.entity].mn" placeholder="{{vm.parameters.title}}" name="{{vm.parameters.field}}">
+            </div>
+            <p class="help-block" ng-show="form[vm.parameters.field].$invalid && (form[vm.parameters.field].$dirty || vm.submitted)">
+                <span ng-repeat="(key, value) in vm.parameters.restrictions" ng-show="form[vm.parameters.field].$error[key]">{{vm.getMessage(key, value)}}</span>
+            </p>
+        </div>
+
+        <div class="text-right">
+            <button class="btn btn-success text-uppercase" type="submit">Registrarse</button>
+        </div>
+    </fieldset>
+</form>
+
+
