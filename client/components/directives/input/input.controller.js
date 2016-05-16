@@ -2,16 +2,15 @@
 
 (function () {
 
-    class DatatableController {
-        constructor($scope, $http, NgTableParams, $compile, sweet) {
+    class InputController {
+        constructor($scope, $http, NgTableParams, sweet) {
             this.sweet = sweet;
-            this.$compile = $compile;
             this.$scope = $scope;
             this.parameters = $scope.parameters;
             this.$http = $http;
             $http.get('/api/' + this.parameters.entity + '/metadata').then(response => {
                 this.metadata = response.data;
-                this.cols = this.generateColsList(this.metadata, this.parameters, this.$compile);
+                this.cols = this.generateColsList(this.metadata, this.parameters);
                 this.loadedData = true;
             });
             this.tableParams = new NgTableParams({}, {
@@ -26,7 +25,7 @@
             }
         }
 
-        generateColsList(metadata, parameters, $compile) {
+        generateColsList(metadata, parameters) {
             var cols = [];
             var actionsCol = {
                 field: '_id',
@@ -129,6 +128,6 @@
     }
 
     angular.module('sacpApp.admin')
-        .controller('DatatableController', DatatableController);
+        .controller('InputController', InputController);
 
 })();
