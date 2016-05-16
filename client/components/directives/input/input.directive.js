@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('sacpApp.input')
-  .directive('input', function () {
+angular.module('sacpApp')
+  .directive('forminput', function () {
     return {
       templateUrl: 'components/directives/input/input.html',
         restrict: 'EA',

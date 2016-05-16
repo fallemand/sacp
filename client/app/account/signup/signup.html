@@ -1,8 +1,8 @@
 <div class="cls-content-lg panel">
     <div class="panel-body">
         <p class="pad-btm">Registrar una cuenta</p>
-        <form class="form" name="form" ng-hide="vm.success" ng-disabled="isSaving" ng-submit="vm.register(form)" novalidate autocomplete="off">
-            <fieldset ng-disabled="isSaving">
+        <form class="form" name="form" ng-hide="vm.success" ng-disabled="vm.isSaving" ng-submit="vm.register(form)" novalidate autocomplete="off">
+            <fieldset ng-disabled="vm.isSaving">
                 <div class="form-group" ng-class="{ 'has-success': form.name.$valid && (form.name.$dirty || vm.submitted),
                                             'has-error': form.name.$invalid && (form.name.$dirty || vm.submitted)}">
                     <div class="input-group">

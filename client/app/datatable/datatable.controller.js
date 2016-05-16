@@ -12,6 +12,30 @@
                     alert(true);
                 }
             };
+            this.inputParameters = {
+                'entity' : 'user',
+                'title': 'Nombre',
+                'pluralTitle': 'Nombres',
+                'field' : 'name',
+                'type': 'string',
+                'show': true,
+                'icon': 'fa fa-user-md',
+                'iconText' : 'USR',
+                'restrictions' : {
+                    required: true,
+                    min: '10',
+                    max: '20'
+                }
+            };
+            this.isSaving = false;
+        }
+
+        register(form) {
+            this.isSaving = true;
+            this.submitted = true;
+            if (form.$valid) {
+                alert(true);
+            }
         }
     }
 

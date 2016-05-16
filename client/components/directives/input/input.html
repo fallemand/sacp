@@ -1,13 +1,11 @@
-<div class="form-group" ng-class="{ 'has-success': form.mn.$valid && (form.mn.$dirty || vm.submitted),
-                                            'has-error': form.mn.$invalid && (form.mn.$dirty || vm.submitted)}">
+
+<div class="form-group" ng-class="{ 'has-success': form[vm.parameters.field].$valid && (form[vm.parameters.field].$dirty || vm.submitted),
+                                            'has-error': form[vm.parameters.field].$invalid && (form[vm.parameters.field].$dirty || vm.submitted)}">
     <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-user-md"></i></i></div>
-        <input type="number" class="form-control" min="1" max="99999999" step="1" required
-               ng-model="vm.user.mn" placeholder="Matricula Nacional" name="mn">
+        <div class="input-group-addon"><i class="{{vm.parameters.icon}}"></i></div>
+        <input type="{{vm.parameters.type}}" class="form-control" required ng-model="vm[vm.parameters.entity].mn" placeholder="{{vm.parameters.title}}" name="{{vm.parameters.field}}">
     </div>
-    <p class="help-block" ng-show="form.mn.$invalid && (form.mn.$dirty || vm.submitted)">
-        <span ng-show="form.mn.$error.required">El campo es requerido</span>
-        <span ng-show="form.mn.$error.max">Máximo 8 dígitos</span>
-        <span ng-show="form.mn.$error.min">El valor mínimo es 1</span>
+    <p class="help-block" ng-show="form[vm.parameters.field].$invalid && (form[vm.parameters.field].$dirty || vm.submitted)">
+        <span ng-repeat="(key, value) in vm.parameters.restrictions" ng-show="form[vm.parameters.field].$error[key]">{{vm.getMessage(key, value)}}</span>
     </p>
 </div>

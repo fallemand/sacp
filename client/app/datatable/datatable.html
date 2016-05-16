@@ -5,6 +5,18 @@
 
                 <datatable parameters="vm.parameters"></datatable>
 
+                <form class="form" name="form" ng-hide="vm.success" ng-disabled="vm.isSaving" ng-submit="vm.register(form)" novalidate autocomplete="off">
+                    <fieldset ng-disabled="vm.isSaving">
+                        <forminput parameters="vm.inputParameters"></forminput>
+
+                        <div class="text-right">
+                            <button class="btn btn-success text-uppercase" type="submit">Registrarse</button>
+                        </div>
+                    </fieldset>
+                </form>
+
+
+
             </div>
         </div>
 
