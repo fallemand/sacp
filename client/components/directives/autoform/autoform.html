@@ -1,4 +1,5 @@
 <div ng-if="vm.loadedData">
-    <div ng-if="vm.parameters.template == 'short'" ng-include="'/components/directives/autoform/templates/short.html'"></div>
-    <div ng-if="vm.parameters.template == 'full'" ng-include="'/components/directives/autoform/templates/full.html'"></div>
+    <div ng-if="vm.autoform.template == 'short'" ng-include="'/components/directives/autoform/templates/short.html'"></div>
+    <div ng-if="vm.autoform.template == 'full'" ng-include="'/components/directives/autoform/templates/full.html'"></div>
+    <div ng-if="vm.autoform.template == 'lite'" ng-include="'/components/directives/autoform/templates/lite.html'"></div>
 </div>

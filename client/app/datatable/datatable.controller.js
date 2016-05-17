@@ -11,11 +11,15 @@
                     alert(true);
                 }
             };
-            this.inputParameters = {
+            this.autoform = {
                 'entity' : 'patients',
                 'formGroupClass' : 'col-md-3',
-                'template' : 'short'
+                'template' : 'lite'
             };
+        }
+
+        submit() {
+            alert(this.autoform.object.name)
         }
     }
 

@@ -5,13 +5,13 @@
     class AutoFormController {
         constructor($scope, $http, ngToast) {
             this.$scope = $scope;
-            this.parameters = $scope.parameters;
+            this.autoform = $scope.parameters;
+            this.loadAutoForm();
             this.isSaving = false;
             this.submitted = false;
             this.$http = $http;
             this.ngToast = ngToast;
-            this.object = {};
-            $http.get('/api/' + this.parameters.entity + '/metadata')
+            $http.get('/api/' + this.autoform.entity + '/metadata')
                 .then(response => {
                     this.metadata = response.data;
                     this.loadedData = true;
@@ -22,6 +22,19 @@
                         content: err.message
                     });
                 });
+        }
+
+        loadAutoForm() {
+            this.autoform.form = this.form;
+            this.autoform.isSaving = this.isSaving;
+            this.autoform.submitted = this.submitted;
+            this.autoform.object = (this.autoform.object) ? this.autoform.object : {};
+            this.autoform.submit = (function() {
+                this.submit();
+            }).bind(this);
+            this.autoform.resetForm = (function() {
+                this.resetForm();
+            }).bind(this);
         }
 
         getMessage(key, value) {
@@ -48,7 +61,7 @@
 
             if (this.form.$valid) {
                 this.isSaving = true;
-                if (this.object._id) {
+                if (this.autoform.object._id) {
                     this.update();
                 }
                 else {
@@ -59,7 +72,7 @@
         }
 
         add() {
-            this.$http.post('/api/' + this.parameters.entity, this.object).then(() => {
+            this.$http.post('/api/' + this.autoform.entity, this.autoform.object).then(() => {
                     this.resetForm();
                     this.ngToast.create(this.metadata.name + ' agregado con éxito!');
                 })
@@ -79,7 +92,7 @@
         }
 
         update() {
-            this.$http.put('/api/' + this.parameters.entity + '/' + this.object._id, this.object).then(() => {
+            this.$http.put('/api/' + this.autoform.entity + '/' + this.autoform.object._id, this.autoform.object).then(() => {
                     this.resetForm();
                     this.ngToast.create(this.metadata.name + ' modificado con éxito!');
                 })
@@ -100,7 +113,7 @@
         resetForm() {
             this.submitted = false;
             this.isSaving = false;
-            this.object = angular.copy({});
+            this.autoform.object = angular.copy({});
             this.form.$setPristine();
             this.form.$setUntouched();
         }
@@ -109,7 +122,7 @@
             this.$http.get('/api/' + api)
                 .then(response => {
                     this[field] = response.data;
-                    this.object[field] = "";
+                    this.autoform.object[field] = "";
                 })
                 .catch(err => {
                     this.ngToast.create({

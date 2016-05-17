@@ -5,7 +5,12 @@
 
                 <datatable parameters="vm.parameters"></datatable>
 
-                <autoform parameters="vm.inputParameters"></autoform>
+                <autoform parameters="vm.autoform"></autoform>
+
+                <div class="text-right">
+                    <button class="btn btn-primary" ng-disabled="vm.autoform.isSaving" ng-click="vm.submit()">Registrarse</button>
+                    <a class="btn btn-default" ng-disabled="vm.autoform.isSaving" ng-click="vm.autoform.resetForm()">Cancelar</a>
+                </div>
 
             </div>
         </div>

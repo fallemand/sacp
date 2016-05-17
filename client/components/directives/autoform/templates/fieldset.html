@@ -1,5 +1,5 @@
 <fieldset ng-disabled="vm.isSaving">
-    <div class="form-group {{vm.parameters.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
+    <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
          ng-class="{ 'has-success': vm.form[field.field].$valid && (vm.form[field.field].$dirty || vm.submitted),
                                             'has-error': vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)}">
         <div class="input-group">
@@ -10,12 +10,12 @@
 
             <input ng-if="field.controlType == 'input'" type="{{field.type}}" class="form-control"
                    required
-                   ng-model="vm.object[field.field]" placeholder="{{field.title}}"
+                   ng-model="vm.autoform.object[field.field]" placeholder="{{field.title}}"
                    name="{{field.field}}">
 
             <select ng-if="field.controlType == 'object' && field.type == 'select'"
                     ng-init="vm.loadData(field.field, field.remoteApi)" class="form-control" required
-                    ng-model="vm.object[field.field]" name="{{field.field}}"
+                    ng-model="vm.autoform.object[field.field]" name="{{field.field}}"
                     ng-options="item[field.descField] for item in vm[field.field]">
                 <option value="">Seleccionar</option>
             </select>
