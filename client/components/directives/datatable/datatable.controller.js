@@ -46,7 +46,7 @@
                 switch(value.type) {
                     case 'text' : col.getValue = this.htmlValue; break;
                     case 'number' : col.getValue = this.htmlValue; break;
-                    case 'object': col.getValue = this.objectValue; break;
+                    case 'select': col.getValue = this.objectValue; break;
                     default: col.getValue = this.htmlValue; break;
                 }
                 cols.push(col);
