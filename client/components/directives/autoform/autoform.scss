@@ -1,0 +1,25 @@
+.form-short {
+    .form-group {
+        padding: 0 5px;
+        margin: 5px 0;
+    }
+    .help-block {
+        font-size: 11px;
+        line-height: 12px;
+        margin: 3px 0 0;
+    }
+    .row {
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        flex-wrap: wrap;
+        > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .btn {
+        margin: 5px 0 0;
+    }
+}

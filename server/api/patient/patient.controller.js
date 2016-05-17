@@ -124,15 +124,16 @@ export function metadata(req, res) {
                 }
             },
             {
-                'title': 'Email',
-                'field' : 'email',
-                'type': 'email',
+                'title': 'Tipo Convenio',
+                'field' : 'agreementType',
+                'controlType' : 'object',
+                'descField' : 'name',
+                'remoteApi' : 'agreement-types',
+                'type': 'select',
                 'show': true,
-                'controlType' : 'input',
-                'icon': 'fa fa-envelope',
-                'validateType' : true,
-                'validations' : {
-                    email: true
+                'iconText': 'TC',
+                'restrictions' : {
+                    required: true
                 }
             },
             {
@@ -162,19 +163,6 @@ export function metadata(req, res) {
                 }
             },
             {
-                'title': 'Tipo Convenio',
-                'field' : 'agreementType',
-                'controlType' : 'object',
-                'descField' : 'name',
-                'remoteApi' : 'agreement-types',
-                'type': 'select',
-                'show': true,
-                'iconText': 'TC',
-                'restrictions' : {
-                    required: true
-                }
-            },
-            {
                 'title': 'Dirección',
                 'field' : 'address',
                 'type': 'text',
@@ -189,6 +177,18 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-phone'
+            },
+            {
+                'title': 'Email',
+                'field' : 'email',
+                'type': 'email',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-envelope',
+                'validateType' : true,
+                'validations' : {
+                    email: true
+                }
             },
             {
                 'title': 'Celular',

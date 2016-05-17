@@ -1,4 +1,5 @@
 <fieldset ng-disabled="vm.isSaving">
+    <div class="row">
     <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
          ng-class="{ 'has-success': vm.form[field.field].$valid && (vm.form[field.field].$dirty || vm.submitted),
                                             'has-error': vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)}">
@@ -27,6 +28,6 @@
             <span ng-if="field.validateType" ng-show="vm.form[field.field].$error[field.type]">{{vm.getMessage(field.type, null)}}</span>
         </p>
     </div>
-
+    </div>
 </fieldset>
 

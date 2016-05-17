@@ -73,21 +73,27 @@
                     case 'modify' :
                         html += '<a class="btn btn-xs btn-default" ng-click="vm.update(row)" uib-tooltip="Modificar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-pencil"></i></a>'; break;
                     case 'delete' :
-                        html += '<a class="btn btn-xs btn-default" ng-click="vm.cancel(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>'; break;
+                        html += '<a class="btn btn-xs btn-default" ng-click="vm.delete(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>'; break;
                     case 'activate' :
                         html += '<a class="btn btn-xs btn-success" ng-click="vm.activate(row)" ><i class="fa fa-check-square"></i> Activar</a>'; break;
                     case 'cancel' :
-                        html += '<a class="btn btn-xs btn-danger" ng-click="vm.cancel(row)"><i class="fa fa-times"></i>Cancelar</a>'; break;
+                        html += '<a class="btn btn-xs btn-danger" ng-click="vm.delete(row)"><i class="fa fa-times"></i>Cancelar</a>'; break;
                 }
             });
             html += '</div>';
             return html;
         }
 
-        cancel(user) {
+        update(row) {
+            if(this.parameters.modifyEvent) {
+                this.parameters.modifyEvent(angular.copy(row));
+            }
+        }
+
+        delete(object) {
             this.sweet.show({
                 title: '¿Está Seguro?',
-                text: 'Eliminará el ' + this.metadata.name + ' ' + user.name,
+                text: 'Eliminará el ' + this.metadata.name + ' ' + object.name,
                 type: 'error',
                 showCancelButton: true,
                 confirmButtonClass: 'btn-danger',
@@ -96,7 +102,7 @@
                 allowEscapeKey: true,
                 allowOutsideClick: true
             }, (function() {
-                this.$http.delete('/api/users/' + user._id).then(response => {
+                this.$http.delete('/api/' + this.parameters.entity + '/' + object._id).then(response => {
                     if(this.parameters.reloadEvent) {
                         this.parameters.reloadEvent();
                     }
@@ -117,7 +123,7 @@
                 allowEscapeKey: true,
                 allowOutsideClick: true
             }, (function() {
-                this.$http.put('/api/users/' + user._id + '/activate').then(response => {
+                this.$http.put('/api/' + this.parameters.entity + '/' + user._id + '/activate').then(response => {
                     if(this.parameters.reloadEvent) {
                         this.parameters.reloadEvent();
                     }
