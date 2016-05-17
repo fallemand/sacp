@@ -43,25 +43,24 @@
             }
         }
 
-        submit(form) {
+        submit() {
             this.submitted = true;
 
-            if (form.$valid) {
+            if (this.form.$valid) {
                 this.isSaving = true;
-                if(this.object._id) {
-                    this.update(form);
+                if (this.object._id) {
+                    this.update();
                 }
                 else {
-                    this.add(form);
+                    this.add();
                 }
 
             }
         }
 
-        add(form) {
+        add() {
             this.$http.post('/api/' + this.parameters.entity, this.object).then(() => {
-                    this.parameters.saveFunction();
-                    this.resetForm(form);
+                    this.resetForm();
                     this.ngToast.create(this.metadata.name + ' agregado con éxito!');
                 })
                 .catch(err => {
@@ -70,18 +69,18 @@
 
                     // Update validity of form fields that match the mongoose errors
                     angular.forEach(err.errors, (error, field) => {
-                        form[field].$setValidity('mongoose', false);
+                        this.form[field].$setValidity('mongoose', false);
                         this.errors[field] = error.message;
                     });
-                }).finally(function () {
-                this.isSaving = false;
-            });
+                })
+                .finally(function () {
+                    this.isSaving = false;
+                });
         }
 
-        update(form) {
+        update() {
             this.$http.put('/api/' + this.parameters.entity + '/' + this.object._id, this.object).then(() => {
-                    this.parameters.saveFunction();
-                    this.resetForm(form);
+                    this.resetForm();
                     this.ngToast.create(this.metadata.name + ' modificado con éxito!');
                 })
                 .catch(err => {
@@ -90,7 +89,7 @@
 
                     // Update validity of form fields that match the mongoose errors
                     angular.forEach(err.errors, (error, field) => {
-                        form[field].$setValidity('mongoose', false);
+                        this.form[field].$setValidity('mongoose', false);
                         this.errors[field] = error.message;
                     });
                 }).finally(function () {
@@ -98,20 +97,19 @@
             });
         }
 
-        resetForm(form) {
+        resetForm() {
             this.submitted = false;
-            angular.forEach(this.object, function (value, key) {
-                value = '';
-            });
-            form.$setPristine();
-            form.$setUntouched();
+            this.isSaving = false;
+            this.object = angular.copy({});
+            this.form.$setPristine();
+            this.form.$setUntouched();
         }
 
         loadData(field, api) {
             this.$http.get('/api/' + api)
                 .then(response => {
                     this[field] = response.data;
-                    this.object[field] = this[field][0];
+                    this.object[field] = "";
                 })
                 .catch(err => {
                     this.ngToast.create({
