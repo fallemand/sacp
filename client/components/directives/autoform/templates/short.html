@@ -1,0 +1,15 @@
+<form class="form form-short" name="vm.form" ng-hide="vm.success" ng-disabled="vm.isSaving" ng-submit="vm.submit()"
+      novalidate autocomplete="off">
+    <div class="row">
+        <div class="col-md-10">
+            <ng-include src="'/components/directives/autoform/templates/fieldset.html'"></ng-include>
+        </div>
+        <div class="col-md-2 text-center">
+            <button class="btn btn-primary" ng-disabled="vm.isSaving" type="submit">Registrarse
+            </button>
+            <a class="btn btn-default" ng-disabled="vm.isSaving"
+               ng-click="vm.resetForm(form)">Cancelar</a>
+        </div>
+    </div>
+
+</form>

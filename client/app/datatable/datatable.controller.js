@@ -3,7 +3,6 @@
 
     class DatatableComponent {
         constructor() {
-            this.message = 'Hello';
             this.parameters = {
                 entity: 'users',
                 filters: 'active=true',
@@ -13,7 +12,9 @@
                 }
             };
             this.inputParameters = {
-                'entity' : 'patients'
+                'entity' : 'patients',
+                'formGroupClass' : 'col-md-3',
+                'template' : 'short'
             };
         }
     }

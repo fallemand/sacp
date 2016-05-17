@@ -17,7 +17,6 @@
                     this.loadedData = true;
                 })
                 .catch(err => {
-                    err = err.data;
                     ngToast.create({
                         className: 'danger',
                         content: err.message
@@ -49,46 +48,59 @@
 
             if (form.$valid) {
                 this.isSaving = true;
-                this.$http.post('/api/patients', this.object).then(() => {
-                        this.parameters.saveFunction();
-                        this.resetForm(form);
-                        this.ngToast.create('Paciente agregado con éxito!');
-                    })
-                    .catch(err => {
-                        err = err.data;
-                        this.errors = {};
+                if(this.object._id) {
+                    this.update(form);
+                }
+                else {
+                    this.add(form);
+                }
 
-                        // Update validity of form fields that match the mongoose errors
-                        angular.forEach(err.errors, (error, field) => {
-                            form[field].$setValidity('mongoose', false);
-                            this.errors[field] = error.message;
-                        });
-                    }).finally(function () {
-                    this.isSaving = false;
-                });
             }
         }
 
-
         add(form) {
-            this.submitted = true;
-            this.isSaving = true;
-            if (form.$valid) {
-                alert(true);
-            }
+            this.$http.post('/api/' + this.parameters.entity, this.object).then(() => {
+                    this.parameters.saveFunction();
+                    this.resetForm(form);
+                    this.ngToast.create(this.metadata.name + ' agregado con éxito!');
+                })
+                .catch(err => {
+                    err = err.data;
+                    this.errors = {};
+
+                    // Update validity of form fields that match the mongoose errors
+                    angular.forEach(err.errors, (error, field) => {
+                        form[field].$setValidity('mongoose', false);
+                        this.errors[field] = error.message;
+                    });
+                }).finally(function () {
+                this.isSaving = false;
+            });
         }
 
         update(form) {
-            this.submitted = true;
-            this.isSaving = true;
-            if (form.$valid) {
-                alert(this.user.name);
-            }
+            this.$http.put('/api/' + this.parameters.entity + '/' + this.object._id, this.object).then(() => {
+                    this.parameters.saveFunction();
+                    this.resetForm(form);
+                    this.ngToast.create(this.metadata.name + ' modificado con éxito!');
+                })
+                .catch(err => {
+                    err = err.data;
+                    this.errors = {};
+
+                    // Update validity of form fields that match the mongoose errors
+                    angular.forEach(err.errors, (error, field) => {
+                        form[field].$setValidity('mongoose', false);
+                        this.errors[field] = error.message;
+                    });
+                }).finally(function () {
+                this.isSaving = false;
+            });
         }
 
         resetForm(form) {
             this.submitted = false;
-            angular.forEach(this.patient, function (value, key) {
+            angular.forEach(this.object, function (value, key) {
                 value = '';
             });
             form.$setPristine();
