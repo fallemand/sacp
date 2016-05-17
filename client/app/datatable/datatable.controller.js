@@ -13,19 +13,7 @@
                 }
             };
             this.inputParameters = {
-                'entity' : 'user',
-                'title': 'Nombre',
-                'pluralTitle': 'Nombres',
-                'field' : 'name',
-                'type': 'string',
-                'show': true,
-                'icon': 'fa fa-user-md',
-                'iconText' : 'USR',
-                'restrictions' : {
-                    required: true,
-                    min: '10',
-                    max: '20'
-                }
+                'entity' : 'patients'
             };
         }
     }

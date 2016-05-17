@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('sacpApp')
-  .directive('forminput', function () {
+  .directive('autoform', function () {
     return {
-      templateUrl: 'components/directives/input/input.html',
+      templateUrl: 'components/directives/autoform/autoform.html',
         restrict: 'EA',
-        controller: 'InputController',
+        controller: 'AutoFormController',
         controllerAs: 'vm',
         scope: {
             parameters: '='

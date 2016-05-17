@@ -113,51 +113,90 @@ export function metadata(req, res) {
         'fields': [
             {
                 'title': 'Nombre',
-                'field': 'name',
-                'type': 'text',
-                'show': true
+                'field' : 'name',
+                'type': 'string',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-user-md',
+                'restrictions' : {
+                    required: true,
+                    minlength: '4'
+                }
             },
             {
                 'title': 'Email',
-                'field': 'email',
-                'type': 'text',
-                'show': true
+                'field' : 'email',
+                'type': 'email',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-envelope',
+                'validateType' : true,
+                'validations' : {
+                    email: true
+                }
             },
             {
                 'title': 'DNI',
-                'field': 'dni',
+                'field' : 'dni',
                 'type': 'number',
-                'show': true
+                'show': true,
+                'iconText': 'DNI',
+                'validateType' : true,
+                'controlType' : 'input',
+                'restrictions' : {
+                    number: true,
+                    required: true
+                }
             },
             {
                 'title': 'Nº Obra Social',
-                'field': 'socialInsuranceNumber',
+                'field' : 'socialInsuranceNumber',
                 'type': 'number',
-                'show': true
+                'show': true,
+                'iconText': 'DNI',
+                'validateType' : true,
+                'controlType' : 'input',
+                'restrictions' : {
+                    number: true,
+                    required: true
+                }
             },
             {
                 'title': 'Tipo Convenio',
-                'field': 'agreementType',
-                'type': 'object',
-                'show': true
+                'field' : 'agreementType',
+                'controlType' : 'object',
+                'descField' : 'name',
+                'remoteApi' : 'agreement-types',
+                'type': 'select',
+                'show': true,
+                'iconText': 'TC',
+                'restrictions' : {
+                    required: true
+                }
             },
             {
                 'title': 'Dirección',
-                'field': 'address',
+                'field' : 'address',
                 'type': 'text',
-                'show': true
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home'
             },
             {
                 'title': 'Teléfono',
-                'field': 'phone',
-                'type': 'text',
-                'show': true
+                'field' : 'phone',
+                'type': 'tel',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-phone'
             },
             {
                 'title': 'Celular',
-                'field': 'cellphone',
-                'type': 'text',
-                'show': true
+                'field' : 'cellphone',
+                'type': 'tel',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-phone'
             }
         ]
 

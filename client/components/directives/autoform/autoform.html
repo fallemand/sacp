@@ -1,0 +1,34 @@
+<div ng-if="vm.loadedData">
+    <form class="form" name="form" ng-hide="vm.success" ng-disabled="vm.isSaving" ng-submit="vm.submit(form)"
+          novalidate autocomplete="off">
+        <fieldset ng-disabled="vm.isSaving">
+            <div class="form-group" ng-repeat="field in vm.metadata.fields" ng-class="{ 'has-success': form[field.field].$valid && (form[field.field].$dirty || vm.submitted),
+                                            'has-error': form[field.field].$invalid && (form[field.field].$dirty || vm.submitted)}">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i ng-if="field.icon" class="{{field.icon}}" ></i>
+                        <span ng-if="field.iconText">{{field.iconText}}</span>
+                    </div>
+
+                    <input ng-if="field.controlType == 'input'" type="{{field.type}}" class="form-control" required
+                           ng-model="vm.object[field.field]" placeholder="{{field.title}}"
+                           name="{{field.field}}">
+
+                    <select ng-if="field.controlType == 'object' && field.type == 'select'" ng-init="vm.loadData(field.field, field.remoteApi)" class="form-control" required
+                           ng-model="vm.object[field.field]" name="{{field.field}}" ng-options="item[field.descField] for item in vm[field.field]"></select>
+                </div>
+                <p class="help-block"
+                   ng-show="form[field.field].$invalid && (form[field.field].$dirty || vm.submitted)">
+                    <span ng-repeat="(key, value) in field.restrictions"
+                          ng-show="form[field.field].$error[key]">{{vm.getMessage(key, value)}}</span>
+                    <span ng-if="field.validateType" ng-show="form[field.field].$error[field.type]">{{vm.getMessage(field.type, null)}}</span>
+                </p>
+            </div>
+
+            <div class="text-right">
+                <a class="btn btn-default text-uppercase" ng-disabled="vm.isSaving" ng-click="vm.resetForm(form)">Cancelar</a>
+                <button class="btn btn-success text-uppercase" ng-disabled="vm.isSaving" type="submit">Registrarse</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
