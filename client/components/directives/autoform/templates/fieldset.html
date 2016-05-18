@@ -18,6 +18,7 @@
                     ng-init="vm.loadData(field.field, field.remoteApi)" class="form-control" required
                     ng-model="vm.autoform.object[field.field]" name="{{field.field}}"
                     ng-options="item[field.descField] for item in vm[field.field] track by item._id">
+                <option value="">Seleccionar</option>
             </select>
         </div>
         <p class="help-block"

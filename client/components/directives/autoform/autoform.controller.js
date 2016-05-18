@@ -93,7 +93,12 @@
         }
 
         update() {
-            this.autoform.object.agreementType = this.autoform.object.agreementType._id;
+            //Fix sub-object changes
+            for (var attribute in this.autoform.object) {
+                if (this.autoform.object[attribute].hasOwnProperty('_id')) {
+                    this.autoform.object[attribute] = this.autoform.object[attribute]._id;
+                }
+            }
             this.$http.put('/api/' + this.autoform.entity + '/' + this.autoform.object._id, this.autoform.object).then(() => {
                     this.resetForm();
                     this.ngToast.create(this.metadata.name + ' modificado con éxito!');
