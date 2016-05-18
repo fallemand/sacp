@@ -1,33 +1,28 @@
 <fieldset ng-disabled="vm.isSaving">
     <div class="row">
-    <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
-         ng-class="{ 'has-success': vm.form[field.field].$valid && (vm.form[field.field].$dirty || vm.submitted),
+        <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
+             ng-class="{ 'has-success': vm.form[field.field].$valid && (vm.form[field.field].$dirty || vm.submitted),
                                             'has-error': vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)}">
-        <div class="input-group">
-            <div class="input-group-addon">
-                <i ng-if="field.icon" class="{{field.icon}}"></i>
-                <span ng-if="field.iconText">{{field.iconText}}</span>
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i ng-if="field.icon" class="{{field.icon}}"></i>
+                    <span ng-if="field.iconText">{{field.iconText}}</span>
+                </div>
+
+                <input ng-if="field.controlType == 'input'" type="{{field.type}}" class="form-control"
+                       required ng-model="vm.autoform.object[field.field]" placeholder="{{field.title}}"
+                       name="{{field.field}}">
+
+                <select ng-if="field.controlType == 'object' && field.type == 'select'" dynamic-attributes="field.attributes" ng-init="vm.loadData(field.field, field.remoteApi)" class="form-control" required
+                        ng-model="vm.autoform.object[field.field]" name="{{field.field}}"
+                        ng-options="item[field.descField] for item in vm[field.field] track by item._id">
+                    <option value="">Seleccionar</option>
+                </select>
             </div>
-
-            <input ng-if="field.controlType == 'input'" type="{{field.type}}" class="form-control"
-                   required
-                   ng-model="vm.autoform.object[field.field]" placeholder="{{field.title}}"
-                   name="{{field.field}}">
-
-            <select ng-if="field.controlType == 'object' && field.type == 'select'"
-                    ng-init="vm.loadData(field.field, field.remoteApi)" class="form-control" required
-                    ng-model="vm.autoform.object[field.field]" name="{{field.field}}"
-                    ng-options="item[field.descField] for item in vm[field.field] track by item._id">
-                <option value="">Seleccionar</option>
-            </select>
+            <p class="help-block" ng-show="vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)">
+                <span ng-repeat="(key, value) in field.validations" ng-show="vm.form[field.field].$error[key]">{{vm.getMessage(key, value)}}</span>
+            </p>
         </div>
-        <p class="help-block"
-           ng-show="vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)">
-                    <span ng-repeat="(key, value) in field.restrictions"
-                          ng-show="vm.form[field.field].$error[key]">{{vm.getMessage(key, value)}}</span>
-            <span ng-if="field.validateType" ng-show="vm.form[field.field].$error[field.type]">{{vm.getMessage(field.type, null)}}</span>
-        </p>
-    </div>
     </div>
 </fieldset>
 

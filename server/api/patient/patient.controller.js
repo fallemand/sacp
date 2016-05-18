@@ -111,6 +111,7 @@ export function metadata(req, res) {
         name: 'paciente',
         pluralName: 'pacientes',
         'fields': [
+
             {
                 'title': 'Nombre',
                 'field' : 'name',
@@ -118,10 +119,11 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-user-md',
-                'restrictions' : {
+                'attributes' : {
                     required: true,
                     minlength: '4'
-                }
+                },
+                'validations' : ['required','minlength']
             },
             {
                 'title': 'Tipo Convenio',
@@ -132,9 +134,10 @@ export function metadata(req, res) {
                 'type': 'select',
                 'show': true,
                 'iconText': 'TC',
-                'restrictions' : {
+                'attributes' : {
                     required: true
-                }
+                },
+                'validations' : ['required']
             },
             {
                 'title': 'DNI',
@@ -142,25 +145,25 @@ export function metadata(req, res) {
                 'type': 'number',
                 'show': true,
                 'iconText': 'DNI',
-                'validateType' : true,
                 'controlType' : 'input',
-                'restrictions' : {
-                    number: true,
-                    required: true
-                }
+                'attributes' : {
+                    required: true,
+                    'mongoose-error' : ''
+                },
+                'validations' : ['required', 'number', 'mongoose']
             },
             {
                 'title': 'Nº Obra Social',
                 'field' : 'socialInsuranceNumber',
                 'type': 'number',
                 'show': true,
-                'iconText': 'DNI',
-                'validateType' : true,
+                'icon': 'fa fa-credit-card',
                 'controlType' : 'input',
-                'restrictions' : {
-                    number: true,
-                    required: true
-                }
+                'attributes' : {
+                    required: true,
+                    'mongoose-error' : ''
+                },
+                'validations' : ['required', 'number', 'mongoose']
             },
             {
                 'title': 'Dirección',
@@ -185,10 +188,7 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-envelope',
-                'validateType' : true,
-                'validations' : {
-                    email: true
-                }
+                'validations' : ['email']
             },
             {
                 'title': 'Celular',

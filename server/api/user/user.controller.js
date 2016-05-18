@@ -152,31 +152,56 @@ export function metadata(req, res, next) {
         'fields': [
             {
                 'title': 'Nombre',
-                'pluralTitle': 'Nombres',
                 'field' : 'name',
                 'type': 'string',
-                'show': true
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-male',
+                'attributes' : {
+                    required : ''
+                },
+                'validations' : ['required','minlength']
             },
             {
                 'title': 'Email',
-                'pluralTitle': 'Emails',
                 'field' : 'email',
-                'type': 'string',
-                'show': true
+                'type': 'email',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-envelope',
+                'attributes' : {
+                    'required': '',
+                    'mongoose-error' : ''
+                },
+                'validations' : ['required','mongoose','email']
             },
             {
                 'title': 'Matricula Nacional',
-                'pluralTitle': 'Matricula Nacional',
                 'field' : 'mn',
-                'type': 'string',
-                'show': true
+                'type': 'number',
+                'show': true,
+                'icon': 'fa fa-user-md',
+                'controlType' : 'input',
+                'attributes' : {
+                    required: '',
+                    max : '8',
+                    min: '1'
+                },
+                'validations' : ['required','max','min', 'number']
             },
             {
                 'title': 'Matricula Provincial',
-                'pluralTitle': 'Matricula Provincial',
                 'field' : 'mp',
-                'type': 'string',
-                'show': true
+                'type': 'number',
+                'show': true,
+                'icon': 'fa fa-user-md',
+                'controlType' : 'input',
+                'attributes' : {
+                    required: '',
+                    max : '8',
+                    min: '1'
+                },
+                'validations' : ['required','max','min', 'number']
             }
         ]
 
