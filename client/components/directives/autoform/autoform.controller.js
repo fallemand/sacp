@@ -93,6 +93,7 @@
         }
 
         update() {
+            this.autoform.object.agreementType = this.autoform.object.agreementType._id;
             this.$http.put('/api/' + this.autoform.entity + '/' + this.autoform.object._id, this.autoform.object).then(() => {
                     this.resetForm();
                     this.ngToast.create(this.metadata.name + ' modificado con éxito!');
