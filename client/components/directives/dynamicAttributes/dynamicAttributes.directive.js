@@ -7,27 +7,35 @@ angular.module('sacpApp')
             terminal: true,
             priority: 1000,
             require: "^form",
-            scope: { dynamicAttributes: '=' },
             link: function (scope, element, attrs, formController) {
-                var templateElement;
-                var previousTemplate;
-                templateElement = element.clone();
-                templateElement.removeAttr("dynamic-attributes");
+                var newElement = element.clone();
+                newElement
+                    .addClass('form-control')
+                    .attr('name', scope.field.field)
+                    .removeAttr('dynamic-attributes');
+                switch (scope.field.controlType) {
+                    case 'input' :
+                        newElement.attr('placeholder', scope.field.title);
+                        newElement.attr('type', scope.field.type);
+                        break;
+                    case 'object' :
+                        if(scope.field.type == 'select') {
+                            newElement
+                                .attr('ng-init', 'vm.loadData(field.field, field.remoteApi)')
+                                .attr('ng-options', 'item[field.descField] for item in vm[field.field] track by item._id');
+                            break;
+                        }
+                }
 
-                angular.forEach(scope.dynamicAttributes, (value, attribute) => {
-                    templateElement.attr(attribute, value);
+                angular.forEach(scope.field.attributes, (value, attribute) => {
+                    newElement.attr(attribute, value);
                 });
-                templateElement.insertBefore(element);
 
-                var control = formController[element.attr("name")];
-                if (control){
-                    formController.$removeControl(control);
-                }
-                if (previousTemplate) {
-                    previousTemplate.remove();
-                }
+                newElement.removeAttr("dynamic-attributes");
+                newElement.insertBefore(element);
+                element.remove();
 
-                $compile(templateElement)(scope);
+                $compile(newElement)(scope);
             }
         };
     }]);
