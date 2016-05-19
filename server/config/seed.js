@@ -171,7 +171,7 @@ AgreementType.find({}).remove()
                         Patient.create({
                             name: 'Juan Carlos',
                             email: 'juancarlos@hotmail.com',
-                            dni: '36142871',
+                            dni: '2',
                             socialInsuranceNumber: '23425456',
                             address: 'Hidalgo Palacios 7542',
                             phone: '+43532656565',
@@ -185,7 +185,7 @@ AgreementType.find({}).remove()
                         Patient.create({
                             name: 'Juan Carlos',
                             email: 'juancarlos@hotmail.com',
-                            dni: '36142871',
+                            dni: '1',
                             socialInsuranceNumber: '23425456',
                             address: 'Hidalgo Palacios 7542',
                             phone: '+43532656565',
@@ -199,7 +199,7 @@ AgreementType.find({}).remove()
                         Patient.create({
                             name: 'Juan Carlos',
                             email: 'juancarlos@hotmail.com',
-                            dni: '36142871',
+                            dni: '3',
                             socialInsuranceNumber: '23425456',
                             address: 'Hidalgo Palacios 7542',
                             phone: '+43532656565',

@@ -40,4 +40,23 @@ var PatientSchema = new Schema({
     }
 });
 
+PatientSchema
+    .path('dni')
+    .validate(function (value, respond) {
+        var self = this;
+        return this.constructor.findOne({dni: value}).exec()
+            .then(function (patient) {
+                if (patient) {
+                    if (self.id === patient.id) {
+                        return respond(true);
+                    }
+                    return respond(false);
+                }
+                return respond(true);
+            })
+            .catch(function (err) {
+                throw err;
+            });
+    }, 'Ya existe un paciente con ese DNI.');
+
 export default mongoose.model('Patient', PatientSchema);

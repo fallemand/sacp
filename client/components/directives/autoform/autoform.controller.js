@@ -37,7 +37,7 @@
             }).bind(this);
         }
 
-        getMessage(key, value) {
+        getMessage(key, value, field) {
             switch (key) {
                 case 'required' :
                     return 'El campo es requerido';
@@ -53,6 +53,8 @@
                     return 'No parece un Email válido';
                 case 'number' :
                     return 'No parece un número válido';
+                case 'mongoose' :
+                    return this.errors[field];
             }
         }
 
@@ -78,17 +80,7 @@
                     this.autoform.reloadEvent();
                 })
                 .catch(err => {
-                    err = err.data;
-                    this.errors = {};
-
-                    // Update validity of form fields that match the mongoose errors
-                    angular.forEach(err.errors, (error, field) => {
-                        this.form[field].$setValidity('mongoose', false);
-                        this.errors[field] = error.message;
-                    });
-                })
-                .finally(function () {
-                    this.isSaving = false;
+                    this.handleError(err);
                 });
         }
 
@@ -105,17 +97,27 @@
                     this.autoform.reloadEvent();
                 })
                 .catch(err => {
-                    err = err.data;
-                    this.errors = {};
+                    this.handleError(err);
+                });
+        }
 
-                    // Update validity of form fields that match the mongoose errors
-                    angular.forEach(err.errors, (error, field) => {
-                        this.form[field].$setValidity('mongoose', false);
-                        this.errors[field] = error.message;
-                    });
-                }).finally(function () {
-                this.isSaving = false;
-            });
+        handleError(err) {
+            var errors = err.data.errors;
+            if(errors) {
+                this.errors = {};
+                // Update validity of form fields that match the mongoose errors
+                angular.forEach(errors, (error, field) => {
+                    this.form[field].$setValidity('mongoose', false);
+                    this.errors[field] = error.message;
+                });
+            }
+            else {
+                this.ngToast.create({
+                    className: 'warning',
+                    content: err.message
+                });
+            }
+            this.isSaving = false;
         }
 
         resetForm() {
