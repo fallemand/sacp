@@ -123,7 +123,10 @@ export function metadata(req, res) {
                     required: true,
                     minlength: '4'
                 },
-                'validations' : ['required','minlength']
+                'validations' : {
+                    'required' : '',
+                    'minlength' : 4
+                }
             },
             {
                 'title': 'Tipo Convenio',
@@ -137,7 +140,9 @@ export function metadata(req, res) {
                 'attributes' : {
                     required: true
                 },
-                'validations' : ['required']
+                'validations' : {
+                    'required' : ''
+                }
             },
             {
                 'title': 'DNI',
@@ -150,7 +155,11 @@ export function metadata(req, res) {
                     required: true,
                     'mongoose-error' : ''
                 },
-                'validations' : ['required', 'number', 'mongoose']
+                'validations' : {
+                    'required' : '',
+                    'number' : '',
+                    'mongoose' : ''
+                }
             },
             {
                 'title': 'Nº Obra Social',
@@ -163,7 +172,11 @@ export function metadata(req, res) {
                     required: true,
                     'mongoose-error' : ''
                 },
-                'validations' : ['required', 'number', 'mongoose']
+                'validations' : {
+                    'required' : '',
+                    'number' : '',
+                    'mongoose' : ''
+                }
             },
             {
                 'title': 'Dirección',
@@ -188,7 +201,9 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-envelope',
-                'validations' : ['email']
+                'validations' : {
+                    'email' : ''
+                }
             },
             {
                 'title': 'Celular',
