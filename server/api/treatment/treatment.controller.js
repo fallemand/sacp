@@ -100,3 +100,138 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+// Get metadata
+export function metadata(req, res) {
+    res.json({
+        name: 'tratamiento',
+        pluralName: 'Tratamientos',
+        sections: [
+            {
+                name: 'Paciente',
+                fields: { 'patient'}
+            },
+            {
+                name: 'Enfermedad',
+                fields: { 'disease'}
+            },
+            {
+                name: 'Tratamiento',
+                fields: { 'treatments'}
+            },
+            {
+                name: 'Drogas',
+                fields: { 'drugs'}
+            },
+            {
+                name: 'Confirmar',
+                fields: { 'observation'}
+            },
+        ],
+        'fields': [
+
+            {
+                'title': 'Nombre',
+                'field' : 'name',
+                'type': 'string',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-user-md',
+                'attributes' : {
+                    required: true,
+                    minlength: '4'
+                },
+                'validations' : {
+                    'required' : '',
+                    'minlength' : 4
+                }
+            },
+            {
+                'title': 'Tipo Convenio',
+                'field' : 'agreementType',
+                'controlType' : 'object',
+                'descField' : 'name',
+                'remoteApi' : 'agreement-types',
+                'type': 'select',
+                'show': true,
+                'iconText': 'TC',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'DNI',
+                'field' : 'dni',
+                'type': 'number',
+                'show': true,
+                'iconText': 'DNI',
+                'controlType' : 'input',
+                'attributes' : {
+                    required: true,
+                    'mongoose-error' : ''
+                },
+                'validations' : {
+                    'required' : '',
+                    'number' : '',
+                    'mongoose' : ''
+                }
+            },
+            {
+                'title': 'Nº Obra Social',
+                'field' : 'socialInsuranceNumber',
+                'type': 'number',
+                'show': true,
+                'icon': 'fa fa-credit-card',
+                'controlType' : 'input',
+                'attributes' : {
+                    required: true,
+                    'mongoose-error' : ''
+                },
+                'validations' : {
+                    'required' : '',
+                    'number' : '',
+                    'mongoose' : ''
+                }
+            },
+            {
+                'title': 'Dirección',
+                'field' : 'address',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home'
+            },
+            {
+                'title': 'Teléfono',
+                'field' : 'phone',
+                'type': 'tel',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-phone'
+            },
+            {
+                'title': 'Email',
+                'field' : 'email',
+                'type': 'email',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-envelope',
+                'validations' : {
+                    'email' : ''
+                }
+            },
+            {
+                'title': 'Celular',
+                'field' : 'cellphone',
+                'type': 'tel',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-phone'
+            }
+        ]
+
+    });
+}
