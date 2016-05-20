@@ -17,6 +17,9 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/drug-type/drug-type.socket').register(socket);
+  require('../api/treatment-type/treatment-type.socket').register(socket);
+  require('../api/treatment/treatment.socket').register(socket);
   require('../api/agreement-type/agreement-type.socket').register(socket);
   require('../api/patient/patient.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
