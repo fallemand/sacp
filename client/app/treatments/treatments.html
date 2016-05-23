@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-md-9">
         <div class="panel">
-            <div id="demo-cls-wz">
                 <multi-step-container steps="vm.steps" class="sliding-steps simple-prev-next" search-id="'step'"
                                       on-cancel="vm.cancel()" on-finish="vm.finish()"
                                       on-step-change="vm.stepChange($getActiveIndex())">
@@ -51,7 +50,7 @@
                     </head>
 
                     <!--Form-->
-                    <form class="form-horizontal mar-top">
+                    <form class="mar-top form-horizontal" novalidate>
                         <div class="panel-body">
                             <step-container></step-container>
                         </div>
@@ -69,9 +68,6 @@
                     </form>
 
                 </multi-step-container>
-
-
-            </div>
         </div>
 
     </div>

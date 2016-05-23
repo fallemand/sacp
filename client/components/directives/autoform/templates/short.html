@@ -2,12 +2,14 @@
       novalidate autocomplete="off">
     <div class="row">
         <div class="col-md-10">
-            <ng-include src="'/components/directives/autoform/templates/fieldset.html'"></ng-include>
+            <div class="row">
+                <ng-include src="'/components/directives/autoform/templates/partials/fieldset.html'"></ng-include>
+            </div>
         </div>
         <div class="col-md-2 text-center">
-            <button class="btn btn-primary" ng-disabled="vm.isSaving" type="submit">Registrarse
+            <button class="btn btn-primary btn-block" ng-disabled="vm.isSaving" type="submit">Registrarse
             </button>
-            <a class="btn btn-default" ng-disabled="vm.isSaving"
+            <a class="btn btn-default btn-block" ng-disabled="vm.isSaving"
                ng-click="vm.resetForm()">Cancelar</a>
         </div>
     </div>

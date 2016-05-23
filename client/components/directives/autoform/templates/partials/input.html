@@ -1,0 +1,5 @@
+<input ng-if="field.controlType == 'input'" ng-model="vm.autoform.object[field.field]" dynamic-attributes>
+
+<select ng-if="field.controlType == 'object'" ng-model="vm.autoform.object[field.field]" dynamic-attributes>
+    <option value="">Seleccionar</option>
+</select>

@@ -6,15 +6,19 @@
         constructor($scope, $http, ngToast) {
             this.$scope = $scope;
             this.autoform = $scope.parameters;
-            this.loadAutoForm();
             this.isSaving = false;
             this.submitted = false;
             this.$http = $http;
+            this.errors = {};
             this.ngToast = ngToast;
             $http.get('/api/' + this.autoform.entity + '/metadata')
                 .then(response => {
-                    this.metadata = response.data;
                     this.loadedData = true;
+                    this.loadAutoForm();
+                    this.metadata = response.data;
+                    if(this.autoform.section) {
+                        this.metadata.fields = this.getSectionFields();
+                    }
                 })
                 .catch(err => {
                     ngToast.create({
@@ -22,6 +26,18 @@
                         content: err.message
                     });
                 });
+        }
+
+        getSectionFields() {
+            var metadataFields = this.metadata.fields;
+            var sectionFields = this.metadata.sections[this.autoform.section].fields;
+            var fields = [];
+            angular.forEach(metadataFields, (value) => {
+                if(sectionFields.indexOf(value.field) > -1 ) {
+                    fields.push(value);
+                }
+            });
+            return fields;
         }
 
         loadAutoForm() {

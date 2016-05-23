@@ -11,7 +11,8 @@
                 },
                 {
                     templateUrl: 'app/treatments/steps/_disease.html',
-                    title: 'Add it to your app'
+                    title: 'Add it to your app',
+                    hasForm: true
                 },
                 {
                     templateUrl: 'app/treatments/steps/_treatment.html',
@@ -30,7 +31,7 @@
             this.autoformDisease = {
                 entity : 'treatments',
                 section: 'disease',
-                template : 'full'
+                template : 'lite'
             };
         }
 

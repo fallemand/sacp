@@ -1,0 +1,17 @@
+<fieldset ng-disabled="vm.isSaving">
+    <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
+         ng-class="{ 'has-success': vm.form[field.field].$valid && (vm.form[field.field].$dirty || vm.submitted),
+                                            'has-error': vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)}">
+        <div class="input-group">
+            <div ng-if="vm.autoform.inputIcons" class="input-group-addon">
+                <i ng-if="field.icon" class="{{field.icon}}"></i>
+                <span ng-if="field.iconText">{{field.iconText}}</span>
+            </div>
+
+            <ng-include src="'/components/directives/autoform/templates/partials/input.html'"></ng-include>
+
+        </div>
+        <ng-include src="'/components/directives/autoform/templates/partials/help-block.html'"></ng-include>
+    </div>
+</fieldset>
+

@@ -14,7 +14,7 @@
         display: -webkit-flex;
         display: -ms-flexbox;
         flex-wrap: wrap;
-        > [class*='col-'] {
+        > fieldset [class*='col-'] {
             display: flex;
             flex-direction: column;
         }

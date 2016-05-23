@@ -212,20 +212,3 @@ AgreementType.find({}).remove()
                 });
         });
     });
-
-Patient.find({}).remove()
-    .then(() => {
-        Patient.create({
-            name: 'Juan Carlos',
-            email: 'juancarlos@hotmail.com',
-            dni: '36142871',
-            socialInsuranceNumber: '23425456',
-            address: 'Hidalgo Palacios 7542',
-            phone: '+43532656565',
-            cellphone: '3513160678'
-        }).then(() => {
-            console.log('finished populating patients');
-        });
-    });
-
-

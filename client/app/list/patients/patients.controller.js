@@ -26,6 +26,7 @@ class PatientsController {
             entity : 'patients',
             formGroupClass : 'col-md-3',
             template : 'short',
+            inputIcons : true,
             resetEvent: (function() {
                 this.showPatientForm = false;
             }).bind(this),

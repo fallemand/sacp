@@ -1,0 +1,5 @@
+<p class="help-block" ng-show="vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)">
+    <span ng-repeat="(key, value) in field.validations" ng-show="vm.form[field.field].$error[key]">{{vm.getMessage(key, value, field.field)}}</span>
+</p>
+
+

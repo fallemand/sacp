@@ -106,30 +106,29 @@ export function metadata(req, res) {
     res.json({
         name: 'tratamiento',
         pluralName: 'Tratamientos',
-        sections: [
-            {
-                name: 'Paciente',
-                fields: { 'patient'}
+        sections: {
+            patient : {
+                title: 'Paciente',
+                fields: ['patient']
             },
-            {
-                name: 'Enfermedad',
-                fields: { 'disease'}
+            disease : {
+                title: 'Enfermedad',
+                fields: ['disease.topographicDiagnosis', 'disease.histologicalDiagnosis', 'disease.stage']
             },
-            {
-                name: 'Tratamiento',
-                fields: { 'treatments'}
+            treatment : {
+                title: 'Tratamiento',
+                fields: ['treatments']
             },
-            {
-                name: 'Drogas',
-                fields: { 'drugs'}
+            drugs : {
+                title: 'Drogas',
+                fields: ['drugs']
             },
-            {
-                name: 'Confirmar',
-                fields: { 'observation'}
+            confirm : {
+                title: 'Confirmar',
+                fields: ['observation']
             }
-        ],
-        'fields': [
-
+        },
+        fields: [
             {
                 'title': 'Diagnóstico Topográfico',
                 'field' : 'disease.topographicDiagnosis',
