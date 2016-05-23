@@ -10,7 +10,7 @@ var TreatmentSchema = new Schema({
         ref: 'Patient'
     },
     disease : {
-        topographisDiagnosis: {
+        topographicDiagnosis: {
             type: String,
             required: true
         },
@@ -23,7 +23,7 @@ var TreatmentSchema = new Schema({
             required: false
         }
     },
-    treatments: {
+    treatment: {
         type: {
             type: Schema.Types.ObjectId,
             ref: 'TreatmentType'
@@ -52,7 +52,7 @@ var TreatmentSchema = new Schema({
             type: Number,
             required: false
         },
-        ciclesQuantity: {
+        cyclesQuantity: {
             type: String,
             required: false
         }
@@ -70,7 +70,7 @@ var TreatmentSchema = new Schema({
             type: String,
             required: true
         },
-        drugType: {
+        type: {
             type: Schema.Types.ObjectId,
             ref: 'DrugType'
         },

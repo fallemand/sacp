@@ -126,33 +126,31 @@ export function metadata(req, res) {
             {
                 name: 'Confirmar',
                 fields: { 'observation'}
-            },
+            }
         ],
         'fields': [
 
             {
-                'title': 'Nombre',
-                'field' : 'name',
-                'type': 'string',
+                'title': 'Diagnóstico Topográfico',
+                'field' : 'disease.topographicDiagnosis',
+                'type': 'typeAhead',
+                'descField' : 'name',
+                'remoteApi' : 'agreement-types',
                 'show': true,
-                'controlType' : 'input',
+                'controlType' : 'object',
                 'icon': 'fa fa-user-md',
                 'attributes' : {
-                    required: true,
-                    minlength: '4'
+                    required: true
                 },
                 'validations' : {
-                    'required' : '',
-                    'minlength' : 4
+                    'required' : ''
                 }
             },
             {
-                'title': 'Tipo Convenio',
-                'field' : 'agreementType',
-                'controlType' : 'object',
-                'descField' : 'name',
-                'remoteApi' : 'agreement-types',
-                'type': 'select',
+                'title': 'Diagnóstico Histológico',
+                'field' : 'disease.histologicalDiagnosis',
+                'controlType' : 'input',
+                'type': 'text',
                 'show': true,
                 'iconText': 'TC',
                 'attributes' : {
@@ -163,73 +161,224 @@ export function metadata(req, res) {
                 }
             },
             {
-                'title': 'DNI',
-                'field' : 'dni',
+                'title': 'Estadío',
+                'field' : 'disease.stage',
                 'type': 'number',
                 'show': true,
                 'iconText': 'DNI',
                 'controlType' : 'input',
                 'attributes' : {
                     required: true,
-                    'mongoose-error' : ''
+                    'max' : '6',
+                    'min' : 0
                 },
                 'validations' : {
                     'required' : '',
                     'number' : '',
-                    'mongoose' : ''
+                    'max' : '6',
+                    'min' : 0
                 }
             },
             {
-                'title': 'Nº Obra Social',
-                'field' : 'socialInsuranceNumber',
-                'type': 'number',
+                'title': 'Tipo de Tratamiento',
+                'field' : 'treatment.type',
+                'type': 'select',
+                'show': true,
+                'descField' : 'name',
+                'remoteApi' : 'treatment-types',
+                'icon': 'fa fa-credit-card',
+                'controlType' : 'object',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : '',
+                    'number' : ''
+                }
+            },
+            {
+                'title': 'Esquema',
+                'field' : 'treatment.schema',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Fecha probable de tratamiento',
+                'field' : 'treatment.expectedDate',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Altura',
+                'field' : 'treatment.height',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Peso',
+                'field' : 'treatment.weight',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Superficie Corporal',
+                'field' : 'treatment.bodySurface',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Ciclo Actual',
+                'field' : 'treatment.actualCicle',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Cantidad de Ciclos',
+                'field' : 'treatment.cyclesQuantity',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-home',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Droga',
+                'field' : 'drugs.name',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-envelope',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Nombre Comercial',
+                'field' : 'drugs.tradeName',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-envelope',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Presentación',
+                'field' : 'drugs.presentation',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'fa fa-envelope',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Tipo',
+                'field' : 'drugs.type',
+                'type': 'select',
+                'show': true,
+                'descField' : 'name',
+                'remoteApi' : 'drug-types',
+                'icon': 'fa fa-credit-card',
+                'controlType' : 'object',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Cantidad',
+                'field' : 'drugs.quantity',
+                'type': 'text',
                 'show': true,
                 'icon': 'fa fa-credit-card',
                 'controlType' : 'input',
                 'attributes' : {
-                    required: true,
-                    'mongoose-error' : ''
+                    required: true
                 },
                 'validations' : {
-                    'required' : '',
-                    'number' : '',
-                    'mongoose' : ''
+                    'required' : ''
                 }
             },
             {
-                'title': 'Dirección',
-                'field' : 'address',
-                'type': 'text',
-                'show': true,
-                'controlType' : 'input',
-                'icon': 'fa fa-home'
-            },
-            {
-                'title': 'Teléfono',
-                'field' : 'phone',
+                'title': 'Observaciones',
+                'field' : 'observation',
                 'type': 'tel',
                 'show': true,
                 'controlType' : 'input',
-                'icon': 'fa fa-phone'
-            },
-            {
-                'title': 'Email',
-                'field' : 'email',
-                'type': 'email',
-                'show': true,
-                'controlType' : 'input',
-                'icon': 'fa fa-envelope',
+                'icon': 'fa fa-phone',
+                'attributes' : {
+                    required: true
+                },
                 'validations' : {
-                    'email' : ''
+                    'required' : ''
                 }
-            },
-            {
-                'title': 'Celular',
-                'field' : 'cellphone',
-                'type': 'tel',
-                'show': true,
-                'controlType' : 'input',
-                'icon': 'fa fa-phone'
             }
         ]
 

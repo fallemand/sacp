@@ -26,6 +26,12 @@
                     title: 'Create your multi step forms / wizzards'
                 }
             ];
+
+            this.autoformDisease = {
+                entity : 'treatments',
+                section: 'disease',
+                template : 'full'
+            };
         }
 
         stepChange(activeIndex) {
