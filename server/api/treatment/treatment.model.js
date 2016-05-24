@@ -11,8 +11,8 @@ var TreatmentSchema = new Schema({
     },
     disease : {
         topographicDiagnosis: {
-            type: String,
-            required: true
+            type: Schema.Types.ObjectId,
+            ref: 'TreatmentType'
         },
         histologicalDiagnosis: {
             type: String,
