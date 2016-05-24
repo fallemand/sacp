@@ -132,9 +132,9 @@ export function metadata(req, res) {
             {
                 'title': 'Diagnóstico Topográfico',
                 'field' : 'disease.topographicDiagnosis',
-                'type': 'typeAhead',
-                'descField' : 'name',
-                'remoteApi' : 'agreement-types',
+                'type': 'typeahead',
+                'descField' : 'desc',
+                'remoteApi' : 'cie10-diseases',
                 'show': true,
                 'controlType' : 'object',
                 'icon': 'fa fa-user-md',

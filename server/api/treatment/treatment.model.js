@@ -12,7 +12,7 @@ var TreatmentSchema = new Schema({
     disease : {
         topographicDiagnosis: {
             type: Schema.Types.ObjectId,
-            ref: 'TreatmentType'
+            ref: 'Cie10Disease'
         },
         histologicalDiagnosis: {
             type: String,

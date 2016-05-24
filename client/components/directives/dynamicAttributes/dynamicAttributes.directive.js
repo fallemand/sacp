@@ -25,6 +25,11 @@ angular.module('sacpApp')
                                 .attr('ng-options', 'item[field.descField] for item in vm[field.field] track by item._id');
                             break;
                         }
+                        if(scope.field.type == 'typeahead') {
+                            newElement
+                                .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue)');
+                            break;
+                        }
                 }
 
                 angular.forEach(scope.field.attributes, (value, attribute) => {

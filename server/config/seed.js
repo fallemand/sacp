@@ -8,6 +8,7 @@ import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import Patient from '../api/patient/patient.model';
 import AgreementType from '../api/agreement-type/agreement-type.model';
+import Cie10Disease from '../api/cie10-disease/cie10-disease.model';
 
 Thing.find({}).remove()
     .then(() => {

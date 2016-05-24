@@ -12,6 +12,10 @@
                     <a class="btn btn-default" ng-disabled="vm.autoform.isSaving" ng-click="vm.autoform.resetForm()">Cancelar</a>
                 </div>
 
+
+                <!-- Test TypeAhead -->
+                <input type="text" ng-model="vm.selected" class="form-control" uib-typeahead="address.name for address in vm.getLocation($viewValue)">
+
             </div>
         </div>
 

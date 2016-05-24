@@ -61,9 +61,18 @@ function handleError(res, statusCode) {
 
 // Gets a list of Cie10Diseases
 export function index(req, res) {
-  return Cie10Disease.find().exec()
+    return Cie10Disease.find(processQuery(req.query)).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+export function processQuery(query) {
+    var result = {};
+    for(var attribute in query){
+        var regexp = new RegExp(query[attribute]);
+        result[attribute] = regexp;
+    }
+    return result;
 }
 
 // Gets a single Cie10Disease from the DB

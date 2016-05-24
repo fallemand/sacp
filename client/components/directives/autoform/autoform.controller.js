@@ -160,6 +160,19 @@
                     });
                 });
         }
+
+        loadTypeAhead(api, viewvalue) {
+            return this.$http.get('/api/' + api + '?code=^' + viewvalue)
+                .then(response => {
+                    return response.data;
+                })
+                .catch(err => {
+                    this.ngToast.create({
+                        className: 'danger',
+                        content: err.message
+                    });
+                });
+        }
     }
 
     angular.module('sacpApp.admin')
