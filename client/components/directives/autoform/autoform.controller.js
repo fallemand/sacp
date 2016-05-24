@@ -10,6 +10,7 @@
             this.submitted = false;
             this.$http = $http;
             this.errors = {};
+            this.typeahead = {};
             this.ngToast = ngToast;
             $http.get('/api/' + this.autoform.entity + '/metadata')
                 .then(response => {

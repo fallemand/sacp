@@ -25,11 +25,23 @@ angular.module('sacpApp')
                                 .attr('ng-options', 'item[field.descField] for item in vm[field.field] track by item._id');
                             break;
                         }
-                        if(scope.field.type == 'typeahead') {
-                            newElement
-                                .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue)');
-                            break;
+                        else {
+                            if(scope.field.type == 'typeahead') {
+                                newElement
+                                    .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue)')
+                                    .attr('typeahead-loading', 'vm.typeahead.loading')
+                                    .attr('typeahead-no-results', 'vm.typeahead.noresults')
+                                    .attr('typeahead-min-length', 2);
+                                var noResults = angular.element('<div />')
+                                    .attr('ng-show','vm.typeahead.noresults')
+                                    .html('<i class="glyphicon glyphicon-remove"></i> Sin resultados');
+                                var loading = angular.element('<i />')
+                                    .attr('ng-show','vm.typeahead.loading')
+                                    .addClass('glyphicon glyphicon-refresh');
+                                break;
+                            }
                         }
+
                 }
 
                 angular.forEach(scope.field.attributes, (value, attribute) => {
@@ -38,6 +50,12 @@ angular.module('sacpApp')
 
                 newElement.removeAttr("dynamic-attributes");
                 newElement.insertBefore(element);
+                if(noResults) {
+                    noResults.insertAfter(newElement);
+                }
+                if(loading) {
+                    loading.insertAfter(newElement);
+                }
                 element.remove();
 
                 $compile(newElement)(scope);
