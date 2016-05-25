@@ -86,3 +86,8 @@ select.form-control {
 .dropdown-toggle {
     cursor: pointer;
 }
+
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: scroll;
+}

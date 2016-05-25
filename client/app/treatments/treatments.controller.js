@@ -33,6 +33,12 @@
                 section: 'disease',
                 template : 'lite'
             };
+
+            this.autoformPatient = {
+                entity : 'treatments',
+                section: 'patient',
+                template : 'lite'
+            };
         }
 
         stepChange(activeIndex) {

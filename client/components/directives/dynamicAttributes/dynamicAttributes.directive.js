@@ -5,7 +5,7 @@ angular.module('sacpApp')
         return {
             restrict: 'A',
             terminal: true,
-            priority: 1000,
+            priority: 599,
             require: "^form",
             link: function (scope, element, attrs, formController) {
                 var newElement = element.clone();
@@ -33,11 +33,12 @@ angular.module('sacpApp')
                                     .attr('typeahead-no-results', 'vm.typeahead.noresults')
                                     .attr('typeahead-min-length', 2);
                                 var noResults = angular.element('<div />')
+                                    .addClass('effect-fade')
                                     .attr('ng-show','vm.typeahead.noresults')
                                     .html('<i class="glyphicon glyphicon-remove"></i> Sin resultados');
-                                var loading = angular.element('<i />')
-                                    .attr('ng-show','vm.typeahead.loading')
-                                    .addClass('glyphicon glyphicon-refresh');
+                                // var loading = angular.element('<i />')
+                                //     .attr('ng-show','vm.typeahead.loading')
+                                //     .addClass('glyphicon glyphicon-refresh effect-fade');
                                 break;
                             }
                         }
@@ -52,10 +53,12 @@ angular.module('sacpApp')
                 newElement.insertBefore(element);
                 if(noResults) {
                     noResults.insertAfter(newElement);
+                    $compile(noResults)(scope)
                 }
-                if(loading) {
-                    loading.insertAfter(newElement);
-                }
+                // if(loading) {
+                //     loading.insertAfter(newElement);
+                //     $compile(loading)(scope)
+                // }
                 element.remove();
 
                 $compile(newElement)(scope);

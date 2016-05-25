@@ -1,73 +1,71 @@
 <div class="row">
     <div class="col-md-9">
         <div class="panel">
-                <multi-step-container steps="vm.steps" class="sliding-steps simple-prev-next" search-id="'step'"
-                                      on-cancel="vm.cancel()" on-finish="vm.finish()"
-                                      on-step-change="vm.stepChange($getActiveIndex())">
-                    <head>
+            <multi-step-container steps="vm.steps" class="sliding-steps simple-prev-next" search-id="'step'"
+                                  on-cancel="vm.cancel()" on-finish="vm.finish()"
+                                  on-step-change="vm.stepChange($getActiveIndex())">
+                <head>
 
-                        <!--Nav-->
-                        <ul class="wz-nav-off wz-icon-inline wz-classic wz-5">
-                            <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==1)}">
-                                <a href ng-click="$setActiveIndex(1)">
-                                    <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i class="fa fa-user"></i></span>
-                                    Paciente
-                                </a>
-                            </li>
-                            <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==2)}">
-                                <a href ng-click="$setActiveIndex(2)">
+                    <!--Nav-->
+                    <ul class="wz-nav-off wz-icon-inline wz-classic wz-5">
+                        <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==1)}">
+                            <a href ng-click="$setActiveIndex(1)">
+                                <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i class="fa fa-user"></i></span>
+                                Paciente
+                            </a>
+                        </li>
+                        <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==2)}">
+                            <a href ng-click="$setActiveIndex(2)">
                                 <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i
                                     class="flaticon-spotlight"></i></span> Enfermedad
-                                </a>
-                            </li>
-                            <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==3)}">
-                                <a href ng-click="$setActiveIndex(3)">
+                            </a>
+                        </li>
+                        <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==3)}">
+                            <a href ng-click="$setActiveIndex(3)">
                                 <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i
                                     class="flaticon-medical-briefcase"></i></span> Tratamiento
-                                </a>
-                            </li>
-                            <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==4)}">
-                                <a href ng-click="$setActiveIndex(4)">
+                            </a>
+                        </li>
+                        <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==4)}">
+                            <a href ng-click="$setActiveIndex(4)">
                                     <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i
                                         class="flaticon-medicine-bottle"></i></span>
-                                    Drogas
-                                </a>
-                            </li>
-                            <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==4)}">
-                                <a href ng-click="$setActiveIndex(5)">
+                                Drogas
+                            </a>
+                        </li>
+                        <li class="col-xs-2 bg-primary ng-animate-disabled" ng-class="{'active':($getActiveIndex()==4)}">
+                            <a href ng-click="$setActiveIndex(5)">
                                     <span class="icon-wrap icon-wrap-xs bg-trans-dark"><i
                                         class="fa fa-check-square-o"></i></span>
-                                    Confirmar
-                                </a>
-                            </li>
-                        </ul>
-                        <!--Progress bar-->
-                        <div class="progress progress-md progress-striped active">
-                            <div class="progress-bar progress-bar progress-bar-info"
-                                 style="width: {{vm.progressBarWidth}}"></div>
-                        </div>
+                                Confirmar
+                            </a>
+                        </li>
+                    </ul>
+                    <!--Progress bar-->
+                    <div class="progress progress-md progress-striped active">
+                        <div class="progress-bar progress-bar progress-bar-info"
+                             style="width: {{vm.progressBarWidth}}"></div>
+                    </div>
 
-                    </head>
+                </head>
 
-                    <!--Form-->
-                    <form class="mar-top form-horizontal" novalidate>
-                        <div class="panel-body">
-                            <step-container></step-container>
-                        </div>
+                <div class="panel-body">
+                    <step-container></step-container>
+                </div>
 
 
-                        <!--Footer button-->
-                        <div class="panel-footer text-right">
-                            <div class="box-inline">
-                                <button class="btn btn-info" ng-disabled="$isFirst()" ng-click="$previousStep()">Atras
-                                </button>
-                                <button class="btn btn-info" ng-disabled="$isLast()" ng-click="$nextStep()">Siguiente
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <!--Footer button-->
+                <div class="panel-footer text-right">
+                    <div class="box-inline">
+                        <button class="btn btn-info" ng-disabled="$isFirst()" ng-click="$previousStep()">Atras
+                        </button>
+                        <button class="btn btn-info" ng-disabled="$isLast()" ng-click="$nextStep()">Siguiente
+                        </button>
+                    </div>
+                </div>
 
-                </multi-step-container>
+
+            </multi-step-container>
         </div>
 
     </div>

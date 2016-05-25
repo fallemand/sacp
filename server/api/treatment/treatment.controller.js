@@ -130,6 +130,22 @@ export function metadata(req, res) {
         },
         fields: [
             {
+                'title': 'Paciente',
+                'field' : 'patient',
+                'type': 'typeahead',
+                'descField' : 'name',
+                'remoteApi' : 'patients',
+                'show': true,
+                'controlType' : 'object',
+                'icon': 'fa fa-user-md',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
                 'title': 'Diagnóstico Topográfico',
                 'field' : 'disease.topographicDiagnosis',
                 'type': 'typeahead',
