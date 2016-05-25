@@ -162,8 +162,8 @@
                 });
         }
 
-        loadTypeAhead(api, viewvalue) {
-            return this.$http.get('/api/' + api + '?code=^' + viewvalue)
+        loadTypeAhead(api, viewvalue, searchField) {
+            return this.$http.get('/api/' + api + '?' + searchField + '=^' + viewvalue)
                 .then(response => {
                     return response.data;
                 })

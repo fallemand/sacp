@@ -40,6 +40,13 @@ var PatientSchema = new Schema({
     }
 });
 
+PatientSchema.virtual('desc').get(function() {
+    return this.name + ' - ' + this.dni;
+});
+
+PatientSchema.set('toJSON', { virtuals: true });
+PatientSchema.set('toObject', { virtuals: true });
+
 PatientSchema
     .path('dni')
     .validate(function (value, respond) {

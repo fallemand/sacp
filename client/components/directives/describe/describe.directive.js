@@ -3,7 +3,6 @@
 angular.module('sacpApp')
     .directive('describe', function ($http) {
         return {
-            templateUrl: 'components/directives/describe/describe.html',
             restrict: 'A',
             scope: {
                 data: '='
@@ -12,10 +11,15 @@ angular.module('sacpApp')
                 $http.get('/api/' + attrs.entity + '/metadata')
                     .then(response => {
                         var fields = response.data.fields;
-                        for (var field in fields) {
-                            element.append('<dt>' + fields[field].title + '</dt>');
-                            element.append('<dd>' + scope.data[fields[field].field] + '</dd>');
-                        }
+                        angular.forEach(fields, function(field, key){
+                            element.append('<dt>' + field.title + '</dt>');
+                            if(field.controlType == 'object') {
+                                element.append('<dd>' + scope.data[field.field][field.descField] + '</dd>');
+                            }
+                            else {
+                                element.append('<dd>' + scope.data[field.field] + '</dd>');
+                            }
+                        });
                     })
                     .catch(err => {
                         ngToast.create({

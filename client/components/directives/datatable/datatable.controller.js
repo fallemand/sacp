@@ -15,7 +15,8 @@
             });
             this.tableParams = new NgTableParams({}, {
                 getData: (function ($defer, params) {
-                    $http.get('/api/' + this.parameters.entity + '?' + this.parameters.filters).then(response => {
+                    var filters = (this.parameters.filters) ? '?' + this.parameters.filters : '';
+                    $http.get('/api/' + this.parameters.entity + filters).then(response => {
                         $defer.resolve(response.data);
                     });
                 }).bind(this)

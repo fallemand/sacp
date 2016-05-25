@@ -133,8 +133,9 @@ export function metadata(req, res) {
                 'title': 'Paciente',
                 'field' : 'patient',
                 'type': 'typeahead',
-                'descField' : 'name',
+                'descField' : 'desc',
                 'remoteApi' : 'patients',
+                'searchField' : 'name',
                 'show': true,
                 'controlType' : 'object',
                 'icon': 'fa fa-user-md',
@@ -150,6 +151,7 @@ export function metadata(req, res) {
                 'field' : 'disease.topographicDiagnosis',
                 'type': 'typeahead',
                 'descField' : 'desc',
+                'searchField' : 'code',
                 'remoteApi' : 'cie10-diseases',
                 'show': true,
                 'controlType' : 'object',
@@ -184,13 +186,13 @@ export function metadata(req, res) {
                 'controlType' : 'input',
                 'attributes' : {
                     required: true,
-                    'max' : '6',
+                    'max' : '5',
                     'min' : 0
                 },
                 'validations' : {
                     'required' : '',
                     'number' : '',
-                    'max' : '6',
+                    'max' : '5',
                     'min' : 0
                 }
             },

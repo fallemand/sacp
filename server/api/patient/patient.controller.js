@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Patient from './patient.model';
+import * as utils from '../../components/utility';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -61,7 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Patients
 export function index(req, res) {
-    return Patient.find()
+    return Patient.find(utils.processQuery(req.query))
         .populate('agreementType')
         .exec()
         .then(respondWithResult(res))

@@ -13,7 +13,7 @@ describe('Directive: dynamicAttributes', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<dynamic-attributes></dynamic-attributes>');
+    element = angular.element('<autoinput></autoinput>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('this is the dynamicAttributes directive');
   }));

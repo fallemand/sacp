@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sacpApp')
-    .directive('dynamicAttributes', [ "$compile", function ($compile) {
+    .directive('autoinput', [ "$compile", function ($compile) {
         return {
             restrict: 'A',
             terminal: true,
@@ -12,7 +12,7 @@ angular.module('sacpApp')
                 newElement
                     .addClass('form-control')
                     .attr('name', scope.field.field)
-                    .removeAttr('dynamic-attributes');
+                    .removeAttr('autoinput');
                 switch (scope.field.controlType) {
                     case 'input' :
                         newElement.attr('placeholder', scope.field.title);
@@ -28,7 +28,7 @@ angular.module('sacpApp')
                         else {
                             if(scope.field.type == 'typeahead') {
                                 newElement
-                                    .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue)')
+                                    .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue, field.searchField)')
                                     .attr('typeahead-loading', 'vm.typeahead.loading')
                                     .attr('typeahead-no-results', 'vm.typeahead.noresults')
                                     .attr('typeahead-min-length', 2);
@@ -49,7 +49,7 @@ angular.module('sacpApp')
                     newElement.attr(attribute, value);
                 });
 
-                newElement.removeAttr("dynamic-attributes");
+                newElement.removeAttr("autoinput");
                 newElement.insertBefore(element);
                 if(noResults) {
                     noResults.insertAfter(newElement);

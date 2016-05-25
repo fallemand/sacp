@@ -170,9 +170,9 @@ AgreementType.find({}).remove()
                 .then(() => {
                     AgreementType.findOne({name: 'DOSEP'}, function (err, doc) {
                         Patient.create({
-                            name: 'Juan Carlos',
-                            email: 'juancarlos@hotmail.com',
-                            dni: '2',
+                            name: 'Fran Carvallo',
+                            email: 'bgbgyu@hotmail.com',
+                            dni: '12589698',
                             socialInsuranceNumber: '23425456',
                             address: 'Hidalgo Palacios 7542',
                             phone: '+43532656565',
@@ -184,9 +184,9 @@ AgreementType.find({}).remove()
                     });
                     AgreementType.findOne({name: 'Carenciado'}, function (err, doc) {
                         Patient.create({
-                            name: 'Juan Carlos',
-                            email: 'juancarlos@hotmail.com',
-                            dni: '1',
+                            name: 'Manuel Sanchez',
+                            email: 'asdasd@hotmail.com',
+                            dni: '36142871',
                             socialInsuranceNumber: '23425456',
                             address: 'Hidalgo Palacios 7542',
                             phone: '+43532656565',
@@ -200,7 +200,7 @@ AgreementType.find({}).remove()
                         Patient.create({
                             name: 'Juan Carlos',
                             email: 'juancarlos@hotmail.com',
-                            dni: '3',
+                            dni: '13658987',
                             socialInsuranceNumber: '23425456',
                             address: 'Hidalgo Palacios 7542',
                             phone: '+43532656565',
