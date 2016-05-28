@@ -1,4 +1,4 @@
-<form class="form form-short" name="vm.form" ng-hide="vm.success" ng-disabled="vm.isSaving" ng-submit="vm.submit()"
+<form class="form form-short" name="vm.autoform.form" ng-hide="vm.success" ng-disabled="vm.autoform.isSaving" ng-submit="vm.submit()"
       novalidate autocomplete="off">
     <div class="row">
         <div class="col-md-10">
@@ -7,9 +7,9 @@
             </div>
         </div>
         <div class="col-md-2 text-center">
-            <button class="btn btn-primary btn-block" ng-disabled="vm.isSaving" type="submit">Registrarse
+            <button class="btn btn-primary btn-block" ng-disabled="vm.autoform.isSaving" type="submit">Registrarse
             </button>
-            <a class="btn btn-default btn-block" ng-disabled="vm.isSaving"
+            <a class="btn btn-default btn-block" ng-disabled="vm.autoform.isSaving"
                ng-click="vm.resetForm()">Cancelar</a>
         </div>
     </div>

@@ -31,7 +31,8 @@ angular.module('sacpApp')
                                     .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue, field.searchField)')
                                     .attr('typeahead-loading', 'vm.typeahead.loading')
                                     .attr('typeahead-no-results', 'vm.typeahead.noresults')
-                                    .attr('typeahead-min-length', 2);
+                                    .attr('typeahead-min-length', 2)
+                                    .attr('typeahead-editable', 'false');
                                 var noResults = angular.element('<div />')
                                     .addClass('effect-fade')
                                     .attr('ng-show','vm.typeahead.noresults')

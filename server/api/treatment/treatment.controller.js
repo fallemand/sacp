@@ -117,7 +117,7 @@ export function metadata(req, res) {
             },
             treatment : {
                 title: 'Tratamiento',
-                fields: ['treatments']
+                fields: ['treatment.type', 'treatment.schema', 'treatment.expectedDate', 'treatment.height', 'treatment.weight', 'treatment.bodySurface', 'treatment.actualCicle', 'treatment.cyclesQuantity']
             },
             drugs : {
                 title: 'Drogas',

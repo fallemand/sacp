@@ -6,8 +6,8 @@
         constructor($scope, $http, ngToast) {
             this.$scope = $scope;
             this.autoform = $scope.parameters;
-            this.isSaving = false;
-            this.submitted = false;
+            this.autoform.isSaving = false;
+            this.autoform.submitted = false;
             this.$http = $http;
             this.errors = {};
             this.typeahead = {};
@@ -42,9 +42,6 @@
         }
 
         loadAutoForm() {
-            this.autoform.form = this.form;
-            this.autoform.isSaving = this.isSaving;
-            this.autoform.submitted = this.submitted;
             this.autoform.object = (this.autoform.object) ? this.autoform.object : {};
             this.autoform.submit = (function() {
                 this.submit();
@@ -76,10 +73,10 @@
         }
 
         submit() {
-            this.submitted = true;
+            this.autoform.submitted = true;
 
             if (this.form.$valid) {
-                this.isSaving = true;
+                this.autoform.isSaving = true;
                 if (this.autoform.object._id) {
                     this.update();
                 }
@@ -134,12 +131,12 @@
                     content: err.message
                 });
             }
-            this.isSaving = false;
+            this.autoform.isSaving = false;
         }
 
         resetForm() {
-            this.submitted = false;
-            this.isSaving = false;
+            this.autoform.submitted = false;
+            this.autoform.isSaving = false;
             this.autoform.object = angular.copy({});
             this.form.$setPristine();
             this.form.$setUntouched();

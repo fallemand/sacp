@@ -7,7 +7,8 @@
             this.steps = [
                 {
                     templateUrl: 'app/treatments/steps/_patient.html',
-                    title: 'Get the source'
+                    title: 'Get the source',
+                    hasForm: true
                 },
                 {
                     templateUrl: 'app/treatments/steps/_disease.html',
@@ -16,33 +17,42 @@
                 },
                 {
                     templateUrl: 'app/treatments/steps/_treatment.html',
-                    title: 'Create your multi step forms / wizzards'
+                    title: 'Create your multi step forms / wizzards',
+                    hasForm: true
                 },
                 {
                     templateUrl: 'app/treatments/steps/_drugs.html',
-                    title: 'Create your multi step forms / wizzards'
+                    title: 'Create your multi step forms / wizzards',
+                    hasForm: true
                 },
                 {
                     templateUrl: 'app/treatments/steps/_confirm.html',
-                    title: 'Create your multi step forms / wizzards'
+                    title: 'Create your multi step forms / wizzards',
+                    hasForm: true
                 }
             ];
 
             this.autoformDisease = {
-                entity : 'treatments',
+                entity: 'treatments',
                 section: 'disease',
-                template : 'lite'
+                template: 'lite'
             };
 
             this.autoformPatient = {
-                entity : 'treatments',
+                entity: 'treatments',
                 section: 'patient',
-                template : 'lite'
+                template: 'lite'
+            };
+
+            this.autoformTreatment = {
+                entity: 'treatments',
+                section: 'treatment',
+                template: 'lite'
             };
         }
 
         stepChange(activeIndex) {
-            this.progressBarWidth = (100 / this.steps.length) * activeIndex  + '%';
+            this.progressBarWidth = (100 / this.steps.length) * activeIndex + '%';
         }
 
         cancel() {

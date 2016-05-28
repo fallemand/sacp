@@ -1,11 +1,11 @@
-<fieldset ng-disabled="vm.isSaving">
+<fieldset ng-disabled="vm.autoform.isSaving">
     <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
-         ng-class="{ 'has-success': vm.form[field.field].$valid && (vm.form[field.field].$dirty || vm.submitted),
-                                            'has-error': vm.form[field.field].$invalid && (vm.form[field.field].$dirty || vm.submitted)}">
+         ng-class="{ 'has-success': vm.autoform.form[field.field].$valid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted),
+                                            'has-error': vm.autoform.form[field.field].$invalid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted)}">
         <label class="col-sm-3 control-label">{{field.title}}</label>
         <div class="col-sm-8 mar-btm">
             <ng-include src="'/components/directives/autoform/templates/partials/input.html'"></ng-include>
+            <ng-include src="'/components/directives/autoform/templates/partials/help-block.html'"></ng-include>
         </div>
-        <ng-include src="'/components/directives/autoform/templates/partials/help-block.html'"></ng-include>
     </div>
 </fieldset>
