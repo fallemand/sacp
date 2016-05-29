@@ -9,6 +9,9 @@ import User from '../api/user/user.model';
 import Patient from '../api/patient/patient.model';
 import AgreementType from '../api/agreement-type/agreement-type.model';
 import Cie10Disease from '../api/cie10-disease/cie10-disease.model';
+import TreatmentType from '../api/treatment-type/treatment-type.model';
+import DrugType from '../api/drug-type/drug-type.model';
+
 
 Thing.find({}).remove()
     .then(() => {
@@ -40,6 +43,26 @@ Thing.find({}).remove()
             info: 'Easily deploy your app to Heroku or Openshift with the heroku ' +
             'and openshift subgenerators'
         });
+    });
+
+
+TreatmentType.find({}).remove()
+    .then(() => {
+        TreatmentType.create({
+            name: 'Adyuvante'
+        }, {
+            name: 'Neo-Adyuvante'
+        }, {
+            name: 'Avanzado'
+        })
+    });
+DrugType.find({}).remove()
+    .then(() => {
+        DrugType.create({
+            name: 'Ampolla'
+        }, {
+            name: 'Comprimido'
+        })
     });
 
 User.find({}).remove()

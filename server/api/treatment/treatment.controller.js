@@ -121,7 +121,7 @@ export function metadata(req, res) {
             },
             drugs : {
                 title: 'Drogas',
-                fields: ['drugs']
+                fields: ['drugs.name', 'drugs.tradeName', 'drugs.type', 'drugs.presentation', 'drugs.quantity']
             },
             confirm : {
                 title: 'Confirmar',
@@ -143,7 +143,8 @@ export function metadata(req, res) {
                     required: true
                 },
                 'validations' : {
-                    'required' : ''
+                    'required' : '',
+                    'editable' : ''
                 }
             },
             {
@@ -317,7 +318,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType' : 'input',
-                'icon': 'fa fa-envelope',
+                'icon': 'flaticon-chemistry-lab-instrument-1',
                 'attributes' : {
                     required: true
                 },
@@ -331,21 +332,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType' : 'input',
-                'icon': 'fa fa-envelope',
-                'attributes' : {
-                    required: true
-                },
-                'validations' : {
-                    'required' : ''
-                }
-            },
-            {
-                'title': 'Presentación',
-                'field' : 'drugs.presentation',
-                'type': 'text',
-                'show': true,
-                'controlType' : 'input',
-                'icon': 'fa fa-envelope',
+                'icon': 'flaticon-medicine-bottle',
                 'attributes' : {
                     required: true
                 },
@@ -360,8 +347,22 @@ export function metadata(req, res) {
                 'show': true,
                 'descField' : 'name',
                 'remoteApi' : 'drug-types',
-                'icon': 'fa fa-credit-card',
+                'icon': 'flaticon-open-pill',
                 'controlType' : 'object',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
+            },
+            {
+                'title': 'Presentación',
+                'field' : 'drugs.presentation',
+                'type': 'text',
+                'show': true,
+                'controlType' : 'input',
+                'icon': 'flaticon-bottle-of-chemical-elements',
                 'attributes' : {
                     required: true
                 },
@@ -372,9 +373,9 @@ export function metadata(req, res) {
             {
                 'title': 'Cantidad',
                 'field' : 'drugs.quantity',
-                'type': 'text',
+                'type': 'number',
                 'show': true,
-                'icon': 'fa fa-credit-card',
+                'icon': 'fa fa-sort-numeric-asc',
                 'controlType' : 'input',
                 'attributes' : {
                     required: true

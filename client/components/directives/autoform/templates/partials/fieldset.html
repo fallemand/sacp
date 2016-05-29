@@ -3,7 +3,7 @@
          ng-class="{ 'has-success': vm.autoform.form[field.field].$valid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted),
                                             'has-error': vm.autoform.form[field.field].$invalid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted)}">
         <div class="input-group">
-            <div ng-if="vm.autoform.inputIcons" class="input-group-addon">
+            <div ng-if="vm.autoform.inputIcons" class="input-group-addon" uib-tooltip="{{field.title}}" tooltip-append-to-body="true">
                 <i ng-if="field.icon" class="{{field.icon}}"></i>
                 <span ng-if="field.iconText">{{field.iconText}}</span>
             </div>

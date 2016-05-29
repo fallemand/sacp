@@ -4,6 +4,7 @@
     class TreatmentsComponent {
         constructor() {
             this.message = 'Hello';
+            this.object = {};
             this.steps = [
                 {
                     templateUrl: 'app/treatments/steps/_patient.html',
@@ -35,11 +36,13 @@
             this.autoformDisease = {
                 entity: 'treatments',
                 section: 'disease',
+                object: this.object,
                 template: 'lite'
             };
 
             this.autoformPatient = {
                 entity: 'treatments',
+                object: this.object,
                 section: 'patient',
                 template: 'lite'
             };
@@ -47,7 +50,33 @@
             this.autoformTreatment = {
                 entity: 'treatments',
                 section: 'treatment',
+                object: this.object,
                 template: 'lite'
+            };
+
+            this.autoformDrugs = {
+                entity: 'treatments',
+                section: 'drugs',
+                template: 'short',
+                object: this.object,
+                formGroupClass : 'col-md-4',
+                inputIcons : true
+            };
+
+            this.drugsTable = {
+                entity: 'treatments',
+                section: 'drugs',
+                actions: ['view', 'modify', 'delete'],
+                initEvent: (function (table) {
+                    this.patientsTable = table;
+                }).bind(this),
+                reloadEvent: (function () {
+                    this.patientsTable.reload();
+                }).bind(this),
+                modifyEvent: (function (object) {
+                    this.showPatientForm = true;
+                    this.autoform.object = object;
+                }).bind(this)
             };
         }
 

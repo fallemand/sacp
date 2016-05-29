@@ -67,6 +67,8 @@
                     return 'No parece un Email válido';
                 case 'number' :
                     return 'No parece un número válido';
+                case 'editable' :
+                    return 'Seleccione un elemento';
                 case 'mongoose' :
                     return this.errors[field];
             }
