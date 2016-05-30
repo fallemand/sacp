@@ -231,7 +231,7 @@ export function metadata(req, res) {
             {
                 'title': 'Fecha probable de tratamiento',
                 'field' : 'treatment.expectedDate',
-                'type': 'text',
+                'type': 'date',
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-home',
