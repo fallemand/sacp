@@ -67,7 +67,7 @@
                 case 'number' :
                     return 'No parece un número válido';
                 case 'editable' :
-                    return 'Seleccione un elemento';
+                    return 'Sin resultados';
                 case 'mongoose' :
                     return this.errors[field];
             }

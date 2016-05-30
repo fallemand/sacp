@@ -63,6 +63,13 @@
                 inputIcons : true
             };
 
+            this.autoformConfirm = {
+                entity: 'treatments',
+                section: 'confirm',
+                object: this.object,
+                template: 'lite'
+            };
+
             this.drugsTable = {
                 entity: 'treatments',
                 section: 'drugs',

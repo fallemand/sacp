@@ -3,3 +3,5 @@
 <select ng-if="field.controlType == 'object' && field.type == 'select'" ng-model="vm.$scope.object[field.field]" autoinput>
     <option value="">Seleccionar</option>
 </select>
+
+<textarea ng-if="field.controlType == 'textarea'" ng-model="vm.$scope.object[field.field]" autoinput></textarea>

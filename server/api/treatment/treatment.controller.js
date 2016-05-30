@@ -387,12 +387,13 @@ export function metadata(req, res) {
             {
                 'title': 'Observaciones',
                 'field' : 'observation',
-                'type': 'tel',
+                'type': 'text',
                 'show': true,
-                'controlType' : 'input',
+                'controlType' : 'textarea',
                 'icon': 'fa fa-phone',
                 'attributes' : {
-                    required: true
+                    required: true,
+                    rows: 4
                 },
                 'validations' : {
                     'required' : ''

@@ -18,6 +18,9 @@ angular.module('sacpApp')
                         newElement.attr('placeholder', scope.field.title);
                         newElement.attr('type', scope.field.type);
                         break;
+                    case 'textarea' :
+                        newElement.attr('placeholder', scope.field.title);
+                        break;
                     case 'object' :
                         if(scope.field.type == 'select') {
                             newElement
@@ -33,13 +36,6 @@ angular.module('sacpApp')
                                     .attr('typeahead-no-results', 'vm.typeahead.noresults')
                                     .attr('typeahead-min-length', 2)
                                     .attr('typeahead-editable', 'false');
-                                var noResults = angular.element('<div />')
-                                    .addClass('effect-fade')
-                                    .attr('ng-show','vm.typeahead.noresults')
-                                    .html('<i class="glyphicon glyphicon-remove"></i> Sin resultados');
-                                // var loading = angular.element('<i />')
-                                //     .attr('ng-show','vm.typeahead.loading')
-                                //     .addClass('glyphicon glyphicon-refresh effect-fade');
                                 break;
                             }
                         }
@@ -52,14 +48,6 @@ angular.module('sacpApp')
 
                 newElement.removeAttr("autoinput");
                 newElement.insertBefore(element);
-                if(noResults) {
-                    noResults.insertAfter(newElement);
-                    $compile(noResults)(scope)
-                }
-                // if(loading) {
-                //     loading.insertAfter(newElement);
-                //     $compile(loading)(scope)
-                // }
                 element.remove();
 
                 $compile(newElement)(scope);
