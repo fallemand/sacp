@@ -8,7 +8,8 @@ angular.module('sacpApp')
         controller: 'AutoFormController',
         controllerAs: 'vm',
         scope: {
-            parameters: '='
+            parameters: '=',
+            object: '='
         }
     };
   });

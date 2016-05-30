@@ -2,10 +2,10 @@
 
 class PatientsController {
 
-
     constructor($http, ngToast) {
         this.showPatientForm = false;
         this.patientsTable;
+        this.object = {};
 
         this.patientsTableParamenters = {
             entity: 'patients',
@@ -18,7 +18,8 @@ class PatientsController {
             }).bind(this),
             modifyEvent: (function (object) {
                 this.showPatientForm = true;
-                this.autoform.object = object;
+                this.object = object;
+                this.showPatientForm = true;
             }).bind(this)
         };
 

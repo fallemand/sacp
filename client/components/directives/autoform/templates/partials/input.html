@@ -1,5 +1,5 @@
-<input ng-if="field.controlType == 'input' || field.type == 'typeahead'" ng-model="vm.autoform.object[field.field]" autoinput>
+<input ng-if="field.controlType == 'input' || field.type == 'typeahead'" ng-model="vm.$scope.object[field.field]" autoinput>
 
-<select ng-if="field.controlType == 'object' && field.type == 'select'" ng-model="vm.autoform.object[field.field]" autoinput>
+<select ng-if="field.controlType == 'object' && field.type == 'select'" ng-model="vm.$scope.object[field.field]" autoinput>
     <option value="">Seleccionar</option>
 </select>

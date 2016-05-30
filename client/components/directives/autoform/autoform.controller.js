@@ -42,7 +42,6 @@
         }
 
         loadAutoForm() {
-            this.autoform.object = (this.autoform.object) ? this.autoform.object : {};
             this.autoform.submit = (function() {
                 this.submit();
             }).bind(this);
@@ -77,9 +76,9 @@
         submit() {
             this.autoform.submitted = true;
 
-            if (this.form.$valid) {
+            if (this.autoform.form.$valid) {
                 this.autoform.isSaving = true;
-                if (this.autoform.object._id) {
+                if (this.$scope.object._id) {
                     this.update();
                 }
                 else {
@@ -90,7 +89,7 @@
         }
 
         add() {
-            this.$http.post('/api/' + this.autoform.entity, this.autoform.object).then(() => {
+            this.$http.post('/api/' + this.autoform.entity, this.$scope.object).then(() => {
                     this.resetForm();
                     this.ngToast.create(this.metadata.name + ' agregado con éxito!');
                     this.autoform.reloadEvent();
@@ -102,12 +101,12 @@
 
         update() {
             //Fix sub-object changes
-            for (var attribute in this.autoform.object) {
-                if (this.autoform.object[attribute].hasOwnProperty('_id')) {
-                    this.autoform.object[attribute] = this.autoform.object[attribute]._id;
+            for (var attribute in this.$scope.object) {
+                if (this.$scope.object[attribute].hasOwnProperty('_id')) {
+                    this.$scope.object[attribute] = this.$scope.object[attribute]._id;
                 }
             }
-            this.$http.put('/api/' + this.autoform.entity + '/' + this.autoform.object._id, this.autoform.object).then(() => {
+            this.$http.put('/api/' + this.autoform.entity + '/' + this.$scope.object._id, this.$scope.object).then(() => {
                     this.resetForm();
                     this.ngToast.create(this.metadata.name + ' modificado con éxito!');
                     this.autoform.reloadEvent();
@@ -123,7 +122,7 @@
                 this.errors = {};
                 // Update validity of form fields that match the mongoose errors
                 angular.forEach(errors, (error, field) => {
-                    this.form[field].$setValidity('mongoose', false);
+                    this.autoform.form[field].$setValidity('mongoose', false);
                     this.errors[field] = error.message;
                 });
             }
@@ -139,9 +138,9 @@
         resetForm() {
             this.autoform.submitted = false;
             this.autoform.isSaving = false;
-            this.autoform.object = angular.copy({});
-            this.form.$setPristine();
-            this.form.$setUntouched();
+            this.$scope.object = angular.copy({});
+            this.autoform.form.$setPristine();
+            this.autoform.form.$setUntouched();
             if(this.autoform.resetEvent) {
                 this.autoform.resetEvent();
             }
@@ -151,7 +150,7 @@
             this.$http.get('/api/' + api)
                 .then(response => {
                     this[field] = response.data;
-                    this.autoform.object[field] = "";
+                    this.$scope.object[field] = "";
                 })
                 .catch(err => {
                     this.ngToast.create({
