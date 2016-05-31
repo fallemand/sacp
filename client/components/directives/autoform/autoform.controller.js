@@ -38,6 +38,10 @@
                     fields.push(value);
                 }
             });
+            if(fields[0].controlType == 'list') {
+                this.list = true;
+                return fields[0].fields;
+            }
             return fields;
         }
 
@@ -89,14 +93,19 @@
         }
 
         add() {
-            this.$http.post('/api/' + this.autoform.entity, this.$scope.object).then(() => {
-                    this.resetForm();
-                    this.ngToast.create(this.metadata.name + ' agregado con éxito!');
-                    this.autoform.reloadEvent();
-                })
-                .catch(err => {
-                    this.handleError(err);
-                });
+            if (!this.list) {
+                this.$http.post('/api/' + this.autoform.entity, this.$scope.object).then(() => {
+                        this.resetForm();
+                        this.ngToast.create(this.metadata.name + ' agregado con éxito!');
+                        this.autoform.reloadEvent();
+                    })
+                    .catch(err => {
+                        this.handleError(err);
+                    });
+            }
+            else {
+                this.$scope.object['drugs'].push(this.$scope.object['drugs' + 'aux']);
+            }
         }
 
         update() {

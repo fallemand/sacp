@@ -1,7 +1,15 @@
-<input ng-if="field.controlType == 'input' || field.type == 'typeahead'" ng-model="vm.$scope.object[field.field]" autoinput>
+<input ng-if="!vm.list && (field.controlType == 'input' || field.type == 'typeahead')" ng-model="vm.$scope.object[field.field]" autoinput>
 
-<select ng-if="field.controlType == 'object' && field.type == 'select'" ng-model="vm.$scope.object[field.field]" autoinput>
+<select ng-if="!vm.list && (field.controlType == 'object' && field.type == 'select')" ng-model="vm.$scope.object[field.field]" autoinput>
     <option value="">Seleccionar</option>
 </select>
 
-<textarea ng-if="field.controlType == 'textarea'" ng-model="vm.$scope.object[field.field]" autoinput></textarea>
+<textarea ng-if="!vm.list && (field.controlType == 'textarea')" ng-model="vm.$scope.object[field.field]" autoinput></textarea>
+
+<input ng-if="vm.list && (field.controlType == 'input' || field.type == 'typeahead')" ng-model="vm.$scope.object[field.field + 'aux']" autoinput>
+
+<select ng-if="vm.list && (field.controlType == 'object' && field.type == 'select')" ng-model="vm.$scope.object[field.field + 'aux']" autoinput>
+    <option value="">Seleccionar</option>
+</select>
+
+<textarea ng-if="vm.list && (field.controlType == 'textarea')" ng-model="vm.$scope.object[field.field + 'aux']" autoinput></textarea>

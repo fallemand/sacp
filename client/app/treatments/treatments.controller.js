@@ -57,6 +57,7 @@
             this.autoformDrugs = {
                 entity: 'treatments',
                 section: 'drugs',
+                type: 'list',
                 template: 'short',
                 object: this.object,
                 formGroupClass : 'col-md-4',
