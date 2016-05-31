@@ -121,7 +121,7 @@ export function metadata(req, res) {
             },
             drugs : {
                 title: 'Drogas',
-                fields: ['drugs.name', 'drugs.tradeName', 'drugs.type', 'drugs.presentation', 'drugs.quantity']
+                fields: ['drugs']
             },
             confirm : {
                 title: 'Confirmar',
@@ -313,76 +313,83 @@ export function metadata(req, res) {
                 }
             },
             {
-                'title': 'Droga',
-                'field' : 'drugs.name',
-                'type': 'text',
-                'show': true,
-                'controlType' : 'input',
-                'icon': 'flaticon-chemistry-lab-instrument-1',
-                'attributes' : {
-                    required: true
-                },
-                'validations' : {
-                    'required' : ''
-                }
-            },
-            {
-                'title': 'Nombre Comercial',
-                'field' : 'drugs.tradeName',
-                'type': 'text',
-                'show': true,
-                'controlType' : 'input',
-                'icon': 'flaticon-medicine-bottle',
-                'attributes' : {
-                    required: true
-                },
-                'validations' : {
-                    'required' : ''
-                }
-            },
-            {
-                'title': 'Tipo',
-                'field' : 'drugs.type',
-                'type': 'select',
-                'show': true,
-                'descField' : 'name',
-                'remoteApi' : 'drug-types',
-                'icon': 'flaticon-open-pill',
-                'controlType' : 'object',
-                'attributes' : {
-                    required: true
-                },
-                'validations' : {
-                    'required' : ''
-                }
-            },
-            {
-                'title': 'Presentación',
-                'field' : 'drugs.presentation',
-                'type': 'text',
-                'show': true,
-                'controlType' : 'input',
-                'icon': 'flaticon-bottle-of-chemical-elements',
-                'attributes' : {
-                    required: true
-                },
-                'validations' : {
-                    'required' : ''
-                }
-            },
-            {
-                'title': 'Cantidad',
-                'field' : 'drugs.quantity',
-                'type': 'number',
-                'show': true,
-                'icon': 'fa fa-sort-numeric-asc',
-                'controlType' : 'input',
-                'attributes' : {
-                    required: true
-                },
-                'validations' : {
-                    'required' : ''
-                }
+                'title': 'Drogas',
+                'field' : 'drugs',
+                'controlType' : 'list',
+                fields : [
+                    {
+                        'title': 'Droga',
+                        'field' : 'name',
+                        'type': 'text',
+                        'show': true,
+                        'controlType' : 'input',
+                        'icon': 'flaticon-chemistry-lab-instrument-1',
+                        'attributes' : {
+                            required: true
+                        },
+                        'validations' : {
+                            'required' : ''
+                        }
+                    },
+                    {
+                        'title': 'Nombre Comercial',
+                        'field' : 'tradeName',
+                        'type': 'text',
+                        'show': true,
+                        'controlType' : 'input',
+                        'icon': 'flaticon-medicine-bottle',
+                        'attributes' : {
+                            required: true
+                        },
+                        'validations' : {
+                            'required' : ''
+                        }
+                    },
+                    {
+                        'title': 'Tipo',
+                        'field' : 'type',
+                        'type': 'select',
+                        'show': true,
+                        'descField' : 'name',
+                        'remoteApi' : 'drug-types',
+                        'icon': 'flaticon-open-pill',
+                        'controlType' : 'object',
+                        'attributes' : {
+                            required: true
+                        },
+                        'validations' : {
+                            'required' : ''
+                        }
+                    },
+                    {
+                        'title': 'Presentación',
+                        'field' : 'presentation',
+                        'type': 'text',
+                        'show': true,
+                        'controlType' : 'input',
+                        'icon': 'flaticon-bottle-of-chemical-elements',
+                        'attributes' : {
+                            required: true
+                        },
+                        'validations' : {
+                            'required' : ''
+                        }
+                    },
+                    {
+                        'title': 'Cantidad',
+                        'field' : 'quantity',
+                        'type': 'number',
+                        'show': true,
+                        'icon': 'fa fa-sort-numeric-asc',
+                        'controlType' : 'input',
+                        'attributes' : {
+                            required: true
+                        },
+                        'validations' : {
+                            'required' : ''
+                        }
+                    }
+                ]
             },
             {
                 'title': 'Observaciones',

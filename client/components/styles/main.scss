@@ -80,7 +80,7 @@
 }
 
 select.form-control {
-    height: 28px;
+    height: 31px;
 }
 
 .dropdown-toggle {
@@ -91,4 +91,8 @@ select.form-control {
     max-height: 300px;
     overflow-y: scroll;
     min-width: 200px;
+}
+
+.form-control {
+    height: inherit;
 }
