@@ -73,13 +73,15 @@
 
             this.drugsTable = {
                 entity: 'treatments',
-                section: 'drugs',
+                field: 'drugs',
+                type: 'local',
+                list: this.object['drugs'],
                 actions: ['view', 'modify', 'delete'],
                 initEvent: (function (table) {
-                    this.patientsTable = table;
+                    this.drugsTable = table;
                 }).bind(this),
                 reloadEvent: (function () {
-                    this.patientsTable.reload();
+                    this.drugsTable.reload();
                 }).bind(this),
                 modifyEvent: (function (object) {
                     this.showPatientForm = true;

@@ -40,6 +40,7 @@
             });
             if(fields[0].controlType == 'list') {
                 this.list = true;
+                this.listfield = 'drugsaux';
                 return fields[0].fields;
             }
             return fields;
@@ -104,7 +105,11 @@
                     });
             }
             else {
+                if(!this.$scope.object['drugs']) {
+                    this.$scope.object['drugs'] = [];
+                }
                 this.$scope.object['drugs'].push(this.$scope.object['drugs' + 'aux']);
+                this.resetForm();
             }
         }
 

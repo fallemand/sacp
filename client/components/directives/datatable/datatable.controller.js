@@ -9,18 +9,30 @@
             this.parameters = $scope.parameters;
             this.$http = $http;
             $http.get('/api/' + this.parameters.entity + '/metadata').then(response => {
-                this.metadata = response.data;
+                if(this.parameters.field) {
+                    for(var field in response.data.fields) {
+                        if(response.data.fields[field].field == this.parameters.field) {
+                            this.metadata = response.data.fields[field];
+                        }
+                    }
+                }
                 this.cols = this.generateColsList(this.metadata, this.parameters);
                 this.loadedData = true;
             });
-            this.tableParams = new NgTableParams({}, {
-                getData: (function ($defer, params) {
-                    var filters = (this.parameters.filters) ? '?' + this.parameters.filters : '';
-                    $http.get('/api/' + this.parameters.entity + filters).then(response => {
-                        $defer.resolve(response.data);
-                    });
-                }).bind(this)
-            });
+            if(!this.parameters.type) {
+                this.tableParams = new NgTableParams({}, {
+                    getData: (function ($defer, params) {
+                        var filters = (this.parameters.filters) ? '?' + this.parameters.filters : '';
+                        $http.get('/api/' + this.parameters.entity + filters).then(response => {
+                            $defer.resolve(response.data);
+                        });
+                    }).bind(this)
+                });
+            }
+            else {
+                this.parameters.list = (this.parameters.list) ? this.parameters.list : [];
+                this.tableParams = new NgTableParams({}, {dataset: this.parameters.list});
+            }
             if(this.parameters.initEvent) {
                 this.parameters.initEvent(this.tableParams);
             }
