@@ -7,19 +7,13 @@ class PatientsController {
         this.patientsTable;
         this.object = {};
 
-        this.patientsTableParamenters = {
+        this.patientsTable = {
             entity: 'patients',
+            type: 'remote',
             actions: ['view', 'modify', 'delete'],
-            initEvent: (function (table) {
-                this.patientsTable = table;
-            }).bind(this),
-            reloadEvent: (function () {
-                this.patientsTable.reload();
-            }).bind(this),
             modifyEvent: (function (object) {
                 this.showPatientForm = true;
                 this.object = object;
-                this.showPatientForm = true;
             }).bind(this)
         };
 
@@ -32,7 +26,7 @@ class PatientsController {
                 this.showPatientForm = false;
             }).bind(this),
             reloadEvent: (function() {
-                this.patientsTable.reload();
+                this.patientsTable.ngtable.reload();
             }).bind(this)
         };
     }

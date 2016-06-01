@@ -98,7 +98,9 @@
                 this.$http.post('/api/' + this.autoform.entity, this.$scope.object).then(() => {
                         this.resetForm();
                         this.ngToast.create(this.metadata.name + ' agregado con éxito!');
-                        this.autoform.reloadEvent();
+                        if (this.autoform.reloadEvent()) {
+                            this.autoform.reloadEvent();
+                        }
                     })
                     .catch(err => {
                         this.handleError(err);
@@ -108,8 +110,10 @@
                 if(!this.$scope.object['drugs']) {
                     this.$scope.object['drugs'] = [];
                 }
-                this.$scope.object['drugs'].push(this.$scope.object['drugs' + 'aux']);
-                this.resetForm();
+                this.$scope.object['drugs'].push(angular.copy(this.$scope.object['drugs' + 'aux']));
+                if (this.autoform.reloadEvent()) {
+                    this.autoform.reloadEvent();
+                }
             }
         }
 

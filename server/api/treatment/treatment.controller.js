@@ -103,7 +103,7 @@ export function destroy(req, res) {
 
 // Get metadata
 export function metadata(req, res) {
-    res.json({
+    var metadata = {
         name: 'tratamiento',
         pluralName: 'Tratamientos',
         sections: {
@@ -408,5 +408,19 @@ export function metadata(req, res) {
             }
         ]
 
-    });
+    };
+    if(Object.keys(req.query).length > 0) {
+        for(var attribute in req.query){
+            if(attribute == 'field') {
+                for(var field in metadata.fields){
+                    if(metadata.fields[field].field==req.query[attribute]) {
+                        res.json(metadata.fields[field]);
+                    }
+                }
+            }
+        }
+    }
+    else {
+        res.json(metadata);
+    }
 }

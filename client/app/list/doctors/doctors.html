@@ -8,14 +8,14 @@
                         <uib-tab-heading>
                             <i class="flaticon-doctor-with-stethoscope"></i> Médicos Activos
                         </uib-tab-heading>
-                        <datatable parameters="vm.activeDoctorsTableParameters"></datatable>
+                        <datatable parameters="vm.activeDoctorsTable"></datatable>
                     </uib-tab>
 
                     <uib-tab index="1" classes="fade">
                         <uib-tab-heading>
                             Solicitudes <span class="badge badge-warning">{{vm.countNotActiveUsers}}</span>
                         </uib-tab-heading>
-                        <datatable parameters="vm.notActiveDoctorsTableParameters"></datatable>
+                        <datatable parameters="vm.notActiveDoctorsTable"></datatable>
                     </uib-tab>
 
                 </uib-tabset>

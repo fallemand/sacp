@@ -8,7 +8,8 @@ angular.module('sacpApp')
             controller: 'DatatableController',
             controllerAs: 'vm',
             scope: {
-                parameters: '='
+                parameters: '=',
+                object: '='
             }
         };
     });

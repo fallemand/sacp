@@ -61,7 +61,10 @@
                 template: 'short',
                 object: this.object,
                 formGroupClass : 'col-md-4',
-                inputIcons : true
+                inputIcons : true,
+                reloadEvent: (function() {
+                    this.drugsTable.ngtable.reload();
+                }).bind(this)
             };
 
             this.autoformConfirm = {
@@ -73,20 +76,9 @@
 
             this.drugsTable = {
                 entity: 'treatments',
-                field: 'drugs',
                 type: 'local',
-                list: this.object['drugs'],
-                actions: ['view', 'modify', 'delete'],
-                initEvent: (function (table) {
-                    this.drugsTable = table;
-                }).bind(this),
-                reloadEvent: (function () {
-                    this.drugsTable.reload();
-                }).bind(this),
-                modifyEvent: (function (object) {
-                    this.showPatientForm = true;
-                    this.autoform.object = object;
-                }).bind(this)
+                metadataFilters: 'field=drugs',
+                actions: ['view', 'modify', 'delete']
             };
         }
 

@@ -5,37 +5,42 @@ class DoctorsController {
     constructor($http) {
         this.$http = $http;
         this.countNotActiveUsers;
-        this.activeDoctorsTable;
-        this.notActiveDoctorsTable;
 
-        this.activeDoctorsTableParameters = {
+        this.patientsTable = {
+            entity: 'patients',
+            type: 'remote',
+            actions: ['view', 'modify', 'delete'],
+            modifyEvent: (function (object) {
+                this.showPatientForm = true;
+                this.object = object;
+            }).bind(this)
+        };
+
+        this.activeDoctorsTable = {
             entity: 'users',
             filters: 'active=true&&role=user',
+            type: 'remote',
             actions: ['view', 'modify', 'delete'],
-            initEvent : (function(table) {
-                this.activeDoctorsTable = table;
-            }).bind(this),
             reloadEvent : (function() {
-                this.activeDoctorsTable.reload();
+                this.activeDoctorsTable.ngtable.reload();
             }).bind(this)
 
         };
 
-        this.notActiveDoctorsTableParameters = {
+        this.notActiveDoctorsTable = {
             entity: 'users',
             filters: 'active=false&&role=user',
+            type: 'remote',
             actions: ['activate', 'cancel'],
             reloadEvent : (function() {
                 this.countList();
-                this.notActiveDoctorsTable.reload();
-                this.activeDoctorsTable.reload();
+                this.notActiveDoctorsTable.ngtable.reload();
+                this.activeDoctorsTable.ngtable.reload();
             }).bind(this),
-            initEvent : (function(table) {
+            initEvent : (function() {
                 this.countList();
-                this.notActiveDoctorsTable = table;
             }).bind(this)
         };
-
     }
 
     countList() {
