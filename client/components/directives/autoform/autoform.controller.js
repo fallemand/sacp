@@ -111,6 +111,7 @@
                     this.$scope.object['drugs'] = [];
                 }
                 this.$scope.object['drugs'].push(angular.copy(this.$scope.object['drugs' + 'aux']));
+                this.resetForm();
                 if (this.autoform.reloadEvent()) {
                     this.autoform.reloadEvent();
                 }
@@ -156,7 +157,12 @@
         resetForm() {
             this.autoform.submitted = false;
             this.autoform.isSaving = false;
-            this.$scope.object = angular.copy({});
+            if(this.list){
+                this.$scope.object['drugsaux'] = angular.copy({});
+            }
+            else {
+                this.$scope.object = angular.copy({});
+            }
             this.autoform.form.$setPristine();
             this.autoform.form.$setUntouched();
             if(this.autoform.resetEvent) {

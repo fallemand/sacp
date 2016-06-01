@@ -84,7 +84,11 @@
                     this.datatable.ngtable = new this.NgTableParams({
                         page: 1, // show first page
                         count: 10 // count per page
-                    }, {data: this.$scope.object});
+                    }, {
+                        getData: (function ($defer, params) {
+                                return this.$scope.object;
+                        }).bind(this)
+                    });
             }
             if (this.datatable.initEvent) {
                 this.datatable.initEvent();
