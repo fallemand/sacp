@@ -1,7 +1,7 @@
 <div class="well well-xs effect-slide">
-        <autoform parameters="vm.autoformDrugs" object="vm.object"></autoform>
+    <autoform parameters="vm.autoformDrugs" object="vm.object"></autoform>
 </div>
 
-<div class="table-responsive">
+<div class="table-responsive if-effect-fade" ng-if="vm.object.drugs.length > 0">
     <datatable parameters="vm.drugsTable" object="vm.object.drugs"></datatable>
 </div>

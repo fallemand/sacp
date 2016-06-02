@@ -56,9 +56,10 @@
 
             this.autoformDrugs = {
                 entity: 'treatments',
-                section: 'drugs',
-                type: 'list',
+                field: 'drugs',
+                type: 'local',
                 template: 'short',
+                metadataFilters: 'field=drugs',
                 object: this.object,
                 formGroupClass : 'col-md-4',
                 inputIcons : true,

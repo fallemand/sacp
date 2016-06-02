@@ -56,3 +56,13 @@
         margin: 0;
     }
 }
+
+.if-effect-fade {
+    &.ng-enter {
+        transition: opacity .5s linear;
+        opacity:0;
+        &.ng-enter-active {
+            opacity:1;
+        }
+    }
+}

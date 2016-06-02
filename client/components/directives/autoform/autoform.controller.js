@@ -12,8 +12,10 @@
             this.errors = {};
             this.typeahead = {};
             this.ngToast = ngToast;
-            $http.get('/api/' + this.autoform.entity + '/metadata')
-                .then(response => {
+            this.autoform.type = (this.autoform.type) ? this.autoform.type : 'remote';
+            this.aux = 'aux';
+            var filters = (this.autoform.metadataFilters) ? '?' + this.autoform.metadataFilters : '';
+            $http.get('/api/' + this.autoform.entity + '/metadata' + filters).then(response => {
                     this.loadedData = true;
                     this.loadAutoForm();
                     this.metadata = response.data;
@@ -38,11 +40,6 @@
                     fields.push(value);
                 }
             });
-            if(fields[0].controlType == 'list') {
-                this.list = true;
-                this.listfield = 'drugsaux';
-                return fields[0].fields;
-            }
             return fields;
         }
 
@@ -94,27 +91,27 @@
         }
 
         add() {
-            if (!this.list) {
-                this.$http.post('/api/' + this.autoform.entity, this.$scope.object).then(() => {
-                        this.resetForm();
-                        this.ngToast.create(this.metadata.name + ' agregado con éxito!');
-                        if (this.autoform.reloadEvent()) {
-                            this.autoform.reloadEvent();
-                        }
-                    })
-                    .catch(err => {
-                        this.handleError(err);
-                    });
-            }
-            else {
-                if(!this.$scope.object['drugs']) {
-                    this.$scope.object['drugs'] = [];
-                }
-                this.$scope.object['drugs'].push(angular.copy(this.$scope.object['drugs' + 'aux']));
-                this.resetForm();
-                if (this.autoform.reloadEvent()) {
-                    this.autoform.reloadEvent();
-                }
+            switch(this.autoform.type) {
+                case 'remote' :
+                    this.$http.post('/api/' + this.autoform.entity, this.$scope.object).then(() => {
+                            this.resetForm();
+                            this.ngToast.create(this.metadata.name + ' agregado con éxito!');
+                            if (this.autoform.reloadEvent()) {
+                                this.autoform.reloadEvent();
+                            }
+                        })
+                        .catch(err => {
+                            this.handleError(err);
+                        });
+                    break;
+                case 'local' :
+                    this.$scope.object[this.autoform.field] = (this.$scope.object[this.autoform.field]) ? this.$scope.object[this.autoform.field] : [];
+                    this.$scope.object[this.aux] = (this.$scope.object[this.aux]) ? this.$scope.object[this.aux] : [];
+                    this.$scope.object[this.autoform.field].push(angular.copy(this.$scope.object[this.aux][this.autoform.field]));
+                    this.resetForm();
+                    if (this.autoform.reloadEvent()) {
+                        this.autoform.reloadEvent();
+                    }
             }
         }
 
@@ -157,8 +154,8 @@
         resetForm() {
             this.autoform.submitted = false;
             this.autoform.isSaving = false;
-            if(this.list){
-                this.$scope.object['drugsaux'] = angular.copy({});
+            if(this.autoform.type == 'local'){
+                this.$scope.object[this.aux][this.autoform.field] = angular.copy({});
             }
             else {
                 this.$scope.object = angular.copy({});
