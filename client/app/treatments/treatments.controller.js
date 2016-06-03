@@ -2,7 +2,9 @@
 (function () {
 
     class TreatmentsComponent {
-        constructor() {
+        constructor($http, ngToast) {
+            this.$http = $http;
+            this.ngToast = ngToast;
             this.message = 'Hello';
             this.object = {};
             this.steps = [
@@ -23,8 +25,7 @@
                 },
                 {
                     templateUrl: 'app/treatments/steps/_drugs.html',
-                    title: 'Create your multi step forms / wizzards',
-                    hasForm: true
+                    title: 'Create your multi step forms / wizzards'
                 },
                 {
                     templateUrl: 'app/treatments/steps/_confirm.html',
@@ -64,7 +65,9 @@
                 formGroupClass : 'col-md-4',
                 inputIcons : true,
                 reloadEvent: (function() {
-                    this.drugsTable.ngtable.reload();
+                    if(this.drugsTable.ngtable) {
+                        this.drugsTable.ngtable.reload();
+                    }
                 }).bind(this)
             };
 
@@ -92,8 +95,58 @@
         }
 
         finish() {
-            this.progressBarWidth = (100 / this.wizard.getSteps().length) + '%';
+            this.submitted = true;
+            if(this.autoformConfirm.form.$valid) {
+                this.isSaving = true;
+                if (this.object._id) {
+                    //Fix sub-object changes
+                    for (var attribute in this.object) {
+                        if (this.object[attribute].hasOwnProperty('_id')) {
+                            this.object[attribute] = this.object[attribute]._id;
+                        }
+                    }
+                    this.$http.put('/api/treatments/' + this.object._id, this.object).then(() => {
+                            this.object = angular.copy({});
+                            this.ngToast.create('Tratamiento modificado con éxito!');
+                            //Redirigir a listado de tratamientos
+                        })
+                        .catch(err => {
+                            this.handleError(err);
+                        });
+                }
+                else {
+                    this.$http.post('/api/treatments', this.object).then(() => {
+                            this.object = angular.copy({});
+                            this.ngToast.create('Tratamiento agregado con éxito!');
+                            //Redirigir a listado de tratamientos
+                        })
+                        .catch(err => {
+                            this.handleError(err);
+                        });
+                }
+
+            }
         }
+
+        handleError(err) {
+            var errors = err.data.errors;
+            if(errors) {
+                this.errors = {};
+                // Update validity of form fields that match the mongoose errors
+                angular.forEach(errors, (error, field) => {
+                    this.autoform.form[field].$setValidity('mongoose', false);
+                    this.errors[field] = error.message;
+                });
+            }
+            else {
+                this.ngToast.create({
+                    className: 'warning',
+                    content: err.message
+                });
+            }
+            this.autoform.isSaving = false;
+        }
+
     }
 
     angular.module('sacpApp')

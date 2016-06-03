@@ -59,7 +59,9 @@
                     <div class="box-inline">
                         <button class="btn btn-info" ng-disabled="$isFirst()" ng-click="$previousStep()">Atras
                         </button>
-                        <button class="btn btn-info" ng-disabled="$isLast() || ($getActiveStep().hasForm && !$getActiveStep().valid)" ng-click="$nextStep()">Siguiente
+                        <button class="btn btn-info" ng-if="!$isLast()" ng-disabled="$getActiveStep().hasForm && !$getActiveStep().valid" ng-click="$nextStep()">Siguiente
+                        </button>
+                        <button class="btn btn-info" ng-if="$isLast()" ng-click="vm.finish()">Enviar
                         </button>
                     </div>
                 </div>
