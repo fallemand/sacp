@@ -2,8 +2,9 @@
 (function () {
 
     class TreatmentsComponent {
-        constructor($http, ngToast) {
+        constructor($http, ngToast, $state) {
             this.$http = $http;
+            this.$state = $state;
             this.ngToast = ngToast;
             this.message = 'Hello';
             this.object = {};
@@ -119,7 +120,7 @@
                     this.$http.put('/api/treatments/' + this.object._id, this.object).then(() => {
                             this.object = angular.copy({});
                             this.ngToast.create('Tratamiento modificado con éxito!');
-                            //Redirigir a listado de tratamientos
+                            this.$state.go('treatments');
                         })
                         .catch(err => {
                             this.handleError(err);
@@ -129,7 +130,7 @@
                     this.$http.post('/api/treatments', this.object).then(() => {
                             this.object = angular.copy({});
                             this.ngToast.create('Tratamiento agregado con éxito!');
-                            //Redirigir a listado de tratamientos
+                            this.$state.go('treatments');
                         })
                         .catch(err => {
                             this.handleError(err);

@@ -24,6 +24,13 @@
                     }
                     response.data.fields = filteredFields;
                 }
+                var filteredFields = [];
+                for (var field in response.data.fields) {
+                    if (!response.data.fields[field].hideInList) {
+                        filteredFields.push(response.data.fields[field]);
+                    }
+                }
+                response.data.fields = filteredFields;
                 this.metadata = response.data;
                 this.cols = this.generateColsList();
                 this.initialize();

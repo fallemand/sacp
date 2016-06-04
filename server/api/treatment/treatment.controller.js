@@ -176,6 +176,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'iconText': 'TC',
+                'hideInList' : true,
                 'attributes': {
                     required: true
                 },
@@ -222,6 +223,7 @@ export function metadata(req, res) {
             {
                 'title': 'Esquema',
                 'field': 'treatment.schema',
+                'hideInList' : true,
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
@@ -253,6 +255,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
+                'hideInList' : true,
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -267,6 +270,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
+                'hideInList' : true,
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -281,6 +285,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
+                'hideInList' : true,
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -320,6 +325,7 @@ export function metadata(req, res) {
             {
                 'title': 'Drogas',
                 'field': 'drugs',
+                'hideInList' : true,
                 'controlType': 'list',
                 fields: [
                     {
@@ -399,6 +405,7 @@ export function metadata(req, res) {
             {
                 'title': 'Observaciones',
                 'field': 'observation',
+                'hideInList' : true,
                 'type': 'text',
                 'show': true,
                 'controlType': 'textarea',
