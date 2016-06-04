@@ -3,7 +3,7 @@
         <div class="panel">
             <multi-step-container steps="vm.steps" class="sliding-steps simple-prev-next" search-id="'step'"
                                   on-cancel="vm.cancel()" on-finish="vm.finish()"
-                                  on-step-change="vm.stepChange($getActiveIndex())">
+                                  on-step-change="vm.stepChange($getActiveIndex(), $getActiveStep().hasForm)">
                 <head>
 
                     <!--Nav-->
@@ -59,9 +59,9 @@
                     <div class="box-inline">
                         <button class="btn btn-info" ng-disabled="$isFirst()" ng-click="$previousStep()">Atras
                         </button>
-                        <button class="btn btn-info" ng-if="!$isLast()" ng-disabled="$getActiveStep().hasForm && !$getActiveStep().valid" ng-click="$nextStep()">Siguiente
+                        <button class="btn btn-info" ng-if="!$isLast()" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep" ng-click="$nextStep()">Siguiente
                         </button>
-                        <button class="btn btn-info" ng-if="$isLast()" ng-click="vm.finish()">Enviar
+                        <button class="btn btn-info" ng-if="$isLast()" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep" ng-click="vm.finish()">Enviar
                         </button>
                     </div>
                 </div>

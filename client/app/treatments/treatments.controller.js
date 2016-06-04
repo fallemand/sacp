@@ -10,26 +10,21 @@
             this.steps = [
                 {
                     templateUrl: 'app/treatments/steps/_patient.html',
-                    title: 'Get the source',
                     hasForm: true
                 },
                 {
                     templateUrl: 'app/treatments/steps/_disease.html',
-                    title: 'Add it to your app',
                     hasForm: true
                 },
                 {
                     templateUrl: 'app/treatments/steps/_treatment.html',
-                    title: 'Create your multi step forms / wizzards',
                     hasForm: true
                 },
                 {
                     templateUrl: 'app/treatments/steps/_drugs.html',
-                    title: 'Create your multi step forms / wizzards'
                 },
                 {
                     templateUrl: 'app/treatments/steps/_confirm.html',
-                    title: 'Create your multi step forms / wizzards',
                     hasForm: true
                 }
             ];
@@ -82,12 +77,28 @@
                 entity: 'treatments',
                 type: 'local',
                 metadataFilters: 'field=drugs',
-                actions: ['view', 'modify', 'delete']
+                actions: ['view', 'modify', 'delete'],
+                reloadEvent: (function() {
+                    if(this.object.drugs.length > 0) {
+                        this.validStep = true;
+                    }
+                }).bind(this),
+                initEvent: (function() {
+                    if(this.object.drugs.length > 0) {
+                        this.validStep = true;
+                    }
+                }).bind(this),
             };
         }
 
-        stepChange(activeIndex) {
+        stepChange(activeIndex, hasForm) {
             this.progressBarWidth = (100 / this.steps.length) * activeIndex + '%';
+            if(!hasForm) {
+                this.validStep = false;
+            }
+            else {
+                this.validStep = true;
+            }
         }
 
         cancel() {

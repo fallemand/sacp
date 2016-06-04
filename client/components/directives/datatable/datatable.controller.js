@@ -58,6 +58,9 @@
                     case 'select':
                         col.getValue = this.objectValue;
                         break;
+                    case 'typeahead':
+                        col.getValue = this.objectValue;
+                        break;
                     default:
                         col.getValue = this.htmlValue;
                         break;
@@ -96,13 +99,31 @@
         }
 
         htmlValue($scope, row) {
-            var value = row[this.field];
+            var value = row;
+            if(this.field.indexOf('.') > -1) {
+                var paths = this.field.split(".");
+                for(var path in paths) {
+                    value = value[paths[path]];
+                }
+            }
+            else {
+                value = value[this.field];
+            }
             return value;
         }
 
         objectValue($scope, row) {
-            var value = row[this.field].name;
-            return value;
+            var value = row;
+            if(this.field.indexOf('.') > -1) {
+                var paths = this.field.split(".");
+                for(var path in paths) {
+                    value = value[paths[path]];
+                }
+            }
+            else {
+                value = value[this.field];
+            }
+            return value.name;
         }
 
         actionsCol($scope, row) {

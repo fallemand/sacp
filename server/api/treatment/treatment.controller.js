@@ -13,92 +13,97 @@ import _ from 'lodash';
 import Treatment from './treatment.model';
 
 function respondWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      res.status(statusCode).json(entity);
-    }
-  };
+    statusCode = statusCode || 200;
+    return function (entity) {
+        if (entity) {
+            res.status(statusCode).json(entity);
+        }
+    };
 }
 
 function saveUpdates(updates) {
-  return function(entity) {
-    var updated = _.merge(entity, updates);
-    return updated.save()
-      .then(updated => {
-        return updated;
-      });
-  };
+    return function (entity) {
+        var updated = _.merge(entity, updates);
+        return updated.save()
+            .then(updated => {
+                return updated;
+            });
+    };
 }
 
 function removeEntity(res) {
-  return function(entity) {
-    if (entity) {
-      return entity.remove()
-        .then(() => {
-          res.status(204).end();
-        });
-    }
-  };
+    return function (entity) {
+        if (entity) {
+            return entity.remove()
+                .then(() => {
+                    res.status(204).end();
+                });
+        }
+    };
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
+    return function (entity) {
+        if (!entity) {
+            res.status(404).end();
+            return null;
+        }
+        return entity;
+    };
 }
 
 function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
+    statusCode = statusCode || 500;
+    return function (err) {
+        res.status(statusCode).send(err);
+    };
 }
 
 // Gets a list of Treatments
 export function index(req, res) {
-  return Treatment.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+    return Treatment.find()
+        .populate('patient')
+        .populate('disease.topographicDiagnosis')
+        .populate('treatment.type')
+        .populate('drugs.type')
+        .exec()
+        .then(respondWithResult(res))
+        .catch(handleError(res));
 }
 
 // Gets a single Treatment from the DB
 export function show(req, res) {
-  return Treatment.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+    return Treatment.findById(req.params.id).exec()
+        .then(handleEntityNotFound(res))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
 }
 
 // Creates a new Treatment in the DB
 export function create(req, res) {
-  return Treatment.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+    return Treatment.create(req.body)
+        .then(respondWithResult(res, 201))
+        .catch(handleError(res));
 }
 
 // Updates an existing Treatment in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return Treatment.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+    if (req.body._id) {
+        delete req.body._id;
+    }
+    return Treatment.findById(req.params.id).exec()
+        .then(handleEntityNotFound(res))
+        .then(saveUpdates(req.body))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
 }
 
 // Deletes a Treatment from the DB
 export function destroy(req, res) {
-  return Treatment.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+    return Treatment.findById(req.params.id).exec()
+        .then(handleEntityNotFound(res))
+        .then(removeEntity(res))
+        .catch(handleError(res));
 }
 
 // Get metadata
@@ -107,23 +112,23 @@ export function metadata(req, res) {
         name: 'tratamiento',
         pluralName: 'Tratamientos',
         sections: {
-            patient : {
+            patient: {
                 title: 'Paciente',
                 fields: ['patient']
             },
-            disease : {
+            disease: {
                 title: 'Enfermedad',
                 fields: ['disease.topographicDiagnosis', 'disease.histologicalDiagnosis', 'disease.stage']
             },
-            treatment : {
+            treatment: {
                 title: 'Tratamiento',
                 fields: ['treatment.type', 'treatment.schema', 'treatment.expectedDate', 'treatment.height', 'treatment.weight', 'treatment.bodySurface', 'treatment.actualCicle', 'treatment.cyclesQuantity']
             },
-            drugs : {
+            drugs: {
                 title: 'Drogas',
                 fields: ['drugs']
             },
-            confirm : {
+            confirm: {
                 title: 'Confirmar',
                 fields: ['observation']
             }
@@ -131,289 +136,289 @@ export function metadata(req, res) {
         fields: [
             {
                 'title': 'Paciente',
-                'field' : 'patient',
+                'field': 'patient',
                 'type': 'typeahead',
-                'descField' : 'desc',
-                'remoteApi' : 'patients',
-                'searchField' : 'name',
+                'descField': 'desc',
+                'remoteApi': 'patients',
+                'searchField': 'name',
                 'show': true,
-                'controlType' : 'object',
+                'controlType': 'object',
                 'icon': 'fa fa-user-md',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : '',
-                    'editable' : ''
+                'validations': {
+                    'required': '',
+                    'editable': ''
                 }
             },
             {
                 'title': 'Diagnóstico Topográfico',
-                'field' : 'disease.topographicDiagnosis',
+                'field': 'disease.topographicDiagnosis',
                 'type': 'typeahead',
-                'descField' : 'desc',
-                'searchField' : 'code',
-                'remoteApi' : 'cie10-diseases',
+                'descField': 'desc',
+                'searchField': 'code',
+                'remoteApi': 'cie10-diseases',
                 'show': true,
-                'controlType' : 'object',
+                'controlType': 'object',
                 'icon': 'fa fa-user-md',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Diagnóstico Histológico',
-                'field' : 'disease.histologicalDiagnosis',
-                'controlType' : 'input',
+                'field': 'disease.histologicalDiagnosis',
+                'controlType': 'input',
                 'type': 'text',
                 'show': true,
                 'iconText': 'TC',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Estadío',
-                'field' : 'disease.stage',
+                'field': 'disease.stage',
                 'type': 'number',
                 'show': true,
                 'iconText': 'DNI',
-                'controlType' : 'input',
-                'attributes' : {
+                'controlType': 'input',
+                'attributes': {
                     required: true,
-                    'max' : '5',
-                    'min' : 0
+                    'max': '5',
+                    'min': 0
                 },
-                'validations' : {
-                    'required' : '',
-                    'number' : '',
-                    'max' : '5',
-                    'min' : 0
+                'validations': {
+                    'required': '',
+                    'number': '',
+                    'max': '5',
+                    'min': 0
                 }
             },
             {
                 'title': 'Tipo de Tratamiento',
-                'field' : 'treatment.type',
+                'field': 'treatment.type',
                 'type': 'select',
                 'show': true,
-                'descField' : 'name',
-                'remoteApi' : 'treatment-types',
+                'descField': 'name',
+                'remoteApi': 'treatment-types',
                 'icon': 'fa fa-credit-card',
-                'controlType' : 'object',
-                'attributes' : {
+                'controlType': 'object',
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : '',
-                    'number' : ''
+                'validations': {
+                    'required': '',
+                    'number': ''
                 }
             },
             {
                 'title': 'Esquema',
-                'field' : 'treatment.schema',
+                'field': 'treatment.schema',
                 'type': 'text',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-home',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Fecha probable de tratamiento',
-                'field' : 'treatment.expectedDate',
+                'field': 'treatment.expectedDate',
                 'type': 'date',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-home',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Altura',
-                'field' : 'treatment.height',
+                'field': 'treatment.height',
                 'type': 'text',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-home',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Peso',
-                'field' : 'treatment.weight',
+                'field': 'treatment.weight',
                 'type': 'text',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-home',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Superficie Corporal',
-                'field' : 'treatment.bodySurface',
+                'field': 'treatment.bodySurface',
                 'type': 'text',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-home',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Ciclo Actual',
-                'field' : 'treatment.actualCicle',
+                'field': 'treatment.actualCicle',
                 'type': 'text',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-home',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Cantidad de Ciclos',
-                'field' : 'treatment.cyclesQuantity',
+                'field': 'treatment.cyclesQuantity',
                 'type': 'text',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-home',
-                'attributes' : {
+                'attributes': {
                     required: true
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             },
             {
                 'title': 'Drogas',
-                'field' : 'drugs',
-                'controlType' : 'list',
-                fields : [
+                'field': 'drugs',
+                'controlType': 'list',
+                fields: [
                     {
                         'title': 'Droga',
-                        'field' : 'name',
+                        'field': 'name',
                         'type': 'text',
                         'show': true,
-                        'controlType' : 'input',
+                        'controlType': 'input',
                         'icon': 'flaticon-chemistry-lab-instrument-1',
-                        'attributes' : {
+                        'attributes': {
                             required: true
                         },
-                        'validations' : {
-                            'required' : ''
+                        'validations': {
+                            'required': ''
                         }
                     },
                     {
                         'title': 'Nombre Comercial',
-                        'field' : 'tradeName',
+                        'field': 'tradeName',
                         'type': 'text',
                         'show': true,
-                        'controlType' : 'input',
+                        'controlType': 'input',
                         'icon': 'flaticon-medicine-bottle',
-                        'attributes' : {
+                        'attributes': {
                             required: true
                         },
-                        'validations' : {
-                            'required' : ''
+                        'validations': {
+                            'required': ''
                         }
                     },
                     {
                         'title': 'Tipo',
-                        'field' : 'type',
+                        'field': 'type',
                         'type': 'select',
                         'show': true,
-                        'descField' : 'name',
-                        'remoteApi' : 'drug-types',
+                        'descField': 'name',
+                        'remoteApi': 'drug-types',
                         'icon': 'flaticon-open-pill',
-                        'controlType' : 'object',
-                        'attributes' : {
+                        'controlType': 'object',
+                        'attributes': {
                             required: true
                         },
-                        'validations' : {
-                            'required' : ''
+                        'validations': {
+                            'required': ''
                         }
                     },
                     {
                         'title': 'Presentación',
-                        'field' : 'presentation',
+                        'field': 'presentation',
                         'type': 'text',
                         'show': true,
-                        'controlType' : 'input',
+                        'controlType': 'input',
                         'icon': 'flaticon-bottle-of-chemical-elements',
-                        'attributes' : {
+                        'attributes': {
                             required: true
                         },
-                        'validations' : {
-                            'required' : ''
+                        'validations': {
+                            'required': ''
                         }
                     },
                     {
                         'title': 'Cantidad',
-                        'field' : 'quantity',
+                        'field': 'quantity',
                         'type': 'number',
                         'show': true,
                         'icon': 'fa fa-sort-numeric-asc',
-                        'controlType' : 'input',
-                        'attributes' : {
+                        'controlType': 'input',
+                        'attributes': {
                             required: true
                         },
-                        'validations' : {
-                            'required' : ''
+                        'validations': {
+                            'required': ''
                         }
                     }
                 ]
             },
             {
                 'title': 'Observaciones',
-                'field' : 'observation',
+                'field': 'observation',
                 'type': 'text',
                 'show': true,
-                'controlType' : 'textarea',
+                'controlType': 'textarea',
                 'icon': 'fa fa-phone',
-                'attributes' : {
+                'attributes': {
                     required: true,
                     rows: 4
                 },
-                'validations' : {
-                    'required' : ''
+                'validations': {
+                    'required': ''
                 }
             }
         ]
 
     };
-    if(Object.keys(req.query).length > 0) {
-        for(var attribute in req.query){
-            if(attribute == 'field') {
-                for(var field in metadata.fields){
-                    if(metadata.fields[field].field==req.query[attribute]) {
+    if (Object.keys(req.query).length > 0) {
+        for (var attribute in req.query) {
+            if (attribute == 'field') {
+                for (var field in metadata.fields) {
+                    if (metadata.fields[field].field == req.query[attribute]) {
                         res.json(metadata.fields[field]);
                     }
                 }
