@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Treatment from './treatment.model';
+import TreatmentState from '../treatment-state/treatment-state.model';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -66,6 +67,7 @@ export function index(req, res) {
         .populate('disease.topographicDiagnosis')
         .populate('treatment.type')
         .populate('drugs.type')
+        .populate('state')
         .exec()
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -81,9 +83,21 @@ export function show(req, res) {
 
 // Creates a new Treatment in the DB
 export function create(req, res) {
-    return Treatment.create(req.body)
-        .then(respondWithResult(res, 201))
-        .catch(handleError(res));
+    if(!req.body.state) {
+        TreatmentState.findOne({name: 'En Auditoria'})
+            .exec()
+            .then(state => {
+                req.body.state = state._id;
+                return Treatment.create(req.body)
+                    .then(respondWithResult(res, 201))
+                    .catch(handleError(res));
+            })
+    }
+    else {
+        return Treatment.create(req.body)
+            .then(respondWithResult(res, 201))
+            .catch(handleError(res));
+    }
 }
 
 // Updates an existing Treatment in the DB
@@ -166,7 +180,8 @@ export function metadata(req, res) {
                     required: true
                 },
                 'validations': {
-                    'required': ''
+                    'required': '',
+                    'editable': ''
                 }
             },
             {
@@ -416,6 +431,28 @@ export function metadata(req, res) {
                 },
                 'validations': {
                     'required': ''
+                }
+            },
+            {
+                'title': 'Estado',
+                'field': 'state',
+                'type': 'select',
+                'show': true,
+                'descField': 'name',
+                'remoteApi': 'treatment-states',
+                'controlType': 'object',
+                'attributes': {
+                    required: true
+                },
+                'validations': {
+                    'required': '',
+                    'number': ''
+                },
+                'decorator' : {
+                    type: 'label',
+                    class: {
+                        'En Auditoria' : 'label-warning'
+                    }
                 }
             }
         ]

@@ -53,7 +53,9 @@
                     field: value.field,
                     title: value.title,
                     show: value.show,
-                    filter: {'name': "text"}
+                    filter: {'name': "text"},
+                    decorate: this.decorate,
+                    decorator: value.decorator
                 };
                 switch (value.type) {
                     case 'text' :
@@ -116,6 +118,9 @@
             else {
                 value = value[this.field];
             }
+            if(this.decorator) {
+                value = this.decorate(this.decorator, value)
+            }
             return value;
         }
 
@@ -129,6 +134,9 @@
             }
             else {
                 value = value[this.field];
+            }
+            if(this.decorator) {
+                return this.decorate(this.decorator, value.name)
             }
             return value.name;
         }
@@ -155,6 +163,15 @@
                 }
             });
             html += '</div>';
+            return html;
+        }
+
+        decorate(decorator, value) {
+            var html;
+            switch(decorator.type) {
+                case 'label' : html = '<span class="label ' + this.decorator.class[value] +'">' + value + '</span>';
+                    break;
+            }
             return html;
         }
 

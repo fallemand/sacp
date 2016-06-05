@@ -79,8 +79,12 @@ var TreatmentSchema = new Schema({
             required: true
         }
     }],
-    observation : String
-
+    observation : String,
+    state: {
+        type: Schema.Types.ObjectId,
+        ref: 'TreatmentState',
+        required: true
+    }
 });
 
 export default mongoose.model('Treatment', TreatmentSchema);
