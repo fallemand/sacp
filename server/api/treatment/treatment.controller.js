@@ -120,6 +120,17 @@ export function destroy(req, res) {
         .catch(handleError(res));
 }
 
+
+function saveUpdates(updates) {
+    return function (entity) {
+        var updated = _.merge(entity, updates);
+        return updated.save()
+            .then(updated => {
+                return updated;
+            });
+    };
+}
+
 // Get metadata
 export function metadata(req, res) {
     var metadata = {

@@ -4,6 +4,7 @@ import User from './user.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+import _ from 'lodash';
 
 function validationError(res, statusCode) {
     statusCode = statusCode || 422;
@@ -16,6 +17,35 @@ function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function (err) {
         res.status(statusCode).send(err);
+    };
+}
+
+function handleEntityNotFound(res) {
+    return function (entity) {
+        if (!entity) {
+            res.status(404).end();
+            return null;
+        }
+        return entity;
+    };
+}
+
+function saveUpdates(updates) {
+    return function (entity) {
+        var updated = _.merge(entity, updates);
+        return updated.save()
+            .then(updated => {
+                return updated;
+            });
+    };
+}
+
+function respondWithResult(res, statusCode) {
+    statusCode = statusCode || 200;
+    return function (entity) {
+        if (entity) {
+            res.status(statusCode).json(entity);
+        }
     };
 }
 
@@ -58,6 +88,18 @@ export function create(req, res, next) {
             res.json({token});
         })
         .catch(validationError(res));
+}
+
+// Updates an existing Patient in the DB
+export function update(req, res) {
+    if (req.body._id) {
+        delete req.body._id;
+    }
+    return User.findById(req.params.id).exec()
+        .then(handleEntityNotFound(res))
+        .then(saveUpdates(req.body))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
 }
 
 /**

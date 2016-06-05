@@ -5,14 +5,20 @@ class DoctorsController {
     constructor($http) {
         this.$http = $http;
         this.countNotActiveUsers;
+        this.showDoctorForm = false;
+        this.patientsTable;
+        this.object = {};
 
-        this.patientsTable = {
-            entity: 'patients',
-            type: 'remote',
-            actions: ['view', 'modify', 'delete'],
-            modifyEvent: (function (object) {
-                this.showPatientForm = true;
-                this.object = object;
+        this.autoform = {
+            entity : 'users',
+            formGroupClass : 'col-md-3',
+            template : 'short',
+            inputIcons : true,
+            resetEvent: (function() {
+                this.showDoctorForm = false;
+            }).bind(this),
+            reloadEvent: (function() {
+                this.activeDoctorsTable.ngtable.reload();
             }).bind(this)
         };
 
@@ -23,6 +29,10 @@ class DoctorsController {
             actions: ['view', 'modify', 'delete'],
             reloadEvent : (function() {
                 this.activeDoctorsTable.ngtable.reload();
+            }).bind(this),
+            modifyEvent: (function (object) {
+                this.showDoctorForm = true;
+                this.object = object;
             }).bind(this)
 
         };
