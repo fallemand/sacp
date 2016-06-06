@@ -199,10 +199,14 @@ export function metadata(req, res, next) {
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-male',
-                'attributes' : {
-                    required : ''
+                'validations': {
+                    'required': '',
+                    'minlength': '5'
                 },
-                'validations' : ['required','minlength']
+                'attributes': {
+                    required: true,
+                    'minlength': 5
+                }
             },
             {
                 'title': 'Email',
@@ -244,6 +248,22 @@ export function metadata(req, res, next) {
                     min: '1'
                 },
                 'validations' : ['required','max','min', 'number']
+            },
+            {
+                'title': 'Contraseña',
+                'field' : 'password',
+                'type': 'password',
+                'show': true,
+                'icon': 'fa fa-asterisk',
+                'controlType' : 'input',
+                'attributes' : {
+                    required: true,
+                    'mongoose-error' : ''
+                },
+                'validations' : {
+                    'required' : '',
+                    'mongoose' : ''
+                }
             }
         ]
 
