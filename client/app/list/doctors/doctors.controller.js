@@ -31,8 +31,14 @@ class DoctorsController {
                 this.activeDoctorsTable.ngtable.reload();
             }).bind(this),
             modifyEvent: (function (object) {
+                this.autoform.disabled = false;
                 this.showDoctorForm = true;
                 this.object = object;
+            }).bind(this),
+            viewEvent: (function (object) {
+                this.object = object;
+                this.showDoctorForm = true;
+                this.autoform.disabled = true;
             }).bind(this)
 
         };

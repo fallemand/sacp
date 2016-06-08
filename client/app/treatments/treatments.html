@@ -60,7 +60,7 @@
                         </button>
                         <button class="btn btn-info" ng-if="!$isLast()" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep" ng-click="$nextStep()">Siguiente
                         </button>
-                        <button class="btn btn-info" ng-if="$isLast()" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep" ng-click="vm.finish()">Enviar
+                        <button class="btn btn-info" ng-if="$isLast() && vm.action != 'view'" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep" ng-click="vm.finish()">Enviar
                         </button>
                     </div>
                 </div>

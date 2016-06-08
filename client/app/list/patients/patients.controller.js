@@ -12,8 +12,14 @@ class PatientsController {
             type: 'remote',
             actions: ['view', 'modify', 'delete'],
             modifyEvent: (function (object) {
+                this.autoform.disabled = false;
                 this.showPatientForm = true;
                 this.object = object;
+            }).bind(this),
+            viewEvent: (function (object) {
+                this.object = object;
+                this.showPatientForm = true;
+                this.autoform.disabled = true;
             }).bind(this)
         };
 
@@ -36,6 +42,8 @@ class PatientsController {
             this.showPatientForm = false;
         }
         else {
+            this.autoform.resetForm();
+            this.autoform.disabled = false;
             this.showPatientForm = true;
         }
     }

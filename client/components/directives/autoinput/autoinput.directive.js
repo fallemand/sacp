@@ -8,14 +8,13 @@ angular.module('sacpApp')
             priority: 599,
             require: "^form",
             link: function (scope, element, attrs, formController) {
-                var newElement = element.clone();
-                newElement
+
+                var newElement = element.clone()
                     .addClass('form-control')
                     .attr('name', scope.field.field)
+                    .attr('ng-disabled', 'vm.autoform.disabled')
                     .removeAttr('autoinput');
-                // if(scope.autoform.disabled) {
-                //     newElement.attr('disabled', 'disabled');
-                // }
+
                 switch (scope.field.controlType) {
                     case 'input' :
                         newElement.attr('placeholder', scope.field.title);
