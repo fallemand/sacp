@@ -17,6 +17,9 @@ angular.module('sacpApp')
                     case 'input' :
                         newElement.attr('placeholder', scope.field.title);
                         newElement.attr('type', scope.field.type);
+                        if(scope.field.type == 'date') {
+                            scope.object[scope.field.field] = new Date(scope.object[scope.field.field]);
+                        }
                         break;
                     case 'textarea' :
                         newElement.attr('placeholder', scope.field.title);

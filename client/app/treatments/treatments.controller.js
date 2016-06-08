@@ -2,12 +2,36 @@
 (function () {
 
     class TreatmentsComponent {
-        constructor($http, ngToast, $state) {
+        constructor($http, ngToast, $state, $stateParams) {
+            this.loadedData = false;
+            this.id = $stateParams.id;
             this.$http = $http;
             this.$state = $state;
             this.ngToast = ngToast;
-            this.message = 'Hello';
-            this.object = {};
+            if(this.id.length > 0) {
+                this.action = 'update';
+                $http.get('/api/treatments/'+this.id).
+                    then(response => {
+                        this.object = response.data;
+                        this.initialize();
+                    })
+                    .catch(err => {
+                        if(err.data && err.data.name == 'CastError') {
+                            err.message = 'El parametros no es correcto';
+                        }
+                        this.ngToast.create({
+                            className: 'danger',
+                            content: err.message
+                        });
+                    });
+            }
+            else {
+                this.initialize();
+            }
+        }
+
+        initialize() {
+            this.loadedData = true;
             this.steps = [
                 {
                     templateUrl: 'app/treatments/steps/_patient.html',

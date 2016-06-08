@@ -64,9 +64,9 @@ function handleError(res, statusCode) {
 export function index(req, res) {
     return Treatment.find()
         .populate('patient')
-        .populate('disease.topographicDiagnosis')
-        .populate('treatment.type')
-        .populate('drugs.type')
+        .populate('diseaseTopographicDiagnosis')
+        .populate('treatmentType')
+        .populate('drugsType')
         .populate('state')
         .exec()
         .then(respondWithResult(res))
@@ -75,7 +75,13 @@ export function index(req, res) {
 
 // Gets a single Treatment from the DB
 export function show(req, res) {
-    return Treatment.findById(req.params.id).exec()
+    return Treatment.findById(req.params.id)
+        .populate('patient')
+        .populate('diseaseTopographicDiagnosis')
+        .populate('treatmentType')
+        .populate('drugsType')
+        .populate('state')
+        .exec()
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -143,11 +149,11 @@ export function metadata(req, res) {
             },
             disease: {
                 title: 'Enfermedad',
-                fields: ['disease.topographicDiagnosis', 'disease.histologicalDiagnosis', 'disease.stage']
+                fields: ['diseaseTopographicDiagnosis', 'diseaseHistologicalDiagnosis', 'diseaseStage']
             },
             treatment: {
                 title: 'Tratamiento',
-                fields: ['treatment.type', 'treatment.schema', 'treatment.expectedDate', 'treatment.height', 'treatment.weight', 'treatment.bodySurface', 'treatment.actualCicle', 'treatment.cyclesQuantity']
+                fields: ['treatmentType', 'treatmentSchema', 'treatmentExpectedDate', 'treatmentHeight', 'treatmentWeight', 'treatmentBodySurface', 'treatmentActualCicle', 'treatmentCyclesQuantity']
             },
             drugs: {
                 title: 'Drogas',
@@ -179,7 +185,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Diagnóstico Topográfico',
-                'field': 'disease.topographicDiagnosis',
+                'field': 'diseaseTopographicDiagnosis',
                 'type': 'typeahead',
                 'descField': 'desc',
                 'searchField': 'code',
@@ -197,7 +203,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Diagnóstico Histológico',
-                'field': 'disease.histologicalDiagnosis',
+                'field': 'diseaseHistologicalDiagnosis',
                 'controlType': 'input',
                 'type': 'text',
                 'show': true,
@@ -212,7 +218,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Estadío',
-                'field': 'disease.stage',
+                'field': 'diseaseStage',
                 'type': 'number',
                 'show': true,
                 'iconText': 'DNI',
@@ -231,7 +237,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Tipo de Tratamiento',
-                'field': 'treatment.type',
+                'field': 'treatmentType',
                 'type': 'select',
                 'show': true,
                 'descField': 'name',
@@ -248,7 +254,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Esquema',
-                'field': 'treatment.schema',
+                'field': 'treatmentSchema',
                 'hideInList' : true,
                 'type': 'text',
                 'show': true,
@@ -263,7 +269,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Fecha probable de tratamiento',
-                'field': 'treatment.expectedDate',
+                'field': 'treatmentExpectedDate',
                 'type': 'date',
                 'show': true,
                 'controlType': 'input',
@@ -277,7 +283,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Altura',
-                'field': 'treatment.height',
+                'field': 'treatmentHeight',
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
@@ -292,7 +298,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Peso',
-                'field': 'treatment.weight',
+                'field': 'treatmentWeight',
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
@@ -307,7 +313,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Superficie Corporal',
-                'field': 'treatment.bodySurface',
+                'field': 'treatmentBodySurface',
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
@@ -322,7 +328,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Ciclo Actual',
-                'field': 'treatment.actualCicle',
+                'field': 'treatmentActualCicle',
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
@@ -336,7 +342,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Cantidad de Ciclos',
-                'field': 'treatment.cyclesQuantity',
+                'field': 'treatmentCyclesQuantity',
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',

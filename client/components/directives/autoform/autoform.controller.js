@@ -171,7 +171,9 @@
             this.$http.get('/api/' + api)
                 .then(response => {
                     this[field] = response.data;
-                    this.$scope.object[field] = "";
+                    if(!this.$scope.object[field]) {
+                        this.$scope.object[field] = "";
+                    }
                 })
                 .catch(err => {
                     this.ngToast.create({

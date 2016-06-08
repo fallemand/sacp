@@ -181,6 +181,12 @@
             }
         }
 
+        view(row) {
+            if (this.datatable.viewEvent) {
+                this.datatable.viewEvent(angular.copy(row));
+            }
+        }
+
         delete(object) {
             this.sweet.show({
                 title: '¿Está Seguro?',

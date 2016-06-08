@@ -1,8 +1,7 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="panel">
+        <div ng-if="vm.loadedData" class="panel">
             <multi-step-container steps="vm.steps" class="sliding-steps simple-prev-next" search-id="'step'"
-                                  on-cancel="vm.cancel()" on-finish="vm.finish()"
                                   on-step-change="vm.stepChange($getActiveIndex(), $getActiveStep().hasForm)">
                 <head>
 

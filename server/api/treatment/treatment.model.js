@@ -9,56 +9,53 @@ var TreatmentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Patient'
     },
-    disease : {
-        topographicDiagnosis: {
-            type: Schema.Types.ObjectId,
-            ref: 'Cie10Disease'
-        },
-        histologicalDiagnosis: {
-            type: String,
-            required: true
-        },
-        stage: {
-            type: Number,
-            required: false
-        }
+    diseaseTopographicDiagnosis: {
+        type: Schema.Types.ObjectId,
+        ref: 'Cie10Disease'
     },
-    treatment: {
-        type: {
-            type: Schema.Types.ObjectId,
-            ref: 'TreatmentType'
-        },
-        schema: {
-            type: String,
-            required: true
-        },
-        expectedDate: {
-            type: Date,
-            required: true
-        },
-        height: {
-            type: Number,
-            required: true
-        },
-        weight: {
-            type: Number,
-            required: true
-        },
-        bodySurface: {
-            type: String,
-            required: false
-        },
-        actualCicle: {
-            type: Number,
-            required: false
-        },
-        cyclesQuantity: {
-            type: String,
-            required: false
-        }
+    diseaseHistologicalDiagnosis: {
+        type: String,
+        required: true
     },
+    diseaseStage: {
+        type: Number,
+        required: false
+    },
+    treatmentType: {
+        type: Schema.Types.ObjectId,
+        ref: 'TreatmentType'
+    },
+    treatmentSchema: {
+        type: String,
+        required: true
+    },
+    treatmentExpectedDate: {
+        type: Date,
+        required: true
+    },
+    treatmentHeight: {
+        type: Number,
+        required: true
+    },
+    treatmentWeight: {
+        type: Number,
+        required: true
+    },
+    treatmentBodySurface: {
+        type: String,
+        required: false
+    },
+    treatmentActualCicle: {
+        type: Number,
+        required: false
+    },
+    treatmentCyclesQuantity: {
+        type: String,
+        required: false
+    },
+
     drugs: [{
-        name : {
+        name: {
             type: String,
             required: true
         },
@@ -79,7 +76,7 @@ var TreatmentSchema = new Schema({
             required: true
         }
     }],
-    observation : String,
+    observation: String,
     state: {
         type: Schema.Types.ObjectId,
         ref: 'TreatmentState',
