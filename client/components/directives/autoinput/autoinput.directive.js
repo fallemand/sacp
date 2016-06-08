@@ -13,6 +13,9 @@ angular.module('sacpApp')
                     .addClass('form-control')
                     .attr('name', scope.field.field)
                     .removeAttr('autoinput');
+                // if(scope.autoform.disabled) {
+                //     newElement.attr('disabled', 'disabled');
+                // }
                 switch (scope.field.controlType) {
                     case 'input' :
                         newElement.attr('placeholder', scope.field.title);

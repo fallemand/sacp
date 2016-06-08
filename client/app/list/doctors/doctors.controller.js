@@ -11,7 +11,7 @@ class DoctorsController {
 
         this.autoform = {
             entity : 'users',
-            formGroupClass : 'col-md-3',
+            formGroupClass : 'col-md-4',
             template : 'short',
             inputIcons : true,
             resetEvent: (function() {
