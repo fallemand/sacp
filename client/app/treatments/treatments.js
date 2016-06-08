@@ -3,8 +3,8 @@
 angular.module('sacpApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('add', {
-                url: '/treatments/add/:id',
+            .state('treatments.action', {
+                url: '/treatments/:action/:id',
                 template: '<treatments></treatments>',
                 parent: 'private',
                 ncyBreadcrumb: {

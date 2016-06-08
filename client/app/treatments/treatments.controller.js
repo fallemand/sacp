@@ -4,30 +4,44 @@
     class TreatmentsComponent {
         constructor($http, ngToast, $state, $stateParams) {
             this.loadedData = false;
-            this.id = $stateParams.id;
+            this.action = $stateParams.action;
             this.$http = $http;
             this.$state = $state;
             this.ngToast = ngToast;
-            if(this.id.length > 0) {
-                this.action = 'update';
-                $http.get('/api/treatments/'+this.id).
-                    then(response => {
-                        this.object = response.data;
+            switch(this.action) {
+                case 'add' :
+                    this.initialize();
+                    break;
+                case 'update' :
+                    this.getEntity($stateParams.id, (function() {
                         this.initialize();
-                    })
-                    .catch(err => {
-                        if(err.data && err.data.name == 'CastError') {
-                            err.message = 'El parametros no es correcto';
-                        }
-                        this.ngToast.create({
-                            className: 'danger',
-                            content: err.message
-                        });
+                    }).bind(this));
+                    break;
+                case 'view' :
+                    this.getEntity($stateParams.id, (function() {
+                        this.initialize();
+                    }).bind(this));
+                    break;
+            }
+        }
+
+        getEntity(id, callback) {
+            this.$http.get('/api/treatments/'+id).
+                then(response => {
+                    this.object = response.data;
+                    if(callback) {
+                        callback();
+                    }
+                })
+                .catch(err => {
+                    if(err.data && err.data.name == 'CastError') {
+                        err.message = 'El parametros no es correcto';
+                    }
+                    this.ngToast.create({
+                        className: 'danger',
+                        content: err.message
                     });
-            }
-            else {
-                this.initialize();
-            }
+                });
         }
 
         initialize() {
@@ -58,6 +72,7 @@
                 entity: 'treatments',
                 section: 'disease',
                 object: this.object,
+                disabled : (this.action == 'view'),
                 template: 'lite'
             };
 
@@ -65,6 +80,7 @@
                 entity: 'treatments',
                 object: this.object,
                 section: 'patient',
+                disabled : (this.action == 'view'),
                 template: 'lite'
             };
 
@@ -72,6 +88,7 @@
                 entity: 'treatments',
                 section: 'treatment',
                 object: this.object,
+                disabled : (this.action == 'view'),
                 template: 'lite'
             };
 
@@ -79,6 +96,7 @@
                 entity: 'treatments',
                 field: 'drugs',
                 type: 'local',
+                disabled : (this.action == 'view'),
                 template: 'short',
                 metadataFilters: 'field=drugs',
                 object: this.object,
@@ -94,6 +112,7 @@
             this.autoformConfirm = {
                 entity: 'treatments',
                 section: 'confirm',
+                disabled : (this.action == 'view'),
                 object: this.object,
                 template: 'lite'
             };

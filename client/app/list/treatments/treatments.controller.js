@@ -8,7 +8,7 @@ class TreatmentsController {
             type: 'remote',
             actions: ['view', 'modify', 'delete'],
             viewEvent: (function (object) {
-                this.$state.go('add', {'id' : object._id});
+                this.$state.go('treatments.action', {'action': 'view', 'id' : object._id});
             }).bind(this),
             modifyEvent: (function (object) {
                 this.showPatientForm = true;
