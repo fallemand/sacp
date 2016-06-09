@@ -102,3 +102,97 @@ export function destroy(req, res) {
         .then(removeEntity(res))
         .catch(handleError(res));
 }
+
+// Get metadata
+export function metadata(req, res) {
+    var metadata = {
+        name: 'Historial de Estados',
+        pluralName: 'Historial de Estados',
+        fields: [
+            {
+                'title': 'Tratamiento',
+                'field': 'treatment',
+                'type': 'typeahead',
+                'descField': '_id',
+                'remoteApi': 'treatments',
+                'searchField': '_id',
+                'show': true,
+                'controlType': 'object',
+                'icon': 'fa fa-user-md',
+                'attributes': {
+                    required: true
+                },
+                'validations': {
+                    'required': '',
+                    'editable': ''
+                }
+            },
+            {
+                'title': 'Historial de Estados',
+                'field': 'history',
+                'hideInList' : true,
+                'controlType': 'list',
+                fields: [
+                    {
+                        'title': 'Fecha',
+                        'field': 'date',
+                        'type': 'date',
+                        'show': true,
+                        'controlType': 'input',
+                        'icon': 'fa fa-calendar',
+                        'attributes': {
+                            required: true
+                        },
+                        'validations': {
+                            'required': ''
+                        }
+                    },
+                    {
+                        'title': 'Estado',
+                        'field': 'state',
+                        'type': 'select',
+                        'show': true,
+                        'descField': 'name',
+                        'remoteApi': 'treatment-states',
+                        'icon': 'fa fa-credit-card',
+                        'controlType': 'object',
+                        'attributes': {
+                            required: true
+                        },
+                        'validations': {
+                            'required': ''
+                        }
+                    },
+                    {
+                        'title': 'Observación',
+                        'field': 'observation',
+                        'type': 'text',
+                        'show': true,
+                        'controlType': 'input',
+                        'icon': 'fa fa-pencil',
+                        'attributes': {
+                            required: true
+                        },
+                        'validations': {
+                            'required': ''
+                        }
+                    }
+                ]
+            }
+        ]
+    };
+    if (Object.keys(req.query).length > 0) {
+        for (var attribute in req.query) {
+            if (attribute == 'field') {
+                for (var field in metadata.fields) {
+                    if (metadata.fields[field].field == req.query[attribute]) {
+                        res.json(metadata.fields[field]);
+                    }
+                }
+            }
+        }
+    }
+    else {
+        res.json(metadata);
+    }
+}

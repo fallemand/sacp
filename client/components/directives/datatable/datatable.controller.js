@@ -39,15 +39,17 @@
 
         generateColsList() {
             var cols = [];
-            var actionsCol = {
-                field: '_id',
-                title: 'Acciones',
-                show: 'true',
-                filter: {'name': "text"},
-                getValue: this.actionsCol,
-                actions: this.datatable.actions
-            };
-            cols.push(actionsCol);
+            if(this.datatable.actions && this.datatable.actions.length > 0) {
+                var actionsCol = {
+                    field: '_id',
+                    title: 'Acciones',
+                    show: 'true',
+                    filter: {'name': "text"},
+                    getValue: this.actionsCol,
+                    actions: this.datatable.actions
+                };
+                cols.push(actionsCol);
+            }
             angular.forEach(this.metadata.fields, (value, field) => {
                 var col = {
                     field: value.field,

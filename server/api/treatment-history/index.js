@@ -2,10 +2,12 @@
 
 var express = require('express');
 var controller = require('./treatment-history.controller');
+import * as auth from '../../auth/auth.service';
 
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/metadata', auth.isAuthenticated(), controller.metadata);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

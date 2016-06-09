@@ -133,6 +133,15 @@
                     }
                 }).bind(this),
             };
+
+            if(this.action !== 'add') {
+                this.stateHistoryTable = {
+                    entity: 'treatment-history',
+                    type: 'remote',
+                    metadataFilters: 'field=history',
+                    filters: 'treatment='+this.object._id
+                };
+            }
         }
 
         stepChange(activeIndex, hasForm) {

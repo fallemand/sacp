@@ -12,6 +12,8 @@
 import _ from 'lodash';
 import Treatment from './treatment.model';
 import TreatmentState from '../treatment-state/treatment-state.model';
+import Patient from '../patient/patient.model';
+import AgreementType from '../agreement-type/agreement-type.model';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -81,10 +83,19 @@ export function show(req, res) {
         .populate('treatmentType')
         .populate('drugsType')
         .populate('state')
-        .exec()
-        .then(handleEntityNotFound(res))
-        .then(respondWithResult(res))
-        .catch(handleError(res));
+        .exec(function (err, treatment) {
+            AgreementType.populate(treatment, {
+                path: 'patient.agreementType',
+                select: 'name'
+            },function (err) {
+                if(err) {
+                    res.status(500).send(err);
+                }
+                else {
+                    res.status(200).send(treatment);
+                }
+            });
+        });
 }
 
 // Creates a new Treatment in the DB
