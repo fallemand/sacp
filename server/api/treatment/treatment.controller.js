@@ -12,6 +12,7 @@
 import _ from 'lodash';
 import Treatment from './treatment.model';
 import TreatmentState from '../treatment-state/treatment-state.model';
+import TreatmentHistory from '../treatment-history/treatment-history.model';
 import Patient from '../patient/patient.model';
 import AgreementType from '../agreement-type/agreement-type.model';
 
@@ -87,8 +88,8 @@ export function show(req, res) {
             AgreementType.populate(treatment, {
                 path: 'patient.agreementType',
                 select: 'name'
-            },function (err) {
-                if(err) {
+            }, function (err) {
+                if (err) {
                     res.status(500).send(err);
                 }
                 else {
@@ -100,21 +101,33 @@ export function show(req, res) {
 
 // Creates a new Treatment in the DB
 export function create(req, res) {
-    if(!req.body.state) {
-        TreatmentState.findOne({name: 'En Auditoria'})
-            .exec()
-            .then(state => {
-                req.body.state = state._id;
-                return Treatment.create(req.body)
-                    .then(respondWithResult(res, 201))
-                    .catch(handleError(res));
-            })
-    }
-    else {
-        return Treatment.create(req.body)
-            .then(respondWithResult(res, 201))
-            .catch(handleError(res));
-    }
+    TreatmentState.findOne({name: 'En Auditoria'})
+        .exec()
+        .then(state => {
+            req.body.state = state._id;
+            Treatment.create(req.body, function (err, treatment) {
+                if (err) {
+                    res.status(500).send(err);
+                }
+                var treatmentHistory = {
+                    treatment: treatment._id,
+                    history: [
+                        {
+                            date: new Date(),
+                            state: state._id,
+                            observation: treatment.observation
+                        }
+                    ]
+                };
+                TreatmentHistory.create(treatmentHistory, function (err) {
+                    if (err) {
+                        Treatment.remove({_id: treatment._id});
+                        res.status(500).send(err);
+                    }
+                    return res.status(200).json(treatment);
+                });
+            });
+        });
 }
 
 // Updates an existing Treatment in the DB
@@ -219,7 +232,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'iconText': 'TC',
-                'hideInList' : true,
+                'hideInList': true,
                 'attributes': {
                     required: true
                 },
@@ -266,7 +279,7 @@ export function metadata(req, res) {
             {
                 'title': 'Esquema',
                 'field': 'treatmentSchema',
-                'hideInList' : true,
+                'hideInList': true,
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
@@ -298,7 +311,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
-                'hideInList' : true,
+                'hideInList': true,
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -313,7 +326,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
-                'hideInList' : true,
+                'hideInList': true,
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -328,7 +341,7 @@ export function metadata(req, res) {
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
-                'hideInList' : true,
+                'hideInList': true,
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -368,7 +381,7 @@ export function metadata(req, res) {
             {
                 'title': 'Drogas',
                 'field': 'drugs',
-                'hideInList' : true,
+                'hideInList': true,
                 'controlType': 'list',
                 fields: [
                     {
@@ -448,7 +461,7 @@ export function metadata(req, res) {
             {
                 'title': 'Observaciones',
                 'field': 'observation',
-                'hideInList' : true,
+                'hideInList': true,
                 'type': 'text',
                 'show': true,
                 'controlType': 'textarea',
@@ -476,10 +489,10 @@ export function metadata(req, res) {
                     'required': '',
                     'number': ''
                 },
-                'decorator' : {
+                'decorator': {
                     type: 'label',
                     class: {
-                        'En Auditoria' : 'label-warning'
+                        'En Auditoria': 'label-warning'
                     }
                 }
             }
