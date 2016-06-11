@@ -14,6 +14,7 @@
                     break;
                 case 'update' :
                     this.getEntity($stateParams.id, (function() {
+                        this.object.observation = '';
                         this.initialize();
                     }).bind(this));
                     break;
@@ -137,6 +138,7 @@
             if(this.action !== 'add') {
                 this.stateHistoryTable = {
                     entity: 'treatment-history',
+                    field: 'history',
                     type: 'remote',
                     metadataFilters: 'field=history',
                     filters: 'treatment='+this.object._id

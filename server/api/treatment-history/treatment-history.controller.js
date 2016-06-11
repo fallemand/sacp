@@ -161,6 +161,12 @@ export function metadata(req, res) {
                         },
                         'validations': {
                             'required': ''
+                        },
+                        'decorator': {
+                            type: 'label',
+                            class: {
+                                'En Auditoria': 'label-warning'
+                            }
                         }
                     },
                     {

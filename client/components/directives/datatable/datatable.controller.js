@@ -69,6 +69,9 @@
                     case 'select':
                         col.getValue = this.objectValue;
                         break;
+                    case 'date':
+                        col.getValue = this.dateValue;
+                        break;
                     case 'typeahead':
                         col.getValue = this.objectValue;
                         break;
@@ -89,6 +92,9 @@
                         getData: (function ($defer, params) {
                             var filters = (this.datatable.filters) ? '?' + this.datatable.filters : '';
                             this.$http.get('/api/' + this.datatable.entity + filters).then(response => {
+                                if(this.datatable.field) {
+                                    response.data = response.data[0][this.datatable.field];
+                                }
                                 $defer.resolve(response.data);
                             });
                         }).bind(this)
@@ -124,6 +130,23 @@
                 value = this.decorate(this.decorator, value)
             }
             return value;
+        }
+
+        dateValue($scope, row) {
+            var value = row;
+            if(this.field.indexOf('.') > -1) {
+                var paths = this.field.split(".");
+                for(var path in paths) {
+                    value = value[paths[path]];
+                }
+            }
+            else {
+                value = value[this.field];
+            }
+            if(this.decorator) {
+                value = this.decorate(this.decorator, value)
+            }
+            return new Date(value).toLocaleDateString();
         }
 
         objectValue($scope, row) {
