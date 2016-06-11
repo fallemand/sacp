@@ -63,6 +63,7 @@ function handleError(res, statusCode) {
 export function index(req, res) {
     return TreatmentHistory.find()
         .populate('history.state')
+        .populate('history.user')
         .exec()
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -70,7 +71,10 @@ export function index(req, res) {
 
 // Gets a single TreatmentHistory from the DB
 export function show(req, res) {
-    return TreatmentHistory.findById(req.params.id).exec()
+    return TreatmentHistory.findById(req.params.id)
+        .populate('history.state')
+        .populate('history.user')
+        .exec()
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -145,6 +149,24 @@ export function metadata(req, res) {
                         },
                         'validations': {
                             'required': ''
+                        }
+                    },
+                    {
+                        'title': 'Usuario',
+                        'field': 'user',
+                        'type': 'typeahead',
+                        'descField': 'name',
+                        'remoteApi': 'users',
+                        'searchField': 'name',
+                        'show': true,
+                        'controlType': 'object',
+                        'icon': 'fa fa-user-md',
+                        'attributes': {
+                            required: true
+                        },
+                        'validations': {
+                            'required': '',
+                            'editable': ''
                         }
                     },
                     {

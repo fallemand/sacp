@@ -29,14 +29,19 @@ import DrugType from '../api/drug-type/drug-type.model';
 // TreatmentState.find({}).remove()
 //     .then(() => {
 //         TreatmentState.create({
+//             _id: 'EA',
 //             name: 'En Auditoria'
 //         }, {
+//             _id: 'AP',
 //             name: 'Aprobado'
 //         },{
+//             _id: 'EE',
 //             name: 'En Espera'
 //         },{
+//             _id: 'PA',
 //             name: 'Pausado'
 //         }, {
+//             _id: 'CA',
 //             name: 'Cancelado'
 //         })
 //     });

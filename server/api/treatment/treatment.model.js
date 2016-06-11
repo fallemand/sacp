@@ -78,7 +78,7 @@ var TreatmentSchema = new Schema({
     }],
     observation: String,
     state: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'TreatmentState',
         required: true
     }

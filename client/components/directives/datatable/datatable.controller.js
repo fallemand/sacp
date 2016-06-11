@@ -91,9 +91,10 @@
                     this.datatable.ngtable = new this.NgTableParams({}, {
                         getData: (function ($defer, params) {
                             var filters = (this.datatable.filters) ? '?' + this.datatable.filters : '';
-                            this.$http.get('/api/' + this.datatable.entity + filters).then(response => {
+                            var entityId = (this.datatable.id) ? '/' + this.datatable.id : '';
+                            this.$http.get('/api/' + this.datatable.entity + entityId + filters).then(response => {
                                 if(this.datatable.field) {
-                                    response.data = response.data[0][this.datatable.field];
+                                    response.data = response.data[this.datatable.field];
                                 }
                                 $defer.resolve(response.data);
                             });

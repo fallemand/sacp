@@ -141,7 +141,7 @@
                     field: 'history',
                     type: 'remote',
                     metadataFilters: 'field=history',
-                    filters: 'treatment='+this.object._id
+                    id: this.object._id
                 };
             }
         }

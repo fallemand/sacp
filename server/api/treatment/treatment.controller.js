@@ -90,10 +90,10 @@ export function show(req, res) {
                 select: 'name'
             }, function (err) {
                 if (err) {
-                    res.status(500).send(err);
+                    return res.status(500).send(err);
                 }
                 else {
-                    res.status(200).send(treatment);
+                    return res.status(200).send(treatment);
                 }
             });
         });
@@ -101,45 +101,69 @@ export function show(req, res) {
 
 // Creates a new Treatment in the DB
 export function create(req, res) {
-    TreatmentState.findOne({name: 'En Auditoria'})
-        .exec()
-        .then(state => {
-            req.body.state = state._id;
-            Treatment.create(req.body, function (err, treatment) {
-                if (err) {
-                    res.status(500).send(err);
+    req.body.state = 'EA';
+    Treatment.create(req.body, function (err, treatment) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        var treatmentHistory = {
+            _id: treatment._id,
+            history: [
+                {
+                    date: new Date(),
+                    state: 'EA',
+                    user: req.user._id,
+                    observation: treatment.observation
                 }
-                var treatmentHistory = {
-                    treatment: treatment._id,
-                    history: [
-                        {
-                            date: new Date(),
-                            state: state._id,
-                            observation: treatment.observation
-                        }
-                    ]
-                };
-                TreatmentHistory.create(treatmentHistory, function (err) {
-                    if (err) {
-                        Treatment.remove({_id: treatment._id});
-                        res.status(500).send(err);
-                    }
-                    return res.status(200).json(treatment);
-                });
-            });
+            ]
+        };
+        TreatmentHistory.create(treatmentHistory, function (err) {
+            if (err) {
+                Treatment.remove({_id: treatment._id});
+                return res.status(500).send(err);
+            }
+            return res.status(200).json(treatment);
         });
+    });
 }
 
 // Updates an existing Treatment in the DB
 export function update(req, res) {
+    req.body.state = 'EA';
     if (req.body._id) {
         delete req.body._id;
     }
-    return Treatment.findById(req.params.id).exec()
-        .then(handleEntityNotFound(res))
-        .then(saveUpdates(req.body))
-        .then(respondWithResult(res))
-        .catch(handleError(res));
+    Treatment.findById(req.params.id).exec()
+        .then(entity => {
+            if(!entity) {
+                res.status(404).end();
+            }
+            var updated = _.merge(entity, req.body);
+            updated.save(function(err, treatment) {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                TreatmentHistory.findById(treatment._id, function (err, history) {
+                    if(err) {
+                        entity.save();
+                        return res.status(500).send(err);
+                    }
+                    var newHistory = {
+                        date: new Date(),
+                        user: req.user._id,
+                        state: 'EA',
+                        observation: treatment.observation
+                    };
+                    history.history.push(newHistory);
+                    history.save(function(err) {
+                        if(err) {
+                            return res.status(500).send(err);
+                        }
+                        return res.status(200).json(treatment);
+                    });
+                });
+            })
+        });
 }
 
 // Deletes a Treatment from the DB

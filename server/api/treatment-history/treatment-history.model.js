@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
 var TreatmentHistorySchema = new mongoose.Schema({
-    treatment: {
+    _id: {
         type: Schema.Types.ObjectId,
         ref: 'Treatment'
     },
@@ -13,9 +13,15 @@ var TreatmentHistorySchema = new mongoose.Schema({
             type: Date,
             required: true
         },
-        state: {
+        user: {
             type: Schema.Types.ObjectId,
-            ref: 'TreatmentState'
+            ref: 'User',
+            required: true
+        },
+        state: {
+            type: String,
+            ref: 'TreatmentState',
+            required: true
         },
         observation: {
             type: String,
