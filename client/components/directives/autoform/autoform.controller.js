@@ -105,12 +105,17 @@
                         });
                     break;
                 case 'local' :
-                    this.$scope.object[this.autoform.field] = (this.$scope.object[this.autoform.field]) ? this.$scope.object[this.autoform.field] : [];
-                    this.$scope.object[this.aux] = (this.$scope.object[this.aux]) ? this.$scope.object[this.aux] : [];
-                    this.$scope.object[this.autoform.field].push(angular.copy(this.$scope.object[this.aux][this.autoform.field]));
-                    this.resetForm();
-                    if (this.autoform.reloadEvent()) {
-                        this.autoform.reloadEvent();
+                    if (this.autoform.addEvent) {
+                        this.autoform.addEvent();
+                    }
+                    else {
+                        this.$scope.object[this.autoform.field] = (this.$scope.object[this.autoform.field]) ? this.$scope.object[this.autoform.field] : [];
+                        this.$scope.object[this.aux] = (this.$scope.object[this.aux]) ? this.$scope.object[this.aux] : [];
+                        this.$scope.object[this.autoform.field].push(angular.copy(this.$scope.object[this.aux][this.autoform.field]));
+                        this.resetForm();
+                        if (this.autoform.reloadEvent) {
+                            this.autoform.reloadEvent();
+                        }
                     }
             }
         }

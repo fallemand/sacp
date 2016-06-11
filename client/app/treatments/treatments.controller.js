@@ -132,7 +132,7 @@
                     if(this.object.drugs.length > 0) {
                         this.validStep = true;
                     }
-                }).bind(this),
+                }).bind(this)
             };
 
             if(this.action !== 'add') {
@@ -142,6 +142,30 @@
                     type: 'remote',
                     metadataFilters: 'field=history',
                     id: this.object._id
+                };
+                this.result= {};
+                this.autoformResult = {
+                    entity: 'treatment-history',
+                    type: 'local',
+                    section: 'form',
+                    template: 'full',
+                    metadataFilters: 'field=history',
+                    inputIcons : true,
+                    addEvent: (function() {
+                        this.$http.put('/api/treatments/' + this.object._id, {'state' : this.result.state}).then(() => {
+                                this.$http.put('/api/treatment-history/' + this.object._id, this.result).then(() => {
+                                        this.resetForm();
+                                        this.ngToast.create('Estado seteado con éxito!');
+                                        this.$state.go('treatments');
+                                    })
+                                    .catch(err => {
+                                        this.handleError(err);
+                                    });
+                            })
+                            .catch(err => {
+                                this.handleError(err);
+                            });
+                    }).bind(this)
                 };
             }
         }
@@ -206,11 +230,10 @@
             }
             else {
                 this.ngToast.create({
-                    className: 'warning',
-                    content: err.message
+                    className: 'danger',
+                    content: (err.message) ? err.message : err.data
                 });
             }
-            this.autoform.isSaving = false;
         }
 
     }

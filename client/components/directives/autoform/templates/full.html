@@ -3,10 +3,10 @@
 
     <ng-include src="'/components/directives/autoform/templates/partials/fieldset.html'"></ng-include>
     <div class="text-right">
-        <button class="btn btn-primary" ng-disabled="vm.autoform.isSaving || vm.autoform.disabled" type="submit">Registrarse
-        </button>
         <a class="btn btn-default" ng-disabled="vm.autoform.isSaving"
            ng-click="vm.resetForm()">Cancelar</a>
+        <button class="btn btn-primary" ng-disabled="vm.autoform.isSaving || vm.autoform.disabled" type="submit">Enviar
+        </button>
     </div>
 
 </form>

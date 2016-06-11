@@ -136,6 +136,12 @@ export function metadata(req, res) {
                 'field': 'history',
                 'hideInList' : true,
                 'controlType': 'list',
+                sections: {
+                    form: {
+                        title: 'Revisión Auditoría',
+                        fields: ['state', 'observation']
+                    }
+                },
                 fields: [
                     {
                         'title': 'Fecha',
@@ -192,19 +198,20 @@ export function metadata(req, res) {
                         }
                     },
                     {
-                        'title': 'Observación',
+                        'title': 'Observaciones',
                         'field': 'observation',
                         'type': 'text',
                         'show': true,
-                        'controlType': 'input',
-                        'icon': 'fa fa-pencil',
+                        'controlType': 'textarea',
+                        'icon': 'fa fa-phone',
                         'attributes': {
-                            required: true
+                            required: true,
+                            rows: 4
                         },
                         'validations': {
                             'required': ''
                         }
-                    }
+                    },
                 ]
             }
         ]
