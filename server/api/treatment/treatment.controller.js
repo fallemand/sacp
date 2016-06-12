@@ -129,7 +129,7 @@ export function create(req, res) {
 
 // Updates an existing Treatment in the DB
 export function update(req, res) {
-    if(!req.body.state) {
+    if (!req.body.state) {
         req.body.state = 'EA';
     }
     if (req.body._id) {
@@ -137,16 +137,16 @@ export function update(req, res) {
     }
     Treatment.findById(req.params.id).exec()
         .then(entity => {
-            if(!entity) {
+            if (!entity) {
                 res.status(404).end();
             }
             var updated = _.merge(entity, req.body);
-            updated.save(function(err, treatment) {
+            updated.save(function (err, treatment) {
                 if (err) {
                     return res.status(500).send(err);
                 }
                 TreatmentHistory.findById(treatment._id, function (err, history) {
-                    if(err) {
+                    if (err) {
                         entity.save();
                         return res.status(500).send(err);
                     }
@@ -157,8 +157,8 @@ export function update(req, res) {
                         observation: treatment.observation
                     };
                     history.history.push(newHistory);
-                    history.save(function(err) {
-                        if(err) {
+                    history.save(function (err) {
+                        if (err) {
                             return res.status(500).send(err);
                         }
                         return res.status(200).json(treatment);
@@ -518,13 +518,11 @@ export function metadata(req, res) {
                 'decorator': {
                     type: 'label',
                     class: {
-                        class: {
-                            'En Auditoria': 'label-primary',
-                            'Aprobado': 'label-success',
-                            'Pausado': 'label-warning',
-                            'Cancelado': 'label-danger',
-                            'En Espera': 'label-default'
-                        }
+                        'En Auditoria': 'label-primary',
+                        'Aprobado': 'label-success',
+                        'Pausado': 'label-warning',
+                        'Cancelado': 'label-danger',
+                        'En Espera': 'label-default'
                     }
                 }
             }
