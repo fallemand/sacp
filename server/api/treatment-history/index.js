@@ -10,7 +10,7 @@ router.get('/', auth.isAuthenticated(), controller.index);
 router.get('/metadata', auth.isAuthenticated(), controller.metadata);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 // router.post('/', controller.create);
-router.put('/:id', controller.update);
+router.put('/:id', auth.hasRole('admin'), controller.update);
 // router.patch('/:id', controller.update);
 // router.delete('/:id', controller.destroy);
 

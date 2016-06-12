@@ -129,7 +129,9 @@ export function create(req, res) {
 
 // Updates an existing Treatment in the DB
 export function update(req, res) {
-    req.body.state = 'EA';
+    if(!req.body.state) {
+        req.body.state = 'EA';
+    }
     if (req.body._id) {
         delete req.body._id;
     }
@@ -516,7 +518,13 @@ export function metadata(req, res) {
                 'decorator': {
                     type: 'label',
                     class: {
-                        'En Auditoria': 'label-warning'
+                        class: {
+                            'En Auditoria': 'label-primary',
+                            'Aprobado': 'label-success',
+                            'Pausado': 'label-warning',
+                            'Cancelado': 'label-danger',
+                            'En Espera': 'label-default'
+                        }
                     }
                 }
             }

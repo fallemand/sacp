@@ -92,11 +92,22 @@ export function update(req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    return TreatmentHistory.findById(req.params.id).exec()
-        .then(handleEntityNotFound(res))
-        .then(saveUpdates(req.body))
-        .then(respondWithResult(res))
-        .catch(handleError(res));
+    var newHistory = req.body;
+    newHistory.user = req.user._id;
+    newHistory.date = new Date();
+    TreatmentHistory.findById(req.params.id).exec()
+        .then(treatmentHistory => {
+            if (!treatmentHistory) {
+                res.status(404).end();
+            }
+            treatmentHistory.history.push(newHistory);
+            treatmentHistory.save(function (err, entity) {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                return res.status(200).json(entity);
+            });
+        });
 }
 
 // Deletes a TreatmentHistory from the DB
@@ -134,7 +145,7 @@ export function metadata(req, res) {
             {
                 'title': 'Historial de Estados',
                 'field': 'history',
-                'hideInList' : true,
+                'hideInList': true,
                 'controlType': 'list',
                 sections: {
                     form: {
@@ -193,7 +204,11 @@ export function metadata(req, res) {
                         'decorator': {
                             type: 'label',
                             class: {
-                                'En Auditoria': 'label-warning'
+                                'En Auditoria': 'label-primary',
+                                'Aprobado': 'label-success',
+                                'Pausado': 'label-warning',
+                                'Cancelado': 'label-danger',
+                                'En Espera': 'label-default'
                             }
                         }
                     },

@@ -151,10 +151,11 @@
                     template: 'full',
                     metadataFilters: 'field=history',
                     inputIcons : true,
+                    object: this.result,
+                    field: 'history',
                     addEvent: (function() {
-                        this.$http.put('/api/treatments/' + this.object._id, {'state' : this.result.state}).then(() => {
-                                this.$http.put('/api/treatment-history/' + this.object._id, this.result).then(() => {
-                                        this.resetForm();
+                        this.$http.put('/api/treatments/' + this.object._id, {'state' : this.result.aux.history.state}).then(treatment => {
+                                this.$http.put('/api/treatment-history/' + this.object._id, this.result.aux.history).then(() => {
                                         this.ngToast.create('Estado seteado con éxito!');
                                         this.$state.go('treatments');
                                     })
@@ -195,6 +196,7 @@
                             this.object[attribute] = this.object[attribute]._id;
                         }
                     }
+                    this.object.state = 'EA';
                     this.$http.put('/api/treatments/' + this.object._id, this.object).then(() => {
                             this.object = angular.copy({});
                             this.ngToast.create('Tratamiento modificado con éxito!');
