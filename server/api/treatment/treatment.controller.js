@@ -131,18 +131,19 @@ export function create(req, res) {
 
 // Updates an existing Treatment in the DB
 export function update(req, res) {
-    if (!req.body.state) {
-        req.body.state = 'EA';
+    var treatment = req.body;
+    if (!treatment.state) {
+        treatment.state = 'EA';
     }
-    if (req.body._id) {
-        delete req.body._id;
+    if (treatment._id) {
+        delete treatment._id;
     }
     Treatment.findById(req.params.id).exec()
         .then(entity => {
             if (!entity) {
                 res.status(404).end();
             }
-            var updated = _.merge(entity, req.body);
+            var updated = _.merge(entity, treatment);
             updated.save(function (err, treatment) {
                 if (err) {
                     return res.status(500).send(err);
@@ -432,7 +433,7 @@ export function metadata(req, res) {
                 'field': 'treatmentBodySurface',
                 'type': 'text',
                 'show': true,
-                'editable' : false,
+                'disabled' : true,
                 'controlType': 'input',
                 'hideInList': true,
                 'icon': 'fa fa-home',

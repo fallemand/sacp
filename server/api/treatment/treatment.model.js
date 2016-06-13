@@ -90,9 +90,14 @@ var TreatmentSchema = new Schema({
 });
 
 TreatmentSchema.pre('remove', function(next) {
-    // 'this' is the client being removed. Provide callbacks here if you want
-    // to be notified of the calls' result.
     TreatmentHistory.remove({_id: this._id}).exec();
+    next();
+});
+
+TreatmentSchema.pre('save', function(next) {
+    if(this.width && this.height) {
+        this.treatmentBodySurface = root(2,((this.weight * this.height) / 60));
+    }
     next();
 });
 
