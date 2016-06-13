@@ -3,12 +3,13 @@
 (function () {
 
     class DatatableController {
-        constructor($scope, $http, NgTableParams, sweet) {
+        constructor($scope, $http, NgTableParams, sweet, Auth) {
             this.sweet = sweet;
             this.datatable = $scope.parameters;
             this.$http = $http;
             this.NgTableParams = NgTableParams;
             this.$scope = $scope;
+            this.userType = (Auth.isAdmin()) ? 'admin' : 'user';
             this.getMetadata();
         }
 
@@ -46,7 +47,8 @@
                     show: 'true',
                     filter: {'name': "text"},
                     getValue: this.actionsCol,
-                    actions: this.datatable.actions
+                    actions: this.datatable.actions,
+                    privileges: (this.datatable.privileges) ? this.datatable.privileges[this.userType] : undefined
                 };
                 cols.push(actionsCol);
             }
@@ -170,22 +172,24 @@
         actionsCol($scope, row) {
             var html = '<div class="btn-group">';
             angular.forEach(this.actions, (value, index) => {
-                switch (value) {
-                    case 'view' :
-                        html += '<a class="btn btn-xs btn-default" ng-click="vm.view(row)" uib-tooltip="Ver" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-eye"></i></a>';
-                        break;
-                    case 'modify' :
-                        html += '<a class="btn btn-xs btn-default" ng-click="vm.update(row)" uib-tooltip="Modificar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-pencil"></i></a>';
-                        break;
-                    case 'delete' :
-                        html += '<a class="btn btn-xs btn-default" ng-click="vm.delete(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>';
-                        break;
-                    case 'activate' :
-                        html += '<a class="btn btn-xs btn-success" ng-click="vm.activate(row)" ><i class="fa fa-check-square"></i> Activar</a>';
-                        break;
-                    case 'cancel' :
-                        html += '<a class="btn btn-xs btn-danger" ng-click="vm.delete(row)"><i class="fa fa-times"></i>Cancelar</a>';
-                        break;
+                if(!this.privileges || this.privileges.indexOf(value) > -1) {
+                    switch (value) {
+                        case 'view' :
+                            html += '<a class="btn btn-xs btn-default" ng-click="vm.view(row)" uib-tooltip="Ver" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-eye"></i></a>';
+                            break;
+                        case 'modify' :
+                            html += '<a class="btn btn-xs btn-default" ng-click="vm.update(row)" uib-tooltip="Modificar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-pencil"></i></a>';
+                            break;
+                        case 'delete' :
+                            html += '<a class="btn btn-xs btn-default" ng-click="vm.delete(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>';
+                            break;
+                        case 'activate' :
+                            html += '<a class="btn btn-xs btn-success" ng-click="vm.activate(row)" ><i class="fa fa-check-square"></i> Activar</a>';
+                            break;
+                        case 'cancel' :
+                            html += '<a class="btn btn-xs btn-danger" ng-click="vm.delete(row)"><i class="fa fa-times"></i>Cancelar</a>';
+                            break;
+                    }
                 }
             });
             html += '</div>';

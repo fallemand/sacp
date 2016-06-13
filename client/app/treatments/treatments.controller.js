@@ -2,12 +2,13 @@
 (function () {
 
     class TreatmentsComponent {
-        constructor($http, ngToast, $state, $stateParams) {
+        constructor($http, ngToast, $state, $stateParams, Auth) {
             this.loadedData = false;
             this.action = $stateParams.action;
             this.$http = $http;
             this.$state = $state;
             this.ngToast = ngToast;
+            this.isAdmin = Auth.isAdmin;
             switch(this.action) {
                 case 'add' :
                     this.initialize();
@@ -154,7 +155,7 @@
                     object: this.result,
                     field: 'history',
                     addEvent: (function() {
-                        this.$http.put('/api/treatments/' + this.object._id, {'state' : this.result.aux.history.state}).then(treatment => {
+                        this.$http.put('/api/treatments/' + this.object._id + '/status', this.result.aux.history.state).then(treatment => {
                                 this.$http.put('/api/treatment-history/' + this.object._id, this.result.aux.history).then(() => {
                                         this.ngToast.create('Estado seteado con éxito!');
                                         this.$state.go('treatments');

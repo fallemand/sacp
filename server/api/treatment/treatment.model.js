@@ -2,12 +2,22 @@
 
 import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
+import TreatmentHistory from '../treatment-history/treatment-history.model';
 
 
 var TreatmentSchema = new Schema({
     patient: {
         type: Schema.Types.ObjectId,
         ref: 'Patient'
+    },
+    doctor: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    state: {
+        type: String,
+        ref: 'TreatmentState',
+        required: true
     },
     diseaseTopographicDiagnosis: {
         type: Schema.Types.ObjectId,
@@ -76,12 +86,15 @@ var TreatmentSchema = new Schema({
             required: true
         }
     }],
-    observation: String,
-    state: {
-        type: String,
-        ref: 'TreatmentState',
-        required: true
-    }
+    observation: String
 });
+
+TreatmentSchema.pre('remove', function(next) {
+    // 'this' is the client being removed. Provide callbacks here if you want
+    // to be notified of the calls' result.
+    TreatmentHistory.remove({_id: this._id}).exec();
+    next();
+});
+
 
 export default mongoose.model('Treatment', TreatmentSchema);

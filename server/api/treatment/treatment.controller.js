@@ -67,6 +67,7 @@ function handleError(res, statusCode) {
 export function index(req, res) {
     return Treatment.find()
         .populate('patient')
+        .populate('doctor')
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
         .populate('drugsType')
@@ -102,6 +103,7 @@ export function show(req, res) {
 // Creates a new Treatment in the DB
 export function create(req, res) {
     req.body.state = 'EA';
+    req.body.doctor = req.user._id;
     Treatment.create(req.body, function (err, treatment) {
         if (err) {
             return res.status(500).send(err);
@@ -165,6 +167,24 @@ export function update(req, res) {
                     });
                 });
             })
+        });
+}
+
+/**
+ * Change a users password
+ */
+export function changeStatus(req, res, next) {
+    var newStatus = req.body;
+
+    return Treatment.findById(req.params.id).exec()
+        .then(treatment => {
+            treatment.state = newStatus._id;
+                treatment.save(function(err) {
+                    if(err) {
+                        return res.status(500).send(err)
+                    }
+                    return res.status(204).end();
+                });
         });
 }
 
@@ -234,6 +254,50 @@ export function metadata(req, res) {
                 }
             },
             {
+                'title': 'Médico',
+                'field': 'doctor',
+                'type': 'typeahead',
+                'descField': 'desc',
+                'remoteApi': 'users',
+                'searchField': 'name',
+                'show': true,
+                'controlType': 'object',
+                'icon': 'fa fa-user-md',
+                'attributes': {
+                    required: true
+                },
+                'validations': {
+                    'required': '',
+                    'editable': ''
+                }
+            },
+            {
+                'title': 'Estado',
+                'field': 'state',
+                'type': 'select',
+                'show': true,
+                'descField': 'name',
+                'remoteApi': 'treatment-states',
+                'controlType': 'object',
+                'attributes': {
+                    required: true
+                },
+                'validations': {
+                    'required': '',
+                    'number': ''
+                },
+                'decorator': {
+                    type: 'label',
+                    class: {
+                        'En Auditoria': 'label-primary',
+                        'Aprobado': 'label-success',
+                        'Pausado': 'label-warning',
+                        'Cancelado': 'label-danger',
+                        'En Espera': 'label-default'
+                    }
+                }
+            },
+            {
                 'title': 'Diagnóstico Topográfico',
                 'field': 'diseaseTopographicDiagnosis',
                 'type': 'typeahead',
@@ -291,6 +355,7 @@ export function metadata(req, res) {
                 'type': 'select',
                 'show': true,
                 'descField': 'name',
+                'hideInList': true,
                 'remoteApi': 'treatment-types',
                 'icon': 'fa fa-credit-card',
                 'controlType': 'object',
@@ -334,6 +399,7 @@ export function metadata(req, res) {
             {
                 'title': 'Altura',
                 'field': 'treatmentHeight',
+                'placeholder' : 'En cm. EJ: 180',
                 'type': 'text',
                 'show': true,
                 'controlType': 'input',
@@ -366,6 +432,7 @@ export function metadata(req, res) {
                 'field': 'treatmentBodySurface',
                 'type': 'text',
                 'show': true,
+                'editable' : false,
                 'controlType': 'input',
                 'hideInList': true,
                 'icon': 'fa fa-home',
@@ -381,6 +448,7 @@ export function metadata(req, res) {
                 'field': 'treatmentActualCicle',
                 'type': 'text',
                 'show': true,
+                'hideInList': true,
                 'controlType': 'input',
                 'icon': 'fa fa-home',
                 'attributes': {
@@ -394,6 +462,7 @@ export function metadata(req, res) {
                 'title': 'Cantidad de Ciclos',
                 'field': 'treatmentCyclesQuantity',
                 'type': 'text',
+                'hideInList': true,
                 'show': true,
                 'controlType': 'input',
                 'icon': 'fa fa-home',
@@ -498,32 +567,6 @@ export function metadata(req, res) {
                 },
                 'validations': {
                     'required': ''
-                }
-            },
-            {
-                'title': 'Estado',
-                'field': 'state',
-                'type': 'select',
-                'show': true,
-                'descField': 'name',
-                'remoteApi': 'treatment-states',
-                'controlType': 'object',
-                'attributes': {
-                    required: true
-                },
-                'validations': {
-                    'required': '',
-                    'number': ''
-                },
-                'decorator': {
-                    type: 'label',
-                    class: {
-                        'En Auditoria': 'label-primary',
-                        'Aprobado': 'label-success',
-                        'Pausado': 'label-warning',
-                        'Cancelado': 'label-danger',
-                        'En Espera': 'label-default'
-                    }
                 }
             }
         ]
