@@ -12,7 +12,7 @@ angular.module('sacpApp')
                 var newElement = element.clone()
                     .addClass('form-control')
                     .attr('name', scope.field.field)
-                    .attr('ng-disabled', 'vm.autoform.disabled')
+                    .attr('ng-disabled', scope.field.disabled + ' || vm.autoform.disabled')
                     .removeAttr('autoinput');
 
                 switch (scope.field.controlType) {

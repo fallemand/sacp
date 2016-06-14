@@ -401,7 +401,7 @@ export function metadata(req, res) {
                 'title': 'Altura',
                 'field': 'treatmentHeight',
                 'placeholder' : 'En cm. EJ: 180',
-                'type': 'text',
+                'type': 'number',
                 'show': true,
                 'controlType': 'input',
                 'hideInList': true,
@@ -416,7 +416,8 @@ export function metadata(req, res) {
             {
                 'title': 'Peso',
                 'field': 'treatmentWeight',
-                'type': 'text',
+                'placeholder' : 'En kg. EJ: 80',
+                'type': 'number',
                 'show': true,
                 'controlType': 'input',
                 'hideInList': true,
@@ -431,18 +432,13 @@ export function metadata(req, res) {
             {
                 'title': 'Superficie Corporal',
                 'field': 'treatmentBodySurface',
+                'placeholder': 'Este valor se calculará automáticamente',
                 'type': 'text',
                 'show': true,
                 'disabled' : true,
                 'controlType': 'input',
                 'hideInList': true,
-                'icon': 'fa fa-home',
-                'attributes': {
-                    required: true
-                },
-                'validations': {
-                    'required': ''
-                }
+                'icon': 'fa fa-home'
             },
             {
                 'title': 'Ciclo Actual',

@@ -176,6 +176,9 @@
             this.$http.get('/api/' + api)
                 .then(response => {
                     this[field] = response.data;
+                    if(!this.$scope.object) {
+                        this.$scope.object = {};
+                    }
                     if(!this.$scope.object[field]) {
                         this.$scope.object[field] = "";
                     }

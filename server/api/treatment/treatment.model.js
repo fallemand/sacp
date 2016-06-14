@@ -95,8 +95,15 @@ TreatmentSchema.pre('remove', function(next) {
 });
 
 TreatmentSchema.pre('save', function(next) {
-    if(this.width && this.height) {
-        this.treatmentBodySurface = root(2,((this.weight * this.height) / 60));
+    if(this.treatmentWeight && this.treatmentHeight) {
+        this.treatmentBodySurface = Math.sqrt((this.treatmentWeight * this.treatmentHeight) / 60).toFixed(2);
+    }
+    next();
+});
+
+TreatmentSchema.pre('update', function(next) {
+    if(this.treatmentWeight && this.treatmentHeight) {
+        this.treatmentBodySurface = Math.sqrt((this.treatmentWeight * this.treatmentHeight) / 60).toFixed(2);
     }
     next();
 });
