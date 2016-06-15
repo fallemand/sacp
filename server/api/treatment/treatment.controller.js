@@ -81,6 +81,7 @@ export function index(req, res) {
 export function show(req, res) {
     return Treatment.findById(req.params.id)
         .populate('patient')
+        .populate('doctor')
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
         .populate('drugsType')

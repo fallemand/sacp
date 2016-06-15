@@ -48,6 +48,7 @@
                     filter: {'name': "text"},
                     getValue: this.actionsCol,
                     actions: this.datatable.actions,
+                    customActions: this.datatable.customActions,
                     privileges: (this.datatable.privileges) ? this.datatable.privileges[this.userType] : undefined
                 };
                 cols.push(actionsCol);
@@ -192,6 +193,11 @@
                     }
                 }
             });
+            if(this.customActions) {
+                angular.forEach(this.customActions, (value, index) => {
+                    html += value(row);
+                });
+            }
             html += '</div>';
             return html;
         }

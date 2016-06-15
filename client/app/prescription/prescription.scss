@@ -1,0 +1,25 @@
+.prescription {
+    max-width: 900px;
+    margin: 0 auto;
+    .invoice-title h2, .invoice-title h3 {
+        display: inline-block;
+    }
+    .table > tbody > tr {
+        .no-line {
+            border-top: none;
+        }
+        .thick-line {
+            border-top: 2px solid;
+        }
+    }
+    .table > thead > tr > .no-line {
+        border-bottom: none;
+    }
+    &.scaled-element {
+        transform: scale(1.5,1.5);
+        -ms-transform: scale(1.5,1.5);
+        -webkit-transform: scale(1.5,1.5);
+    }
+}
+
+

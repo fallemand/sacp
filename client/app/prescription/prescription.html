@@ -1,1 +1,84 @@
-<div>This is the prescription view.</div>
+<div class="row">
+    <div class="col-xs-12 text-center mar-btm">
+        <button class="btn btn-primary btn-labeled fa fa-chevron-down" ng-click="vm.createPdf()">
+            Descargar
+        </button>
+        <div class="btn-group">
+            <button class="btn btn-default"><i class="fa fa-print"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div id="prescription" class="panel prescription">
+            <!--Data Table-->
+            <!--===================================================-->
+            <div class="panel-body">
+                <div class="">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="invoice-title">
+                                <h2>Receta</h2><h3 class="pull-right">Nº #12345</h3>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <address>
+                                        <strong>Médico Solicitante:</strong><br>
+                                        {{vm.treatment.doctor.name}}<br>
+                                        1234 Main<br>
+                                        Apt. 4B<br>
+                                        Springfield, ST 54321
+                                    </address>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <address>
+                                        <strong>Paciente:</strong><br>
+                                        Jane Smith<br>
+                                        1234 Main<br>
+                                        Apt. 4B<br>
+                                        Springfield, ST 54321
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <address>
+                                        <strong>Código Tratamiento:</strong><br>
+                                        AT2659<br><br>
+                                    </address>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <address>
+                                        <strong>Order Date:</strong><br>
+                                        March 7, 2014<br><br>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Detalle de Medicamentos</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive" ng-if="vm.treatment">
+                                        <datatable parameters="vm.drugsTable" object="vm.treatment.drugs"></datatable>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--End Data Table-->
+
+        </div>
+
+    </div>
+</div>

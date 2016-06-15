@@ -28,8 +28,8 @@
         }
 
         getEntity(id, callback) {
-            this.$http.get('/api/treatments/'+id).
-                then(response => {
+            this.$http.get('/api/treatments/'+id)
+                .then(response => {
                     this.object = response.data;
                     if(callback) {
                         callback();
@@ -37,7 +37,7 @@
                 })
                 .catch(err => {
                     if(err.data && err.data.name == 'CastError') {
-                        err.message = 'El parametros no es correcto';
+                        err.message = 'El parametro no es correcto';
                     }
                     this.ngToast.create({
                         className: 'danger',
