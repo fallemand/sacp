@@ -8,7 +8,7 @@
             this.$http = $http;
             this.$state = $state;
             this.ngToast = ngToast;
-            this.isAdmin = Auth.isAdmin;
+            this.isAdmin = Auth.isAdmin();
             switch(this.action) {
                 case 'add' :
                     this.initialize();
@@ -162,10 +162,12 @@
                                     })
                                     .catch(err => {
                                         this.handleError(err);
+                                        this.autoformResult.resetForm();
                                     });
                             })
                             .catch(err => {
                                 this.handleError(err);
+                                this.autoformResult.resetForm();
                             });
                     }).bind(this)
                 };

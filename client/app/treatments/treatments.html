@@ -71,7 +71,7 @@
 
     </div>
 </div>
-<div ng-if="vm.isAdmin && vm.action !== 'add'" class="row">
+<div ng-if="vm.action !== 'add'" class="row">
     <div class="col-md-7">
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5">
+    <div ng-if="vm.isAdmin" class="col-md-5">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Revisión Auditor</h3>

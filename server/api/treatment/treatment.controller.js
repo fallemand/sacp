@@ -77,6 +77,20 @@ export function index(req, res) {
         .catch(handleError(res));
 }
 
+// Gets a list of Treatments of that user
+export function indexUser(req, res) {
+    return Treatment.find({doctor: req.user._id})
+        .populate('patient')
+        .populate('doctor')
+        .populate('diseaseTopographicDiagnosis')
+        .populate('treatmentType')
+        .populate('drugsType')
+        .populate('state')
+        .exec()
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
 // Gets a single Treatment from the DB
 export function show(req, res) {
     return Treatment.findById(req.params.id)
@@ -139,10 +153,19 @@ export function update(req, res) {
     if (treatment._id) {
         delete treatment._id;
     }
+    if (treatment.doctor._id) {
+        delete treatment.doctor._id;
+    }
     Treatment.findById(req.params.id).exec()
         .then(entity => {
             if (!entity) {
                 res.status(404).end();
+            }
+            if (entity.state == 'AP') {
+                return res.status(500).send('No se puede modificar un tratamiento aprobado');
+            }
+            if (!entity.doctor.equals(req.user._id)) {
+                return res.status(500).send('El tratamiento que quieres modificar no te pertenece');
             }
             var updated = _.merge(entity, treatment);
             updated.save(function (err, treatment) {
@@ -180,6 +203,9 @@ export function changeStatus(req, res, next) {
 
     return Treatment.findById(req.params.id).exec()
         .then(treatment => {
+            if (treatment.state == 'AP') {
+                return res.status(500).send('No se puede modificar un tratamiento aprobado');
+            }
             treatment.state = newStatus._id;
                 treatment.save(function(err) {
                     if(err) {

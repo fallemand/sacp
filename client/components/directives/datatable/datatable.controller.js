@@ -49,7 +49,7 @@
                     getValue: this.actionsCol,
                     actions: this.datatable.actions,
                     customActions: this.datatable.customActions,
-                    privileges: (this.datatable.privileges) ? this.datatable.privileges[this.userType] : undefined
+                    privileges: (this.datatable.privileges && this.datatable.privileges[this.userType] && this.datatable.privileges[this.userType].actions) ? this.datatable.privileges[this.userType].actions : undefined
                 };
                 cols.push(actionsCol);
             }
@@ -95,7 +95,8 @@
                         getData: (function ($defer, params) {
                             var filters = (this.datatable.filters) ? '?' + this.datatable.filters : '';
                             var entityId = (this.datatable.id) ? '/' + this.datatable.id : '';
-                            this.$http.get('/api/' + this.datatable.entity + entityId + filters).then(response => {
+                            var mine = (this.datatable.privileges && this.datatable.privileges[this.userType] && this.datatable.privileges[this.userType].list) ? '/mine' : '';
+                            this.$http.get('/api/' + this.datatable.entity + entityId + mine + filters).then(response => {
                                 if(this.datatable.field) {
                                     response.data = response.data[this.datatable.field];
                                 }
@@ -172,7 +173,7 @@
 
         actionsCol($scope, row) {
             var html = '<div class="btn-group">';
-            angular.forEach(this.actions, (value, index) => {
+            angular.forEach(this.actions, (value, key) => {
                 if(!this.privileges || this.privileges.indexOf(value) > -1) {
                     switch (value) {
                         case 'view' :
@@ -194,8 +195,10 @@
                 }
             });
             if(this.customActions) {
-                angular.forEach(this.customActions, (value, index) => {
-                    html += value(row);
+                angular.forEach(this.customActions, (value, key) => {
+                    if(!this.privileges || this.privileges.indexOf(key) > -1) {
+                        html += value(row);
+                    }
                 });
             }
             html += '</div>';
