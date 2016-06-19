@@ -1,8 +1,8 @@
 <form name="vm.autoformPatient.form" class="mar-top form-horizontal" novalidate autocomplete="off" form-step-validity>
     <autoform parameters="vm.autoformPatient" object="vm.object"></autoform>
     <div class="form-group">
-        <label class="col-lg-3 control-label">Datos del Paciente</label>
-        <div ng-show="vm.object.patient && vm.object.patient._id" class="col-lg-6 effect-fade">
+        <label class="col-sm-4 control-label">Datos del Paciente</label>
+        <div ng-show="vm.object.patient && vm.object.patient._id" class="col-sm-6 effect-fade">
             <div class="well well-sm">
                 <dl ng-if="vm.object.patient && vm.object.patient._id" class="dl-horizontal mar-no" describe entity="patients" data="vm.object.patient"/>
             </div>

@@ -96,3 +96,7 @@ select.form-control {
 .form-control {
     height: inherit;
 }
+
+.form-control[type=date] {
+    height: 31px;
+}

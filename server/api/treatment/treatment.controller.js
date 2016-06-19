@@ -251,7 +251,7 @@ export function metadata(req, res) {
             },
             treatment: {
                 title: 'Tratamiento',
-                fields: ['treatmentType', 'treatmentSchema', 'treatmentExpectedDate', 'treatmentHeight', 'treatmentWeight', 'treatmentBodySurface', 'treatmentActualCicle', 'treatmentCyclesQuantity']
+                fields: ['treatmentType', 'treatmentSchema', 'treatmentExpectedDate', 'treatmentHeight',  'treatmentActualCicle', 'treatmentWeight', 'treatmentCyclesQuantity', 'treatmentBodySurface']
             },
             drugs: {
                 title: 'Drogas',
@@ -441,13 +441,12 @@ export function metadata(req, res) {
                 }
             },
             {
-                'title': 'Peso',
-                'field': 'treatmentWeight',
-                'placeholder' : 'En kg. EJ: 80',
-                'type': 'number',
+                'title': 'Ciclo Actual',
+                'field': 'treatmentActualCicle',
+                'type': 'text',
                 'show': true,
-                'controlType': 'input',
                 'hideInList': true,
+                'controlType': 'input',
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -457,23 +456,13 @@ export function metadata(req, res) {
                 }
             },
             {
-                'title': 'Superficie Corporal',
-                'field': 'treatmentBodySurface',
-                'placeholder': 'Este valor se calculará automáticamente',
-                'type': 'text',
+                'title': 'Peso',
+                'field': 'treatmentWeight',
+                'placeholder' : 'En kg. EJ: 80',
+                'type': 'number',
                 'show': true,
-                'disabled' : true,
                 'controlType': 'input',
                 'hideInList': true,
-                'icon': 'fa fa-home'
-            },
-            {
-                'title': 'Ciclo Actual',
-                'field': 'treatmentActualCicle',
-                'type': 'text',
-                'show': true,
-                'hideInList': true,
-                'controlType': 'input',
                 'icon': 'fa fa-home',
                 'attributes': {
                     required: true
@@ -496,6 +485,17 @@ export function metadata(req, res) {
                 'validations': {
                     'required': ''
                 }
+            },
+            {
+                'title': 'Superficie Corporal',
+                'field': 'treatmentBodySurface',
+                'placeholder': 'Este valor se calculará automáticamente',
+                'type': 'text',
+                'show': true,
+                'disabled' : true,
+                'controlType': 'input',
+                'hideInList': true,
+                'icon': 'fa fa-home'
             },
             {
                 'title': 'Drogas',
