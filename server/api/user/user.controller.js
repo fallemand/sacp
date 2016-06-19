@@ -254,6 +254,7 @@ export function metadata(req, res, next) {
                 'field' : 'password',
                 'type': 'password',
                 'show': true,
+                'hideInList': true,
                 'icon': 'fa fa-asterisk',
                 'controlType' : 'input',
                 'attributes' : {

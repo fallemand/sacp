@@ -22,11 +22,8 @@ angular.module('sacpApp')
                 referrer: 'login',
                 template: '',
                 controller: function ($state, Auth) {
-                    var referrer = $state.params.referrer ||
-                        $state.current.referrer ||
-                        'login';
                     Auth.logout();
-                    $state.go(referrer);
+                    $state.go('login');
                 },
                 parent: 'public'
             })
