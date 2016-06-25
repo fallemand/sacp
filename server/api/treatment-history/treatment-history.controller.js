@@ -220,11 +220,7 @@ export function metadata(req, res) {
                         'controlType': 'textarea',
                         'icon': 'fa fa-phone',
                         'attributes': {
-                            required: true,
                             rows: 4
-                        },
-                        'validations': {
-                            'required': ''
                         }
                     },
                 ]

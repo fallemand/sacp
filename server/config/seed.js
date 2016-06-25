@@ -30,6 +30,8 @@ import DrugType from '../api/drug-type/drug-type.model';
 // DiseaseStage.find({}).remove()
 //     .then(() => {
 //         DiseaseStage.create({
+//             name: '0'
+//         },{
 //             name: 'I'
 //         }, {
 //             name: 'II'

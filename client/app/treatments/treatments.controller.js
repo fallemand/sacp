@@ -89,7 +89,7 @@
             this.autoformTreatment = {
                 entity: 'treatments',
                 section: 'treatment',
-                //formGroupClass: 'col-md-6',
+                formGroupClass: 'col-md-6',
                 object: this.object,
                 disabled : (this.action == 'view'),
                 template: 'lite'

@@ -3,24 +3,28 @@
         padding: 0 5px;
         margin: 5px 0;
     }
-    .help-block {
-        font-size: 11px;
-        line-height: 12px;
-        margin: 3px 0 0;
-    }
-    .row {
-        display: flex;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        flex-wrap: wrap;
-        > fieldset [class*='col-'] {
-            display: flex;
-            flex-direction: column;
-        }
-    }
+
     .btn {
         margin: 5px 0 0;
+    }
+}
+
+.form .help-block,
+.form-horizontal .help-block {
+    font-size: 11px;
+    line-height: 12px;
+    margin: 3px 0 0;
+}
+
+.row-equal-height {
+    margin: 0;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    > [class*='col-'] {
+        flex-direction: column;
     }
 }
 
@@ -28,6 +32,7 @@
     line-height: 1.1;
 }
 
-.form-horizontal input {
+.form-horizontal input,
+.form-horizontal select {
     max-width: 450px;
 }

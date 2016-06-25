@@ -29,7 +29,7 @@ var TreatmentSchema = new Schema({
     },
     diseaseStage: {
         type: Schema.Types.ObjectId,
-        required: 'DiseaseStage'
+        ref: 'DiseaseStage'
     },
     treatmentType: {
         type: Schema.Types.ObjectId,

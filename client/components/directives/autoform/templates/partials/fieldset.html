@@ -1,4 +1,5 @@
 <fieldset ng-disabled="vm.autoform.isSaving">
+    <div ng-class="{'row row-equal-height' : vm.autoform.formGroupClass}">
     <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
          ng-class="{ 'has-success': vm.autoform.form[field.field].$valid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted),
                                             'has-error': vm.autoform.form[field.field].$invalid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted)}">
@@ -13,5 +14,6 @@
         </div>
         <ng-include src="'components/directives/autoform/templates/partials/help-block.html'"></ng-include>
     </div>
+        </div>
 </fieldset>
 

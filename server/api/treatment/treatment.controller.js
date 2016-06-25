@@ -581,6 +581,7 @@ export function metadata(req, res) {
             {
                 'title': 'Observaciones',
                 'field': 'observation',
+                'placeholder' : 'Resumen de historial clínica, o cualquier comentario que considere conveniente',
                 'hideInList': true,
                 'type': 'text',
                 'show': true,

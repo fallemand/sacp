@@ -24,8 +24,7 @@ var TreatmentHistorySchema = new mongoose.Schema({
             required: true
         },
         observation: {
-            type: String,
-            required: true
+            type: String
         }
     }]
 });
