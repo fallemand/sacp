@@ -151,7 +151,7 @@
             if(this.decorator) {
                 value = this.decorate(this.decorator, value)
             }
-            return new Date(value).toLocaleDateString();
+            return (value) ? new Date(value).toLocaleDateString() : '-';
         }
 
         objectValue($scope, row) {

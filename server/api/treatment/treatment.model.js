@@ -14,6 +14,13 @@ var TreatmentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    createdDate: {
+        type: Date,
+        required: true
+    },
+    lastUodateDate: {
+        type: Date
+    },
     state: {
         type: String,
         ref: 'TreatmentState',

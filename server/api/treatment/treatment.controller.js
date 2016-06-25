@@ -122,6 +122,7 @@ export function show(req, res) {
 export function create(req, res) {
     req.body.state = 'EA';
     req.body.doctor = req.user._id;
+    req.body.createdDate = new Date();
     Treatment.create(req.body, function (err, treatment) {
         if (err) {
             return res.status(500).send(err);
@@ -159,6 +160,7 @@ export function update(req, res) {
     if (treatment.doctor._id) {
         delete treatment.doctor._id;
     }
+    treatment.lastUodateDate = new Date();
     Treatment.findById(req.params.id).exec()
         .then(entity => {
             if (!entity) {
@@ -266,6 +268,22 @@ export function metadata(req, res) {
             }
         },
         fields: [
+            {
+                'title': 'Creado',
+                'field': 'createdDate',
+                'type': 'date',
+                'show': true,
+                'controlType': 'input',
+                'icon': 'fa fa-calendar',
+            },
+            {
+                'title': 'Última Modificación',
+                'field': 'lastUodateDate',
+                'type': 'date',
+                'show': true,
+                'controlType': 'input',
+                'icon': 'fa fa-calendar',
+            },
             {
                 'title': 'Paciente',
                 'field': 'patient',
