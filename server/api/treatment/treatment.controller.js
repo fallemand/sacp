@@ -66,6 +66,7 @@ function handleError(res, statusCode) {
 // Gets a list of Treatments
 export function index(req, res) {
     return Treatment.find()
+        .sort({'lastUodateDate' : 'desc'})
         .populate('patient')
         .populate('doctor')
         .populate('diseaseStage')
@@ -81,6 +82,7 @@ export function index(req, res) {
 // Gets a list of Treatments of that user
 export function indexUser(req, res) {
     return Treatment.find({doctor: req.user._id})
+        .sort({'lastUodateDate' : 'desc'})
         .populate('patient')
         .populate('doctor')
         .populate('diseaseStage')
@@ -123,6 +125,7 @@ export function create(req, res) {
     req.body.state = 'EA';
     req.body.doctor = req.user._id;
     req.body.createdDate = new Date();
+    req.body.treatment.lastUodateDate = new Date();
     Treatment.create(req.body, function (err, treatment) {
         if (err) {
             return res.status(500).send(err);
