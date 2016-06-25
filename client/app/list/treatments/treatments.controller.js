@@ -23,7 +23,7 @@ class TreatmentsController {
                     return (row.state._id !== 'AP') ? '<a class="btn btn-xs btn-default" ng-click="vm.delete(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>' : '';
                 },
                 'view-prescription' : function(row) {
-                    return (row.state._id === 'AP') ? '<a class="btn btn-xs btn-success" href="/prescription/' + row._id + '" ui-sref="prescription({ id : ' + row._id + '})" uib-tooltip="Ver Receta" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-navicon"></i></a>' : '';
+                    return (row.state._id === 'AP') ? '<a class="btn btn-xs btn-success" href="/prescription/' + row._id + '" ui-sref="prescription({ id : \'' + row._id + '\'})" uib-tooltip="Ver Receta" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-navicon"></i></a>' : '';
                 }
             },
             viewEvent: (function (object) {
