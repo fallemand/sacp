@@ -64,6 +64,7 @@ function handleError(res, statusCode) {
 export function index(req, res) {
     return Patient.find(utils.processQuery(req.query))
         .populate('agreementType')
+        .populate('registeredBy')
         .exec()
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -73,6 +74,7 @@ export function index(req, res) {
 export function show(req, res) {
     return Patient.findById(req.params.id)
         .populate('agreementType')
+        .populate('registeredBy')
         .exec()
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
@@ -81,6 +83,7 @@ export function show(req, res) {
 
 // Creates a new Patient in the DB
 export function create(req, res) {
+    req.body.registeredBy = req.user._id;
     return Patient.create(req.body)
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
@@ -90,6 +93,9 @@ export function create(req, res) {
 export function update(req, res) {
     if (req.body._id) {
         delete req.body._id;
+    }
+    if (req.user.role !== 'admin' && req.user._id != req.body.registeredBy) {
+        return res.status(500).send('No puedes modificar este paciente porque fue registrado por otro médico. Solicita al cambio al administrador');
     }
     return Patient.findById(req.params.id).exec()
         .then(handleEntityNotFound(res))

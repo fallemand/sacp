@@ -8,6 +8,11 @@ var PatientSchema = new Schema({
         type: String,
         required: true
     },
+    registeredBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     email: {
         type: String,
         lowercase: true,
