@@ -11,6 +11,7 @@ import AgreementType from '../api/agreement-type/agreement-type.model';
 import Cie10Disease from '../api/cie10-disease/cie10-disease.model';
 import TreatmentType from '../api/treatment-type/treatment-type.model';
 import TreatmentState from '../api/treatment-state/treatment-state.model';
+import DiseaseStage from '../api/disease-stage/disease-stage.model';
 import Treatment from '../api/treatment/treatment.model';
 import DrugType from '../api/drug-type/drug-type.model';
 
@@ -26,25 +27,44 @@ import DrugType from '../api/drug-type/drug-type.model';
 //         })
 //     });
 
-TreatmentState.find({}).remove()
-    .then(() => {
-        TreatmentState.create({
-            _id: 'EA',
-            name: 'En Auditoria'
-        }, {
-            _id: 'AP',
-            name: 'Aprobado'
-        },{
-            _id: 'EE',
-            name: 'En Espera'
-        },{
-            _id: 'PA',
-            name: 'Pausado'
-        }, {
-            _id: 'CA',
-            name: 'Cancelado'
-        })
-    });
+// DiseaseStage.find({}).remove()
+//     .then(() => {
+//         DiseaseStage.create({
+//             name: 'I'
+//         }, {
+//             name: 'II'
+//         }, {
+//             name: 'II'
+//         }, {
+//             name: 'III'
+//         }, {
+//             name: 'IV'
+//         }, {
+//             name: 'Desconocido'
+//         })
+//     });
+
+
+
+// TreatmentState.find({}).remove()
+//     .then(() => {
+//         TreatmentState.create({
+//             _id: 'EA',
+//             name: 'En Auditoria'
+//         }, {
+//             _id: 'AP',
+//             name: 'Aprobado'
+//         },{
+//             _id: 'EE',
+//             name: 'En Espera'
+//         },{
+//             _id: 'PA',
+//             name: 'Pausado'
+//         }, {
+//             _id: 'CA',
+//             name: 'Cancelado'
+//         })
+//     });
 
 // Treatment.find({}).remove();
 //

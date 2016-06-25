@@ -72,6 +72,8 @@
                     return 'Sin resultados';
                 case 'mongoose' :
                     return this.errors[field];
+                case 'date' :
+                    return 'La fecha no es válida';
             }
         }
 

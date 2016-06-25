@@ -28,8 +28,8 @@ var TreatmentSchema = new Schema({
         required: true
     },
     diseaseStage: {
-        type: Number,
-        required: false
+        type: Schema.Types.ObjectId,
+        required: 'DiseaseStage'
     },
     treatmentType: {
         type: Schema.Types.ObjectId,

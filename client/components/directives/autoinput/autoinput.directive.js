@@ -49,7 +49,6 @@ angular.module('sacpApp')
                                 break;
                             }
                         }
-
                 }
 
                 angular.forEach(scope.field.attributes, (value, attribute) => {

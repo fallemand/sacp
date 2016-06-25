@@ -68,6 +68,7 @@ export function index(req, res) {
     return Treatment.find()
         .populate('patient')
         .populate('doctor')
+        .populate('diseaseStage')
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
         .populate('drugsType')
@@ -82,6 +83,7 @@ export function indexUser(req, res) {
     return Treatment.find({doctor: req.user._id})
         .populate('patient')
         .populate('doctor')
+        .populate('diseaseStage')
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
         .populate('drugsType')
@@ -96,6 +98,7 @@ export function show(req, res) {
     return Treatment.findById(req.params.id)
         .populate('patient')
         .populate('doctor')
+        .populate('diseaseStage')
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
         .populate('drugsType')
@@ -361,20 +364,17 @@ export function metadata(req, res) {
             {
                 'title': 'Estadío',
                 'field': 'diseaseStage',
-                'type': 'number',
+                'type': 'select',
                 'show': true,
-                'iconText': 'DNI',
-                'controlType': 'input',
+                'descField': 'name',
+                'remoteApi': 'disease-stages',
+                'icon': 'flaticon-open-pill',
+                'controlType': 'object',
                 'attributes': {
-                    required: true,
-                    'max': '5',
-                    'min': 0
+                    required: true
                 },
                 'validations': {
-                    'required': '',
-                    'number': '',
-                    'max': '5',
-                    'min': 0
+                    'required': ''
                 }
             },
             {
@@ -421,7 +421,8 @@ export function metadata(req, res) {
                     required: true
                 },
                 'validations': {
-                    'required': ''
+                    'required': '',
+                    'date' : ''
                 }
             },
             {
