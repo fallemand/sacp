@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="invoice-title">
-                                <h2>Receta</h2><h3 class="pull-right">Nº #12345</h3>
+                                <h2>Receta</h2><h3 class="pull-right">#{{vm.treatment._id}}</h3>
                             </div>
                             <hr>
                             <div class="row">
@@ -27,18 +27,18 @@
                                     <address>
                                         <strong>Médico Solicitante:</strong><br>
                                         {{vm.treatment.doctor.name}}<br>
-                                        1234 Main<br>
-                                        Apt. 4B<br>
-                                        Springfield, ST 54321
+                                        MN: {{vm.treatment.doctor.mn}}<br>
+                                        MN: {{vm.treatment.doctor.mp}}<br>
+                                        {{vm.treatment.doctor.email}}
                                     </address>
                                 </div>
                                 <div class="col-xs-6 text-right">
                                     <address>
                                         <strong>Paciente:</strong><br>
-                                        Jane Smith<br>
-                                        1234 Main<br>
-                                        Apt. 4B<br>
-                                        Springfield, ST 54321
+                                        {{vm.treatment.patient.name}}<br>
+                                        DNI: {{vm.treatment.patient.dni}}<br>
+                                        Nº: {{vm.treatment.patient.socialInsuranceNumber}}<br>
+                                        Tipo Convenio: {{vm.treatment.patient.agreementType.name}}
                                     </address>
                                 </div>
                             </div>
@@ -46,13 +46,13 @@
                                 <div class="col-xs-6">
                                     <address>
                                         <strong>Código Tratamiento:</strong><br>
-                                        AT2659<br><br>
+                                        {{vm.treatment._id}}<br><br>
                                     </address>
                                 </div>
                                 <div class="col-xs-6 text-right">
                                     <address>
-                                        <strong>Order Date:</strong><br>
-                                        March 7, 2014<br><br>
+                                        <strong>Fecha:</strong><br>
+                                        {{vm.treatment.lastUpdateDate | date:'dd-MM-yyyy'}}<br><br>
                                     </address>
                                 </div>
                             </div>

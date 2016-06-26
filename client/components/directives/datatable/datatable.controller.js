@@ -108,11 +108,14 @@
                 case 'local' :
                     this.datatable.ngtable = new this.NgTableParams({
                         page: 1, // show first page
-                        count: 10 // count per page
+                        count: 20 // count per page
                     }, {
                         getData: (function ($defer, params) {
-                                return this.$scope.object;
-                        }).bind(this)
+                            this.datatable.ngtable.total(this.$scope.object.length),
+                            $defer.resolve(this.$scope.object);
+                        }).bind(this),
+                        total: 0,
+                        counts: []
                     });
             }
             if (this.datatable.initEvent) {

@@ -193,63 +193,63 @@ import DrugType from '../api/drug-type/drug-type.model';
 //             });
 //     });
 
-AgreementType.find({}).remove()
-    .then(() => {
-        AgreementType.create({
-            name: 'PROFE'
-        }, {
-            name: 'Carenciado'
-        }, {
-            name: 'DOSEP'
-        }).then(() => {
-            console.log('finished populating agreement types');
-            Patient.find({}).remove()
-                .then(() => {
-                    AgreementType.findOne({name: 'DOSEP'}, function (err, doc) {
-                        Patient.create({
-                            name: 'Fran Carvallo',
-                            registeredBy: '576ecb91007d1ef0044a86f9',
-                            email: 'bgbgyu@hotmail.com',
-                            dni: '12589698',
-                            socialInsuranceNumber: '23425456',
-                            address: 'Hidalgo Palacios 7542',
-                            phone: '+43532656565',
-                            cellphone: '3513160678',
-                            agreementType: doc._id
-                        }).then(() => {
-                            console.log('finished populating patients');
-                        });
-                    });
-                    AgreementType.findOne({name: 'Carenciado'}, function (err, doc) {
-                        Patient.create({
-                            name: 'Manuel Sanchez',
-                            registeredBy: '576ecb91007d1ef0044a86f9',
-                            email: 'asdasd@hotmail.com',
-                            dni: '36142871',
-                            socialInsuranceNumber: '23425456',
-                            address: 'Hidalgo Palacios 7542',
-                            phone: '+43532656565',
-                            cellphone: '3513160678',
-                            agreementType: doc._id
-                        }).then(() => {
-                            console.log('finished populating patients');
-                        });
-                    });
-                    AgreementType.findOne({name: 'PROFE'}, function (err, doc) {
-                        Patient.create({
-                            name: 'Juan Carlos',
-                            registeredBy: '576ecb91007d1ef0044a86f8',
-                            email: 'juancarlos@hotmail.com',
-                            dni: '13658987',
-                            socialInsuranceNumber: '23425456',
-                            address: 'Hidalgo Palacios 7542',
-                            phone: '+43532656565',
-                            cellphone: '3513160678',
-                            agreementType: doc._id
-                        }).then(() => {
-                            console.log('finished populating patients');
-                        });
-                    });
-                });
-        });
-    });
+// AgreementType.find({}).remove()
+//     .then(() => {
+//         AgreementType.create({
+//             name: 'PROFE'
+//         }, {
+//             name: 'Carenciado'
+//         }, {
+//             name: 'DOSEP'
+//         }).then(() => {
+//             console.log('finished populating agreement types');
+//             Patient.find({}).remove()
+//                 .then(() => {
+//                     AgreementType.findOne({name: 'DOSEP'}, function (err, doc) {
+//                         Patient.create({
+//                             name: 'Fran Carvallo',
+//                             registeredBy: '576ecb91007d1ef0044a86f9',
+//                             email: 'bgbgyu@hotmail.com',
+//                             dni: '12589698',
+//                             socialInsuranceNumber: '23425456',
+//                             address: 'Hidalgo Palacios 7542',
+//                             phone: '+43532656565',
+//                             cellphone: '3513160678',
+//                             agreementType: doc._id
+//                         }).then(() => {
+//                             console.log('finished populating patients');
+//                         });
+//                     });
+//                     AgreementType.findOne({name: 'Carenciado'}, function (err, doc) {
+//                         Patient.create({
+//                             name: 'Manuel Sanchez',
+//                             registeredBy: '576ecb91007d1ef0044a86f9',
+//                             email: 'asdasd@hotmail.com',
+//                             dni: '36142871',
+//                             socialInsuranceNumber: '23425456',
+//                             address: 'Hidalgo Palacios 7542',
+//                             phone: '+43532656565',
+//                             cellphone: '3513160678',
+//                             agreementType: doc._id
+//                         }).then(() => {
+//                             console.log('finished populating patients');
+//                         });
+//                     });
+//                     AgreementType.findOne({name: 'PROFE'}, function (err, doc) {
+//                         Patient.create({
+//                             name: 'Juan Carlos',
+//                             registeredBy: '576ecb91007d1ef0044a86f8',
+//                             email: 'juancarlos@hotmail.com',
+//                             dni: '13658987',
+//                             socialInsuranceNumber: '23425456',
+//                             address: 'Hidalgo Palacios 7542',
+//                             phone: '+43532656565',
+//                             cellphone: '3513160678',
+//                             agreementType: doc._id
+//                         }).then(() => {
+//                             console.log('finished populating patients');
+//                         });
+//                     });
+//                 });
+//         });
+//     });

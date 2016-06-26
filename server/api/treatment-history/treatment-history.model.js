@@ -2,10 +2,11 @@
 
 import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
+var ShortId = require('mongoose-shortid-nodeps');
 
 var TreatmentHistorySchema = new mongoose.Schema({
     _id: {
-        type: Schema.Types.ObjectId,
+        type: ShortId,
         ref: 'Treatment'
     },
     history: [{

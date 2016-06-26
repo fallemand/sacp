@@ -2,10 +2,16 @@
 
 import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
+var ShortId = require('mongoose-shortid-nodeps');
 import TreatmentHistory from '../treatment-history/treatment-history.model';
 
 
 var TreatmentSchema = new Schema({
+    _id: {
+        type: ShortId,
+        len: 6,     // Length 7 characters
+        base: 36
+    },
     patient: {
         type: Schema.Types.ObjectId,
         ref: 'Patient'
@@ -18,7 +24,7 @@ var TreatmentSchema = new Schema({
         type: Date,
         required: true
     },
-    lastUodateDate: {
+    lastUpdateDate: {
         type: Date
     },
     state: {

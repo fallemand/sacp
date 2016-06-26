@@ -66,7 +66,7 @@ function handleError(res, statusCode) {
 // Gets a list of Treatments
 export function index(req, res) {
     return Treatment.find()
-        .sort({'lastUodateDate' : 'desc'})
+        .sort({'lastUpdateDate' : 'desc'})
         .populate('patient')
         .populate('doctor')
         .populate('diseaseStage')
@@ -82,7 +82,7 @@ export function index(req, res) {
 // Gets a list of Treatments of that user
 export function indexUser(req, res) {
     return Treatment.find({doctor: req.user._id})
-        .sort({'lastUodateDate' : 'desc'})
+        .sort({'lastUpdateDate' : 'desc'})
         .populate('patient')
         .populate('doctor')
         .populate('diseaseStage')
@@ -125,7 +125,7 @@ export function create(req, res) {
     req.body.state = 'EA';
     req.body.doctor = req.user._id;
     req.body.createdDate = new Date();
-    req.body.treatment.lastUodateDate = new Date();
+    req.body.lastUpdateDate = new Date();
     Treatment.create(req.body, function (err, treatment) {
         if (err) {
             return res.status(500).send(err);
@@ -163,7 +163,7 @@ export function update(req, res) {
     if (treatment.doctor._id) {
         delete treatment.doctor._id;
     }
-    treatment.lastUodateDate = new Date();
+    treatment.lastUpdateDate = new Date();
     Treatment.findById(req.params.id).exec()
         .then(entity => {
             if (!entity) {
@@ -281,7 +281,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Última Modificación',
-                'field': 'lastUodateDate',
+                'field': 'lastUpdateDate',
                 'type': 'date',
                 'show': true,
                 'controlType': 'input',
