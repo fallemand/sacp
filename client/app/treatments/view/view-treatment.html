@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-xs-12 text-center mar-btm">
+        <button class="btn btn-primary btn-labeled fa fa-chevron-down" ng-click="vm.createPdf()">
+            Descargar
+        </button>
+        <div class="btn-group">
+            <button class="btn btn-default"><i class="fa fa-print"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div id="prescription" class="panel treatment">
+            <!--Data Table-->
+            <!--===================================================-->
+            <div class="panel-body">
+                <div class="">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="invoice-title">
+                                <h2>Tratamiento</h2><h3 class="pull-right">#{{vm.treatment._id}}</h3>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <address>
+                                        <strong>Médico Solicitante:</strong><br>
+                                        {{vm.treatment.doctor.name}}<br>
+                                        MN: {{vm.treatment.doctor.mn}}<br>
+                                        MP: {{vm.treatment.doctor.mp}}<br>
+                                        {{vm.treatment.doctor.email}}
+                                    </address>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <address>
+                                        <strong>Paciente:</strong><br>
+                                        {{vm.treatment.patient.name}}<br>
+                                        DNI: {{vm.treatment.patient.dni}}<br>
+                                        Nº: {{vm.treatment.patient.socialInsuranceNumber}}<br>
+                                        Tipo Convenio: {{vm.treatment.patient.agreementType.name}}
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <address>
+                                        <strong>Código Tratamiento:</strong><br>
+                                        {{vm.treatment._id}}<br><br>
+                                    </address>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <address>
+                                        <strong>Fecha:</strong><br>
+                                        {{vm.treatment.lastUpdateDate | date:'dd-MM-yyyy'}}<br><br>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default drugs">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Enfermedad</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table  table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Diagnóstico Topográfico</th>
+                                            <th>Diagnóstico Histológico</th>
+                                            <th>Estadío</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{vm.treatment.diseaseTopographicDiagnosis.name}}</td>
+                                            <td>{{vm.treatment.diseaseHistologicalDiagnosis}}</td>
+                                            <td>{{vm.treatment.diseaseStage.name}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-default drugs">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Tratamiento</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table  table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Fecha Probable</th>
+                                            <th>Ciclo Actual</th>
+                                            <th>Cantidad de Ciclos</th>
+                                            <th>Esquema</th>
+                                            <th>Altura</th>
+                                            <th>Peso</th>
+                                            <th>Sup Corporal</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{vm.treatment.treatmentType.name}}</td>
+                                            <td>{{vm.treatment.treatmentExpectedDate | date:'dd-MM-yyyy'}}</td>
+                                            <td>{{vm.treatment.treatmentActualCicle}}</td>
+                                            <td>{{vm.treatment.treatmentCyclesQuantity}}</td>
+                                            <td>{{vm.treatment.treatmentSchema}}</td>
+                                            <td>{{vm.treatment.treatmentHeight}}</td>
+                                            <td>{{vm.treatment.treatmentWeight}}</td>
+                                            <td>{{vm.treatment.treatmentBodySurface}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-default drugs">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Drogras</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive" ng-if="vm.treatment">
+                                        <datatable parameters="vm.drugsTable" object="vm.treatment.drugs"></datatable>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default drugs">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Observación</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    {{vm.treatment.observation}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--End Data Table-->
+
+        </div>
+
+    </div>
+</div>

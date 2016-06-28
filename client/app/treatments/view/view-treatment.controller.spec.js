@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Component: DatatableComponent', function () {
+describe('Component: PrescriptionComponent', function () {
 
   // load the controller's module
   beforeEach(module('sacpApp'));
 
-  var DatatableComponent, scope;
+  var PrescriptionComponent, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($componentController, $rootScope) {
     scope = $rootScope.$new();
-    DatatableComponent = $componentController('DatatableComponent', {
+    PrescriptionComponent = $componentController('PrescriptionComponent', {
       $scope: scope
     });
   }));

@@ -207,7 +207,7 @@
         }
     }
 
-    angular.module('sacpApp.admin')
+    angular.module('sacpApp')
         .controller('AutoFormController', AutoFormController);
 
 })();

@@ -1,7 +1,7 @@
 'use strict';
 (function () {
 
-    class PrescriptionComponent {
+    class ViewTreatmentController {
         constructor($http, $stateParams) {
             this.id = $stateParams.id;
             $http.get('/api/treatments/' + $stateParams.id)
@@ -39,9 +39,9 @@
     }
 
     angular.module('sacpApp')
-        .component('prescription', {
-            templateUrl: 'app/prescription/prescription.html',
-            controller: PrescriptionComponent,
+        .component('viewtreatment', {
+            templateUrl: 'app/treatments/view/view-treatment.html',
+            controller: ViewTreatmentController,
             controllerAs: 'vm'
         });
 

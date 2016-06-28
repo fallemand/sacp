@@ -1,9 +1,18 @@
-.prescription {
-    font-size: 16px;
+.treatment {
+    font-size: 15px;
     max-width: 900px;
     margin: 0 auto;
+    .panel-heading{
+        height: 35px;
+    }
+    .panel-title {
+        line-height: 35px;
+    }
     .invoice-title h2, .invoice-title h3 {
         display: inline-block;
+    }
+    .table {
+        margin-bottom: 0;
     }
     .table > tbody > tr {
         .no-line {
@@ -21,10 +30,13 @@
         -ms-transform: scale(1.5,1.5);
         -webkit-transform: scale(1.5,1.5);
     }
+    .ng-table-pager {
+        display: none;
+    }
 }
 
 .drugs {
-    font-size: 14px;
+    font-size: 13px;
     .panel-body {
         padding: 10px;
     }

@@ -2,7 +2,6 @@
 
 angular.module('sacpApp', [
         'sacpApp.auth',
-        'sacpApp.admin',
         'sacpApp.constants',
         'ngCookies',
         'ngResource',

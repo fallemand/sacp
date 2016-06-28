@@ -10,12 +10,10 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 
 // Component styles are injected through grunt
 /* inject:scss */
-@import 'admin/admin';
-@import 'datatable/datatable';
 @import 'home/home';
-@import 'main/main';
 @import 'prescription/prescription';
 @import 'treatments/treatments';
+@import 'treatments/view/view-treatment';
 @import '../components/directives/autoform/autoform';
 @import '../components/directives/datatable/datatable';
 @import '../components/directives/describe/describe';

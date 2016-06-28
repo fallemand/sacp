@@ -90,12 +90,6 @@
             </ul>
             <ul class="nav navbar-top-links pull-right">
 
-                <li ng-show="nav.isAdmin()" ui-sref-active="active" class="dropdown">
-                    <a href="/admin" ui-sref="admin">
-                        <i class="fa fa-cog fa-fw fa-lg"></i> Administración
-                    </a>
-                </li>
-
                 <li ng-hide="nav.isLoggedIn()" ui-sref-active="active" class="dropdown">
                     <a href="/register" ui-sref="signup">
                         <i class="fa fa-user-plus fa-fw fa-lg"></i> Registro
