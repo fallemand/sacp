@@ -145,33 +145,6 @@
                     metadataFilters: 'field=history',
                     id: this.object._id
                 };
-                this.result= {};
-                this.autoformResult = {
-                    entity: 'treatment-history',
-                    type: 'local',
-                    section: 'form',
-                    template: 'full',
-                    metadataFilters: 'field=history',
-                    inputIcons : true,
-                    object: this.result,
-                    field: 'history',
-                    addEvent: (function() {
-                        this.$http.put('/api/treatments/' + this.object._id + '/status', this.result.aux.history.state).then(treatment => {
-                                this.$http.put('/api/treatment-history/' + this.object._id, this.result.aux.history).then(() => {
-                                        this.ngToast.create('Estado seteado con éxito!');
-                                        this.$state.go('treatments');
-                                    })
-                                    .catch(err => {
-                                        this.handleError(err);
-                                        this.autoformResult.resetForm();
-                                    });
-                            })
-                            .catch(err => {
-                                this.handleError(err);
-                                this.autoformResult.resetForm();
-                            });
-                    }).bind(this)
-                };
             }
         }
 

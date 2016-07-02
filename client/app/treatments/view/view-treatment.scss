@@ -1,7 +1,14 @@
-.treatment {
-    font-size: 15px;
+.treatment-container {
     max-width: 900px;
     margin: 0 auto;
+    .ng-table-pager {
+        display: none;
+    }
+}
+
+.treatment {
+    font-size: 15px;
+
     .panel-heading{
         height: 35px;
     }

@@ -27,7 +27,7 @@ class TreatmentsController {
                 }
             },
             viewEvent: (function (object) {
-                this.$state.go('treatments.action', {'action': 'view', 'id' : object._id});
+                this.$state.go('treatments.view', {'id' : object._id});
             }).bind(this),
             modifyEvent: (function (object) {
                 this.$state.go('treatments.action', {'action': 'update', 'id' : object._id});
