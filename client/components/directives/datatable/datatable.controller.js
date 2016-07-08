@@ -45,7 +45,6 @@
                     field: '_id',
                     title: 'Acciones',
                     show: 'true',
-                    filter: {'name': "text"},
                     getValue: this.actionsCol,
                     actions: this.datatable.actions,
                     customActions: this.datatable.customActions,
@@ -53,15 +52,25 @@
                 };
                 cols.push(actionsCol);
             }
-            angular.forEach(this.metadata.fields, (value, field) => {
+            angular.forEach(this.metadata.fields, (value) => {
+                var filter = {};
+                filter[value.field] = 'text';
+                if(value.field.type === 'select') {
+                    filter[value.field] = 'select';
+                }
+
                 var col = {
                     field: value.field,
                     title: value.title,
                     show: value.show,
-                    filter: {'name': "text"},
+                    sortable: value.field,
+                    filter: filter,
                     decorate: this.decorate,
                     decorator: value.decorator
                 };
+                if(value.field.type === 'select') {
+                    getData(value.field, value.remoteApi, col.filterData);
+                }
                 switch (value.type) {
                     case 'text' :
                         col.getValue = this.htmlValue;
@@ -87,22 +96,48 @@
             return cols;
         }
 
+        loadData(field, api, value) {
+            this.$http.get('/api/' + api)
+                .then(response => {
+                    value = response.data;
+                })
+                .catch(err => {
+                    this.ngToast.create({
+                        className: 'danger',
+                        content: err.message
+                    });
+                });
+        }
+
         initialize() {
             this.loadedData = true;
             switch (this.datatable.type) {
                 case 'remote' :
-                    this.datatable.ngtable = new this.NgTableParams({}, {
+                    this.datatable.ngtable = new this.NgTableParams({count: 25}, {
                         getData: (function ($defer, params) {
                             var filters = (this.datatable.filters) ? '?' + this.datatable.filters : '';
                             var entityId = (this.datatable.id) ? '/' + this.datatable.id : '';
                             var mine = (this.datatable.privileges && this.datatable.privileges[this.userType] && this.datatable.privileges[this.userType].list) ? '/mine' : '';
-                            this.$http.get('/api/' + this.datatable.entity + entityId + mine + filters).then(response => {
+
+                            var parameters = {
+                                page: params.page(),
+                                count: params.count(),
+                                sorting: params.sorting(),
+                                filter: params.filter()
+                            };
+                            this.$http({
+                                url: '/api/' + this.datatable.entity + entityId + mine + filters,
+                                method: "GET",
+                                params: parameters
+                            }).then(response => {
+                                params.total(response.data.total);
                                 if(this.datatable.field) {
                                     response.data = response.data[this.datatable.field];
                                 }
-                                $defer.resolve(response.data);
+                                $defer.resolve(response.data.docs);
                             });
-                        }).bind(this)
+                        }).bind(this),
+                        counts: [25,50,100]
                     });
                     break;
                 case 'local' :

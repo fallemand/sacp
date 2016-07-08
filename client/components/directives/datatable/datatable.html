@@ -1,5 +1,5 @@
 <div ng-if="vm.loadedData">
-    <table ng-table-dynamic="vm.datatable.ngtable with vm.cols" class="table table-striped table-hover table-responsive" ng-class="vm.datatable.tableClass">
+    <table ng-table-dynamic="vm.datatable.ngtable with vm.cols" class="table table-striped table-hover table-responsive" ng-class="vm.datatable.tableClass" show-filter="true">
         <tr ng-repeat="row in $data">
             <td ng-repeat="col in $columns" demo-bind-compiled-html="col.getValue(this, row)"></td>
         </tr>

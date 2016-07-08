@@ -54,11 +54,35 @@ function respondWithResult(res, statusCode) {
  * restriction: 'admin'
  */
 export function index(req, res) {
-    return User.find(req.query, '-salt -password').exec()
-        .then(users => {
-            res.status(200).json(users);
+
+    var query = req.query;
+    console.log(query);
+    var options = {
+        select: '-salt -password',
+        sort: JSON.parse(query.sorting),
+        //populate: 'author',
+        //lean: true,
+        page: parseInt(query.page),
+        limit: parseInt(query.count)
+    };
+    var filters = JSON.parse(query.filter);
+    for(var filter in filters) {
+        if(filters[filter] && filters[filter] !== '') {
+            query[filter] = new RegExp(filters[filter], 'i');
+        }
+    }
+
+    delete query.page;
+    delete query.count;
+    delete query.sorting;
+    delete query.filter;
+
+    return User.paginate(query, options)
+        .then(function(result) {
+            res.status(200).json(result);
         })
         .catch(handleError(res));
+
 }
 
 /**
