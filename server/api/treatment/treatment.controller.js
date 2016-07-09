@@ -347,6 +347,7 @@ export function metadata(req, res) {
                 'field': 'diseaseTopographicDiagnosis',
                 'type': 'typeahead',
                 'descField': 'desc',
+                'filterDescField': 'name',
                 'searchField': 'code',
                 'remoteApi': 'cie10-diseases',
                 'show': true,
