@@ -177,7 +177,7 @@
         loadData(field, api) {
             this.$http.get('/api/' + api)
                 .then(response => {
-                    this[field] = response.data;
+                    this[field] = response.data.docs;
                     if(!this.$scope.object) {
                         this.$scope.object = {};
                     }
@@ -194,9 +194,16 @@
         }
 
         loadTypeAhead(api, viewvalue, searchField) {
-            return this.$http.get('/api/' + api + '?' + searchField + '=^' + viewvalue)
-                .then(response => {
-                    return response.data;
+            var filter = {};
+            filter[searchField] = viewvalue;
+            return this.$http({
+                url: '/api/' + api,
+                method: "GET",
+                params: {
+                    filter: filter
+                }
+            }).then(response => {
+                    return response.data.docs;
                 })
                 .catch(err => {
                     this.ngToast.create({

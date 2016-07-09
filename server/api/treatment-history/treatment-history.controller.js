@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import TreatmentHistory from './treatment-history.model';
+import * as utils from '../../components/utility';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -61,10 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of TreatmentHistorys
 export function index(req, res) {
-    return TreatmentHistory.find()
-        .populate('history.state')
-        .populate('history.user')
-        .exec()
+    return utils.processQuery(TreatmentHistory,req.query,{populate: ['history.state','history.user']})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }

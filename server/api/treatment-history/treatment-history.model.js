@@ -3,6 +3,7 @@
 import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 var ShortId = require('mongoose-shortid-nodeps');
+var mongoosePaginate = require('mongoose-paginate');
 
 var TreatmentHistorySchema = new mongoose.Schema({
     _id: {
@@ -29,5 +30,11 @@ var TreatmentHistorySchema = new mongoose.Schema({
         }
     }]
 });
+
+/**
+ * Plugins
+ */
+
+TreatmentHistorySchema.plugin(mongoosePaginate);
 
 export default mongoose.model('TreatmentHistory', TreatmentHistorySchema);

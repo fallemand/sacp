@@ -8,6 +8,7 @@
             this.$http = $http;
             this.$state = $state;
             this.ngToast = ngToast;
+            this.showFilters = false;
             this.isAdmin = Auth.isAdmin();
             switch(this.action) {
                 case 'add' :

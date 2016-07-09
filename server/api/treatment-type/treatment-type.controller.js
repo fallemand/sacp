@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import TreatmentType from './treatment-type.model';
+import * as utils from '../../components/utility';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -61,7 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of TreatmentTypes
 export function index(req, res) {
-  return TreatmentType.find().exec()
+    return utils.processQuery(TreatmentType,req.query,{})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

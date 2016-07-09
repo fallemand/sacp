@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Prescription from './prescription.model';
+import * as utils from '../../components/utility';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -61,7 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Prescriptions
 export function index(req, res) {
-  return Prescription.find().exec()
+    return utils.processQuery(Prescription,req.query,{})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

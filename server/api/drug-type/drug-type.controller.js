@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import DrugType from './drug-type.model';
+import * as utils from '../../components/utility';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -61,7 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of DrugTypes
 export function index(req, res) {
-  return DrugType.find().exec()
+    return utils.processQuery(DrugType,req.query,{})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

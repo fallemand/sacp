@@ -54,9 +54,11 @@
             }
             angular.forEach(this.metadata.fields, (value) => {
                 var filter = {};
-                filter[value.field] = 'text';
-                if(value.field.type === 'select') {
-                    filter[value.field] = 'select';
+                if(value.type === 'select' || value.type === 'typeahead') {
+                    filter[value.field + '.' + value.descField] = 'text';
+                }
+                else {
+                    filter[value.field] = 'text';
                 }
 
                 var col = {
@@ -68,7 +70,7 @@
                     decorate: this.decorate,
                     decorator: value.decorator
                 };
-                if(value.field.type === 'select') {
+                if(value.field.type === 'select' || value.field.type === 'typeahead') {
                     getData(value.field, value.remoteApi, col.filterData);
                 }
                 switch (value.type) {

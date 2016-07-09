@@ -3,3 +3,28 @@
         margin: 0 4px;
     }
 }
+
+.datatable {
+    position: relative;
+}
+
+.datatable-filter {
+    position: absolute;
+    padding: 3px 10px;
+    right: 5px;
+    top: 2px;
+}
+
+.datatable-table th:last-child {
+    padding-right: 55px;
+}
+
+.ng-table-filters th {
+    padding: 6px !important;
+}
+
+.ng-table th.filter .input-filter {
+    min-height: 25px;
+    padding: 3px 8px;
+    max-width: 150px;
+}

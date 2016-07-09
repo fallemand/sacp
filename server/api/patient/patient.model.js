@@ -2,6 +2,7 @@
 
 import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
+var mongoosePaginate = require('mongoose-paginate');
 
 var PatientSchema = new Schema({
     name: {
@@ -70,5 +71,11 @@ PatientSchema
                 throw err;
             });
     }, 'Ya existe un paciente con ese DNI.');
+
+/**
+ * Plugins
+ */
+
+PatientSchema.plugin(mongoosePaginate);
 
 export default mongoose.model('Patient', PatientSchema);

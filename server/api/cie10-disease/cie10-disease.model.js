@@ -1,6 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
+var mongoosePaginate = require('mongoose-paginate');
 
 var Cie10DiseaseSchema = new mongoose.Schema({
     code: {
@@ -20,5 +21,11 @@ Cie10DiseaseSchema.virtual('desc').get(function() {
 
 Cie10DiseaseSchema.set('toJSON', { virtuals: true });
 Cie10DiseaseSchema.set('toObject', { virtuals: true });
+
+/**
+ * Plugins
+ */
+
+Cie10DiseaseSchema.plugin(mongoosePaginate);
 
 export default mongoose.model('Cie10Disease', Cie10DiseaseSchema);

@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 var ShortId = require('mongoose-shortid-nodeps');
 import TreatmentHistory from '../treatment-history/treatment-history.model';
+var mongoosePaginate = require('mongoose-paginate');
 
 
 var TreatmentSchema = new Schema({
@@ -120,6 +121,12 @@ TreatmentSchema.pre('update', function(next) {
     }
     next();
 });
+
+/**
+ * Plugins
+ */
+
+TreatmentSchema.plugin(mongoosePaginate);
 
 
 export default mongoose.model('Treatment', TreatmentSchema);

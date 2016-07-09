@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import DiseaseStage from './disease-stage.model';
+import * as utils from '../../components/utility';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -61,7 +62,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of DiseaseStages
 export function index(req, res) {
-  return DiseaseStage.find().exec()
+    return utils.processQuery(DiseaseStage,req.query,{})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

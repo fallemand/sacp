@@ -15,6 +15,7 @@ import TreatmentState from '../treatment-state/treatment-state.model';
 import TreatmentHistory from '../treatment-history/treatment-history.model';
 import Patient from '../patient/patient.model';
 import AgreementType from '../agreement-type/agreement-type.model';
+import * as utils from '../../components/utility';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -65,32 +66,23 @@ function handleError(res, statusCode) {
 
 // Gets a list of Treatments
 export function index(req, res) {
-    return Treatment.find()
-        .sort({'lastUpdateDate' : 'desc'})
-        .populate('patient')
-        .populate('doctor')
-        .populate('diseaseStage')
-        .populate('diseaseTopographicDiagnosis')
-        .populate('treatmentType')
-        .populate('drugsType')
-        .populate('state')
-        .exec()
+    var options = {
+        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugsType', 'state'],
+        sort: {'lastUpdateDate' : 'desc'}
+    };
+    return utils.processQuery(Treatment,req.query,options)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 // Gets a list of Treatments of that user
 export function indexUser(req, res) {
-    return Treatment.find({doctor: req.user._id})
-        .sort({'lastUpdateDate' : 'desc'})
-        .populate('patient')
-        .populate('doctor')
-        .populate('diseaseStage')
-        .populate('diseaseTopographicDiagnosis')
-        .populate('treatmentType')
-        .populate('drugsType')
-        .populate('state')
-        .exec()
+    var options = {
+        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugsType', 'state'],
+        sort: {'lastUpdateDate' : 'desc'},
+    };
+    req.query.doctor = req.user._id;
+    return utils.processQuery(Treatment,req.query,options)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }

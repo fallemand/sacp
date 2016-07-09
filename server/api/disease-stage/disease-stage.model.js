@@ -1,6 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
+var mongoosePaginate = require('mongoose-paginate');
 
 var DiseaseStageSchema = new mongoose.Schema({
     name: {
@@ -8,5 +9,11 @@ var DiseaseStageSchema = new mongoose.Schema({
         required: true
     }
 });
+
+/**
+ * Plugins
+ */
+
+DiseaseStageSchema.plugin(mongoosePaginate);
 
 export default mongoose.model('DiseaseStage', DiseaseStageSchema);

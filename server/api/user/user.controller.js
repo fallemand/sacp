@@ -5,6 +5,7 @@ import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import * as utils from '../../components/utility';
 
 function validationError(res, statusCode) {
     statusCode = statusCode || 422;
@@ -54,35 +55,14 @@ function respondWithResult(res, statusCode) {
  * restriction: 'admin'
  */
 export function index(req, res) {
-
-    var query = req.query;
-    console.log(query);
     var options = {
-        select: '-salt -password',
-        sort: JSON.parse(query.sorting),
-        //populate: 'author',
-        //lean: true,
-        page: parseInt(query.page),
-        limit: parseInt(query.count)
+        select : '-salt -password'
     };
-    var filters = JSON.parse(query.filter);
-    for(var filter in filters) {
-        if(filters[filter] && filters[filter] !== '') {
-            query[filter] = new RegExp(filters[filter], 'i');
-        }
-    }
-
-    delete query.page;
-    delete query.count;
-    delete query.sorting;
-    delete query.filter;
-
-    return User.paginate(query, options)
+    utils.processQuery(User,req.query,options)
         .then(function(result) {
             res.status(200).json(result);
         })
         .catch(handleError(res));
-
 }
 
 /**

@@ -62,7 +62,8 @@ function handleError(res, statusCode) {
 
 // Gets a list of Cie10Diseases
 export function index(req, res) {
-    return Cie10Disease.find(utils.processQuery(req.query)).exec()
+    req.query.count = 200;
+    return utils.processQuery(Cie10Disease,req.query, {})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

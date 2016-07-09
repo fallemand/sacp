@@ -62,10 +62,10 @@ function handleError(res, statusCode) {
 
 // Gets a list of Patients
 export function index(req, res) {
-    return Patient.find(utils.processQuery(req.query))
-        .populate('agreementType')
-        .populate('registeredBy')
-        .exec()
+    var options = {
+        populate: ['agreementType', 'registeredBy']
+    };
+    return utils.processQuery(Patient,req.query,options)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
