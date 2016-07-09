@@ -55,7 +55,12 @@
             angular.forEach(this.metadata.fields, (value) => {
                 var filter = {};
                 if(value.type === 'select' || value.type === 'typeahead') {
-                    filter[value.field + '.' + value.descField] = 'text';
+                    if(value.filterDescField) {
+                        filter[value.field + '.' + value.filterDescField] = 'text';
+                    }
+                    else {
+                        filter[value.field + '.' + value.descField] = 'text';
+                    }
                 }
                 else {
                     filter[value.field] = 'text';
