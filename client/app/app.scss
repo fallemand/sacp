@@ -12,6 +12,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 /* inject:scss */
 @import 'home/home';
 @import 'prescription/prescription';
+@import 'profile/profile';
 @import 'treatments/treatments';
 @import 'treatments/view/view-treatment';
 @import '../components/directives/autoform/autoform';
