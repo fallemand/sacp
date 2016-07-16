@@ -7,18 +7,28 @@
             this.$state = $state;
             this.ngToast = ngToast;
             this.entity = $state.params.type;
+            switch(this.entity) {
+                case 'doctor' :
+                    this.entity = 'users';
+                    this.filter = 'doctor';
+                    break;
+                case 'patient' :
+                    this.entity = 'patients';
+                    this.filter = 'patient';
+                    break;
+            }
             this.id = $state.params.id;
-            this.getEntity(this.entity, this.id, function(response) {
+            this.getEntity(this.entity, this.id, (function(response) {
                 this.object = response.data;
-            });
+            }).bind(this));
             this.treatmentsTable = {
                 entity: 'treatments',
+                filter: '{"'+this.filter+'._id":"' +  this.id +'"}',
                 type: 'remote',
                 actions: ['view'],
                 privileges: {
                     user: {
-                        actions: ['view', 'modify', 'delete'],
-                        list: 'mine'
+                        actions: ['view', 'modify', 'delete']
                     },
                     admin: {actions: ['view', 'view-prescription']}
                 },
@@ -43,7 +53,7 @@
         }
 
         getEntity(entity, id, callback) {
-            this.$http.get('/api/treatments/'+id)
+            this.$http.get('/api/'+entity+'/'+id)
                 .then(response => {
                     if(callback) {
                         callback(response);

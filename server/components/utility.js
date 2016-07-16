@@ -20,7 +20,13 @@ export function processQuery(model, query, options) {
                     var populate = {};
                     populate.path = field;
                     populate.match = {};
-                    populate.match[descField] = new RegExp(filters[filter], 'i');
+                    if(descField === '_id') {
+                        populate.match[descField] = filters[filter];
+                    }
+                    else {
+                        populate.match[descField] = new RegExp(filters[filter], 'i');
+                    }
+
                     options.populate.push(populate);
                     populateFilter = field;
                 }

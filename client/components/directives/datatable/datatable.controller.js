@@ -137,6 +137,12 @@
                                 sorting: params.sorting(),
                                 filter: params.filter()
                             };
+                            if(this.datatable.filter) {
+                                this.datatable.filter = JSON.parse(this.datatable.filter);
+                                for(var filter in this.datatable.filter) {
+                                    parameters.filter[filter] = this.datatable.filter[filter];
+                                }
+                            }
                             this.$http({
                                 url: '/api/' + this.datatable.entity + entityId + mine + filters,
                                 method: "GET",
