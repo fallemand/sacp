@@ -74,7 +74,8 @@
                     sortable: value.field,
                     filter: filter,
                     decorate: this.decorate,
-                    decorator: value.decorator
+                    decorator: value.decorator,
+                    link: value.link
                 };
                 if(value.columnClass) {
                     col.class = value.columnClass;
@@ -183,6 +184,9 @@
             if(this.decorator) {
                 value = this.decorate(this.decorator, value)
             }
+            if(this.link) {
+                return '<a href="' + this.link + '/' + row._id + '" >' + value + '</a>';
+            }
             return value;
         }
 
@@ -216,6 +220,9 @@
             }
             if(this.decorator) {
                 return this.decorate(this.decorator, value.name)
+            }
+            if(this.link) {
+                return '<a href="' + this.link + '/' +  value._id + '">' + value.name + '</a>';
             }
             return value.name;
         }

@@ -203,6 +203,7 @@ export function metadata(req, res, next) {
                 'columnClass': 'col-md-2',
                 'show': true,
                 'controlType' : 'input',
+                'link' : '/profile/doctor',
                 'icon': 'fa fa-male',
                 'validations': {
                     'required': '',

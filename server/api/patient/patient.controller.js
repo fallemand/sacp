@@ -126,6 +126,7 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-user-md',
+                'link' : '/profile/patient',
                 'attributes' : {
                     required: true,
                     minlength: '4'
