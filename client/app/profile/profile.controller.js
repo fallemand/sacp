@@ -11,15 +11,22 @@
                 case 'doctor' :
                     this.entity = 'users';
                     this.filter = 'doctor';
+                    this.title = 'Tratamientos Solicitados';
+                    this.image = 'av1.png';
+                    this.subtitle = '';
                     break;
                 case 'patient' :
                     this.entity = 'patients';
                     this.filter = 'patient';
+                    this.title = 'Tratamientos Realizados';
+                    this.image = 'av2.png';
+                    this.subtitle = 'DNI:';
                     break;
             }
             this.id = $state.params.id;
             this.getEntity(this.entity, this.id, (function(response) {
                 this.object = response.data;
+                this.subtitleValue = (this.entity === 'users') ? this.object.email : this.object.dni;
             }).bind(this));
             this.treatmentsTable = {
                 entity: 'treatments',
@@ -28,7 +35,8 @@
                 actions: ['view'],
                 privileges: {
                     user: {
-                        actions: ['view', 'modify', 'delete']
+                        actions: ['view'],
+                        list: 'mine'
                     },
                     admin: {actions: ['view', 'view-prescription']}
                 },

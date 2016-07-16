@@ -230,6 +230,7 @@ export function metadata(req, res, next) {
             },
             {
                 'title': 'Matricula Nacional',
+                'shortTitle' : 'Mat Nacional',
                 'field' : 'mn',
                 'type': 'number',
                 'columnClass': 'col-md-2',
@@ -245,6 +246,7 @@ export function metadata(req, res, next) {
             },
             {
                 'title': 'Matricula Provincial',
+                'shortTitle' : 'Mat Provincial',
                 'field' : 'mp',
                 'type': 'number',
                 'columnClass': 'col-md-2',
