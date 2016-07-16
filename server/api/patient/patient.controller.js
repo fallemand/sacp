@@ -118,11 +118,11 @@ export function metadata(req, res) {
         name: 'paciente',
         pluralName: 'pacientes',
         'fields': [
-
             {
                 'title': 'Nombre',
                 'field' : 'name',
                 'type': 'string',
+                'columnClass': 'col-md-1 mw-100',
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-user-md',
@@ -137,8 +137,10 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Tipo Convenio',
+                'shortTitle' : 'TC',
                 'field' : 'agreementType',
                 'controlType' : 'object',
+                'columnClass': 'col-md-1',
                 'descField' : 'name',
                 'remoteApi' : 'agreement-types',
                 'type': 'select',
@@ -155,6 +157,7 @@ export function metadata(req, res) {
                 'title': 'DNI',
                 'field' : 'dni',
                 'type': 'number',
+                'columnClass': 'col-md-1',
                 'show': true,
                 'iconText': 'DNI',
                 'controlType' : 'input',
@@ -170,7 +173,9 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Nº Obra Social',
+                'shortTitle' : 'Nº O.S.',
                 'field' : 'socialInsuranceNumber',
+                'columnClass': 'col-md-1',
                 'type': 'number',
                 'show': true,
                 'icon': 'fa fa-credit-card',
@@ -189,13 +194,15 @@ export function metadata(req, res) {
                 'title': 'Dirección',
                 'field' : 'address',
                 'type': 'text',
-                'show': true,
+                'columnClass': 'col-md-1',
+                'show': false,
                 'controlType' : 'input',
                 'icon': 'fa fa-home'
             },
             {
                 'title': 'Teléfono',
                 'field' : 'phone',
+                'columnClass': 'col-md-1',
                 'type': 'tel',
                 'show': true,
                 'controlType' : 'input',
@@ -205,6 +212,7 @@ export function metadata(req, res) {
                 'title': 'Email',
                 'field' : 'email',
                 'type': 'email',
+                'columnClass': 'col-md-2',
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-envelope',
@@ -215,6 +223,7 @@ export function metadata(req, res) {
             {
                 'title': 'Celular',
                 'field' : 'cellphone',
+                'columnClass': 'col-md-1',
                 'type': 'tel',
                 'show': true,
                 'controlType' : 'input',

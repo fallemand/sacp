@@ -10,13 +10,13 @@
 
 .datatable-filter {
     position: absolute;
-    padding: 3px 10px;
-    right: 5px;
-    top: 2px;
+    padding: 1px 5px;
+    right: 0px;
+    top: 7px;
 }
 
 .datatable-table th:last-child {
-    padding-right: 55px;
+    padding-right: 18px;
 }
 
 .ng-table-filters th {
@@ -27,4 +27,8 @@
     min-height: 25px;
     padding: 3px 8px;
     max-width: 150px;
+}
+
+.table-actions {
+    max-width: 90px;
 }

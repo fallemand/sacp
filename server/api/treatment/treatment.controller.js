@@ -270,14 +270,17 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType': 'input',
                 'icon': 'fa fa-calendar',
+                'columnClass' : 'col-md-1'
             },
             {
                 'title': 'Última Modificación',
+                'shortTitle' : 'Última Mod.',
                 'field': 'lastUpdateDate',
                 'type': 'date',
                 'show': true,
                 'controlType': 'input',
                 'icon': 'fa fa-calendar',
+                'columnClass' : 'col-md-1 mw-125'
             },
             {
                 'title': 'Paciente',
@@ -290,6 +293,7 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType': 'object',
                 'icon': 'fa fa-user-md',
+                'columnClass' : 'col-md-1',
                 'attributes': {
                     required: true
                 },
@@ -308,6 +312,7 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType': 'object',
                 'icon': 'fa fa-user-md',
+                'columnClass' : 'col-md-1',
                 'attributes': {
                     required: true
                 },
@@ -324,6 +329,7 @@ export function metadata(req, res) {
                 'descField': 'name',
                 'remoteApi': 'treatment-states',
                 'controlType': 'object',
+                'columnClass' : 'col-md-1',
                 'attributes': {
                     required: true
                 },
@@ -344,6 +350,7 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Diagnóstico Topográfico',
+                'shortTitle' : 'Diag. Topográfico',
                 'field': 'diseaseTopographicDiagnosis',
                 'type': 'typeahead',
                 'descField': 'desc',
@@ -353,6 +360,7 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType': 'object',
                 'icon': 'fa fa-user-md',
+                'columnClass' : 'col-md-3',
                 'attributes': {
                     required: true
                 },
@@ -385,6 +393,7 @@ export function metadata(req, res) {
                 'remoteApi': 'disease-stages',
                 'icon': 'flaticon-open-pill',
                 'controlType': 'object',
+                'columnClass' : 'col-md-1',
                 'attributes': {
                     required: true
                 },
@@ -427,11 +436,13 @@ export function metadata(req, res) {
             },
             {
                 'title': 'Fecha probable de tratamiento',
+                'shortTitle' : 'Fecha PT',
                 'field': 'treatmentExpectedDate',
                 'type': 'date',
                 'show': true,
                 'controlType': 'input',
                 'icon': 'fa fa-home',
+                'columnClass' : 'col-md-1 mw-80',
                 'attributes': {
                     required: true
                 },

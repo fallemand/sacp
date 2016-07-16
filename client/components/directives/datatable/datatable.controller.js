@@ -46,6 +46,7 @@
                     title: 'Acciones',
                     show: 'true',
                     getValue: this.actionsCol,
+                    class : 'table-actions col-md-1',
                     actions: this.datatable.actions,
                     customActions: this.datatable.customActions,
                     privileges: (this.datatable.privileges && this.datatable.privileges[this.userType] && this.datatable.privileges[this.userType].actions) ? this.datatable.privileges[this.userType].actions : undefined
@@ -68,13 +69,16 @@
 
                 var col = {
                     field: value.field,
-                    title: value.title,
+                    title: (value.shortTitle) ? value.shortTitle : value.title,
                     show: value.show,
                     sortable: value.field,
                     filter: filter,
                     decorate: this.decorate,
                     decorator: value.decorator
                 };
+                if(value.columnClass) {
+                    col.class = value.columnClass;
+                }
                 if(value.field.type === 'select' || value.field.type === 'typeahead') {
                     getData(value.field, value.remoteApi, col.filterData);
                 }
@@ -231,10 +235,10 @@
                             html += '<a class="btn btn-xs btn-default" ng-click="vm.delete(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>';
                             break;
                         case 'activate' :
-                            html += '<a class="btn btn-xs btn-success" ng-click="vm.activate(row)" ><i class="fa fa-check-square"></i> Activar</a>';
+                            html += '<a class="btn btn-xs btn-success" ng-click="vm.activate(row)" uib-tooltip="Activar" tooltip-placement="top"><i class="fa fa-check-square"></i></a>';
                             break;
                         case 'cancel' :
-                            html += '<a class="btn btn-xs btn-danger" ng-click="vm.delete(row)"><i class="fa fa-times"></i>Cancelar</a>';
+                            html += '<a class="btn btn-xs btn-danger" ng-click="vm.delete(row)" uib-tooltip="Cancelar" tooltip-placement="top"><i class="fa fa-times"></i></a>';
                             break;
                     }
                 }
