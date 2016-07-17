@@ -15,7 +15,8 @@ angular.module('sacpApp', [
         'ngAnimate',
         'hSweetAlert',
         'ngToast',
-        'multiStepForm'
+        'multiStepForm',
+        'ngFileUpload'
     ])
     .config(function ($urlRouterProvider, $locationProvider, $stateProvider, $animateProvider) {
         $urlRouterProvider
