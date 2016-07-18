@@ -14,7 +14,7 @@
                     var file = this.files[i];
                     if (!file.$error) {
                         this.Upload.upload({
-                            url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                            url: '/api/upload-files',
                             data: {
                                 file: file
                             }
