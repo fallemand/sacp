@@ -14,7 +14,7 @@
                     var file = this.files[i];
                     if (!file.$error) {
                         this.Upload.upload({
-                            url: '/api/upload-files',
+                            url: '/api/upload-files/treatment/a435d/'+ (i+1),
                             data: {
                                 file: file
                             }
