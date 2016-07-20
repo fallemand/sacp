@@ -1,3 +1,28 @@
 <form name="vm.autoformConfirm.form" class="mar-top form-horizontal" novalidate autocomplete="off" form-step-validity>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Imágenes</label>
+        <div class="col-sm-7 mar-btm">
+            <div ngf-drop ngf-select ng-model="vm.files" class="dropzone dz-clickable"
+                 ngf-drag-over-class="'dz-drag-hover'" ngf-multiple="true" ngf-allow-dir="true"
+                 accept="image/*,application/pdf"
+                 ngf-pattern="'image/*,application/pdf'">
+
+                <div ng-if="!vm.files.length || vm.files.length < 2" class="dz-default dz-message">
+                    <div class="dz-icon icon-wrap icon-circle icon-wrap-md">
+                        <i class="fa fa-cloud-upload fa-3x"></i>
+                    </div>
+                    <div>
+                        <p class="dz-text">Arrastrar Imágenes</p>
+                        <p class="text-muted">o clickear para elegir manualmente</p>
+                    </div>
+                </div>
+
+                <img ng-repeat="image in vm.files" ngf-thumbnail="image" class="dz-preview dz-image-preview" ngf-size="{width: 100, height: auto, quality: 0.9}">
+            </div>
+            <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+        </div>
+    </div>
+
+
     <autoform parameters="vm.autoformConfirm" object="vm.object"></autoform>
 </form>
