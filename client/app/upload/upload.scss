@@ -7,6 +7,27 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+.dz-thumbnail {
+    margin: 2px;
+    display: inline-block;
+    cursor: pointer !important;
+    position: relative;
+}
+
+.dz-thumbnail:hover:after {
+    font-family: FontAwesome;
+    content: "\f00d";
+    position: absolute;
+    right: calc(50% - 18px);
+    top: calc(50% - 19px);
+    background-color: rgba(0,0,0,0.4);
+    padding: 4px 10px;
+    border-radius: 50px;
+    color: #eee;
+    font-size: 20px;
+}
+
 .dropzone {
     position: relative;
     border: 1px solid rgba(0,0,0,0.08);
@@ -41,10 +62,10 @@
     background: rgba(255,255,255,0.8);
     position: relative;
     display: inline-block;
-    margin: 17px;
+    margin: 4px;
     vertical-align: top;
-    border: 1px solid #acacac;
-    padding: 6px 6px 6px 6px;
+    border: 1px solid #ccc;
+    padding: 3px;
 }
 .dropzone .dz-preview.dz-file-preview [data-dz-thumbnail],
 .dropzone-previews .dz-preview.dz-file-preview [data-dz-thumbnail] {
@@ -243,8 +264,9 @@
 }
 .dropzone .dz-preview,
 .dropzone-previews .dz-preview {
-    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
+    max-height: 100px;
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     font-size: 14px;
 }
 .dropzone .dz-preview.dz-image-preview:hover .dz-details img,

@@ -36,6 +36,12 @@
                 }
             }
         };
+
+        removeImage(index, object, event) {
+            object.splice(index, 1);
+            event.preventDefault();
+            event.stopPropagation();
+        }
     }
 
     angular.module('sacpApp')

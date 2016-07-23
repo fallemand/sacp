@@ -158,6 +158,12 @@
                 this.validStep = true;
             }
         }
+        
+        removeImage(index, object, event) {
+            object.splice(index, 1);
+            event.preventDefault();
+            event.stopPropagation();
+        }
 
         cancel() {
             this.progressBarWidth = (100 / this.wizard.getSteps().length) + '%';
