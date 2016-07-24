@@ -151,8 +151,12 @@
                                 params.total(response.data.total);
                                 if(this.datatable.field) {
                                     response.data = response.data[this.datatable.field];
+                                    $defer.resolve(response.data);
                                 }
-                                $defer.resolve(response.data.docs);
+                                else {
+                                    $defer.resolve(response.data.docs);
+                                }
+
                             });
                         }).bind(this),
                         counts: [25,50,100]
