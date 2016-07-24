@@ -2,26 +2,28 @@
 (function () {
 
     class TreatmentsComponent {
-        constructor($http, ngToast, $state, $stateParams, Auth) {
+        constructor($http, ngToast, $state, $stateParams, Auth, Upload, $timeout) {
             this.loadedData = false;
             this.action = $stateParams.action;
             this.$http = $http;
             this.$state = $state;
             this.ngToast = ngToast;
             this.showFilters = false;
+            this.Upload = Upload;
+            this.$timeout = $timeout;
             this.isAdmin = Auth.isAdmin();
-            switch(this.action) {
+            switch (this.action) {
                 case 'add' :
                     this.initialize();
                     break;
                 case 'update' :
-                    this.getEntity($stateParams.id, (function() {
+                    this.getEntity($stateParams.id, (function () {
                         this.object.observation = '';
                         this.initialize();
                     }).bind(this));
                     break;
                 case 'view' :
-                    this.getEntity($stateParams.id, (function() {
+                    this.getEntity($stateParams.id, (function () {
                         this.initialize();
                     }).bind(this));
                     break;
@@ -29,15 +31,15 @@
         }
 
         getEntity(id, callback) {
-            this.$http.get('/api/treatments/'+id)
+            this.$http.get('/api/treatments/' + id)
                 .then(response => {
                     this.object = response.data;
-                    if(callback) {
+                    if (callback) {
                         callback();
                     }
                 })
                 .catch(err => {
-                    if(err.data && err.data.name == 'CastError') {
+                    if (err.data && err.data.name == 'CastError') {
                         err.message = 'El parametro no es correcto';
                     }
                     this.ngToast.create({
@@ -75,7 +77,7 @@
                 entity: 'treatments',
                 section: 'disease',
                 object: this.object,
-                disabled : (this.action == 'view'),
+                disabled: (this.action == 'view'),
                 template: 'lite'
             };
 
@@ -83,7 +85,7 @@
                 entity: 'treatments',
                 object: this.object,
                 section: 'patient',
-                disabled : (this.action == 'view'),
+                disabled: (this.action == 'view'),
                 template: 'lite'
             };
 
@@ -92,7 +94,7 @@
                 section: 'treatment',
                 formGroupClass: 'col-md-6',
                 object: this.object,
-                disabled : (this.action == 'view'),
+                disabled: (this.action == 'view'),
                 template: 'lite'
             };
 
@@ -100,14 +102,14 @@
                 entity: 'treatments',
                 field: 'drugs',
                 type: 'local',
-                disabled : (this.action == 'view'),
+                disabled: (this.action == 'view'),
                 template: 'short',
                 metadataFilters: 'field=drugs',
                 object: this.object,
-                formGroupClass : 'col-md-4',
-                inputIcons : true,
-                reloadEvent: (function() {
-                    if(this.drugsTable.ngtable) {
+                formGroupClass: 'col-md-4',
+                inputIcons: true,
+                reloadEvent: (function () {
+                    if (this.drugsTable.ngtable) {
                         this.drugsTable.ngtable.reload();
                     }
                 }).bind(this)
@@ -116,7 +118,7 @@
             this.autoformConfirm = {
                 entity: 'treatments',
                 section: 'confirm',
-                disabled : (this.action == 'view'),
+                disabled: (this.action == 'view'),
                 object: this.object,
                 template: 'lite'
             };
@@ -126,19 +128,19 @@
                 type: 'local',
                 metadataFilters: 'field=drugs',
                 actions: ['view', 'modify', 'delete'],
-                reloadEvent: (function() {
-                    if(this.object.drugs.length > 0) {
+                reloadEvent: (function () {
+                    if (this.object.drugs.length > 0) {
                         this.validStep = true;
                     }
                 }).bind(this),
-                initEvent: (function() {
-                    if(this.object.drugs.length > 0) {
+                initEvent: (function () {
+                    if (this.object.drugs.length > 0) {
                         this.validStep = true;
                     }
                 }).bind(this)
             };
 
-            if(this.action !== 'add') {
+            if (this.action !== 'add') {
                 this.stateHistoryTable = {
                     entity: 'treatment-history',
                     field: 'history',
@@ -151,14 +153,14 @@
 
         stepChange(activeIndex, hasForm) {
             this.progressBarWidth = (100 / this.steps.length) * activeIndex + '%';
-            if(!hasForm) {
+            if (!hasForm) {
                 this.validStep = false;
             }
             else {
                 this.validStep = true;
             }
         }
-        
+
         removeImage(index, object, event) {
             object.splice(index, 1);
             event.preventDefault();
@@ -171,7 +173,7 @@
 
         finish() {
             this.submitted = true;
-            if(this.autoformConfirm.form.$valid) {
+            if (this.autoformConfirm.form.$valid) {
                 this.isSaving = true;
                 if (this.object._id) {
                     //Fix sub-object changes
@@ -191,10 +193,16 @@
                         });
                 }
                 else {
-                    this.$http.post('/api/treatments', this.object).then(() => {
-                            this.object = angular.copy({});
-                            this.ngToast.create('Tratamiento agregado con éxito!');
-                            this.$state.go('treatments');
+                    this.$http.post('/api/treatments', this.object).then(treatment => {
+                            //this.object = angular.copy({});
+                            if (this.files && this.files.length > 0) {
+                                this.uploadFiles(treatment.data._id);
+                            }
+                            else {
+                                this.ngToast.create('Tratamiento agregado con éxito!');
+                                this.$state.go('treatments');
+                            }
+
                         })
                         .catch(err => {
                             this.handleError(err);
@@ -204,9 +212,45 @@
             }
         }
 
+        uploadFiles(id) {
+            if (this.files && this.files.length) {
+                for (var i = 0; i < this.files.length; i++) {
+                    var file = this.files[i];
+                    if (!file.$error) {
+                        if (i === (this.files.length - 1)) {
+                            this.isLastImage = id + '/' + (i + 1);
+                        }
+                        this.Upload.upload({
+                            url: '/api/upload-files/treatment/' + id + '/' + (i + 1),
+                            data: {
+                                file: file
+                            }
+                        }).then((function (resp) {
+                            if (resp.config.url.indexOf(this.isLastImage) > -1 ) {
+                                this.ngToast.create('Tratamiento agregado con éxito!');
+                                this.$state.go('treatments');
+                            }
+                            this.$timeout((function () {
+                                this.log = 'file: ' +
+                                    resp.config.data.file.name +
+                                    ', Response: ' + JSON.stringify(resp.data) +
+                                    '\n' + this.log;
+                            }).bind(this));
+                        }).bind(this), null, (function (evt) {
+                            var progressPercentage = parseInt(100.0 *
+                                evt.loaded / evt.total);
+                            this.log = 'progress: ' + progressPercentage +
+                                '% ' + evt.config.data.file.name + '\n' +
+                                this.log;
+                        }).bind(this));
+                    }
+                }
+            }
+        };
+
         handleError(err) {
             var errors = err.data.errors;
-            if(errors) {
+            if (errors) {
                 this.errors = {};
                 // Update validity of form fields that match the mongoose errors
                 angular.forEach(errors, (error, field) => {
