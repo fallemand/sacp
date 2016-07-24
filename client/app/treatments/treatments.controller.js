@@ -47,6 +47,17 @@
                         content: err.message
                     });
                 });
+
+            this.$http.get('/api/upload-files/treatment/' + id)
+                .then(response => {
+                    this.uploadFiles = response.data;
+                })
+                .catch(err => {
+                    this.ngToast.create({
+                        className: 'danger',
+                        content: err.message
+                    });
+                });
         }
 
         initialize() {
@@ -161,10 +172,15 @@
             }
         }
 
-        removeImage(index, object, event) {
-            object.splice(index, 1);
-            event.preventDefault();
-            event.stopPropagation();
+        removeImage(index, object, event, type) {
+            if(type === 'server') {
+                //TODO
+            }
+            else {
+                object.splice(index, 1);
+                event.preventDefault();
+                event.stopPropagation();
+            }
         }
 
         cancel() {

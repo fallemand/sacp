@@ -77,7 +77,6 @@ var TreatmentSchema = new Schema({
         type: String,
         required: false
     },
-
     drugs: [{
         name: {
             type: String,
