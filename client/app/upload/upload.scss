@@ -10,9 +10,18 @@
 
 .dz-thumbnail {
     margin: 2px;
+    vertical-align: top;
     display: inline-block;
     cursor: pointer !important;
     position: relative;
+}
+
+.dz-thumbnail-file {
+    width: 90px;
+    font-size: 11px;
+    line-height: 1.2;
+    text-align: center;
+    word-wrap:break-word;
 }
 
 .dz-thumbnail:hover:after {
@@ -267,7 +276,6 @@
     max-height: 100px;
     -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
 }
 .dropzone .dz-preview.dz-image-preview:hover .dz-details img,
 .dropzone-previews .dz-preview.dz-image-preview:hover .dz-details img {
