@@ -7,7 +7,7 @@
                  accept="image/*,application/pdf"
                  ngf-pattern="'image/*,application/pdf'">
 
-                <div ng-if="!vm.files.length || vm.files.length < 2" class="dz-default dz-message">
+                <div ng-if="(!vm.files.length && !vm.uploadedFiles.length) || (vm.files.length < 2 && vm.uploadedFiles.length < 2)" class="dz-default dz-message">
                     <div class="dz-icon icon-wrap icon-circle icon-wrap-md">
                         <i class="fa fa-cloud-upload fa-3x"></i>
                     </div>
@@ -26,7 +26,7 @@
 
                 </div>
 
-                <div ng-if="vm.action != 'add'" class="dz-thumbnail" ng-repeat="image in vm.uploadFiles" ng-click="vm.removeImage($index, vm.files, $event, 'server')">
+                <div ng-if="vm.action != 'add'" class="dz-thumbnail" ng-repeat="image in vm.uploadedFiles" ng-click="vm.removeImage($index, vm.uploadedFiles, $event, 'server', image.name)">
                     <img ng-if="(['png', 'gif', 'jpeg', 'bmp', 'jpg'].indexOf(image.type) > -1)" ngf-thumbnail="image.path" class="dz-preview dz-image-preview" ngf-size="{width: 60, height: auto, quality: 0.9}">
                     <div class="dz-thumbnail-file" ng-if="(['png', 'gif', 'jpeg', 'bmp', 'jpg'].indexOf(image.type) == -1)">
                         <i class="dz-preview dz-image-preview fa fa-5x fa-file-pdf-o" ></i> <br />

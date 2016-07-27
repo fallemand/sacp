@@ -10,6 +10,6 @@ var router = express.Router();
 
 router.post('/:entity/:id/:number', multipartyMiddleware, controller.create);
 router.get('/:entity/:id', auth.isAuthenticated(), controller.getFiles);
-router.del('/:entity/:file', auth.isAuthenticated(), controller.removeFile);
+router.delete('/:entity/:file', auth.isAuthenticated(), controller.removeFile);
 
 module.exports = router;

@@ -280,7 +280,7 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType': 'input',
                 'icon': 'fa fa-calendar',
-                'columnClass' : 'col-md-1 mw-125'
+                'columnClass' : 'col-md-1 mw-110'
             },
             {
                 'title': 'Paciente',

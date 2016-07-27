@@ -9,9 +9,14 @@
             this.$state = $state;
             this.ngToast = ngToast;
             this.showFilters = false;
-            this.Upload = Upload;
-            this.$timeout = $timeout;
             this.isAdmin = Auth.isAdmin();
+
+            //Used in fileUpload
+            this.imagesToRemove = [];
+            this.$timeout = $timeout;
+            this.Upload = Upload;
+            this.mayorIndex = 1;
+
             switch (this.action) {
                 case 'add' :
                     this.initialize();
@@ -50,7 +55,13 @@
 
             this.$http.get('/api/upload-files/treatment/' + id)
                 .then(response => {
-                    this.uploadFiles = response.data;
+                    this.uploadedFiles = response.data;
+                    for(var file in this.uploadedFiles) {
+                        var index = parseInt(this.uploadedFiles[file].name.substring(this.uploadedFiles[file].name.indexOf('-') + 1, this.uploadedFiles[file].name.indexOf('.')));
+                        if(index > this.mayorIndex) {
+                            this.mayorIndex = index;
+                        }
+                    }
                 })
                 .catch(err => {
                     this.ngToast.create({
@@ -172,15 +183,16 @@
             }
         }
 
-        removeImage(index, object, event, type) {
+        removeImage(index, object, event, type, name) {
             if(type === 'server') {
-                //TODO
+                this.imagesToRemove.push({file: name})
+                object.splice(index, 1);
             }
             else {
                 object.splice(index, 1);
-                event.preventDefault();
-                event.stopPropagation();
             }
+            event.preventDefault();
+            event.stopPropagation();
         }
 
         cancel() {
@@ -199,10 +211,16 @@
                         }
                     }
                     this.object.state = 'EA';
-                    this.$http.put('/api/treatments/' + this.object._id, this.object).then(() => {
-                            this.object = angular.copy({});
-                            this.ngToast.create('Tratamiento modificado con éxito!');
-                            this.$state.go('treatments');
+                    this.$http.put('/api/treatments/' + this.object._id, this.object).then(treatment => {
+                            this.deleteFiles();
+                            if (this.files && this.files.length > 0) {
+                                this.uploadFiles(treatment.data._id);
+                            }
+                            else {
+                                this.ngToast.create('Tratamiento modificado con éxito!');
+                                this.$state.go('treatments');
+                            }
+                            //this.object = angular.copy({});
                         })
                         .catch(err => {
                             this.handleError(err);
@@ -234,7 +252,9 @@
                     var file = this.files[i];
                     if (!file.$error) {
                         if (i === (this.files.length - 1)) {
-                            this.isLastImage = id + '/' + (i + 1);
+                            this.mayorIndex += 1;
+                            this.isLastImage = id + '/' + this.mayorIndex;
+
                         }
                         this.Upload.upload({
                             url: '/api/upload-files/treatment/' + id + '/' + (i + 1),
@@ -260,6 +280,15 @@
                                 this.log;
                         }).bind(this));
                     }
+                }
+            }
+        };
+
+        deleteFiles() {
+            if (this.imagesToRemove.length > 0) {
+                for (var i = 0; i <this.imagesToRemove.length; i++) {
+                    var file = this.imagesToRemove[i];
+                        this.$http.delete('/api/upload-files/treatment/' + file.file + '/');
                 }
             }
         };
