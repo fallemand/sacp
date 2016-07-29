@@ -7,7 +7,7 @@
             this.isAdmin = Auth.isAdmin();
             this.ngToast = ngToast;
             this.collapseActions = true;
-            $http.get('/api/treatments/' + $stateParams.id)
+            $http.get('/api/treatments/' + this.id)
                 .then(response => {
                     this.treatment = response.data;
                     this.stateHistoryTable = {
@@ -18,6 +18,19 @@
                         metadataFilters: 'field=history',
                         id: this.treatment._id
                     };
+                })
+                .catch(err => {
+                    this.ngToast.create({
+                        className: 'danger',
+                        content: err.message
+                    });
+                });
+
+            $http.get('/api/upload-files/treatment/' + this.id)
+                .then(response => {
+                    if(response.data.length > 0) {
+                        this.uploadedFiles = response.data;
+                    }
                 })
                 .catch(err => {
                     this.ngToast.create({

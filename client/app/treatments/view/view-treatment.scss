@@ -50,3 +50,28 @@
 }
 
 
+
+.files-preview {
+    .file-preview {
+        display: inline-block;
+        max-width: 100px;
+        max-height: 100px;
+        margin: 0 10px 0 0;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+        }
+    }
+    .file-preview:hover {
+        display: inline-block;
+        max-width: 100px;
+        max-height: 100px;
+        margin: 0 10px 0 0;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+        }
+    }
+}

@@ -251,18 +251,18 @@
                 for (var i = 0; i < this.files.length; i++) {
                     var file = this.files[i];
                     if (!file.$error) {
+                        this.mayorIndex += 1;
                         if (i === (this.files.length - 1)) {
-                            this.mayorIndex += 1;
-                            this.isLastImage = id + '/' + this.mayorIndex;
+                            this.lastImageName = id + '/' + this.mayorIndex;
 
                         }
                         this.Upload.upload({
-                            url: '/api/upload-files/treatment/' + id + '/' + (i + 1),
+                            url: '/api/upload-files/treatment/' + id + '/' + this.mayorIndex,
                             data: {
                                 file: file
                             }
                         }).then((function (resp) {
-                            if (resp.config.url.indexOf(this.isLastImage) > -1 ) {
+                            if (resp.config.url.indexOf(this.lastImageName) > -1 ) {
                                 this.ngToast.create('Tratamiento agregado con éxito!');
                                 this.$state.go('treatments');
                             }

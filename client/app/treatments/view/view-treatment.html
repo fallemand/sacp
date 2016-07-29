@@ -175,7 +175,15 @@
                 <!--End Data Table-->
 
             </div>
-
+            <div ng-if="vm.uploadedFiles" class="well well-sm files-preview">
+                    <a href="{{image.path}}" target="_blank" ng-repeat="image in vm.uploadedFiles" class="file-preview thumbnail" >
+                        <img ng-if="(['png', 'gif', 'jpeg', 'bmp', 'jpg'].indexOf(image.type) > -1)"  ng-src="{{image.path}}" />
+                        <div class="dz-thumbnail-file" ng-if="(['png', 'gif', 'jpeg', 'bmp', 'jpg'].indexOf(image.type) == -1)">
+                            <i class="dz-preview dz-image-preview fa fa-5x fa-file-pdf-o" ></i> <br />
+                            <span>{{ image.name | limitTo: 20 }}{{image.name.length > 20 ? '...' : ''}}</span>
+                        </div>
+                    </a>
+            </div>
         </div>
     </div>
 </div>
