@@ -25,6 +25,7 @@ class DoctorsController {
         this.activeDoctorsTable = {
             entity: 'users',
             filters: 'active=true&&role=user',
+            canFilter : true,
             type: 'remote',
             actions: ['view', 'modify', 'delete'],
             reloadEvent : (function() {
@@ -50,6 +51,7 @@ class DoctorsController {
             entity: 'users',
             filters: 'active=false&&role=user',
             type: 'remote',
+            canFilter : true,
             actions: ['activate', 'cancel'],
             reloadEvent : (function() {
                 this.countList();

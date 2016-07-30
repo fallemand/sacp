@@ -1,35 +1,33 @@
-<div ng-if="!vm.isAdmin" class="row">
-    <div class="col-xs-12 text-center mar-btm">
-        <button class="btn btn-primary btn-labeled fa fa-chevron-down" ng-click="vm.createPdf()">
-            Descargar
-        </button>
-    </div>
-</div>
-
 <div class="treatment-container">
     <div class="row">
-        <div ng-if="vm.isAdmin" class="col-xs-12 mar-btm">
+        <div class="col-xs-12 mar-btm">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-control">
-                        <a class="btn btn-info" ng-click="vm.createPdf()" uib-tooltip="Descargar PDF" tooltip-placement="top">
-                            <i class="fa fa-print fa-2x"></i>
+                        <a class="btn btn-info" href="/treatments/update/{{vm.treatment._id}}" ui-sref="treatments.action({'action': 'update', 'id' : vm.treatment._id})" uib-tooltip="Modificar" tooltip-placement="top">
+                            <i class="fa fa-pencil fa-2x"></i>
                         </a>
-                        <a class="btn btn-info" ng-click="vm.collapseActions = !vm.collapseActions">
+                        <a class="btn btn-info" ng-click="vm.createPdf()" uib-tooltip="Descargar PDF" tooltip-placement="top">
+                            <i class="fa fa-download fa-2x"></i>
+                        </a>
+                        <!-- <a class="btn btn-info" onclick="window.print();return false" uib-tooltip="Imprimir" tooltip-placement="top">
+                            <i class="fa fa-print fa-2x"></i>
+                        </a>-->
+                        <a class="btn btn-info" ng-click="vm.collapseActions = !vm.collapseActions" uib-tooltip="Ver Historial de Estados" tooltip-placement="top">
                             <i class="text-thin fa fa-2x " ng-class="vm.collapseActions ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
                         </a>
                     </div>
-                    <h3 class="panel-title">Revisión Auditor - Historial</h3>
+                    <h3 class="panel-title">Acciones</h3>
                 </div>
 
                 <div uib-collapse="vm.collapseActions" class="panel-body">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div ng-if="vm.isAdmin" class="col-md-5">
                             <div ng-if="vm.autoformResult" class="table-responsive">
                                 <autoform parameters="vm.autoformResult" object="vm.result"></autoform>
                             </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-7" ng-class="{'col-md-7' : (vm.isAdmin), 'col-md-12' : (!vm.isAdmin)}">
                             <div ng-if="vm.stateHistoryTable" class="table-responsive table-condensed">
                                 <datatable parameters="vm.stateHistoryTable"></datatable>
                             </div>

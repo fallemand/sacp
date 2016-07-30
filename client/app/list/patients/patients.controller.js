@@ -11,6 +11,7 @@ class PatientsController {
         this.patientsTable = {
             entity: 'patients',
             type: 'remote',
+            canFilter : true,
             actions: ['view', 'delete'],
             privileges: {
                 user: {actions: ['view', 'modify']},

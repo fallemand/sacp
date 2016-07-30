@@ -26,6 +26,7 @@ class TreatmentsController {
                     return (row.state._id === 'AP') ? '<a class="btn btn-xs btn-success" href="/prescription/' + row._id + '" ui-sref="prescription({ id : \'' + row._id + '\'})" uib-tooltip="Ver Receta" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-navicon"></i></a>' : '';
                 }
             },
+            canFilter : true,
             viewEvent: (function (object) {
                 this.$state.go('treatments.view', {'id' : object._id});
             }).bind(this),
