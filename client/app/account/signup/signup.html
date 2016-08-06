@@ -8,7 +8,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-male"></i></div>
                         <input type="text" class="form-control" placeholder="Nombre y Apellido" name="name"
-                               minlength="6"
+                               minlength="6" tabindex="1"
                                ng-model="vm.user.name" required/>
                     </div>
                     <p class="help-block" ng-show="form.name.$invalid && (form.name.$dirty || vm.submitted)">
@@ -21,7 +21,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user-md"></i></i></div>
                         <input type="number" class="form-control" min="1" max="99999999" step="1" required
-                               ng-model="vm.user.mn" placeholder="Matricula Nacional" name="mn">
+                               ng-model="vm.user.mn" placeholder="Matricula Nacional" name="mn" tabindex="2">
                     </div>
                     <p class="help-block" ng-show="form.mn.$invalid && (form.mn.$dirty || vm.submitted)">
                         <span ng-show="form.mn.$error.required">El campo es requerido</span>
@@ -34,7 +34,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user-md"></i></i></div>
                         <input type="number" class="form-control" min="1" max="99999999" step="1" required
-                               ng-model="vm.user.mp" placeholder="Matricula Provincial" name="mp">
+                               ng-model="vm.user.mp" placeholder="Matricula Provincial" name="mp" tabindex="3">
                     </div>
                     <p class="help-block" ng-show="form.mp.$invalid && (form.mp.$dirty || vm.submitted)">
                         <span ng-show="form.mp.$error.required">El campo es requerido</span>
@@ -48,7 +48,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
                         <input type="email" name="email" class="form-control" ng-model="vm.user.email"
-                               placeholder="E-mail" ng-model="vm.user.email"
+                               placeholder="E-mail" ng-model="vm.user.email" tabindex="4"
                                required
                                mongoose-error/>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
                         <input type="password" name="password" class="form-control" placeholder="Contraseña"
-                               ng-model="vm.user.password"
+                               ng-model="vm.user.password" tabindex="5"
                                ng-minlength="6"
                                required
                                mongoose-error/>
@@ -83,6 +83,7 @@
                         <input type="password" name="confirmPassword" class="form-control"
                                placeholder="Repetir Contraseña"
                                ng-model="vm.user.confirmPassword"
+                               tabindex="6"
                                match="vm.user.password"
                                ng-minlength="6" required/>
                     </div>
@@ -92,7 +93,7 @@
                 </div>
 
                 <div class="text-right">
-                    <button class="btn btn-success text-uppercase" type="submit">Registrarse</button>
+                    <button class="btn btn-success text-uppercase" tabindex="7" type="submit">Registrarse</button>
                 </div>
             </fieldset>
         </form>
@@ -114,6 +115,6 @@
     </div>
 </div>
 <div class="pad-ver">
-    ¿Ya tienees una cuenta? <a href ui-sref="login" class="btn-link mar-rgt">Ingresar al Sistema</a>
+    ¿Ya tienees una cuenta? <a href ui-sref="login" class="btn-link mar-rgt" tabindex="8">Ingresar al Sistema</a>
 </div>
 

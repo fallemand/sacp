@@ -84,7 +84,7 @@
                             width: 500
                         }]
                     };
-                    pdfMake.createPdf(docDefinition).download("prescription-" + this.id + ".pdf");
+                    pdfMake.createPdf(docDefinition).download("treatment-" + this.id + ".pdf");
                 }).bind({id: this.id})
             });
         }

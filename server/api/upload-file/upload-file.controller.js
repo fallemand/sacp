@@ -21,7 +21,7 @@ export function create(req, res) {
         files = req.files;
     for(var file in files) {
         if(types.indexOf(files[file].type) > -1) {
-            extension = files[file].originalFilename.substring(files[file].originalFilename.indexOf('.')+1, files[file].originalFilename.length);
+            extension = files[file].originalFilename.substring(files[file].originalFilename.indexOf('.')+1, files[file].originalFilename.length).toLocaleLowerCase();
             newPath = 'client/files/' + entity + '/' + id + '-' + number + '.' + extension;
             fs.rename(files[file].path, newPath);
         }
@@ -44,7 +44,7 @@ export function getFiles(req, res) {
         for(var file in realFiles) {
             realFiles[file] = {
                 name: realFiles[file],
-                type : realFiles[file].substring(realFiles[file].indexOf('.') + 1, realFiles[file].length),
+                type : realFiles[file].substring(realFiles[file].indexOf('.') + 1, realFiles[file].length).toLocaleLowerCase(),
                 path : 'files/'+ entity +'/' + realFiles[file]
             };
         }

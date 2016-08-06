@@ -28,10 +28,12 @@ class SignupController {
                 .then(() => {
                     // Show success alert
                     this.success = true;
+                    this.isSaving = false;
                 })
                 .catch(err => {
                     err = err.data;
                     this.errors = {};
+                    this.isSaving = false;
 
                     // Update validity of form fields that match the mongoose errors
                     angular.forEach(err.errors, (error, field) => {

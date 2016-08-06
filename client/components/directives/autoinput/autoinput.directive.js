@@ -15,6 +15,10 @@ angular.module('sacpApp')
                     .attr('ng-disabled', scope.field.disabled + ' || vm.autoform.disabled')
                     .removeAttr('autoinput');
 
+                if(scope.field.tabIndex) {
+                    newElement.attr('tabindex', scope.field.tabIndex);
+                }
+
                 switch (scope.field.controlType) {
                     case 'input' :
                         newElement.attr('placeholder', (scope.field.placeholder) ? (scope.field.placeholder) : scope.field.title);
