@@ -166,6 +166,12 @@ export function activate(req, res) {
             user.active = true;
             return user.save()
                 .then(() => {
+                    var context = {
+                        name : user.name,
+                        url: 'http://www.sacp.cf',
+                        unsubscribeHash : user._id
+                    }
+                    utils.sendMail('activation',context);
                     res.status(204).end();
                 })
                 .catch(validationError(res));
