@@ -18,7 +18,13 @@ angular.module('sacpApp.auth')
 
           event.preventDefault();
           return Auth.isLoggedIn(_.noop).then(is => {
-            $state.go(is ? 'home' : 'login');
+              if(Auth.isAdmin()) {
+                  $state.go(is ? 'home' : 'login');
+              }
+              else {
+                  $state.go(is ? 'treatments' : 'login');
+              }
+
           });
         });
       } else {
