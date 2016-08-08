@@ -1,0 +1,9 @@
+.panel.media {
+    cursor: pointer;
+    transition: background .3s ease-out;
+    border-bottom: 1px solid #fff;
+    &:hover {
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #0a8b9d;
+    }
+}

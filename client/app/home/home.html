@@ -3,18 +3,21 @@
 
         <!--Registered User-->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <div class="panel media pad-all">
-            <div class="media-left">
-									<span class="icon-wrap icon-wrap-sm icon-circle bg-success">
-									<i class="flaticon-doctor-with-stethoscope fa-2x"></i>
-									</span>
-            </div>
+        <a href="/doctors" ui-sref="doctors">
+            <div class="panel media pad-all">
 
-            <div class="media-body">
-                <p class="text-2x mar-no text-thin">5</p>
-                <p class="text-muted mar-no">Médicos Requieren Activación</p>
+                <div class="media-left">
+                                        <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+                                        <i class="flaticon-doctor-with-stethoscope fa-2x"></i>
+                                        </span>
+                </div>
+
+                <div class="media-body">
+                    <p class="text-2x mar-no text-thin">{{vm.countNotActiveUsers}}</p>
+                    <p class="text-muted mar-no">Médicos por Activar</p>
+                </div>
             </div>
-        </div>
+        </a>
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
     </div>
@@ -22,18 +25,20 @@
 
         <!--New Order-->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <div class="panel media pad-all">
-            <div class="media-left">
-									<span class="icon-wrap icon-wrap-sm icon-circle bg-info">
-									<i class="flaticon-medical-briefcase fa-2x"></i>
-									</span>
-            </div>
+        <a href="/treatments" ui-sref="treatments">
+            <div class="panel media pad-all">
+                <div class="media-left">
+                                        <span class="icon-wrap icon-wrap-sm icon-circle bg-info">
+                                        <i class="flaticon-medical-briefcase fa-2x"></i>
+                                        </span>
+                </div>
 
-            <div class="media-body">
-                <p class="text-2x mar-no text-thin">12</p>
-                <p class="text-muted mar-no">Tratamientos en Auditoría</p>
+                <div class="media-body">
+                    <p class="text-2x mar-no text-thin">{{vm.treatmentsEA}}</p>
+                    <p class="text-muted mar-no">Tratamientos en Auditoría</p>
+                </div>
             </div>
-        </div>
+        </a>
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
     </div>
@@ -41,18 +46,20 @@
 
         <!--Comments-->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <div class="panel media pad-all">
-            <div class="media-left">
-									<span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
-									<i class="flaticon-medical-briefcase fa-2x"></i>
-									</span>
-            </div>
+        <a href="/treatments" ui-sref="treatments">
+            <div class="panel media pad-all">
+                <div class="media-left">
+                                        <span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
+                                        <i class="flaticon-medical-briefcase fa-2x"></i>
+                                        </span>
+                </div>
 
-            <div class="media-body">
-                <p class="text-2x mar-no text-thin">5</p>
-                <p class="text-muted mar-no">Tratamientos Pausados</p>
+                <div class="media-body">
+                    <p class="text-2x mar-no text-thin">{{vm.treatmentsPA}}</p>
+                    <p class="text-muted mar-no">Tratamientos Pausados</p>
+                </div>
             </div>
-        </div>
+        </a>
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
     </div>
