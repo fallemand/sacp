@@ -167,10 +167,10 @@ export function activate(req, res) {
             return user.save()
                 .then(() => {
                     var context = {
-                        name : user.name,
+                        user : user,
                         url: 'http://www.sacp.cf',
                         unsubscribeHash : user._id
-                    }
+                    };
                     utils.sendMail('activation',context);
                     res.status(204).end();
                 })
