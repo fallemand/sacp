@@ -245,8 +245,8 @@ export function metadata(req, res, next) {
                 'controlType' : 'input',
                 'attributes' : {
                     required: '',
-                    max : '8',
-                    min: '1'
+                    'maxlength' : '8',
+                    'minlength': '1'
                 },
                 'validations' : ['required','max','min', 'number']
             },
@@ -261,8 +261,8 @@ export function metadata(req, res, next) {
                 'controlType' : 'input',
                 'attributes' : {
                     required: '',
-                    max : '8',
-                    min: '1'
+                    'maxlength' : '8',
+                    'minlength': '1'
                 },
                 'validations' : ['required','max','min', 'number']
             },
@@ -276,11 +276,9 @@ export function metadata(req, res, next) {
                 'icon': 'fa fa-asterisk',
                 'controlType' : 'input',
                 'attributes' : {
-                    required: true,
                     'mongoose-error' : ''
                 },
                 'validations' : {
-                    'required' : '',
                     'mongoose' : ''
                 }
             }
