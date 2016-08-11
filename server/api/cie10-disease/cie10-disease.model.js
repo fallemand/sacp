@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 var mongoosePaginate = require('mongoose-paginate');
 
 var Cie10DiseaseSchema = new mongoose.Schema({
-    code: {
+    _id: {
         type: String,
         unique: true,
         required: true
@@ -16,7 +16,7 @@ var Cie10DiseaseSchema = new mongoose.Schema({
 });
 
 Cie10DiseaseSchema.virtual('desc').get(function() {
-    return this.code + ' - ' + this.name;
+    return this._id + ' - ' + this.name;
 });
 
 Cie10DiseaseSchema.set('toJSON', { virtuals: true });

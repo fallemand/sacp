@@ -193,9 +193,14 @@
                 });
         }
 
-        loadTypeAhead(api, viewvalue, searchField) {
+        loadTypeAhead(api, viewvalue, searchField, searchFieldWithId) {
             var filter = {};
-            filter[searchField] = viewvalue;
+            if(searchFieldWithId) {
+                filter.or = '[' + searchField + '=' +viewvalue + '&_id=' + viewvalue + ']';
+            }
+            else {
+                filter[searchField] = viewvalue;
+            }
             return this.$http({
                 url: '/api/' + api,
                 method: "GET",

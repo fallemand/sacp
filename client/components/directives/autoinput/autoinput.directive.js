@@ -45,10 +45,11 @@ angular.module('sacpApp')
                         else {
                             if(scope.field.type == 'typeahead') {
                                 newElement
-                                    .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue, field.searchField)')
+                                    .attr('uib-typeahead', 'item as item[field.descField] for item in vm.loadTypeAhead(field.remoteApi, $viewValue, field.searchField, field.searchFieldWithId)')
                                     .attr('typeahead-loading', 'vm.typeahead.loading')
                                     .attr('typeahead-no-results', 'vm.typeahead.noresults')
                                     .attr('typeahead-min-length', 2)
+                                    .attr('typeahead-wait-ms', 250)
                                     .attr('typeahead-editable', 'false');
                                 break;
                             }

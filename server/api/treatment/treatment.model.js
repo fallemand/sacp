@@ -34,8 +34,9 @@ var TreatmentSchema = new Schema({
         required: true
     },
     diseaseTopographicDiagnosis: {
-        type: Schema.Types.ObjectId,
-        ref: 'Cie10Disease'
+        type: String,
+        ref: 'Cie10Disease',
+        required: true
     },
     diseaseHistologicalDiagnosis: {
         type: String,

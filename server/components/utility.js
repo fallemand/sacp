@@ -31,7 +31,23 @@ export function processQuery(model, query, options) {
                     populateFilter = field;
                 }
                 else {
-                    query[filter] = new RegExp(filters[filter], 'i');
+                    if(filter === 'or') {
+                        var orFilters = filters[filter].replace('[','').replace(']','');
+                        orFilters = orFilters.split('&');
+                        var array = [];
+
+                        for(var orFilter in orFilters) {
+                            var object = {};
+                            var key =  orFilters[orFilter].substring(0,  orFilters[orFilter].indexOf('='));
+                            var value =  orFilters[orFilter].substring(orFilters[orFilter].indexOf('=') + 1,  orFilters[orFilter].length);
+                            object[key] = new RegExp(value, 'i');
+                            array.push(object);
+                        }
+                        query.$or = array;
+                    }
+                    else {
+                        query[filter] = new RegExp(filters[filter], 'i');
+                    }
                 }
             }
         }
