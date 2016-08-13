@@ -70,7 +70,7 @@
                 var col = {
                     field: value.field,
                     title: (value.shortTitle) ? value.shortTitle : value.title,
-                    show: value.show,
+                    show: (!value.hideInList),
                     sortable: value.field,
                     filter: filter,
                     decorate: this.decorate,
@@ -304,21 +304,44 @@
                 allowEscapeKey: true,
                 allowOutsideClick: true
             }, (function () {
-                this.$http.delete('/api/' + this.datatable.entity + '/' + object._id).then(response => {
-                    this.sweet.show({
-                        title: 'Eliminado!',
-                        text: 'El ' + this.metadata.name + ' ha sido eliminado.',
-                        type: 'success',
-                        timer: '1300',
-                        allowOutsideClick: true,
-                        allowEscapeKey: true,
-                        showConfirmButton: false
-                    });
-                    this.datatable.ngtable.reload();
-                    if (this.datatable.reloadEvent) {
-                        this.datatable.reloadEvent();
-                    }
-                });
+                switch (this.datatable.type) {
+                    case 'remote' :
+                        this.$http.delete('/api/' + this.datatable.entity + '/' + object._id)
+                            .then(response => {
+                                this.sweet.show({
+                                    title: 'Eliminado!',
+                                    text: 'El ' + this.metadata.name + ' ha sido eliminado.',
+                                    type: 'success',
+                                    timer: '1300',
+                                    allowOutsideClick: true,
+                                    allowEscapeKey: true,
+                                    showConfirmButton: false
+                                });
+                                this.datatable.ngtable.reload();
+                                if (this.datatable.reloadEvent) {
+                                    this.datatable.reloadEvent();
+                                }
+                            });
+                        break;
+                    case 'local' :
+                        var indexToRemove = this.$scope.object.indexOf(object);
+                        if (indexToRemove > -1) {
+                            this.$scope.object.splice(indexToRemove, 1);
+                            this.sweet.show({
+                                title: 'Eliminado!',
+                                text: 'El ' + this.metadata.name + ' ha sido eliminado.',
+                                type: 'success',
+                                timer: '1300',
+                                allowOutsideClick: true,
+                                allowEscapeKey: true,
+                                showConfirmButton: false
+                            });
+                            this.datatable.ngtable.reload();
+                        }
+                        if (this.datatable.reloadEvent) {
+                            this.datatable.reloadEvent();
+                        }
+                }
             }).bind(this));
         }
 

@@ -67,7 +67,7 @@ function handleError(res, statusCode) {
 // Gets a list of Treatments
 export function index(req, res) {
     var options = {
-        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugsType', 'state'],
+        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
         sort: {'lastUpdateDate' : 'desc'}
     };
     return utils.processQuery(Treatment,req.query,options)
@@ -78,8 +78,8 @@ export function index(req, res) {
 // Gets a list of Treatments of that user
 export function indexUser(req, res) {
     var options = {
-        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugsType', 'state'],
-        sort: {'lastUpdateDate' : 'desc'},
+        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
+        sort: {'lastUpdateDate' : 'desc'}
     };
     req.query.doctor = req.user._id;
     return utils.processQuery(Treatment,req.query,options)
@@ -95,7 +95,7 @@ export function show(req, res) {
         .populate('diseaseStage')
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
-        .populate('drugsType')
+        .populate('drugs.type')
         .populate('state')
         .exec(function (err, treatment) {
             AgreementType.populate(treatment, {
@@ -537,6 +537,7 @@ export function metadata(req, res) {
             {
                 'title': 'Drogas',
                 'field': 'drugs',
+                name: 'item',
                 'hideInList': true,
                 'controlType': 'list',
                 fields: [
@@ -560,13 +561,7 @@ export function metadata(req, res) {
                         'type': 'text',
                         'show': true,
                         'controlType': 'input',
-                        'icon': 'flaticon-medicine-bottle',
-                        'attributes': {
-                            required: true
-                        },
-                        'validations': {
-                            'required': ''
-                        }
+                        'icon': 'flaticon-medicine-bottle'
                     },
                     {
                         'title': 'Tipo',

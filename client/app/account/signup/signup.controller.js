@@ -22,8 +22,8 @@ class SignupController {
                     name: this.user.name,
                     email: this.user.email,
                     password: this.user.password,
-                    mn: this.user.mn,
-                    mp: this.user.mp
+                    mn: this.user.ma,
+                    me: this.user.me
                 })
                 .then(() => {
                     // Show success alert

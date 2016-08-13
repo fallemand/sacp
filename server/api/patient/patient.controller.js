@@ -83,6 +83,7 @@ export function show(req, res) {
 
 // Creates a new Patient in the DB
 export function create(req, res) {
+    req.body.registerDate = new Date();
     req.body.registeredBy = req.user._id;
     return Patient.create(req.body)
         .then(respondWithResult(res, 201))
@@ -93,6 +94,9 @@ export function create(req, res) {
 export function update(req, res) {
     if (req.body._id) {
         delete req.body._id;
+    }
+    if (req.body.registerDate) {
+        delete req.body.registerDate;
     }
     if (req.user.role !== 'admin' && req.user._id != req.body.registeredBy) {
         return res.status(500).send('No puedes modificar este paciente porque fue registrado por otro médico. Solicita al cambio al administrador');
@@ -196,7 +200,8 @@ export function metadata(req, res) {
                 'field' : 'address',
                 'type': 'text',
                 'columnClass': 'col-md-1',
-                'show': false,
+                'show': true,
+                'hideInList' : true,
                 'controlType' : 'input',
                 'icon': 'fa fa-home'
             },
@@ -229,6 +234,21 @@ export function metadata(req, res) {
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'fa fa-phone'
+            },
+            {
+                'title': 'Fecha Registro',
+                'field' : 'registerDate',
+                'type': 'date',
+                'columnClass': 'col-md-1 mw-100',
+                'show': false,
+                'controlType' : 'input',
+                'icon': 'fa fa-calendar',
+                'attributes' : {
+                    required: true
+                },
+                'validations' : {
+                    'required' : ''
+                }
             }
         ]
 

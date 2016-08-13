@@ -1,6 +1,6 @@
 <fieldset ng-disabled="vm.autoform.isSaving">
     <div ng-class="{'row row-equal-height' : vm.autoform.formGroupClass}">
-    <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields"
+    <div class="form-group {{vm.autoform.formGroupClass}}" ng-repeat="field in vm.metadata.fields" ng-if="field.show"
          ng-class="{ 'has-success': vm.autoform.form[field.field].$valid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted),
                                             'has-error': vm.autoform.form[field.field].$invalid && (vm.autoform.form[field.field].$dirty || vm.autoform.submitted)}">
         <div class="input-group">

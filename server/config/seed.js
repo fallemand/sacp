@@ -36,8 +36,6 @@ import DrugType from '../api/drug-type/drug-type.model';
 //         }, {
 //             name: 'II'
 //         }, {
-//             name: 'II'
-//         }, {
 //             name: 'III'
 //         }, {
 //             name: 'IV'
@@ -87,7 +85,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'test@example.com',
 //                 password: 'test',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: true
 //
 //             }, {
@@ -97,7 +95,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'admin@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: true
 //             }, {
 //                 provider: 'local',
@@ -105,7 +103,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'admin1@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: true
 //             }, {
 //                 provider: 'local',
@@ -113,7 +111,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'adm2@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: true
 //             }, {
 //                 provider: 'local',
@@ -121,7 +119,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'ad3n@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -129,7 +127,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'ad4n@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -137,7 +135,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'adm5@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -145,7 +143,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'ad6n@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -153,7 +151,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'adm7@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -161,7 +159,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'ad8n@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -169,7 +167,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'ad9n@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -177,7 +175,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'ad0n@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             }, {
 //                 provider: 'local',
@@ -185,7 +183,7 @@ import DrugType from '../api/drug-type/drug-type.model';
 //                 email: 'ad55n@example.com',
 //                 password: 'admin',
 //                 mn: '1',
-//                 mp: '1',
+//                 me: '1',
 //                 active: false
 //             })
 //             .then(() => {

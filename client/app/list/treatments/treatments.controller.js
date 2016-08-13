@@ -17,10 +17,10 @@ class TreatmentsController {
             },
             customActions: {
                 'modify' : function(row) {
-                    return (row.state._id !== 'AP') ? '<a class="btn btn-xs btn-default" ng-click="vm.update(row)" uib-tooltip="Modificar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-pencil"></i></a>' : '';
+                    return (row.state._id !== 'AP' && row.state._id !== 'CA') ? '<a class="btn btn-xs btn-default" ng-click="vm.update(row)" uib-tooltip="Modificar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-pencil"></i></a>' : '';
                 },
                 'delete' : function(row) {
-                    return (row.state._id !== 'AP') ? '<a class="btn btn-xs btn-default" ng-click="vm.delete(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>' : '';
+                    return (row.state._id !== 'AP' && row.state._id !== 'CA') ? '<a class="btn btn-xs btn-default" ng-click="vm.delete(row)" uib-tooltip="Eliminar" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-times"></i></a>' : '';
                 },
                 'view-prescription' : function(row) {
                     return (row.state._id === 'AP') ? '<a class="btn btn-xs btn-success" href="/prescription/' + row._id + '" ui-sref="prescription({ id : \'' + row._id + '\'})" uib-tooltip="Ver Receta" tooltip-placement="top" tooltip-append-to-body="true"><i class="fa fa-navicon"></i></a>' : '';

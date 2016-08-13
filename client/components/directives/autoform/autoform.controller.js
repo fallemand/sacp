@@ -123,20 +123,31 @@
         }
 
         update() {
-            //Fix sub-object changes
-            for (var attribute in this.$scope.object) {
-                if (this.$scope.object[attribute].hasOwnProperty('_id')) {
-                    this.$scope.object[attribute] = this.$scope.object[attribute]._id;
-                }
+            switch(this.autoform.type) {
+                case 'remote' :
+                    //Fix sub-object changes
+                    for (var attribute in this.$scope.object) {
+                        if (this.$scope.object[attribute].hasOwnProperty('_id')) {
+                            this.$scope.object[attribute] = this.$scope.object[attribute]._id;
+                        }
+                    }
+                    this.$http.put('/api/' + this.autoform.entity + '/' + this.$scope.object._id, this.$scope.object).then(() => {
+                            this.resetForm();
+                            this.ngToast.create(this.metadata.name + ' modificado con éxito!');
+                            this.autoform.reloadEvent();
+                        })
+                        .catch(err => {
+                            this.handleError(err);
+                        });
+                    break;
+                case 'local' :
+                    for(var item in this.$scope.object[this.autoform.field]) {
+                        if(this.$scope.object[this.autoform.field].$$hashKey == this.$scope.object[this.aux][this.autoform.field].$$hashKey) {
+                            this.$scope.object[this.autoform.field][item] = this.$scope.object[this.aux][this.autoform.field];
+                            this.resetForm();
+                        }
+                    }
             }
-            this.$http.put('/api/' + this.autoform.entity + '/' + this.$scope.object._id, this.$scope.object).then(() => {
-                    this.resetForm();
-                    this.ngToast.create(this.metadata.name + ' modificado con éxito!');
-                    this.autoform.reloadEvent();
-                })
-                .catch(err => {
-                    this.handleError(err);
-                });
         }
 
         handleError(err) {

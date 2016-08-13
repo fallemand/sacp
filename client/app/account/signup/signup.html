@@ -16,30 +16,30 @@
                         <span ng-show="form.name.$error.required">El campo es requerido</span>
                     </p>
                 </div>
-                <div class="form-group" ng-class="{ 'has-success': form.mn.$valid && (form.mn.$dirty || vm.submitted),
-                                            'has-error': form.mn.$invalid && (form.mn.$dirty || vm.submitted)}">
+                <div class="form-group" ng-class="{ 'has-success': form.ma.$valid && (form.ma.$dirty || vm.submitted),
+                                            'has-error': form.ma.$invalid && (form.ma.$dirty || vm.submitted)}">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user-md"></i></i></div>
                         <input type="number" class="form-control" min="1" max="99999999" step="1" required
-                               ng-model="vm.user.mn" placeholder="Matricula Nacional" name="mn" tabindex="2">
+                               ng-model="vm.user.ma" placeholder="Matricula" name="ma" tabindex="2">
                     </div>
-                    <p class="help-block" ng-show="form.mn.$invalid && (form.mn.$dirty || vm.submitted)">
-                        <span ng-show="form.mn.$error.required">El campo es requerido</span>
-                        <span ng-show="form.mn.$error.max">Máximo 8 dígitos</span>
-                        <span ng-show="form.mn.$error.min">El valor mínimo es 1</span>
+                    <p class="help-block" ng-show="form.ma.$invalid && (form.ma.$dirty || vm.submitted)">
+                        <span ng-show="form.ma.$error.required">El campo es requerido</span>
+                        <span ng-show="form.ma.$error.max">Máximo 8 dígitos</span>
+                        <span ng-show="form.ma.$error.min">El valor mínimo es 1</span>
                     </p>
                 </div>
-                <div class="form-group" ng-class="{ 'has-success': form.mp.$valid && (form.mp.$dirty || vm.submitted),
-                                            'has-error': form.mp.$invalid && (form.mp.$dirty || vm.submitted)}">
+                <div class="form-group" ng-class="{ 'has-success': form.me.$valid && (form.me.$dirty || vm.submitted),
+                                            'has-error': form.me.$invalid && (form.me.$dirty || vm.submitted)}">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user-md"></i></i></div>
                         <input type="number" class="form-control" min="1" max="99999999" step="1" required
-                               ng-model="vm.user.mp" placeholder="Matricula Provincial" name="mp" tabindex="3">
+                               ng-model="vm.user.me" placeholder="Matricula Especialista" name="me" tabindex="3">
                     </div>
-                    <p class="help-block" ng-show="form.mp.$invalid && (form.mp.$dirty || vm.submitted)">
-                        <span ng-show="form.mp.$error.required">El campo es requerido</span>
-                        <span ng-show="form.mp.$error.max">Máximo 8 dígitos</span>
-                        <span ng-show="form.mp.$error.min">El valor mínimo es 1</span>
+                    <p class="help-block" ng-show="form.me.$invalid && (form.me.$dirty || vm.submitted)">
+                        <span ng-show="form.me.$error.required">El campo es requerido</span>
+                        <span ng-show="form.me.$error.max">Máximo 8 dígitos</span>
+                        <span ng-show="form.me.$error.min">El valor mínimo es 1</span>
                     </p>
                 </div>
                 <hr>

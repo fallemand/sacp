@@ -168,7 +168,7 @@ export function activate(req, res) {
                 .then(() => {
                     var context = {
                         user : user,
-                        url: 'http://www.sacp.cf',
+                        url: 'http://www.sacp.com.ar',
                         unsubscribeHash : user._id
                     };
                     utils.sendMail('activation',context);
@@ -235,9 +235,9 @@ export function metadata(req, res, next) {
                 'validations' : ['required','mongoose','email']
             },
             {
-                'title': 'Matricula Nacional',
-                'shortTitle' : 'Mat Nacional',
-                'field' : 'mn',
+                'title': 'Matricula',
+                'shortTitle' : 'Mat',
+                'field' : 'ma',
                 'type': 'number',
                 'columnClass': 'col-md-2',
                 'show': true,
@@ -245,15 +245,15 @@ export function metadata(req, res, next) {
                 'controlType' : 'input',
                 'attributes' : {
                     required: '',
-                    'maxlength' : '8',
-                    'minlength': '1'
+                    'min' : '99999999',
+                    'max': '1'
                 },
                 'validations' : ['required','max','min', 'number']
             },
             {
-                'title': 'Matricula Provincial',
-                'shortTitle' : 'Mat Provincial',
-                'field' : 'mp',
+                'title': 'Matricula Especialista',
+                'shortTitle' : 'Mat Especialista',
+                'field' : 'me',
                 'type': 'number',
                 'columnClass': 'col-md-2',
                 'show': true,
@@ -261,8 +261,8 @@ export function metadata(req, res, next) {
                 'controlType' : 'input',
                 'attributes' : {
                     required: '',
-                    'maxlength' : '8',
-                    'minlength': '1'
+                    'max' : '99999999',
+                    'min': '1'
                 },
                 'validations' : ['required','max','min', 'number']
             },

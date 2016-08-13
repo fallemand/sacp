@@ -43,6 +43,10 @@ var PatientSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'AgreementType',
         required: false
+    },
+    registerDate: {
+        type: Date,
+        required: true
     }
 });
 

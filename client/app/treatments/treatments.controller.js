@@ -149,7 +149,7 @@
                 entity: 'treatments',
                 type: 'local',
                 metadataFilters: 'field=drugs',
-                actions: ['view', 'modify', 'delete'],
+                actions: ['modify', 'delete'],
                 reloadEvent: (function () {
                     if (this.object.drugs.length > 0) {
                         this.validStep = true;
@@ -159,6 +159,10 @@
                     if (this.object.drugs.length > 0) {
                         this.validStep = true;
                     }
+                }).bind(this),
+                modifyEvent: (function (object) {
+                    this.object.aux = {};
+                    this.object.aux.drugs = object;
                 }).bind(this)
             };
 

@@ -25,7 +25,7 @@ var UserSchema = new Schema({
     },
     provider: String,
     salt: String,
-    mp: {
+    me: {
         type: Number,
         required: true
     },
@@ -58,8 +58,8 @@ UserSchema
             'name': this.name,
             'role': this.role,
             'email': this.email,
-            'mp': this.mp,
-            'mn': this.mn
+            'me': this.me,
+            'ma': this.ma
         };
     });
 
