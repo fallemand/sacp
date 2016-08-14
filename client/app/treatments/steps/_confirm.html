@@ -7,7 +7,7 @@
                  accept="image/*,application/pdf"
                  ngf-pattern="'image/*,application/pdf'">
 
-                <div ng-if="(!vm.files.length && !vm.uploadedFiles.length) || (vm.files.length < 2 && vm.uploadedFiles.length < 2)" class="dz-default dz-message">
+                <div ng-if="(!vm.files.length && !vm.uploadedFiles.length) || (vm.files.length < 2 && vm.uploadedFiles.length < 2) || vm.action != 'view'" class="dz-default dz-message">
                     <div class="dz-icon icon-wrap icon-circle icon-wrap-md">
                         <i class="fa fa-cloud-upload fa-3x"></i>
                     </div>
@@ -39,6 +39,12 @@
         </div>
     </div>
 
-
     <autoform parameters="vm.autoformConfirm" object="vm.object"></autoform>
+
+    <div ng-if="vm.action == 'update'" class="form-group">
+        <label class="col-sm-4 control-label">Comentario</label>
+        <div class="col-sm-7 mar-btm">
+            <textarea  ng-model="vm.object.comment" class="form-control" name="comment" placeholder="Detalle información sobre el cambio o información extra que sea revelevante para el auditor. Ej: Si agrego imágenes, o modifico campos" required="required" rows="3"></textarea>
+        </div>
+    </div>
 </form>

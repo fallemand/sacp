@@ -67,7 +67,10 @@ function handleError(res, statusCode) {
 // Gets a list of Treatments
 export function index(req, res) {
     var options = {
-        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
+        populate: [{
+            path: 'doctor',
+            select: '-salt -provider -password'
+        }, 'patient', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
         sort: {'lastUpdateDate' : 'desc'}
     };
     return utils.processQuery(Treatment,req.query,options)
@@ -78,7 +81,10 @@ export function index(req, res) {
 // Gets a list of Treatments of that user
 export function indexUser(req, res) {
     var options = {
-        populate: ['patient', 'doctor', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
+        populate: ['patient', {
+            path: 'doctor',
+            select: '-salt -provider -password'
+        }, 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
         sort: {'lastUpdateDate' : 'desc'}
     };
     req.query.doctor = req.user._id;
@@ -91,7 +97,10 @@ export function indexUser(req, res) {
 export function show(req, res) {
     return Treatment.findById(req.params.id)
         .populate('patient')
-        .populate('doctor')
+        .populate({
+            path: 'doctor',
+            select: '-salt -provider -password'
+        })
         .populate('diseaseStage')
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
@@ -118,6 +127,7 @@ export function create(req, res) {
     req.body.doctor = req.user._id;
     req.body.createdDate = new Date();
     req.body.lastUpdateDate = new Date();
+    var comment = 'Carga Inicial';
     Treatment.create(req.body, function (err, treatment) {
         if (err) {
             return res.status(500).send(err);
@@ -129,7 +139,7 @@ export function create(req, res) {
                     date: new Date(),
                     state: 'EA',
                     user: req.user._id,
-                    observation: treatment.observation
+                    observation: comment
                 }
             ]
         };
@@ -145,6 +155,8 @@ export function create(req, res) {
 
 // Updates an existing Treatment in the DB
 export function update(req, res) {
+    var comment = req.body.comment;
+    delete req.body.comment;
     var treatment = req.body;
     if (!treatment.state) {
         treatment.state = 'EA';
@@ -164,6 +176,9 @@ export function update(req, res) {
             if (entity.state == 'AP') {
                 return res.status(500).send('No se puede modificar un tratamiento aprobado');
             }
+            if (entity.state == 'CA') {
+                return res.status(500).send('No se puede modificar un tratamiento cancelado');
+            }
             if (!entity.doctor.equals(req.user._id)) {
                 return res.status(500).send('El tratamiento que quieres modificar no te pertenece');
             }
@@ -181,7 +196,7 @@ export function update(req, res) {
                         date: new Date(),
                         user: req.user._id,
                         state: 'EA',
-                        observation: treatment.observation
+                        observation: comment
                     };
                     history.history.push(newHistory);
                     history.save(function (err) {
@@ -263,6 +278,16 @@ export function metadata(req, res) {
             }
         },
         fields: [
+            {
+                'title': 'Id',
+                'field': '_id',
+                'type': 'input',
+                'show': false,
+                'hideInList' : false,
+                'controlType': 'input',
+                'icon': 'fa fa-calendar',
+                'columnClass' : 'col-md-1 mw-80'
+            },
             {
                 'title': 'Creado',
                 'field': 'createdDate',
@@ -361,6 +386,7 @@ export function metadata(req, res) {
                 'searchFieldWithId' : true,
                 'remoteApi': 'cie10-diseases',
                 'show': true,
+                'hideInList': true,
                 'controlType': 'object',
                 'icon': 'fa fa-user-md',
                 'columnClass' : 'col-md-3',
@@ -620,7 +646,7 @@ export function metadata(req, res) {
                 'icon': 'fa fa-phone',
                 'attributes': {
                     required: true,
-                    rows: 4
+                    rows: 3
                 },
                 'validations': {
                     'required': ''

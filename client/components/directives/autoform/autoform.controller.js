@@ -82,7 +82,7 @@
 
             if (this.autoform.form.$valid) {
                 this.autoform.isSaving = true;
-                if (this.$scope.object._id) {
+                if (this.$scope.object._id || (this.autoform.type === 'local' && this.$scope.object[this.aux][this.autoform.field].objectToUpdate)) {
                     this.update();
                 }
                 else {
@@ -141,9 +141,10 @@
                         });
                     break;
                 case 'local' :
-                    for(var item in this.$scope.object[this.autoform.field]) {
-                        if(this.$scope.object[this.autoform.field].$$hashKey == this.$scope.object[this.aux][this.autoform.field].$$hashKey) {
-                            this.$scope.object[this.autoform.field][item] = this.$scope.object[this.aux][this.autoform.field];
+                    for(var i = 0; i < this.$scope.object[this.autoform.field].length; i+=1) {
+                        if(this.$scope.object[this.autoform.field][i].$$hashKey == this.$scope.object[this.aux][this.autoform.field].objectToUpdate) {
+                            delete this.$scope.object[this.aux][this.autoform.field].objectToUpdate;
+                            this.$scope.object[this.autoform.field][i] = this.$scope.object[this.aux][this.autoform.field];
                             this.resetForm();
                         }
                     }

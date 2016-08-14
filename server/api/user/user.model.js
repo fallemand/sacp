@@ -29,7 +29,7 @@ var UserSchema = new Schema({
         type: Number,
         required: true
     },
-    mn: {
+    ma: {
         type: Number,
         required: true
     },

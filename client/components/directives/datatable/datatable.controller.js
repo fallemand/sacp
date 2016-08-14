@@ -71,12 +71,14 @@
                     field: value.field,
                     title: (value.shortTitle) ? value.shortTitle : value.title,
                     show: (!value.hideInList),
-                    sortable: value.field,
                     filter: filter,
                     decorate: this.decorate,
                     decorator: value.decorator,
                     link: value.link
                 };
+                if(this.datatable.canFilter) {
+                    col.sortable = value.field;
+                }
                 if(value.columnClass) {
                     col.class = value.columnClass;
                 }
@@ -282,7 +284,9 @@
 
         update(row) {
             if (this.datatable.modifyEvent) {
-                this.datatable.modifyEvent(angular.copy(row));
+                var copy = angular.copy(row);
+                copy.objectToUpdate = row.$$hashKey;
+                this.datatable.modifyEvent(copy);
             }
         }
 
@@ -293,9 +297,10 @@
         }
 
         delete(object) {
+            var desc = (object.name) ? object.name : '#' + object._id
             this.sweet.show({
                 title: '¿Está Seguro?',
-                text: 'Eliminará el ' + this.metadata.name + ' ' + object.name,
+                text: 'Eliminará el ' + this.metadata.name + ' ' + desc,
                 type: 'error',
                 showCancelButton: true,
                 confirmButtonClass: 'btn-danger',

@@ -6,7 +6,8 @@
             this.id = $stateParams.id;
             this.isAdmin = Auth.isAdmin();
             this.ngToast = ngToast;
-            this.collapseActions = true;
+            this.collapseActions = (this.isAdmin) ? true : false;
+            this.actionsTitle = (this.isAdmin) ? 'Acciones' : 'Historial de Estados';
             $http.get('/api/treatments/' + this.id)
                 .then(response => {
                     this.treatment = response.data;
@@ -59,7 +60,9 @@
                     $http.put('/api/treatments/' + this.treatment._id + '/status', this.result.aux.history.state).then(treatment => {
                             $http.put('/api/treatment-history/' + this.treatment._id, this.result.aux.history).then(() => {
                                     this.ngToast.create('Estado seteado con éxito!');
-                                    this.$state.go('treatments');
+                                    this.collapseActions = true;
+                                    this.stateHistoryTable.ngtable.reload();
+                                    this.autoformResult.resetForm();
                                 })
                                 .catch(err => {
                                     this.handleError(err);

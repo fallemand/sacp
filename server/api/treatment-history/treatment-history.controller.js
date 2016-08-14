@@ -71,7 +71,10 @@ export function index(req, res) {
 export function show(req, res) {
     return TreatmentHistory.findById(req.params.id)
         .populate('history.state')
-        .populate('history.user')
+        .populate({
+            path: 'history.user',
+            select: '-salt -provider -password'
+        })
         .exec()
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
@@ -191,7 +194,7 @@ export function metadata(req, res) {
                         'show': true,
                         'descField': 'name',
                         'remoteApi': 'treatment-states',
-                        'icon': 'fa fa-credit-card',
+                        'icon': 'fa fa-th-large',
                         'controlType': 'object',
                         'attributes': {
                             required: true
@@ -216,7 +219,7 @@ export function metadata(req, res) {
                         'type': 'text',
                         'show': true,
                         'controlType': 'textarea',
-                        'icon': 'fa fa-phone',
+                        'icon': 'fa fa-file-text-o',
                         'attributes': {
                             rows: 4
                         }

@@ -5,7 +5,8 @@
 'use strict';
 
 export function processQuery(model, query, options) {
-    options.sort = (query.sorting) ? JSON.parse(query.sorting) : options.sort;
+    query.sorting = (query.sorting) ? JSON.parse(query.sorting) : {};
+    options.sort = (Object.keys(query.sorting).length > 0) ? JSON.parse(query.sorting) : options.sort;
     options.page = (query.page) ? parseInt(query.page) : 1;
     options.limit = (query.count) ? parseInt(query.count) : 50;
     var populateFilter;
@@ -59,9 +60,11 @@ export function processQuery(model, query, options) {
     delete query.filter;
 
     if (!populateFilter) {
+        console.log(options);
         return model.paginate(query, options);
     }
     else {
+        console.log(options);
         return model.paginate(query, options).then(function(documents) {
             documents.docs = documents.docs.filter(function (document) {
                 return document[populateFilter];

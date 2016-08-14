@@ -23,7 +23,6 @@
                     break;
                 case 'update' :
                     this.getEntity($stateParams.id, (function () {
-                        this.object.observation = '';
                         this.initialize();
                     }).bind(this));
                     break;
@@ -214,7 +213,6 @@
                             this.object[attribute] = this.object[attribute]._id;
                         }
                     }
-                    this.object.state = 'EA';
                     this.$http.put('/api/treatments/' + this.object._id, this.object).then(treatment => {
                             this.deleteFiles();
                             if (this.files && this.files.length > 0) {

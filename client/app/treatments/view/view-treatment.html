@@ -4,7 +4,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-control">
-                        <a class="btn btn-info" href="/treatments/update/{{vm.treatment._id}}" ui-sref="treatments.action({'action': 'update', 'id' : vm.treatment._id})" uib-tooltip="Modificar" tooltip-placement="top">
+                        <a class="btn btn-info" ng-if="!vm.isAdmin" href="/treatments/update/{{vm.treatment._id}}" ui-sref="treatments.action({'action': 'update', 'id' : vm.treatment._id})" uib-tooltip="Modificar" tooltip-placement="top">
                             <i class="fa fa-pencil fa-2x"></i>
                         </a>
                         <a class="btn btn-info" ng-click="vm.createPdf()" uib-tooltip="Descargar PDF" tooltip-placement="top">
@@ -17,7 +17,7 @@
                             <i class="text-thin fa fa-2x " ng-class="vm.collapseActions ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
                         </a>
                     </div>
-                    <h3 class="panel-title">Acciones</h3>
+                    <h3 class="panel-title">{{vm.actionsTitle}}</h3>
                 </div>
 
                 <div uib-collapse="vm.collapseActions" class="panel-body">
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="panel panel-default drugs">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title"><strong>Drogras</strong></h3>
+                                        <h3 class="panel-title"><strong>Drogas</strong></h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="table-responsive" ng-if="vm.treatment">

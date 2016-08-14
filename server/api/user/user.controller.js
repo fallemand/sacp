@@ -245,8 +245,8 @@ export function metadata(req, res, next) {
                 'controlType' : 'input',
                 'attributes' : {
                     required: '',
-                    'min' : '99999999',
-                    'max': '1'
+                    'min' : '1',
+                    'max': '99999999'
                 },
                 'validations' : ['required','max','min', 'number']
             },
