@@ -22,7 +22,7 @@ class SignupController {
                     name: this.user.name,
                     email: this.user.email,
                     password: this.user.password,
-                    mn: this.user.ma,
+                    ma: this.user.ma,
                     me: this.user.me
                 })
                 .then(() => {

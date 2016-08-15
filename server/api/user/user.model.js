@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 mongoose.Promise = require('bluebird');
 var mongoosePaginate = require('mongoose-paginate');
 import {Schema} from 'mongoose';
+import Treatment from '../treatment/treatment.model';
 
 var UserSchema = new Schema({
     name: {
@@ -76,6 +77,21 @@ UserSchema
 /**
  * Validations
  */
+
+UserSchema.pre('remove', function(next){
+    Treatment.count({doctor: this._id}, function (err, count){
+        console.log(count);
+        if(err) {
+            next(err);
+        }
+        if(count>0){
+            next(new Error("No se puede eliminar el médico porque contiene tratamientos asociados"));
+        }
+        else {
+            next();
+        }
+    });
+});
 
 // Validate empty email
 UserSchema

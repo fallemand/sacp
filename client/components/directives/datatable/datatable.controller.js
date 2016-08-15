@@ -326,6 +326,19 @@
                                 if (this.datatable.reloadEvent) {
                                     this.datatable.reloadEvent();
                                 }
+                            })
+                            .catch(err => {
+                                this.sweet.show({
+                                    title: 'Error!',
+                                    text: err.data.message,
+                                    type: 'error',
+                                    timer: '5000',
+                                    allowOutsideClick: true,
+                                    allowEscapeKey: true,
+                                    showCancelButton: true,
+                                    showConfirmButton: false,
+                                    cancelButtonText: 'Cerrar'
+                                });
                             });
                         break;
                     case 'local' :

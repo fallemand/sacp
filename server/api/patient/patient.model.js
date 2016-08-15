@@ -2,6 +2,7 @@
 
 import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
+import Treatment from '../treatment/treatment.model';
 var mongoosePaginate = require('mongoose-paginate');
 
 var PatientSchema = new Schema({
@@ -56,6 +57,20 @@ PatientSchema.virtual('desc').get(function() {
 
 PatientSchema.set('toJSON', { virtuals: true });
 PatientSchema.set('toObject', { virtuals: true });
+
+PatientSchema.pre('remove', function(next){
+    Treatment.count({patient: this._id}, function (err, count){
+        if(err) {
+            next(err);
+        }
+        if(count>0){
+            next(new Error("No se puede eliminar el paciente porque contiene tratamientos asociados"));
+        }
+        else {
+            next();
+        }
+    });
+});
 
 PatientSchema
     .path('dni')

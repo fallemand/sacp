@@ -17,6 +17,9 @@ function validationError(res, statusCode) {
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function (err) {
+        if(err instanceof Error) {
+            err = {message: err.message};
+        }
         res.status(statusCode).send(err);
     };
 }
@@ -127,11 +130,21 @@ export function show(req, res, next) {
  * restriction: 'admin'
  */
 export function destroy(req, res) {
-    return User.findByIdAndRemove(req.params.id).exec()
-        .then(function () {
-            res.status(204).end();
-        })
+    return User.findById(req.params.id).exec()
+        .then(handleEntityNotFound(res))
+        .then(removeEntity(res))
         .catch(handleError(res));
+}
+
+function removeEntity(res) {
+    return function (entity) {
+        if (entity) {
+            return entity.remove()
+                .then(() => {
+                    res.status(204).end();
+                });
+        }
+    };
 }
 
 /**

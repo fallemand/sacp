@@ -56,6 +56,9 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function (err) {
+        if(err instanceof Error) {
+            err = {message: err.message};
+        }
         res.status(statusCode).send(err);
     };
 }

@@ -17,11 +17,17 @@ angular.module('sacpApp')
                             }
                             var title = (fields[field].shortTitle) ? fields[field].shortTitle : fields[field].title;
                             element.append('<dt>' + title + '</dt>');
-                            if(fields[field].controlType == 'object') {
-                                element.append('<dd>' + scope.data[fields[field].field][fields[field].descField] + '</dd>');
+                            var desc = scope.data[fields[field].field];
+                            if(desc) {
+                                if(fields[field].controlType == 'object') {
+                                    element.append('<dd>' + desc[fields[field].descField] + '</dd>');
+                                }
+                                else {
+                                    element.append('<dd>' + desc + '</dd>');
+                                }
                             }
                             else {
-                                element.append('<dd>' + scope.data[fields[field].field] + '</dd>');
+                                element.append('<dd>-</dd>');
                             }
                         }
                     })

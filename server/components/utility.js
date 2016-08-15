@@ -60,11 +60,9 @@ export function processQuery(model, query, options) {
     delete query.filter;
 
     if (!populateFilter) {
-        console.log(options);
         return model.paginate(query, options);
     }
     else {
-        console.log(options);
         return model.paginate(query, options).then(function(documents) {
             documents.docs = documents.docs.filter(function (document) {
                 return document[populateFilter];
