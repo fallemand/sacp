@@ -1,3 +1,0 @@
-/**
- * Keep folder file.
- */
