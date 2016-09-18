@@ -225,6 +225,7 @@
                             //this.object = angular.copy({});
                         })
                         .catch(err => {
+                            this.isSaving = false;
                             this.handleError(err);
                         });
                 }
@@ -241,6 +242,7 @@
 
                         })
                         .catch(err => {
+                            this.isSaving = false;
                             this.handleError(err);
                         });
                 }
@@ -299,10 +301,9 @@
             var errors = err.data.errors;
             if (errors) {
                 this.errors = {};
-                // Update validity of form fields that match the mongoose errors
-                angular.forEach(errors, (error, field) => {
-                    this.autoform.form[field].$setValidity('mongoose', false);
-                    this.errors[field] = error.message;
+                this.ngToast.create({
+                    className: 'danger',
+                    content: 'Faltan campos por completar. Revisa el formulario.'
                 });
             }
             else {

@@ -110,14 +110,14 @@ TreatmentSchema.pre('remove', function(next) {
 
 TreatmentSchema.pre('save', function(next) {
     if(this.treatmentWeight && this.treatmentHeight) {
-        this.treatmentBodySurface = Math.sqrt((this.treatmentWeight * this.treatmentHeight) / 60).toFixed(2);
+        this.treatmentBodySurface = (0.024265 * Math.pow(this.treatmentWeight, 0.5378) * Math.pow(this.treatmentHeight, 0.3964)).toFixed(2);
     }
     next();
 });
 
 TreatmentSchema.pre('update', function(next) {
     if(this.treatmentWeight && this.treatmentHeight) {
-        this.treatmentBodySurface = Math.sqrt((this.treatmentWeight * this.treatmentHeight) / 60).toFixed(2);
+        this.treatmentBodySurface = (0.024265 * Math.pow(this.treatmentWeight, 0.5378) * Math.pow(this.treatmentHeight, 0.3964)).toFixed(2);
     }
     next();
 });

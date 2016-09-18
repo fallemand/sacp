@@ -60,7 +60,10 @@
                         </button>
                         <button class="btn btn-info" ng-if="!$isLast()" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep" ng-click="$nextStep()">Siguiente
                         </button>
-                        <button class="btn btn-info" ng-if="$isLast() && vm.action != 'view'" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep || vm.isSaving" ng-click="vm.finish()">Enviar
+                        <button class="btn btn-info" ng-class="{ 'is-saving': vm.isSaving }" ng-if="$isLast() && vm.action != 'view'" ng-disabled="($getActiveStep().hasForm && !$getActiveStep().valid) || !vm.validStep || vm.isSaving" ng-click="vm.finish()">
+                            <img ng-show="vm.isSaving" src="assets/images/spin.gif"></img>
+                            <span ng-show="!vm.isSaving">Enviar</span>
+                            <span ng-show="vm.isSaving">Cargando Información</span>
                         </button>
                     </div>
                 </div>
