@@ -3,12 +3,13 @@
 (function () {
 
     class DatatableController {
-        constructor($scope, $http, NgTableParams, sweet, Auth) {
+        constructor($scope, $http, NgTableParams, sweet, Auth, $window) {
             this.sweet = sweet;
             this.datatable = $scope.parameters;
             this.$http = $http;
             this.NgTableParams = NgTableParams;
             this.$scope = $scope;
+            this.$window = $window;
             this.userType = (Auth.isAdmin()) ? 'admin' : 'user';
             this.getMetadata();
         }
@@ -288,6 +289,21 @@
                 copy.objectToUpdate = row.$$hashKey;
                 this.datatable.modifyEvent(copy);
             }
+        }
+
+        download(path) {
+            this.$http.get(path, {responseType:'arraybuffer'})
+                .then(response => {
+                    var file = new Blob([(response.data)], {type: 'application/pdf'});
+                    var fileURL = URL.createObjectURL(file);
+                    this.$window.open(fileURL);
+                })
+                .catch(err => {
+                    this.ngToast.create({
+                        className: 'danger',
+                        content: err.message
+                    });
+                });
         }
 
         view(row) {

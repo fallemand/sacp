@@ -27,6 +27,10 @@ export function getReport(req, res) {
                 var error = err || 'Verifique los parámetros';
                 return res.status(500).send(error);
             }
+            if (object.state !== 'AP') {
+                var error = err || 'El tratamiento no esta aprobado';
+                return res.status(500).send(error);
+            }
             var fs = require('fs');
             var pdf = require('html-pdf');
             var template = fs.readFileSync('./client/reports/prescription.html', 'utf8');
