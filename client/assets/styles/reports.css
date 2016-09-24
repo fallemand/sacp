@@ -8,6 +8,17 @@
     color:#383838;
 }
 
+.invoice-text-lg{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.invoice-title {
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+}
+
 .invoice-box table{
     width:100%;
     line-height:inherit;
@@ -19,7 +30,12 @@
     vertical-align:top;
 }
 
-.invoice-box table tr td:nth-child(2){
+.invoice-box .item,
+.invoice-box .heading{
+    font-size: 15px;
+}
+
+.invoice-information tr td:nth-child(2){
     text-align:right;
 }
 

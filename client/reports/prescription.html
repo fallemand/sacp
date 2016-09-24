@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="http://localhost:9000/assets/styles/reports.css">
+    <link rel="stylesheet" type="text/css" href="{{serverUrl}}/assets/styles/reports.css">
 </head>
 
 <body>
@@ -10,15 +10,16 @@
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
             <td colspan="2">
-                <table>
+                <table class="invoice-information">
                     <tr>
                         <td class="title">
-                            <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                            <img src="{{serverUrl}}/assets/images/logo-receta.png">
                         </td>
 
                         <td>
-                            Receta # {{_id}}<br>
-                            Creada: {{formatDate lastUpdateDate}}
+                            <span class="invoice-text-lg">#{{id}}</span> <br />
+                            Creada: {{ formatDate lastUpdateDate}}<br />
+                            Tratamiento: {{id}}
                         </td>
                     </tr>
                 </table>
@@ -27,89 +28,53 @@
 
         <tr class="information">
             <td colspan="2">
-                <table>
+                <table class="invoice-information">
                     <tr>
                         <td>
-                            Next Step Webs, Inc.<br>
-                            12345 Sunny Road<br>
-                            Sunnyville, TX 12345
+                            <span class="invoice-title">Medico Solicitante</span>
+                            {{doctor.name}} <br />
+                            MA: {{doctor.ma}} <br />
+                            ME: {{doctor.me}}  <br />
+                            {{doctor.email}}
                         </td>
 
                         <td>
-                            Acme Corp.<br>
-                            John Doe<br>
-                            john@example.com
+                            <span class="invoice-title">Paciente</span>
+                            {{patient.name}} <br />
+                            DNI: {{patient.dni}}  <br />
+                            Nº: {{patient.socialInsuranceNumber}}  <br />
+                            Tipo Convenio: {{patient.agreementType.name}}
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
 
-        <tr class="heading">
-            <td>
-                Payment Method
-            </td>
-
-            <td>
-                Check #
-            </td>
+        <tr>
+            <td class="invoice-title">Detalle de Medicamentos</td>
         </tr>
 
-        <tr class="details">
+        <tr>
             <td>
-                Check
-            </td>
 
-            <td>
-                1000
-            </td>
-        </tr>
-
-        <tr class="heading">
-            <td>
-                Item
-            </td>
-
-            <td>
-                Price
-            </td>
-        </tr>
-
-        <tr class="item">
-            <td>
-                Website design
-            </td>
-
-            <td>
-                $300.00
-            </td>
-        </tr>
-
-        <tr class="item">
-            <td>
-                Hosting (3 months)
-            </td>
-
-            <td>
-                $75.00
-            </td>
-        </tr>
-
-        <tr class="item last">
-            <td>
-                Domain name (1 year)
-            </td>
-
-            <td>
-                $10.00
-            </td>
-        </tr>
-
-        <tr class="total">
-            <td></td>
-
-            <td>
-                Total: $385.00
+                <table cellspacing="0">
+                    <tr class="heading">
+                        <td>Droga</td>
+                        <td>Nombre Comercial</td>
+                        <td>Tipo</td>
+                        <td>Presentación</td>
+                        <td>Cantidad</td>
+                    </tr>
+                    {{#each drugs}}
+                    <tr class="item">
+                        <td>{{name}}</td>
+                        <td>{{tradeName}}</td>
+                        <td>{{type.name}}</td>
+                        <td>{{presentation}}</td>
+                        <td>{{quantity}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
             </td>
         </tr>
     </table>
