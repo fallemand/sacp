@@ -291,12 +291,15 @@
             }
         }
 
-        download(path) {
-            this.$http.get(path, {responseType:'arraybuffer'})
+        download(type, id) {
+            this.$http.get('/api/reports/' + type + '/' + id, {responseType:'arraybuffer'})
                 .then(response => {
                     var file = new Blob([(response.data)], {type: 'application/pdf'});
                     var fileURL = URL.createObjectURL(file);
-                    this.$window.open(fileURL);
+                    var anchor = document.createElement("a");
+                    anchor.download = type + '-' + id +'.pdf';
+                    anchor.href = fileURL;
+                    anchor.click();
                 })
                 .catch(err => {
                     this.ngToast.create({
