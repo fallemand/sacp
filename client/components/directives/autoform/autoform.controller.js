@@ -74,6 +74,8 @@
                     return this.errors[field];
                 case 'date' :
                     return 'La fecha no es válida';
+                case 'pattern' :
+                    return 'Solo se permite '  + value;
             }
         }
 

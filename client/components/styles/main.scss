@@ -134,3 +134,22 @@ select.form-control {
 .wz-classic li > a {
     padding: 15px 0;
 }
+
+.alert.alert-vertical {
+    padding-right: 15px;
+    .media-left, .media-body {
+        display: block;
+        width: 100%;
+        padding-right: 0;
+    }
+    .alert-message {
+        padding-right: 0;
+        font-size: 1.1em;
+    }
+    .alert-title {
+        padding-right: 0;
+        font-size: 1.8em;
+        font-weight: 300;
+        margin: 10px 0;
+    }
+}

@@ -292,6 +292,7 @@
         }
 
         download(type, id) {
+            this.downloading = true;
             this.$http.get('/api/reports/' + type + '/' + id, {responseType:'arraybuffer'})
                 .then(response => {
                     var file = new Blob([(response.data)], {type: 'application/pdf'});
@@ -300,8 +301,10 @@
                     anchor.download = type + '-' + id +'.pdf';
                     anchor.href = fileURL;
                     anchor.click();
+                    this.downloading = false;
                 })
                 .catch(err => {
+                    this.downloading = false;
                     this.ngToast.create({
                         className: 'danger',
                         content: err.message

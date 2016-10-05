@@ -1,4 +1,4 @@
-<div class="datatable" ng-if="vm.loadedData">
+<div class="datatable" ng-if="vm.loadedData" ng-class="{'overlay': vm.downloading}">
     <a ng-if="vm.datatable.canFilter" ng-click="vm.showFilters=!vm.showFilters" class="btn btn-xs btn-info datatable-filter" uib-tooltip="Filtrar" tooltip-placement="left"><i class="fa fa-filter"></i></a>
     <table ng-table-dynamic="vm.datatable.ngtable with vm.cols" class="table table-striped table-hover table-responsive datatable-table" ng-class="vm.datatable.tableClass" show-filter="vm.showFilters">
         <tr ng-repeat="row in $data">

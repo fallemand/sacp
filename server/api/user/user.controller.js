@@ -6,6 +6,7 @@ import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import * as utils from '../../components/utility';
+import * as mailUtils from '../../components/mails/mail-utils';
 
 function validationError(res, statusCode) {
     statusCode = statusCode || 422;
@@ -181,10 +182,13 @@ export function activate(req, res) {
                 .then(() => {
                     var context = {
                         user : user,
-                        url: 'http://www.sacp.com.ar',
                         unsubscribeHash : user._id
                     };
-                    utils.sendMail('activation',context);
+                    try{
+                        mailUtils.sendMail('activation',context);
+                    }catch(e) {
+                        console.log(e);
+                    }
                     res.status(204).end();
                 })
                 .catch(validationError(res));
@@ -245,7 +249,11 @@ export function metadata(req, res, next) {
                     'required': '',
                     'mongoose-error' : ''
                 },
-                'validations' : ['required','mongoose','email']
+                'validations' : {
+                    required: true,
+                    'email': '',
+                    'mongoose': ''
+                }
             },
             {
                 'title': 'Matricula',
@@ -261,7 +269,12 @@ export function metadata(req, res, next) {
                     'min' : '1',
                     'max': '99999999'
                 },
-                'validations' : ['required','max','min', 'number']
+                'validations' : {
+                    required: true,
+                    'max': '1',
+                    'min': '99999999',
+                    'number': ''
+                }
             },
             {
                 'title': 'Matricula Especialista',
@@ -277,7 +290,30 @@ export function metadata(req, res, next) {
                     'max' : '99999999',
                     'min': '1'
                 },
-                'validations' : ['required','max','min', 'number']
+                'validations' : {
+                    required: true,
+                    'max': '1',
+                    'min': '99999999',
+                    'number': ''
+                }
+            },
+            {
+                'title': 'Activo',
+                'shortTitle' : 'Activo',
+                'field' : 'active',
+                'type': 'text',
+                'columnClass': 'col-md-2',
+                'show': true,
+                'icon': 'fa fa-user-md',
+                'controlType' : 'input',
+                'attributes' : {
+                    required: '',
+                    pattern: '(true|false)'
+                },
+                'validations' : {
+                    required: true,
+                    'pattern': 'true o false'
+                }
             },
             {
                 'title': 'Contraseña',
