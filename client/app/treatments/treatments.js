@@ -7,6 +7,7 @@ angular.module('sacpApp')
                 url: '/treatments/:action/:id',
                 template: '<treatments></treatments>',
                 parent: 'private',
+                authenticate: true,
                 ncyBreadcrumb: {
                     label: 'Agregar'
                 }

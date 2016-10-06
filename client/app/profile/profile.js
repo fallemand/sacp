@@ -7,6 +7,7 @@ angular.module('sacpApp')
                 url: '/profile/:type/:id',
                 template: '<profile></profile>',
                 parent: 'private',
+                authenticate: true,
                 ncyBreadcrumb: {
                     label: 'Perfil'
                 }

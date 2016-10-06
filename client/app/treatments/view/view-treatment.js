@@ -7,6 +7,7 @@ angular.module('sacpApp')
                 url: '/treatments/:id',
                 template: '<viewtreatment></viewtreatment>',
                 parent: 'private',
+                authenticate: true,
                 ncyBreadcrumb: {
                     label: 'Ficha Tratamiento'
                 }

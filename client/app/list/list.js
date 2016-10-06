@@ -9,6 +9,7 @@ angular.module('sacpApp')
                 controller: 'PatientsController',
                 controllerAs: 'vm',
                 parent: 'private',
+                authenticate: true,
                 ncyBreadcrumb: {
                     label: 'Listado Pacientes'
                 }
@@ -19,6 +20,7 @@ angular.module('sacpApp')
                 controller: 'DoctorsController',
                 controllerAs: 'vm',
                 parent: 'private',
+                authenticate: true,
                 ncyBreadcrumb: {
                     label: 'Listado Médicos'
                 }
@@ -29,6 +31,7 @@ angular.module('sacpApp')
                 controller: 'TreatmentsController',
                 controllerAs: 'vm',
                 parent: 'private',
+                authenticate: true,
                 ncyBreadcrumb: {
                     label: 'Listado Tratamientos'
                 }
