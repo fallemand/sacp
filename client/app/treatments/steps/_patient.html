@@ -1,5 +1,8 @@
 <form name="vm.autoformPatient.form" class="mar-top form-horizontal" novalidate autocomplete="off" form-step-validity>
     <autoform parameters="vm.autoformPatient" object="vm.object"></autoform>
+    <div class="col-sm-offset-4 col-sm-6 effect-fade help-text">
+        ¿No encuentra el paciente? <a href="/patients" ui-sref="patients" class="btn-link">Agregar paciente</a>
+    </div>
     <div class="form-group">
         <label class="col-sm-4 control-label">Datos del Paciente</label>
         <div ng-show="vm.object.patient && vm.object.patient._id" class="col-sm-6 effect-fade">

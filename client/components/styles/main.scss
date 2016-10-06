@@ -87,8 +87,11 @@ select.form-control {
     cursor: pointer;
 }
 
-.dropdown-menu {
+/* Needed for typeahead */
+ul.dropdown-menu {
     max-height: 300px;
+    overflow-y: scroll;
+    min-width: 200px;
 }
 
 .form-control {
@@ -155,4 +158,10 @@ select.form-control {
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background-color: #0a8b9d;
     border-color: #337ab7;
+}
+
+.help-text {
+    margin-top: -22px;
+    margin-bottom: 30px;
+    font-size: .9em;
 }

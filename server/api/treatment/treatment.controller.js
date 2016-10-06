@@ -330,6 +330,7 @@ export function metadata(req, res) {
                 'controlType': 'object',
                 'icon': 'fa fa-user-md',
                 'columnClass' : 'col-md-1',
+                'placeholder' : 'Ingrese el Nombre o el DNI del paciente',
                 'attributes': {
                     required: true
                 },
@@ -397,6 +398,7 @@ export function metadata(req, res) {
                 'remoteApi': 'cie10-diseases',
                 'show': true,
                 'hideInList': true,
+                'placeholder': 'Comience a escribir el código CIE10 o la descripción',
                 'controlType': 'object',
                 'icon': 'fa fa-user-md',
                 'columnClass' : 'col-md-3',

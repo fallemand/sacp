@@ -50,7 +50,8 @@ angular.module('sacpApp')
                                     .attr('typeahead-no-results', 'vm.typeahead.noresults')
                                     .attr('typeahead-min-length', 2)
                                     .attr('typeahead-wait-ms', 250)
-                                    .attr('typeahead-editable', 'false');
+                                    .attr('typeahead-editable', 'false')
+                                    .attr('placeholder', (scope.field.placeholder) ? (scope.field.placeholder) : scope.field.title);
                                 break;
                             }
                         }
