@@ -89,8 +89,6 @@ select.form-control {
 
 .dropdown-menu {
     max-height: 300px;
-    overflow-y: scroll;
-    min-width: 200px;
 }
 
 .form-control {
@@ -152,4 +150,9 @@ select.form-control {
         font-weight: 300;
         margin: 10px 0;
     }
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #0a8b9d;
+    border-color: #337ab7;
 }

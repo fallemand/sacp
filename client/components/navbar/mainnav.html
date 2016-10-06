@@ -7,17 +7,17 @@
         <!--================================-->
         <div id="mainnav-shortcut">
             <ul class="list-unstyled">
-                <li ng-show="nav.isLoggedIn()" class="col-xs-4" uib-tooltip="Inicio" tooltip-placement="bottom">
+                <li ng-show="vm.isLoggedIn" class="col-xs-4" uib-tooltip="Inicio" tooltip-placement="bottom">
                     <a class="shortcut-grid" href="/home" ui-sref="home">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
-                <!--<li ng-show="nav.isAdmin()" class="col-xs-4" uib-tooltip="Estadísticas" tooltip-placement="bottom">
+                <!--<li ng-show="vm.isAdmin" class="col-xs-4" uib-tooltip="Estadísticas" tooltip-placement="bottom">
                     <a class="shortcut-grid" href="#">
                         <i class="fa fa-bar-chart"></i>
                     </a>
                 </li>
-                <li ng-show="nav.isAdmin()" class="col-xs-4" uib-tooltip="Reportes" tooltip-placement="bottom">
+                <li ng-show="vm.isAdmin" class="col-xs-4" uib-tooltip="Reportes" tooltip-placement="bottom">
                     <a class="shortcut-grid" href="#">
                         <i class="fa fa-file-excel-o"></i>
                     </a>
@@ -39,7 +39,7 @@
                         <li class="list-header">Menú</li>
 
                         <!--Menu list item-->
-                        <li ng-show="nav.isAdmin()">
+                        <li ng-show="vm.isAdmin">
                             <a href="/doctors" ui-sref="doctors">
                                 <i class="flaticon-doctor-with-stethoscope"></i>
                                 <span class="menu-title">Médicos</span>

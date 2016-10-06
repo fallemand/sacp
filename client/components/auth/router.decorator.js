@@ -25,7 +25,7 @@
                                 $state.go('treatments');
                             }
                             else {
-                                $state.go('login', {'returnState' : next, 'returnParams' : params});
+                                $state.go('login', {'returnState' : next.name, 'returnParams' : params});
                             }
                         });
                     });
@@ -36,7 +36,7 @@
                             $state.go(next, params);
                             return;
                         }
-                        $state.go('login', {'returnState' : next, 'returnParams' : params});
+                        $state.go('login', {'returnState' : next.name, 'returnParams' : params});
                     });
                 }
             });

@@ -17,7 +17,7 @@
         <!--Navbar Dropdown-->
         <!--================================-->
         <div class="navbar-content clearfix">
-            <ul ng-show="nav.isLoggedIn()" class="nav navbar-top-links pull-left">
+            <ul ng-show="nav.isLoggedIn" class="nav navbar-top-links pull-left">
 
                 <!--Navigation toogle button-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -29,16 +29,58 @@
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <!--End Navigation toogle button-->
 
+                <!--Messages Dropdown-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <li ng-if="nav.pendingTreatments.total > 0" class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                    <a class="dropdown-toggle" uib-dropdown-toggle>
+                        <i class="fa fa-bell fa-lg"></i>
+                        <span class="badge badge-header badge-danger">{{nav.pendingTreatments.total}}</span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-md with-arrow panel-default" uib-dropdown-menu>
+                        <div class="pad-all bord-btm">
+                            <p class="text-lg text-muted text-thin mar-no">
+                                Tienes {{nav.pendingTreatments.total}}
+                                <ng-pluralize count="nav.pendingTreatments.total" when="{'1': 'tratamiento pendiente', 'other': 'tratamientos pendientes'}"></ng-pluralize>
+                            </p>
+                        </div>
+                        <!-- User dropdown menu -->
+                        <ul class="head-list">
+                            <!-- Dropdown list-->
+                            <li ng-repeat="treatment in nav.pendingTreatments.docs">
+                                <a href="#" class="media" ui-sref="treatments.view({'id' : treatment._id})">
+                                    <div class="media-left">
+                                        <span class="icon-wrap icon-circle" ng-class="{'bg-default' : treatment.state._id === 'EE',
+                                                                                        'bg-primary' : treatment.state._id === 'EA',
+                                                                                        'bg-warning' : treatment.state._id === 'PA'}">
+                                            <i class="flaticon-medical-briefcase fa-lg"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="text-nowrap"><strong>#{{treatment._id}}</strong> para {{treatment.patient.name}}</div>
+                                        <small class="text-muted">{{treatment.state.name}}</small>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+
+
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End message dropdown-->
+
             </ul>
             <ul class="nav navbar-top-links pull-right">
 
-                <li ng-hide="nav.isLoggedIn()" ui-sref-active="active" class="dropdown">
+                <li ng-hide="nav.isLoggedIn" ui-sref-active="active" class="dropdown">
                     <a href="/register" ui-sref="signup">
                         <i class="fa fa-user-plus fa-fw fa-lg"></i> Registro
                     </a>
                 </li>
 
-                <li ng-hide="nav.isLoggedIn()" ui-sref-active="active" class="dropdown">
+                <li ng-hide="nav.isLoggedIn" ui-sref-active="active" class="dropdown">
                     <a href="/login" ui-sref="login">
                         <i class="fa fa-sign-in fa-fw fa-lg"></i> Login
                     </a>
@@ -46,27 +88,32 @@
 
                 <!--User dropdown-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <li ng-show="nav.isLoggedIn()" id="dropdown-user" class="dropdown" uib-dropdown on-toggle="toggled(open)">
+                <li ng-show="nav.isLoggedIn" id="dropdown-user" class="dropdown" uib-dropdown on-toggle="toggled(open)">
                     <a class="dropdown-toggle text-right" uib-dropdown-toggle>
                         <span class="pull-right">
                             <img class="img-circle img-user media-object" src="assets/images/av1.png" alt="Profile Picture">
                         </span>
-                        <div class="username hidden-xs">{{ nav.getCurrentUser().name }}</div>
+                        <div class="username hidden-xs">{{ nav.getCurrentUser.name }}</div>
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default" uib-dropdown-menu>
+                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right with-arrow panel-default" uib-dropdown-menu>
 
                         <!-- User dropdown menu -->
                         <ul class="head-list">
-                            <li ng-show="nav.isLoggedIn()" ui-sref-active="active">
+                            <li ng-show="nav.isLoggedIn" ui-sref-active="active">
+                                <a href="/profile/doctor/{{nav.getCurrentUser._id}}" ui-sref="profile({'type': 'doctor', 'id': '{{nav.getCurrentUser._id}}'})">
+                                    <i class="fa fa-user fa-fw fa-lg"></i> Mi Perfil
+                                </a>
+                            </li>
+                            <li ng-show="nav.isLoggedIn" ui-sref-active="active">
                                 <a href="/settings" ui-sref="settings">
-                                    <i class="fa fa-user fa-fw fa-lg"></i> Perfil
+                                    <i class="fa fa-key fa-fw fa-lg"></i> Cambiar Contraseña
                                 </a>
                             </li>
                         </ul>
 
                         <!-- Dropdown footer -->
-                        <div ng-show="nav.isLoggedIn()" ui-sref-active="active" class="pad-all text-right">
+                        <div ng-show="nav.isLoggedIn" ui-sref-active="active" class="pad-all text-right">
                             <a ui-sref="logout" href="#" class="btn btn-primary">
                                 <i class="fa fa-sign-out fa-fw"></i> Salir
                             </a>
@@ -83,37 +130,3 @@
 
     </div>
 </header>
-
-
-
-<!--
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">sacp</a>
-    </div>
-    <div uib-collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in nav.menu" ui-sref-active="active">
-            <a ui-sref="{{item.state}}">{{item.title}}</a>
-        </li>
-        <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>
-        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
-        <li ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </li>
-        <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
--->
