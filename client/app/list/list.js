@@ -20,7 +20,7 @@ angular.module('sacpApp')
                 controller: 'DoctorsController',
                 controllerAs: 'vm',
                 parent: 'private',
-                authenticate: true,
+                authenticate: 'admin',
                 ncyBreadcrumb: {
                     label: 'Listado Médicos'
                 }

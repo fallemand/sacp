@@ -8,6 +8,10 @@ angular.module('sacpApp')
                 templateUrl: 'app/account/login/login.html',
                 controller: 'LoginController',
                 controllerAs: 'vm',
+                params: {
+                    returnState: null,
+                    returnParams: null
+                },
                 parent: 'public'
             })
             .state('recover', {

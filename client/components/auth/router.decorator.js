@@ -21,7 +21,12 @@
                             return;
                         }
                         return Auth.isLoggedIn(_.noop).then(is => {
-                            $state.go(is ? 'treatments' : 'login');
+                            if(is) {
+                                $state.go('treatments');
+                            }
+                            else {
+                                $state.go('login', {'returnState' : next, 'returnParams' : params});
+                            }
                         });
                     });
                 } else {
@@ -31,7 +36,7 @@
                             $state.go(next, params);
                             return;
                         }
-                        $state.go('login');
+                        $state.go('login', {'returnState' : next, 'returnParams' : params});
                     });
                 }
             });
