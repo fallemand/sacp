@@ -15,6 +15,7 @@ export function processQuery(model, query, options) {
         var filters = JSON.parse(query.filter);
         for (var filter in filters) {
             if (filters[filter] && filters[filter] !== '') {
+                //I want to filter by an inner attribute ex: patient.name
                 if (filter.indexOf('.') > -1) {
                     var field = filter.substr(0, filter.indexOf('.'));
                     var descField = filter.substr(filter.indexOf('.') + 1, filter.length);
@@ -32,6 +33,7 @@ export function processQuery(model, query, options) {
                     populateFilter = field;
                 }
                 else {
+                    //I want to filter by OR
                     if(filter === 'or') {
                         var orFilters = filters[filter].replace('[','').replace(']','');
                         orFilters = orFilters.split('&');
@@ -46,6 +48,7 @@ export function processQuery(model, query, options) {
                         }
                         query.$or = array;
                     }
+                    //Just filter by attribute
                     else {
                         query[filter] = new RegExp(filters[filter], 'i');
                     }

@@ -21,11 +21,11 @@ var PatientSchema = new Schema({
         required: false
     },
     dni: {
-        type: Number,
+        type: String,
         required: true
     },
     socialInsuranceNumber: {
-        type: Number,
+        type: String,
         required: true
     },
     address: {

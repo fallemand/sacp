@@ -224,6 +224,9 @@ export function changeStatus(req, res, next) {
             if (treatment.state == 'AP' && newStatus._id !== 'CA') {
                 return res.status(500).send('No se puede modificar un tratamiento aprobado');
             }
+            if (treatment.state == 'CA') {
+                return res.status(500).send('No se puede modificar un tratamiento cancelado');
+            }
             treatment.state = newStatus._id;
                 treatment.save(function(err) {
                     if(err) {
@@ -322,6 +325,7 @@ export function metadata(req, res) {
                 'remoteApi': 'patients',
                 'link' : '/profile/patient',
                 'searchField': 'name',
+                'searchFieldExtra' : 'dni',
                 'show': true,
                 'controlType': 'object',
                 'icon': 'fa fa-user-md',
@@ -389,7 +393,7 @@ export function metadata(req, res) {
                 'descField': 'desc',
                 'filterDescField': 'name',
                 'searchField': 'name',
-                'searchFieldWithId' : true,
+                'searchFieldExtra' : '_id',
                 'remoteApi': 'cie10-diseases',
                 'show': true,
                 'hideInList': true,

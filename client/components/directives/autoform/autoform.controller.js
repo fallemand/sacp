@@ -207,10 +207,10 @@
                 });
         }
 
-        loadTypeAhead(api, viewvalue, searchField, searchFieldWithId) {
+        loadTypeAhead(api, viewvalue, searchField, searchFieldExtra) {
             var filter = {};
-            if(searchFieldWithId) {
-                filter.or = '[' + searchField + '=' +viewvalue + '&_id=' + viewvalue + ']';
+            if(searchFieldExtra) {
+                filter.or = '[' + searchField + '=' +viewvalue + '&' + searchFieldExtra + '=' + viewvalue + ']';
             }
             else {
                 filter[searchField] = viewvalue;
