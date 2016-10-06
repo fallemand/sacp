@@ -185,7 +185,7 @@ export function activate(req, res) {
                         unsubscribeHash : user._id
                     };
                     try{
-                        mailUtils.sendMail('activation',context);
+                        mailUtils.sendMail('activation',context, user.email);
                     }catch(e) {
                         console.log(e);
                     }

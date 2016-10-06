@@ -11,11 +11,10 @@
 
 import _ from 'lodash';
 import Treatment from './treatment.model';
-import TreatmentState from '../treatment-state/treatment-state.model';
 import TreatmentHistory from '../treatment-history/treatment-history.model';
-import Patient from '../patient/patient.model';
 import AgreementType from '../agreement-type/agreement-type.model';
 import * as utils from '../../components/utility';
+import * as mailUtils from '../../components/mails/mail-utils';
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -201,6 +200,7 @@ export function update(req, res) {
                     history.history.push(newHistory);
                     history.save(function (err) {
                         if (err) {
+                            entity.save();
                             return res.status(500).send(err);
                         }
                         return res.status(200).json(treatment);
@@ -216,15 +216,21 @@ export function update(req, res) {
 export function changeStatus(req, res, next) {
     var newStatus = req.body;
 
-    return Treatment.findById(req.params.id).exec()
+    return Treatment.findById(req.params.id)
+        .populate('doctor', 'email name')
+        .populate('patient', 'name')
+        .exec()
         .then(treatment => {
-            if (treatment.state == 'AP') {
+            if (treatment.state == 'AP' && newStatus._id !== 'CA') {
                 return res.status(500).send('No se puede modificar un tratamiento aprobado');
             }
             treatment.state = newStatus._id;
                 treatment.save(function(err) {
                     if(err) {
                         return res.status(500).send(err)
+                    }
+                    if(req.user.role === 'admin') {
+                        mailUtils.sendMail('treatment-change', treatment, treatment.doctor.email);
                     }
                     return res.status(204).end();
                 });

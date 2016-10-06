@@ -4,7 +4,7 @@
 
 'use strict';
 
-export function sendMail(template, context) {
+export function sendMail(template, context, recipient) {
     context.url = 'http://www.sacp.com.ar';
     var nodemailer = require('nodemailer');
     var mg = require('nodemailer-mailgun-transport');
@@ -22,7 +22,7 @@ export function sendMail(template, context) {
 
     nodemailerMailgun.sendMail({
         from: '"Sistema S.A.C.P." <contacto@sacp.com.ar>',
-        to: context.user.email, // An array if you have multiple recipients.
+        to: recipient, // An array if you have multiple recipients.
         //cc:'second@domain.com',
         //bcc:'secretagent@company.gov',
         subject: template.subject,
@@ -52,7 +52,12 @@ function getTemplate(template, context) {
     switch(template) {
         case 'activation':
             result.subject = 'Tu cuenta ha sido activada';
-            result.body = mailTemplate(context)
+            result.body = mailTemplate(context);
+            break;
+        case 'treatment-change':
+            result.subject = 'El tratamiento #' + context._id + ' ha cambiado de estado';
+            result.body = mailTemplate(context);
+            break;
     }
     return result;
 }
