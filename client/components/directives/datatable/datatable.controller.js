@@ -395,9 +395,12 @@
                 confirmButtonText: 'Sí, activarlo!',
                 closeOnConfirm: false,
                 allowEscapeKey: true,
+                showLoaderOnConfirm: true,
                 allowOutsideClick: true
             }, (function () {
+                $('.sweet-alert .confirm').attr('disabled','disabled');
                 this.$http.put('/api/' + this.datatable.entity + '/' + user._id + '/activate').then(response => {
+                    $('.sweet-alert .confirm').removeAttr('disabled');
                     if (this.datatable.reloadEvent) {
                         this.datatable.reloadEvent();
                     }
