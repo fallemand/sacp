@@ -164,9 +164,10 @@
                 });
             }
             else {
+                var error = err.data.message || err.message;
                 this.ngToast.create({
                     className: 'warning',
-                    content: err.message
+                    content: error
                 });
             }
             this.autoform.isSaving = false;

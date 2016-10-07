@@ -80,7 +80,6 @@ UserSchema
 
 UserSchema.pre('remove', function(next){
     Treatment.count({doctor: this._id}, function (err, count){
-        console.log(count);
         if(err) {
             next(err);
         }

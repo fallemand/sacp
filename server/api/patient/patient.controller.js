@@ -56,7 +56,12 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function (err) {
-        res.status(statusCode).send(err);
+        if (err instanceof Error && err.name !== 'ValidationError') {
+            res.status(statusCode).send({message: err.message});
+        }
+        else {
+            res.status(statusCode).send(err);
+        }
     };
 }
 
@@ -65,6 +70,17 @@ export function index(req, res) {
     var options = {
         populate: ['agreementType', 'registeredBy']
     };
+    return utils.processQuery(Patient,req.query,options)
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+// Gets a list of Patients of that user
+export function indexUser(req, res) {
+    var options = {
+        populate: ['agreementType', 'registeredBy']
+    };
+    req.query.registeredBy = req.user._id;
     return utils.processQuery(Patient,req.query,options)
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -99,7 +115,7 @@ export function update(req, res) {
         delete req.body.registerDate;
     }
     if (req.user.role !== 'admin' && req.user._id != req.body.registeredBy) {
-        return res.status(500).send('No puedes modificar este paciente porque fue registrado por otro médico. Solicita al cambio al administrador');
+        return res.status(403).json({message: "No puedes modificar este paciente porque fue registrado por otro médico. Solicita el cambio al administrador"});
     }
     return Patient.findById(req.params.id).exec()
         .then(handleEntityNotFound(res))
@@ -111,6 +127,12 @@ export function update(req, res) {
 // Deletes a Patient from the DB
 export function destroy(req, res) {
     return Patient.findById(req.params.id).exec()
+        .then(patient => {
+            if (req.user.role !== 'admin' && req.user._id.toString() !== patient.registeredBy.toString()) {
+                throw new Error("No puedes eliminar este paciente porque fue registrado por otro médico.");
+            }
+            return patient;
+        })
         .then(handleEntityNotFound(res))
         .then(removeEntity(res))
         .catch(handleError(res));
