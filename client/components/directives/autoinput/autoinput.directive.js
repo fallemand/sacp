@@ -26,6 +26,10 @@ angular.module('sacpApp')
                         if(scope.field.disabled) {
                             newElement.attr('disabled', 'disabled');
                         }
+                        if(scope.field.type == 'number') {
+                            newElement.attr('string-to-number', '');
+                        }
+
                         if(scope.field.type == 'date') {
                             if(scope.object && scope.object[scope.field.field]) {
                                 scope.object[scope.field.field] = new Date(scope.object[scope.field.field]);

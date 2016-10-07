@@ -50,7 +50,10 @@
                         <li>
                             <a href="/patients" ui-sref="patients">
                                 <i class="fa fa-user"></i>
-                                <span class="menu-title">Pacientes</span>
+                                <span class="menu-title">
+                                    <span ng-if="!vm.isAdmin">Mis </span>
+                                    Pacientes
+                                </span>
                             </a>
                         </li>
 
@@ -58,9 +61,10 @@
                         <li>
                             <a href="/treatments" ui-sref="treatments">
                                 <i class="flaticon-medical-briefcase"></i>
-											<span class="menu-title">
-												Tratamientos
-											</span>
+                                <span class="menu-title">
+                                    <span ng-if="!vm.isAdmin">Mis </span>
+                                    Tratamientos
+                                </span>
                             </a>
 
                             <!--Submenu-->
