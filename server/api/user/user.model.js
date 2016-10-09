@@ -27,11 +27,11 @@ var UserSchema = new Schema({
     provider: String,
     salt: String,
     me: {
-        type: Number,
+        type: String,
         required: true
     },
     ma: {
-        type: Number,
+        type: String,
         required: true
     },
     active: {

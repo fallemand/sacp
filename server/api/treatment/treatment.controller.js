@@ -673,7 +673,8 @@ export function metadata(req, res) {
                             required: true
                         },
                         'validations': {
-                            'required': ''
+                            'required': '',
+                            'editable': ''
                         }
                     },
                     {
