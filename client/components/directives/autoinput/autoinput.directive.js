@@ -42,8 +42,10 @@ angular.module('sacpApp')
                     case 'object' :
                         if(scope.field.type == 'select') {
                             newElement
-                                .attr('ng-init', 'vm.loadData(field.field, field.remoteApi)')
                                 .attr('ng-options', 'item[field.descField] for item in vm[field.field] track by item._id');
+                            if(scope.field.loadData !== false) {
+                                newElement.attr('ng-init', 'vm.loadData(field.field, field.remoteApi)')
+                            }
                             break;
                         }
                         else {

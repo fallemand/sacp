@@ -189,8 +189,12 @@
             }
         }
 
-        loadData(field, api) {
-            this.$http.get('/api/' + api)
+        loadData(field, api, filter) {
+            var url = '/api/' + api;
+            if(filter) {
+                url += '?' + filter;
+            }
+            this.$http.get(url)
                 .then(response => {
                     this[field] = response.data.docs;
                     if(!this.$scope.object) {
@@ -206,6 +210,10 @@
                         content: err.message
                     });
                 });
+        }
+
+        loadNext($item, field, api, filter) {
+            this.loadData(field,api, filter + '=' + $item._id);
         }
 
         loadTypeAhead(api, viewvalue, searchField, searchFieldExtra) {
