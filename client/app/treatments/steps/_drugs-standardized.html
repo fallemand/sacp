@@ -1,0 +1,7 @@
+<div ng-if="vm.action !== 'view'" class="well well-xs effect-slide">
+    <autoform parameters="vm.autoformDrugsStandardized" object="vm.object"></autoform>
+</div>
+
+<div class="table-responsive if-effect-fade" ng-if="vm.object.drugsStandardized.length > 0">
+    <datatable parameters="vm.drugsTableStandardized" object="vm.object.drugsStandardized"></datatable>
+</div>

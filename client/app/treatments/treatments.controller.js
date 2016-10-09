@@ -86,7 +86,8 @@
                     hasForm: true
                 },
                 {
-                    templateUrl: 'app/treatments/steps/_drugs.html',
+                    templateUrl: 'app/treatments/steps/_drugs-standardized.html',
+                    //templateUrl: 'app/treatments/steps/_drugs.html',
                 },
                 {
                     templateUrl: 'app/treatments/steps/_confirm.html',
@@ -136,6 +137,23 @@
                 }).bind(this)
             };
 
+            this.autoformDrugsStandardized = {
+                entity: 'treatments',
+                field: 'drugsStandardized',
+                type: 'local',
+                disabled: (this.action == 'view'),
+                template: 'short',
+                metadataFilters: 'field=drugsStandardized',
+                object: this.object,
+                formGroupClass: 'col-md-4',
+                inputIcons: true,
+                reloadEvent: (function () {
+                    if (this.drugsTable.ngtable) {
+                        this.drugsTable.ngtable.reload();
+                    }
+                }).bind(this)
+            };
+
             this.autoformConfirm = {
                 entity: 'treatments',
                 section: 'confirm',
@@ -162,6 +180,27 @@
                 modifyEvent: (function (object) {
                     this.object.aux = {};
                     this.object.aux.drugs = object;
+                }).bind(this)
+            };
+
+            this.drugsTableStandardized = {
+                entity: 'treatments',
+                type: 'local',
+                metadataFilters: 'field=drugsStandardized',
+                actions: ['modify', 'delete'],
+                reloadEvent: (function () {
+                    if (this.object.drugsStandardized.length > 0) {
+                        this.validStep = true;
+                    }
+                }).bind(this),
+                initEvent: (function () {
+                    if (this.object.drugsStandardized.length > 0) {
+                        this.validStep = true;
+                    }
+                }).bind(this),
+                modifyEvent: (function (object) {
+                    this.object.aux = {};
+                    this.object.aux.drugsStandardized = object;
                 }).bind(this)
             };
 

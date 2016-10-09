@@ -35,5 +35,27 @@ angular.module('sacpApp')
                 ncyBreadcrumb: {
                     label: 'Listado Tratamientos'
                 }
+            })
+            .state('drug-presentations', {
+                url: '/drug-presentations',
+                templateUrl: 'app/list/drug-presentations/drug-presentations.html',
+                controller: 'DrugPresentationsController',
+                controllerAs: 'vm',
+                parent: 'private',
+                authenticate: 'admin',
+                ncyBreadcrumb: {
+                    label: 'Listado de Presentaciones de Drogas'
+                }
+            })
+            .state('drugs', {
+                url: '/drugs',
+                templateUrl: 'app/list/drugs/drugs.html',
+                controller: 'DrugsController',
+                controllerAs: 'vm',
+                parent: 'private',
+                authenticate: 'admin',
+                ncyBreadcrumb: {
+                    label: 'Listado de Drogas'
+                }
             });
     });

@@ -40,6 +40,22 @@
 
                         <!--Menu list item-->
                         <li ng-show="vm.isAdmin">
+                            <a href="/drugs" ng-click="vm.submenuDrugs = !vm.submenuDrugs">
+                                <i class="flaticon-bottle-of-chemical-elements"></i>
+                                <span class="menu-title">
+                                    Drogas
+                                </span>
+                            </a>
+
+                            <!--Submenu-->
+                            <ul class="collapse" ng-class="{'in' : vm.submenuDrugs}">
+                                <li><a href="/drugs" ui-sref="drugs">Drogas Genéricas</a></li>
+                                <li><a href="/drug-presentations" ui-sref="drug-presentations">Presentaciones</a></li>
+                            </ul>
+                        </li>
+
+                        <!--Menu list item-->
+                        <li ng-show="vm.isAdmin">
                             <a href="/doctors" ui-sref="doctors">
                                 <i class="flaticon-doctor-with-stethoscope"></i>
                                 <span class="menu-title">Médicos</span>

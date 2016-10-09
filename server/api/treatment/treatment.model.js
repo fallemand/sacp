@@ -100,6 +100,20 @@ var TreatmentSchema = new Schema({
             required: true
         }
     }],
+    drugsStandardized: [{
+        drug: {
+            type: Schema.Types.ObjectId,
+            ref: 'Drug'
+        },
+        presentation: {
+            type: Schema.Types.ObjectId,
+            ref: 'DrugPresentation'
+        },
+        quantity: {
+            type: Number,
+            required: true
+        }
+    }],
     observation: String
 });
 

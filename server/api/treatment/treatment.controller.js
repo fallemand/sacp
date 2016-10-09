@@ -281,6 +281,10 @@ export function metadata(req, res) {
                 title: 'Drogas',
                 fields: ['drugs']
             },
+            drugsStandardized: {
+                title: 'Drogas',
+                fields: ['drugsStandardized']
+            },
             confirm: {
                 title: 'Confirmar',
                 fields: ['observation']
@@ -648,6 +652,64 @@ export function metadata(req, res) {
                 ]
             },
             {
+                'title': 'Drogas',
+                'field': 'drugsStandardized',
+                name: 'item',
+                'hideInList': true,
+                'controlType': 'list',
+                fields: [
+                    {
+                        'title': 'Droga',
+                        'field': 'drug',
+                        'type': 'typeahead',
+                        'searchField': 'name',
+                        'show': true,
+                        'descField': 'name',
+                        'remoteApi': 'drugs',
+                        'icon': 'flaticon-open-pill',
+                        'controlType': 'object',
+                        'attributes': {
+                            'typeahead-on-select' : 'vm.loadNext($item, \'presentation\', \'drug-presentations\', \'drug\')', //Load next component
+                            required: true
+                        },
+                        'validations': {
+                            'required': ''
+                        }
+                    },
+                    {
+                        'title': 'Presentación',
+                        'field': 'presentation',
+                        'type': 'select',
+                        'show': true,
+                        'loadData' : false, //Do not load data at first.
+                        'descField': 'name',
+                        'remoteApi': 'drug-presentations',
+                        'icon': 'flaticon-open-pill',
+                        'controlType': 'object',
+                        'attributes': {
+                            required: true
+                        },
+                        'validations': {
+                            'required': ''
+                        }
+                    },
+                    {
+                        'title': 'Cantidad',
+                        'field': 'quantity',
+                        'type': 'number',
+                        'show': true,
+                        'icon': 'fa fa-sort-numeric-asc',
+                        'controlType': 'input',
+                        'attributes': {
+                            required: true
+                        },
+                        'validations': {
+                            'required': ''
+                        }
+                    }
+                ]
+            },
+            {
                 'title': 'Observaciones',
                 'field': 'observation',
                 'placeholder' : 'Resumen de historial clínica, o cualquier comentario que considere conveniente',
@@ -658,7 +720,7 @@ export function metadata(req, res) {
                 'icon': 'fa fa-phone',
                 'attributes': {
                     required: true,
-                    rows: 3
+                    rows: 2
                 },
                 'validations': {
                     'required': ''

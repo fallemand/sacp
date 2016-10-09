@@ -11,7 +11,7 @@
 
 import _ from 'lodash';
 import Patient from './patient.model';
-import * as utils from '../../components/utility';
+var utils = require('../../components/utility');
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
