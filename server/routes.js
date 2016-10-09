@@ -23,7 +23,6 @@ export default function(app) {
   app.use('/api/treatments', require('./api/treatment'));
   app.use('/api/agreement-types', require('./api/agreement-type'));
   app.use('/api/patients', require('./api/patient'));
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth').default);
