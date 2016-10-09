@@ -2,9 +2,63 @@
  * Created by falle on 25/05/2016.
  */
 
+import _ from 'lodash';
+
 'use strict';
+export function respondWithResult(res, statusCode) {
+    statusCode = statusCode || 200;
+    return function (entity) {
+        if (entity) {
+            res.status(statusCode).json(entity);
+        }
+    };
+}
+
+export function saveUpdates(updates) {
+    return function (entity) {
+        var updated = _.merge(entity, updates);
+        return updated.save()
+            .then(updated => {
+                return updated;
+            });
+    };
+}
+
+export function removeEntity(res) {
+    return function (entity) {
+        if (entity) {
+            return entity.remove()
+                .then(() => {
+                    res.status(204).end();
+                });
+        }
+    };
+}
+
+export function handleEntityNotFound(res) {
+    return function (entity) {
+        if (!entity) {
+            res.status(404).end();
+            return null;
+        }
+        return entity;
+    };
+}
+
+export function handleError(res, statusCode) {
+    statusCode = statusCode || 500;
+    return function (err) {
+        if (err instanceof Error && err.name !== 'ValidationError') {
+            res.status(statusCode).send({message: err.message});
+        }
+        else {
+            res.status(statusCode).send(err);
+        }
+    };
+}
 
 export function processQuery(model, query, options) {
+    options = options || {};
     query.sorting = (query.sorting) ? JSON.parse(query.sorting) : {};
     options.sort = (Object.keys(query.sorting).length > 0) ? query.sorting : options.sort;
     options.page = (query.page) ? parseInt(query.page) : 1;
