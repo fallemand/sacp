@@ -23,8 +23,10 @@
     padding: 6px !important;
 }
 
-.ng-table th.filter .input-filter {
+.ng-table th.filter .input-filter,
+.ng-table th.filter .filter-select {
     min-height: 25px;
+    height: 25px;
     padding: 3px 8px;
     max-width: 150px;
 }

@@ -3,13 +3,13 @@
 (function () {
 
     class DatatableController {
-        constructor($scope, $http, NgTableParams, sweet, Auth, $window) {
+        constructor($scope, $http, NgTableParams, sweet, Auth, $q) {
             this.sweet = sweet;
             this.datatable = $scope.parameters;
             this.$http = $http;
             this.NgTableParams = NgTableParams;
             this.$scope = $scope;
-            this.$window = $window;
+            this.$q = $q;
             this.userType = (Auth.isAdmin()) ? 'admin' : 'user';
             this.getMetadata();
         }
@@ -56,16 +56,27 @@
             }
             angular.forEach(this.metadata.fields, (value) => {
                 var filter = {};
-                if(value.type === 'select' || value.type === 'typeahead') {
-                    if(value.filterDescField) {
-                        filter[value.field + '.' + value.filterDescField] = 'text';
-                    }
-                    else {
-                        filter[value.field + '.' + value.descField] = 'text';
-                    }
-                }
-                else {
-                    filter[value.field] = 'text';
+                var filterData;
+                switch(value.type) {
+                    case 'select' :
+                        var descField = value.filterDescField || value.descField;
+                        filter[value.field + '.' + descField] = 'select';
+                        filterData = (function(column) {
+                            var def = this.$q.defer();
+                            this.$http.get('/api/' + value.remoteApi)
+                                .success(response => {
+                                    var result = response.docs.map(function(a) {return {id: a.name, title: a.name}});
+                                    def.resolve(result);
+                                });
+                            return def;
+                        }).bind(this);
+                        break;
+                    case 'typeahead' :
+                        filter[value.field + '.' + value.filterDescField || value.descField] = 'text';
+                        break;
+                    default :
+                        filter[value.field] = 'text';
+
                 }
 
                 var col = {
@@ -73,6 +84,7 @@
                     title: (value.shortTitle) ? value.shortTitle : value.title,
                     show: (!value.hideInList),
                     filter: filter,
+                    filterData : filterData,
                     decorate: this.decorate,
                     decorator: value.decorator,
                     link: value.link
@@ -82,9 +94,6 @@
                 }
                 if(value.columnClass) {
                     col.class = value.columnClass;
-                }
-                if(value.field.type === 'select' || value.field.type === 'typeahead') {
-                    getData(value.field, value.remoteApi, col.filterData);
                 }
                 switch (value.type) {
                     case 'text' :
@@ -109,19 +118,6 @@
                 cols.push(col);
             });
             return cols;
-        }
-
-        loadData(field, api, value) {
-            this.$http.get('/api/' + api)
-                .then(response => {
-                    value = response.data;
-                })
-                .catch(err => {
-                    this.ngToast.create({
-                        className: 'danger',
-                        content: err.message
-                    });
-                });
         }
 
         initialize() {
