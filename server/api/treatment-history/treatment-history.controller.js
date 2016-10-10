@@ -73,7 +73,7 @@ export function show(req, res) {
         .populate('history.state')
         .populate({
             path: 'history.user',
-            select: '-salt -provider -password'
+            select: '-salt -recoverToken -recoverExpire -provider -password'
         })
         .exec()
         .then(handleEntityNotFound(res))

@@ -52,12 +52,14 @@ function getTemplate(template, context) {
     switch(template) {
         case 'activation':
             result.subject = 'Tu cuenta ha sido activada';
-            result.body = mailTemplate(context);
             break;
         case 'treatment-change':
             result.subject = 'El tratamiento #' + context._id + ' ha cambiado de estado';
-            result.body = mailTemplate(context);
+            break;
+        case 'recover':
+            result.subject = 'Recuperar su cuenta';
             break;
     }
+    result.body = mailTemplate(context);
     return result;
 }

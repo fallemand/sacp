@@ -68,7 +68,7 @@ export function index(req, res) {
     var options = {
         populate: [{
             path: 'doctor',
-            select: '-salt -provider -password'
+            select: '-salt -recoverToken -recoverExpire -provider -password'
         }, 'patient', 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
         sort: {'lastUpdateDate' : 'desc'}
     };
@@ -82,7 +82,7 @@ export function indexUser(req, res) {
     var options = {
         populate: ['patient', {
             path: 'doctor',
-            select: '-salt -provider -password'
+            select: '-salt -recoverToken -recoverExpire -provider -password'
         }, 'diseaseStage', 'diseaseTopographicDiagnosis', 'treatmentType', 'drugs.type', 'state'],
         sort: {'lastUpdateDate' : 'desc'}
     };
@@ -98,7 +98,7 @@ export function show(req, res) {
         .populate('patient')
         .populate({
             path: 'doctor',
-            select: '-salt -provider -password'
+            select: '-salt -recoverToken -recoverExpire -provider -password'
         })
         .populate('diseaseStage')
         .populate('diseaseTopographicDiagnosis')

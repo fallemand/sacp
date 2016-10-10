@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import * as utils from '../../components/utility';
 import * as mailUtils from '../../components/mails/mail-utils';
+var crypto = require('crypto');
 
 function validationError(res, statusCode) {
     statusCode = statusCode || 422;
@@ -18,7 +19,7 @@ function validationError(res, statusCode) {
 function handleError(res, statusCode) {
     statusCode = statusCode || 500;
     return function (err) {
-        if(err instanceof Error) {
+        if (err instanceof Error) {
             err = {message: err.message};
         }
         res.status(statusCode).send(err);
@@ -60,10 +61,10 @@ function respondWithResult(res, statusCode) {
  */
 export function index(req, res) {
     var options = {
-        select : '-salt -password'
+        select: '-salt -recoverToken -recoverExpire -password'
     };
-    utils.processQuery(User,req.query,options)
-        .then(function(result) {
+    utils.processQuery(User, req.query, options)
+        .then(function (result) {
             res.status(200).json(result);
         })
         .catch(handleError(res));
@@ -181,12 +182,12 @@ export function activate(req, res) {
             return user.save()
                 .then(() => {
                     var context = {
-                        user : user,
-                        unsubscribeHash : user._id
+                        user: user,
+                        unsubscribeHash: user._id
                     };
-                    try{
-                        mailUtils.sendMail('activation',context, user.email);
-                    }catch(e) {
+                    try {
+                        mailUtils.sendMail('activation', context, user.email);
+                    } catch (e) {
                         console.log(e);
                     }
                     res.status(204).end();
@@ -196,12 +197,39 @@ export function activate(req, res) {
 }
 
 /**
+ * Activate User
+ */
+export function recover(req, res) {
+    return User.findOne({email: req.body.email})
+        .exec()
+        .then(user => {
+            if (!user) {
+                throw new Error('El mail no esta asociado a ninguna cuenta')
+            }
+            crypto.randomBytes(20, function (err, buf) {
+                var token = buf.toString('hex');
+                user.recoverToken = token;
+                var recoverExpire = new Date();
+                recoverExpire.setHours(recoverExpire.getHours() + 1);
+                user.recoverExpire = recoverExpire;
+                user.save();
+                mailUtils.sendMail('recover', {
+                    recoverUrl: '/recover/' + user._id + '/' + user.recoverToken,
+                    user: user
+                }, user.email);
+                res.status(204).end();
+            });
+        })
+        .catch(handleError(res));
+}
+
+/**
  * Get my info
  */
 export function me(req, res, next) {
     var userId = req.user._id;
 
-    return User.findOne({_id: userId}, '-salt -password').exec()
+    return User.findOne({_id: userId}, '-salt -recoverToken -recoverExpire -password').exec()
         .then(user => { // don't ever give out the password or salt
             if (!user) {
                 return res.status(401).end();
@@ -216,17 +244,17 @@ export function me(req, res, next) {
  */
 export function metadata(req, res, next) {
     res.json({
-        name : 'usuario',
+        name: 'usuario',
         pluralName: 'usuarios',
         'fields': [
             {
                 'title': 'Nombre',
-                'field' : 'name',
+                'field': 'name',
                 'type': 'string',
                 'columnClass': 'col-md-2',
                 'show': true,
-                'controlType' : 'input',
-                'link' : '/profile/doctor',
+                'controlType': 'input',
+                'link': '/profile/doctor',
                 'icon': 'fa fa-male',
                 'validations': {
                     'required': '',
@@ -239,17 +267,17 @@ export function metadata(req, res, next) {
             },
             {
                 'title': 'Email',
-                'field' : 'email',
+                'field': 'email',
                 'columnClass': 'col-md-2',
                 'type': 'email',
                 'show': true,
-                'controlType' : 'input',
+                'controlType': 'input',
                 'icon': 'fa fa-envelope',
-                'attributes' : {
+                'attributes': {
                     'required': '',
-                    'mongoose-error' : ''
+                    'mongoose-error': ''
                 },
-                'validations' : {
+                'validations': {
                     required: true,
                     'email': '',
                     'mongoose': ''
@@ -257,19 +285,19 @@ export function metadata(req, res, next) {
             },
             {
                 'title': 'Matricula',
-                'shortTitle' : 'Mat',
-                'field' : 'ma',
+                'shortTitle': 'Mat',
+                'field': 'ma',
                 'type': 'number',
                 'columnClass': 'col-md-2',
                 'show': true,
                 'icon': 'fa fa-user-md',
-                'controlType' : 'input',
-                'attributes' : {
+                'controlType': 'input',
+                'attributes': {
                     required: '',
-                    'min' : '1',
+                    'min': '1',
                     'max': '99999999'
                 },
-                'validations' : {
+                'validations': {
                     required: true,
                     'max': '1',
                     'min': '99999999',
@@ -278,19 +306,19 @@ export function metadata(req, res, next) {
             },
             {
                 'title': 'Matricula Especialista',
-                'shortTitle' : 'Mat Especialista',
-                'field' : 'me',
+                'shortTitle': 'Mat Especialista',
+                'field': 'me',
                 'type': 'number',
                 'columnClass': 'col-md-2',
                 'show': true,
                 'icon': 'fa fa-user-md',
-                'controlType' : 'input',
-                'attributes' : {
+                'controlType': 'input',
+                'attributes': {
                     required: '',
-                    'max' : '99999999',
+                    'max': '99999999',
                     'min': '1'
                 },
-                'validations' : {
+                'validations': {
                     required: true,
                     'max': '1',
                     'min': '99999999',
@@ -299,36 +327,36 @@ export function metadata(req, res, next) {
             },
             {
                 'title': 'Activo',
-                'shortTitle' : 'Activo',
-                'field' : 'active',
+                'shortTitle': 'Activo',
+                'field': 'active',
                 'type': 'text',
                 'columnClass': 'col-md-2',
                 'show': true,
                 'icon': 'fa fa-user-md',
-                'controlType' : 'input',
-                'attributes' : {
+                'controlType': 'input',
+                'attributes': {
                     required: '',
                     pattern: '(true|false)'
                 },
-                'validations' : {
+                'validations': {
                     required: true,
                     'pattern': 'true o false'
                 }
             },
             {
                 'title': 'Contraseña',
-                'field' : 'password',
+                'field': 'password',
                 'type': 'password',
                 'columnClass': 'col-md-2',
                 'show': true,
                 'hideInList': true,
                 'icon': 'fa fa-asterisk',
-                'controlType' : 'input',
-                'attributes' : {
-                    'mongoose-error' : ''
+                'controlType': 'input',
+                'attributes': {
+                    'mongoose-error': ''
                 },
-                'validations' : {
-                    'mongoose' : ''
+                'validations': {
+                    'mongoose': ''
                 }
             }
         ]

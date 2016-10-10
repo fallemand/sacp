@@ -37,6 +37,12 @@ var UserSchema = new Schema({
     active: {
         type: Boolean,
         default: 0
+    },
+    recoverToken: {
+        type: String
+    },
+    recoverExpire: {
+        type: Date
     }
 });
 

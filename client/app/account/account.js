@@ -21,6 +21,13 @@ angular.module('sacpApp')
                 controllerAs: 'vm',
                 parent: 'public'
             })
+            .state('recover.change-password', {
+                url: '/recover/:user/:token',
+                templateUrl: 'app/account/recover/change-password.html',
+                controller: 'ChangePasswordController',
+                controllerAs: 'vm',
+                parent: 'public'
+            })
             .state('logout', {
                 url: '/logout?referrer',
                 referrer: 'login',
