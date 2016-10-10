@@ -16,7 +16,7 @@ class ChangePasswordController {
         this.error = '';
 
         if (form.$valid) {
-            this.$http.post('/api/users/recover', {email: this.email})
+            this.$http.post('/api/users/recover-password/', {password: this.password, user: this.$stateParams.user, token: this.$stateParams.token})
                 .then(response => {
                     this.success = true;
                 })

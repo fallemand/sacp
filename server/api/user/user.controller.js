@@ -197,7 +197,7 @@ export function activate(req, res) {
 }
 
 /**
- * Activate User
+ * Recover: Generate Token User
  */
 export function recover(req, res) {
     return User.findOne({email: req.body.email})
@@ -212,13 +212,42 @@ export function recover(req, res) {
                 var recoverExpire = new Date();
                 recoverExpire.setHours(recoverExpire.getHours() + 1);
                 user.recoverExpire = recoverExpire;
-                user.save();
-                mailUtils.sendMail('recover', {
-                    recoverUrl: '/recover/' + user._id + '/' + user.recoverToken,
-                    user: user
-                }, user.email);
-                res.status(204).end();
+                return user.save()
+                    .then(user => {
+                        mailUtils.sendMail('recover', {
+                            recoverUrl: '/recover/' + user._id + '/' + user.recoverToken,
+                            user: user
+                        }, user.email);
+                        return res.status(204).end();
+                    });
             });
+        })
+        .catch(handleError(res));
+}
+
+/**
+ * Recover: Change password
+ */
+export function recoverPassword(req, res) {
+    return User.findOne({_id: req.body.user})
+        .exec()
+        .then(user => {
+            if (!user) {
+                throw new Error('No se encontró un usuario con ese id');
+            }
+            if(user.recoverToken !== req.body.token) {
+                throw new Error('Hubo un problema. Intente volver a recuperar su cuenta, o contacte a un administrador para recuperar su cuenta');
+            }
+            if(user.recoverExpire < new Date()) {
+                throw new Error('Pasó demaciado tiempo desde que se envió el mail. Debe volver a recuperar su cuenta');
+            }
+            user.password = req.body.password;
+            user.set('recoverToken', undefined, { strict: false });
+            user.set('recoverExpire', undefined, { strict: false });
+            return user.save()
+                .then(user => {
+                    return res.status(204).end()
+                });
         })
         .catch(handleError(res));
 }
