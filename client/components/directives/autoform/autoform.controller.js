@@ -214,6 +214,7 @@
 
         loadNext($item, field, api, filter) {
             this.loadData(field,api, filter + '=' + $item._id);
+            console.log($item);
         }
 
         loadTypeAhead(api, viewvalue, searchField, searchFieldExtra) {

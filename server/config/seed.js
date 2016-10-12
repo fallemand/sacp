@@ -4,15 +4,59 @@
  */
 
 'use strict';
-import User from '../api/user/user.model';
-import Patient from '../api/patient/patient.model';
-import AgreementType from '../api/agreement-type/agreement-type.model';
-import Cie10Disease from '../api/cie10-disease/cie10-disease.model';
-import TreatmentType from '../api/treatment-type/treatment-type.model';
-import TreatmentState from '../api/treatment-state/treatment-state.model';
-import DiseaseStage from '../api/disease-stage/disease-stage.model';
-import Treatment from '../api/treatment/treatment.model';
-import DrugType from '../api/drug-type/drug-type.model';
+
+import Drug from '../api/drug/drug.model';
+import DrugPresentation from '../api/drug-presentation/drug-presentation.model';
+
+Drug.find({}).remove();
+var node_xj = require("xls-to-json");
+node_xj({
+    input: "./server/config/input.xls",  // input xls
+    output: null,
+    sheet: "hoja1"  // specific sheetname
+}, function(err, result) {
+    if(!err) {
+        result.forEach(function(value, index){
+            Drug.findOne({name : value.drug })
+                .then(drug => {
+                    var id;
+                    if(!drug) {
+                        Drug.create({name : value.drug })
+                            .then(newDrug => {
+                                id = newDrug._id;
+                            })
+                    }
+                    else {
+                        id = drug._id;
+                    }
+                    value.drug = id;
+                    DrugPresentation.findOne({code : value.code})
+                        .then(presentation => {
+                            if(!presentation) {
+                                DrugPresentation.create(value);
+                            }
+                            else {
+                                presentation.drug = value.drug;
+                                presentation.name = value.name;
+                                presentation.save();
+                            }
+                        });
+                });
+
+        });
+
+    }
+});
+
+// import User from '../api/user/user.model';
+// import Patient from '../api/patient/patient.model';
+// import AgreementType from '../api/agreement-type/agreement-type.model';
+// import Cie10Disease from '../api/cie10-disease/cie10-disease.model';
+// import TreatmentType from '../api/treatment-type/treatment-type.model';
+// import TreatmentState from '../api/treatment-state/treatment-state.model';
+// import DiseaseStage from '../api/disease-stage/disease-stage.model';
+// import Treatment from '../api/treatment/treatment.model';
+// import DrugType from '../api/drug-type/drug-type.model';
 
 
 // TreatmentType.find({}).remove()

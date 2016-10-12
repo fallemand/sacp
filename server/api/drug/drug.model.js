@@ -4,7 +4,11 @@ import mongoose from 'mongoose';
 var mongoosePaginate = require('mongoose-paginate');
 
 var DrugSchema = new mongoose.Schema({
-  name: String
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    }
 });
 
 /**

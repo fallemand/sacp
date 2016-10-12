@@ -66,7 +66,7 @@ export function metadata(req, res) {
                 'title': 'Código',
                 'field' : 'code',
                 'type': 'text',
-                'columnClass': 'col-md-4',
+                'columnClass': 'col-md-1 mw-125',
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'flaticon-bottle-of-chemical-elements',
@@ -101,10 +101,10 @@ export function metadata(req, res) {
                 }
             },
             {
-                'title': 'Nombre',
+                'title': 'Presentación',
                 'field' : 'name',
                 'type': 'text',
-                'columnClass': 'col-md-4',
+                'columnClass': 'col-md-7',
                 'show': true,
                 'controlType' : 'input',
                 'icon': 'flaticon-bottle-of-chemical-elements',

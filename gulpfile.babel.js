@@ -487,6 +487,7 @@ gulp.task('build', cb => {
             'copy:fonts',
             'copy:assets',
             'copy:server',
+            'copy:extraFiles',
             'transpile:server',
             'build:client'
         ],
@@ -590,6 +591,11 @@ gulp.task('copy:server', () => {
             'bower.json',
             '.bowerrc'
         ], {cwdbase: true})
+        .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('copy:extraFiles', () => {
+    return gulp.src([`./${serverPath}/**/*.hbs`, `${clientPath}/reports/**/*`, `${clientPath}/files/**/keep-folder.jpg`], {cwdbase: true})
         .pipe(gulp.dest(paths.dist));
 });
 

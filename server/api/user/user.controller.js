@@ -206,7 +206,7 @@ export function recover(req, res) {
             if (!user) {
                 throw new Error('El mail no esta asociado a ninguna cuenta')
             }
-            crypto.randomBytes(20, function (err, buf) {
+            return crypto.randomBytes(20, function (err, buf) {
                 var token = buf.toString('hex');
                 user.recoverToken = token;
                 var recoverExpire = new Date();
