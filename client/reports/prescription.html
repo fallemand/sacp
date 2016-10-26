@@ -57,7 +57,24 @@
 
         <tr>
             <td>
+                {{#if drugsStandardized}}
+                <table cellspacing="0">
+                    <tr class="heading">
+                        <td>Droga</td>
+                        <td>Presentación</td>
+                        <td>Cantidad</td>
+                    </tr>
+                    {{#each drugsStandardized}}
+                    <tr class="item">
+                        <td>{{drug.name}}</td>
+                        <td>{{presentation.name}}</td>
+                        <td>{{quantity}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+                {{/if}}
 
+                {{#if drugs}}
                 <table cellspacing="0">
                     <tr class="heading">
                         <td>Droga</td>
@@ -76,6 +93,7 @@
                     </tr>
                     {{/each}}
                 </table>
+                {{/if}}
             </td>
         </tr>
     </table>

@@ -46,6 +46,12 @@
                 metadataFilters: 'field=drugs'
             };
 
+            this.drugsStandardizedTable = {
+                entity: 'treatments',
+                type: 'local',
+                metadataFilters: 'field=drugsStandardized'
+            };
+
             this.result= {};
             this.autoformResult = {
                 entity: 'treatment-history',

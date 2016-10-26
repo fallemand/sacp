@@ -50,7 +50,7 @@
                             <li ng-repeat="treatment in nav.pendingTreatments.docs">
                                 <a href="#" class="media" ui-sref="treatments.view({'id' : treatment._id})">
                                     <div class="media-left">
-                                        <span class="icon-wrap icon-circle" ng-class="{'bg-default' : treatment.state._id === 'EE',
+                                        <span class="icon-wrap icon-circle" ng-class="{'bg-gray' : treatment.state._id === 'EE',
                                                                                         'bg-primary' : treatment.state._id === 'EA',
                                                                                         'bg-warning' : treatment.state._id === 'PA'}">
                                             <i class="flaticon-medical-briefcase fa-lg"></i>

@@ -147,13 +147,23 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="panel panel-default drugs">
+                                <div class="panel panel-default drugs" ng-if="vm.treatment.drugs.length > 0">
                                     <div class="panel-heading">
                                         <h3 class="panel-title"><strong>Drogas</strong></h3>
                                     </div>
                                     <div class="panel-body">
-                                        <div class="table-responsive" ng-if="vm.treatment">
+                                        <div class="table-responsive" ng-if="vm.treatment.drugs">
                                             <datatable parameters="vm.drugsTable" object="vm.treatment.drugs"></datatable>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default drugs" ng-if="vm.treatment.drugsStandardized.length > 0">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><strong>Drogas</strong></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive" ng-if="vm.treatment.drugsStandardized">
+                                            <datatable parameters="vm.drugsStandardizedTable" object="vm.treatment.drugsStandardized"></datatable>
                                         </div>
                                     </div>
                                 </div>

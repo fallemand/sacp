@@ -7,7 +7,7 @@ class NavbarController {
         this.getCurrentUser = Auth.getCurrentUser();
 
         if(this.isLoggedIn && !this.isAdmin) {
-            var filter = encodeURIComponent('{"or":"[state=PA&state=ES&state=ES&state=EA]"}');
+            var filter = encodeURIComponent('{"or":"[state=PA&state=EE&state=EA]"}');
             $http.get('/api/treatments/mine?filter=' + filter).then(response => {
                 this.pendingTreatments = response.data;
             });

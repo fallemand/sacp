@@ -104,6 +104,8 @@ export function show(req, res) {
         .populate('diseaseTopographicDiagnosis')
         .populate('treatmentType')
         .populate('drugs.type')
+        .populate('drugsStandardized.presentation')
+        .populate('drugsStandardized.drug')
         .populate('state')
         .exec(function (err, treatment) {
             AgreementType.populate(treatment, {
@@ -669,7 +671,7 @@ export function metadata(req, res) {
                         'icon': 'flaticon-open-pill',
                         'controlType': 'object',
                         'attributes': {
-                            'typeahead-on-select' : 'vm.loadNext($item, \'name\', \'drug-presentations\', \'drug\')', //Load next component
+                            'typeahead-on-select' : 'vm.loadNext($item, \'presentation\', \'drug-presentations\', \'drug\')', //Load next component
                             required: true
                         },
                         'validations': {
@@ -679,7 +681,7 @@ export function metadata(req, res) {
                     },
                     {
                         'title': 'Presentación',
-                        'field': 'name',
+                        'field': 'presentation',
                         'type': 'select',
                         'show': true,
                         'loadData' : false, //Do not load data at first.

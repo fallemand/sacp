@@ -22,6 +22,8 @@ export function getReport(req, res) {
             populate: { path: 'agreementType' }
         })
         .populate('drugs.type')
+        .populate('drugsStandardized.presentation')
+        .populate('drugsStandardized.drug')
         .exec(function (err, object) {
             if (err || !object) {
                 var error = err || 'Verifique los parámetros';
