@@ -1,0 +1,13 @@
+Copiar base de datos
+mongodump -d sacp-dev -c drugpresentations
+opcional: -c some_collection
+mongorestore -h 127.0.0.1:35566 -d web --drop -c drugs --username admin --password ErWHyIkbCLfe dump/sacp-dev/drugs.bson
+
+backup database
+mongodump -h 127.0.0.1:35566 -d web --username admin --password ErWHyIkbCLfe
+
+Obtener url:
+rhc port-forward -a web
+web es el nombre de la app.
+
+
