@@ -17,7 +17,7 @@ import DrugPresentation from './drug-presentation.model';
 // Gets a list of DrugPresentations
 export function index(req, res) {
     var options = {
-        populate: 'drug'
+        populate: ['drug']
     };
     return utils.processQuery(DrugPresentation,req.query, options)
         .then(utils.respondWithResult(res))

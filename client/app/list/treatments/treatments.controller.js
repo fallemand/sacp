@@ -10,7 +10,7 @@ class TreatmentsController {
             actions: ['view'],
             privileges: {
                 user: {
-                    actions: ['view', 'modify'],
+                    actions: ['view', 'modify', 'view-prescription'],
                     list: 'mine'
                 },
                 admin: {actions: ['view', 'view-prescription']}
