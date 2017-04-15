@@ -6,11 +6,18 @@ class NavbarController {
         this.isAdmin = Auth.isAdmin();
         this.getCurrentUser = Auth.getCurrentUser();
 
-        if(this.isLoggedIn && !this.isAdmin) {
+        if(this.isLoggedIn) {
             var filter = encodeURIComponent('{"or":"[state=PA&state=EE&state=EA]"}');
-            $http.get('/api/treatments/mine?filter=' + filter).then(response => {
-                this.pendingTreatments = response.data;
-            });
+            if(this.isAdmin) {
+                $http.get('/api/treatments?filter=' + filter).then(response => {
+                    this.pendingTreatments = response.data;
+                });
+            }
+            else {
+                $http.get('/api/treatments/mine?filter=' + filter).then(response => {
+                    this.pendingTreatments = response.data;
+                });
+            }
         }
     }
 

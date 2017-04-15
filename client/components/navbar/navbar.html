@@ -57,7 +57,8 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <div class="text-nowrap"><strong>#{{treatment._id}}</strong> para {{treatment.patient.name}}</div>
+                                        <div ng-if="!nav.isAdmin" class="text-nowrap"><strong>#{{treatment._id}}</strong> para {{treatment.patient.name}}</div>
+                                        <div ng-if="nav.isAdmin" class="text-nowrap"><strong>#{{treatment._id}}</strong> de {{treatment.doctor.name}}</div>
                                         <small class="text-muted">{{treatment.state.name}}</small>
                                     </div>
                                 </a>
