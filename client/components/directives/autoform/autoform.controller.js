@@ -84,7 +84,8 @@
 
             if (this.autoform.form.$valid) {
                 this.autoform.isSaving = true;
-                if (this.$scope.object._id || (this.autoform.type === 'local' && this.$scope.object[this.aux][this.autoform.field].objectToUpdate)) {
+                if (this.$scope.object._id && (this.autoform.type !== 'local' ||
+                                                (this.autoform.type === 'local' && this.$scope.object[this.aux][this.autoform.field].objectToUpdate))) {
                     this.update();
                 }
                 else {
@@ -214,7 +215,6 @@
 
         loadNext($item, field, api, filter) {
             this.loadData(field,api, filter + '=' + $item._id);
-            console.log($item);
         }
 
         loadTypeAhead(api, viewvalue, searchField, searchFieldExtra) {
