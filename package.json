@@ -122,7 +122,8 @@
     "npm": "^2.14.20"
   },
   "scripts": {
-    "start": "node server",
+    "start:server": "node server",
+    "start:client": "gulp serve",
     "test": "gulp test",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },
